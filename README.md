@@ -2,7 +2,7 @@
 
 <div align="center">
 
-[![CI](https://github.com/pharmapolyscope/pharmapolyscope-input-generator/actions/workflows/ci.yml/badge.svg)](https://github.com/pharmapolyscope/pharmapolyscope-input-generator/actions/workflows/ci.yml)
+[![CI](https://github.com/Tushar-470/pharmapolyscope-input-generator/actions/workflows/ci.yml/badge.svg)](https://github.com/Tushar-470/pharmapolyscope-input-generator/actions/workflows/ci.yml)
 [![Python Version](https://img.shields.io/badge/python-3.11%20%7C%203.12-blue.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Cheminformatics: RDKit](https://img.shields.io/badge/Cheminformatics-RDKit-green.svg)](https://www.rdkit.org/)
@@ -127,7 +127,7 @@ Every drug and polymer entity must pass 12 automated physical chemistry gates (`
 ### 1. Installation via `uv` (Fastest)
 ```bash
 # Clone repository
-git clone https://github.com/pharmapolyscope/pharmapolyscope-input-generator.git
+git clone https://github.com/Tushar-470/pharmapolyscope-input-generator.git
 cd pharmapolyscope-input-generator
 
 # Install dependencies and sync virtual environment
@@ -247,13 +247,13 @@ If you use the **PharmaPolySCOPE Physicochemical Input Generator** in your resea
   year         = {2026},
   publisher    = {GitHub},
   version      = {v1.0.0},
-  url          = {https://github.com/pharmapolyscope/pharmapolyscope-input-generator},
+  url          = {https://github.com/Tushar-470/pharmapolyscope-input-generator},
   license      = {MIT}
 }
 ```
 
 ### Academic Paper Reference
-> PharmaPolySCOPE Research Consortium. (2026). *PharmaPolySCOPE Physicochemical Input Generator: Authoritative Upstream Parameter Engine for Solid Dispersion Formulation Modeling* (Version 1.0.0) [Computer software]. https://github.com/pharmapolyscope/pharmapolyscope-input-generator
+> PharmaPolySCOPE Research Consortium. (2026). *PharmaPolySCOPE Physicochemical Input Generator: Authoritative Upstream Parameter Engine for Solid Dispersion Formulation Modeling* (Version 1.0.0) [Computer software]. https://github.com/Tushar-470/pharmapolyscope-input-generator
 
 ---
 

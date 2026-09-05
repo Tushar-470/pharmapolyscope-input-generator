@@ -4,7 +4,7 @@ title: "PharmaPolySCOPE Physicochemical Input Generator: Authoritative Upstream 
 version: 1.0.0
 date-released: 2026-09-05
 license: MIT
-repository-code: "https://github.com/pharmapolyscope/pharmapolyscope-input-generator"
+repository-code: "https://github.com/Tushar-470/pharmapolyscope-input-generator"
 keywords:
   - "pharmaceutical-engineering"
   - "amorphous-solid-dispersions"
