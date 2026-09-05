@@ -12,7 +12,6 @@ if hasattr(sys.stdout, "reconfigure"):
 
 from engine.io_manager import IOManager
 from engine.qc import QualityControlEngine
-from engine.pair_metrics import evaluate_drug_polymer_pair
 
 
 def main():
@@ -35,13 +34,7 @@ def main():
     export_parser = subparsers.add_parser("export-ready", help="Print Pharmapolyscope-Ready manual entry sheet")
     export_parser.add_argument("--id", required=True, help="Entity ID (e.g. DRG-0001, POL-0001)")
 
-    # 4. Screen Pair command
-    pair_parser = subparsers.add_parser("screen-pair", help="Screen a drug-polymer pair")
-    pair_parser.add_argument("--drug", required=True, help="Drug Entity ID (e.g. DRG-0001)")
-    pair_parser.add_argument("--polymer", required=True, help="Polymer Entity ID (e.g. POL-0001)")
-    pair_parser.add_argument("--r0", type=float, default=7.5, help="Assigned R0 radius (default: 7.5)")
-
-    # 5. Sync CSV command
+    # 4. Sync CSV command
     subparsers.add_parser("sync-csv", help="Synchronize input_dataset.csv from input_dataset.json")
 
     args = parser.parse_args()
@@ -105,31 +98,6 @@ def main():
             print(f"Error generating sheet: {e}")
             sys.exit(1)
 
-    elif args.command == "screen-pair":
-        data = io_mgr.load_dataset()
-        records = data.get("records", [])
-        d_matches = [r for r in records if r.get("entity_id") == args.drug]
-        p_matches = [r for r in records if r.get("entity_id") == args.polymer]
-        
-        if not d_matches or not p_matches:
-            print("Specified drug or polymer ID not found.")
-            sys.exit(1)
-            
-        res = evaluate_drug_polymer_pair(d_matches[0], p_matches[0], args.r0)
-        print("=" * 70)
-        print(f"PAIR MISCIBILITY SCREEN: {res['drug_name']} + {res['polymer_name']}")
-        print("=" * 70)
-        print(f"Drug delta_t:              {res['delta_t_drug']} MPa^0.5")
-        print(f"Polymer delta_t:           {res['delta_t_polymer_tabulated']} MPa^0.5")
-        print(f"Greenhalgh Delta delta_t:  {res['greenhalgh_delta_t_tabulated']} MPa^0.5 -> {res['greenhalgh_verdict']}")
-        print(f"Hansen Distance Ra:        {res['hansen_distance_Ra']} MPa^0.5")
-        print(f"RED @ R0=7.0:              {res['RED']['at_R0_7_0']}")
-        print(f"RED @ R0=7.5 (standard):   {res['RED']['at_R0_7_5']}")
-        print(f"RED @ R0=8.0:              {res['RED']['at_R0_8_0']}")
-        print(f"Stability Classification:  {res['stability_grade']}")
-        for note in res.get("qc_notes", []):
-            print(f"NOTE: {note}")
-        print("=" * 70)
 
     elif args.command == "sync-csv":
         data = io_mgr.load_dataset()

@@ -8,7 +8,6 @@ import os
 from api.routes.drugs import render_smiles_svg, search_pubchem
 from engine.io_manager import IOManager
 from engine.polymer_pipeline import PolymerPipelineEngine
-from engine.pair_metrics import evaluate_drug_polymer_pair
 
 
 def test_ui_files_exist_and_clean():
@@ -124,13 +123,6 @@ def test_benchmark_outputs_unaltered():
     assert pol["hsp_mpa_half"]["delta_D"] == 20.44
     assert pol["hsp_mpa_half"]["delta_P"] == 13.67
     assert pol["hsp_mpa_half"]["delta_H"] == 6.86
-    
-    # Pair metrics
-    pair_res = evaluate_drug_polymer_pair(drg, pol, r0_assigned=7.5)
-    assert pair_res["hansen_distance_Ra"] == 12.57
-    assert pair_res["RED_at_7_5"] == 1.68
-    assert pair_res["greenhalgh_delta_t_tabulated"] == 6.92
-    assert pair_res["stability_grade"] == "BORDERLINE"
 
 
 def test_calculate_drug_properties_endpoint():

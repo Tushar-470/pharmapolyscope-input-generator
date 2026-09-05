@@ -6,71 +6,11 @@ Performs one-at-a-time perturbations, Monte-Carlo resampling, and method displac
 import math
 import random
 from typing import Dict, Any, List
-from engine.pair_metrics import calculate_hansen_distance
 
 
 class SensitivityEngine:
     def __init__(self, seed: int = 42):
         self.random = random.Random(seed)
-
-    def analyze_hsp_resampling(
-        self,
-        d_hsp: Dict[str, float],
-        p_hsp: Dict[str, float],
-        r0_val: float = 7.5,
-        n_samples: int = 10000
-    ) -> Dict[str, Any]:
-        """
-        Monte-Carlo resampling of HSP components (+/- 1.5 MPa^0.5 gaussian)
-        to evaluate Ra and RED distribution and boundary crossing probability.
-        """
-        d_dD = d_hsp.get("delta_D", 0.0)
-        d_dP = d_hsp.get("delta_P", 0.0)
-        d_dH = d_hsp.get("delta_H", 0.0)
-        
-        p_dD = p_hsp.get("delta_D", 0.0)
-        p_dP = p_hsp.get("delta_P", 0.0)
-        p_dH = p_hsp.get("delta_H", 0.0)
-        
-        base_ra = calculate_hansen_distance(d_dD, d_dP, d_dH, p_dD, p_dP, p_dH)
-        base_red = round(base_ra / r0_val, 2)
-        
-        ra_samples = []
-        red_samples = []
-        miscible_count = 0
-        
-        for _ in range(n_samples):
-            # Resample each component with standard deviation 1.5 / 1.96 ~ 0.76 MPa^0.5
-            s_d_dD = self.random.gauss(d_dD, 0.76)
-            s_d_dP = self.random.gauss(d_dP, 0.76)
-            s_d_dH = self.random.gauss(d_dH, 0.76)
-            
-            s_p_dD = self.random.gauss(p_dD, 0.76)
-            s_p_dP = self.random.gauss(p_dP, 0.76)
-            s_p_dH = self.random.gauss(p_dH, 0.76)
-            
-            s_ra = calculate_hansen_distance(s_d_dD, s_d_dP, s_d_dH, s_p_dD, s_p_dP, s_p_dH)
-            s_red = s_ra / r0_val
-            
-            ra_samples.append(s_ra)
-            red_samples.append(s_red)
-            if s_red <= 1.0:
-                miscible_count += 1
-                
-        mean_ra = round(sum(ra_samples) / n_samples, 2)
-        mean_red = round(sum(red_samples) / n_samples, 2)
-        miscible_prob = round(miscible_count / n_samples * 100.0, 1)
-        
-        return {
-            "base_Ra": base_ra,
-            "base_RED": base_red,
-            "resampled_mean_Ra": mean_ra,
-            "resampled_mean_RED": mean_red,
-            "probability_inside_sphere_pct": miscible_prob,
-            "n_resamples": n_samples,
-            "component_uncertainty": "+/- 1.5 MPa^0.5",
-            "verdict_stability": "STABLE" if (miscible_prob > 90.0 or miscible_prob < 10.0) else "BORDERLINE"
-        }
 
     def generate_dual_representation(self, record: Dict[str, Any]) -> Dict[str, Any]:
         """

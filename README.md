@@ -7,7 +7,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Cheminformatics: RDKit](https://img.shields.io/badge/Cheminformatics-RDKit-green.svg)](https://www.rdkit.org/)
 [![Regulatory: ICH Q8/Q9](https://img.shields.io/badge/Regulatory-ICH%20Q8%2FQ9%20QbD-purple.svg)](https://www.ich.org/)
-[![Tests Passing](https://img.shields.io/badge/tests-38%2F38%20passing-brightgreen.svg)](tests/)
+[![Tests Passing](https://img.shields.io/badge/tests-33%2F33%20passing-brightgreen.svg)](tests/)
 
 **Authoritative Upstream Physicochemical Parameter Generation, Validation, and Quality-Control Engine for Solid Dispersion Formulation Modeling**
 
@@ -150,7 +150,7 @@ Open your browser at **`http://127.0.0.1:8000`** to access:
 ```bash
 uv run pytest -v
 ```
-All **38 test cases** validate against experimental physical benchmarks and verify zero-defect execution.
+All **33 test cases** validate against experimental physical benchmarks and verify zero-defect execution.
 
 ---
 
@@ -222,7 +222,7 @@ pharmapolyscope-input-generator/
 │   ├── polymer_pipeline.py      # Commercial polymer excipient processing
 │   ├── qc.py                    # 12-gate physical chemistry inspection battery
 │   └── thermophysical.py        # Boyer-Kauzmann Tg heuristic & thermal units
-├── tests/                       # Complete pytest suite (38 passing tests)
+├── tests/                       # Complete pytest suite (33 passing tests)
 ├── ui/                          # Scientific browser workstation
 │   ├── css/style.css            # Responsive layout & 1-page micro-print stylesheet
 │   ├── js/app.js                # State manager & REST API client

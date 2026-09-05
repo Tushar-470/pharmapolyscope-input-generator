@@ -1264,36 +1264,5 @@
         "diagnostics": []
       }
     }
-  ],
-  "pair_metrics_worked_example": {
-    "pair": [
-      "DRG-0001",
-      "POL-0001"
-    ],
-    "greenhalgh_delta_t": {
-      "hvk": 6.92,
-      "fedors": 2.84,
-      "just_breitkreutz": 2.55,
-      "thresholds": "delta < 2 likely glass solution; < 7 likely miscible; > 10 likely immiscible"
-    },
-    "hansen_distance_Ra": {
-      "uniform_hvk": 12.57,
-      "mixed_method_illustration": 8.45
-    },
-    "RED": {
-      "at_R0_7.0": [
-        1.8,
-        1.21
-      ],
-      "at_R0_7.5": [
-        1.68,
-        1.13
-      ],
-      "at_R0_8.0": [
-        1.57,
-        1.06
-      ],
-      "note": "verdict outside sphere across the band under both datasets; pair exported as BORDERLINE; experimental confirmation recommended"
-    }
-  }
+  ]
 }

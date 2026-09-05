@@ -24,9 +24,6 @@ The system is built as a modular Python package adhering to strict separation of
 | `GET` | `/api/polymers` | List all saved polymer records |
 | `GET` | `/api/polymers/curated_carriers` | List curated polymer carriers and commercial grades |
 | `POST` | `/api/polymers/save` | Validate and commit polymer record to store |
-| `GET` | `/api/pairs/matrix` | Compute $M \times N$ pair miscibility matrix |
-| `POST` | `/api/pairs/screen_pair` | Screen specific Drug-Polymer pair ($R_a$, RED, $\Delta \delta_t$) |
-| `POST` | `/api/pairs/resampling_sensitivity` | Run 1,000 Monte Carlo HSP resampling iterations |
 | `GET` | `/api/qc/summary` | Retrieve dashboard overview and active method registry |
 | `POST` | `/api/qc/run_all` | Re-evaluate QC checks across all stored records |
 | `GET` | `/api/export/pharmapolyscope_ready/{id}` | Generate dedicated manual-entry summary sheet |
@@ -47,9 +44,6 @@ uv run python cli.py validate
 # Generate Pharmapolyscope-Ready Sheet
 uv run python cli.py export-ready --id DRG-0001
 uv run python cli.py export-ready --id POL-0001
-
-# Screen Drug-Polymer Pair
-uv run python cli.py screen-pair --drug DRG-0001 --polymer POL-0001
 
 # Synchronize CSV Export from JSON Store
 uv run python cli.py sync-csv

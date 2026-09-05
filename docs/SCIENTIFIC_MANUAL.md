@@ -23,11 +23,9 @@ Deterministic Tm Acquisition (Table 4-1)    Composition Weighting (Copolymers/Es
          ↓                                           ↓
 Tg = 0.70 * Tm (+/- 21 K)                   Repeat-Unit Hoftyzer-van Krevelen HSP
          ↓                                           ↓
-Fedors Molar Volume & Density               Assigned R0 = 7.5 MPa^0.5
+Fedors Molar Volume & Density               Automated QC & Provenance Attachment
          ↓                                           ↓
-Hoftyzer-van Krevelen HSP                   Automated QC & Provenance Attachment
-         ↓                                           ↓
-Assigned R0 = 7.5 MPa^0.5                   PHARMAPOLYSCOPE MANUAL ENTRY SHEET
+Hoftyzer-van Krevelen HSP                   PHARMAPOLYSCOPE MANUAL ENTRY SHEET
          ↓
 Automated QC Battery & Provenance
          ↓
@@ -60,15 +58,7 @@ $$\boxed{\delta_t = \sqrt{\delta_D^2 + \delta_P^2 + \delta_H^2}} \quad (\text{MP
 - Secondary Method: Fedors Total Parameter:
   $$\delta_{t,\text{Fedors}} = \sqrt{\frac{\sum \Delta U_i}{\sum \Delta V_i}} \times 2.0455 \quad (\text{MPa}^{1/2})$$
 
-#### 3.4 Hansen Distance and Relative Energy Difference (RED)
-$$\boxed{R_a^2 = 4(\delta_{D,1} - \delta_{D,2})^2 + (\delta_{P,1} - \delta_{P,2})^2 + (\delta_{H,1} - \delta_{H,2})^2}$$
-$$\boxed{\text{RED} = \frac{R_a}{R_0}}$$
-- Method ID: `R0-SCREEN-01`
-- Screening Radius: $R_0 = 7.5\text{ MPa}^{1/2}$ (`ASSUMED`) with mandatory sensitivity band $[7.0, 8.0]\text{ MPa}^{1/2}$.
+#### 3.4 Cross-Method Displacement
+$$\boxed{\Delta\delta_t = |\delta_{t,\text{HVK}} - \delta_{t,\text{Fedors}}|} \quad (\text{MPa}^{1/2})$$
+- Acceptance Criteria: $\Delta\delta_t < 2.5\text{ MPa}^{1/2}$ (PASS), $2.5 \le \Delta\delta_t < 5.0\text{ MPa}^{1/2}$ (FLAG), $\ge 5.0\text{ MPa}^{1/2}$ (REJECT).
 
-#### 3.5 Greenhalgh Scalar Total Difference
-$$\boxed{\Delta \delta_t = |\delta_{t,1} - \delta_{t,2}|}$$
-- Reference: Greenhalgh et al. (1999), *J. Pharm. Sci.*, 88(11), 1182–1190.
-- $\Delta \delta_t < 2.0\text{ MPa}^{1/2}$: Likely glass solution.
-- $\Delta \delta_t < 7.0\text{ MPa}^{1/2}$: Likely miscible.
-- $\Delta \delta_t > 10.0\text{ MPa}^{1/2}$: Likely immiscible.

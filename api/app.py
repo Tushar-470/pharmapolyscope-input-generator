@@ -9,7 +9,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 
-from api.routes import drugs, polymers, pairs, qc, export, audit
+from api.routes import drugs, polymers, qc, export, audit
 
 app = FastAPI(
     title="Pharmapolyscope Physicochemical Input Generator",
@@ -28,7 +28,6 @@ app.add_middleware(
 # Register API routers
 app.include_router(drugs.router)
 app.include_router(polymers.router)
-app.include_router(pairs.router)
 app.include_router(qc.router)
 app.include_router(export.router)
 app.include_router(audit.router)

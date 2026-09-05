@@ -701,7 +701,6 @@ async function saveCurrentDrug(forceDistinct = false) {
     delta_D: r.hsp_mpa_half.delta_D,
     delta_P: r.hsp_mpa_half.delta_P,
     delta_H: r.hsp_mpa_half.delta_H,
-    R0: 7.5,
     logP: r.logP,
     TPSA: r.TPSA,
     HBD: r.HBD,
@@ -1439,13 +1438,6 @@ function inspectParameterDetails(paramKey) {
       uncertainty: "± 1.62 MPa½ (combined quadrature uncertainty)",
       method: "HSP-HVK-01",
       notes: "Cross-checked against secondary Fedors total solubility parameter."
-    },
-    "poly_r0": {
-      title: "Polymer Interaction Radius (R0)",
-      equation: "R0 = 7.50 MPa½ [Standard Screening Sphere Radius]",
-      uncertainty: "Range: [7.0, 8.0] MPa½",
-      method: "ASSUMED-CONV-01",
-      notes: "Defines the boundary sphere of miscibility in Hansen 3D space for polymer carrier solubilization."
     }
   };
 

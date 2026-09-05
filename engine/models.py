@@ -183,4 +183,3 @@ class InputDatasetStore(BaseModel):
     controlled_vocabularies: Dict[str, List[str]] = Field(default_factory=dict)
     field_contract: List[Dict[str, Any]] = Field(default_factory=list)
     records: List[EntityRecord] = Field(default_factory=list)
-    pair_metrics_worked_example: Optional[Dict[str, Any]] = None

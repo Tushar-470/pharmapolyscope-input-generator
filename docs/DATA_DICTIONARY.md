@@ -41,7 +41,6 @@
 | `delta_D` | Yes | Float | Hoftyzer-van Krevelen dispersion parameter ($\text{MPa}^{1/2}$) |
 | `delta_P` | Yes | Float | Hoftyzer-van Krevelen polar parameter ($\text{MPa}^{1/2}$) |
 | `delta_H` | Yes | Float | Hoftyzer-van Krevelen hydrogen-bonding parameter ($\text{MPa}^{1/2}$) |
-| `R0` | Yes | Float / Object | Interaction radius ($7.5\text{ MPa}^{1/2}$, `ASSUMED`) |
 | `logP` | Drugs | Float / Object | RDKit Crippen LogP with PubChem XLogP3 cross-check |
 | `TPSA` | Drugs | Float | Ertl Topological Polar Surface Area ($\text{\AA}^2$) |
 | `HBD` | Drugs | Integer | Lipinski Hydrogen Bond Donors (count) |

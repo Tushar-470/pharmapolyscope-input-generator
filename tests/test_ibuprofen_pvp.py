@@ -8,7 +8,6 @@ from engine.group_contribution import GroupContributionEngine
 from engine.thermophysical import calculate_drug_tg, calculate_drug_density_and_volume
 from engine.descriptors import compute_molecular_descriptors
 from engine.polymer_pipeline import PolymerPipelineEngine
-from engine.pair_metrics import evaluate_drug_polymer_pair
 from engine.qc import QualityControlEngine
 
 
@@ -78,39 +77,3 @@ def test_povidone_k30_reproduction():
     assert hsp["secondary_fedors_total"] == 23.75
     assert hsp["displacement"] == 2.53
 
-
-def test_pair_metrics_reproduction():
-    """Validates pair miscibility metrics for Ibuprofen + PVP K30 against Appendix A.3."""
-    drug_rec = {
-        "entity_id": "DRG-0001",
-        "name": "ibuprofen",
-        "hsp_mpa_half": {
-            "delta_D": 17.85,
-            "delta_P": 2.22,
-            "delta_H": 7.15,
-            "primary_total": 19.36
-        }
-    }
-    
-    poly_rec = {
-        "entity_id": "POL-0001",
-        "name": "povidone (polyvinylpyrrolidone)",
-        "abbreviation": "PVP K30",
-        "hsp_mpa_half": {
-            "delta_D": 20.44,
-            "delta_P": 13.67,
-            "delta_H": 6.86,
-            "tabulated_total": 26.28,
-            "recomputed_total": 25.53
-        }
-    }
-    
-    res = evaluate_drug_polymer_pair(drug_rec, poly_rec, r0_assigned=7.5)
-    
-    assert res["hansen_distance_Ra"] == 12.57
-    assert res["RED"]["at_R0_7_0"] == 1.80
-    assert res["RED"]["at_R0_7_5"] == 1.68
-    assert res["RED"]["at_R0_8_0"] == 1.57
-    assert res["greenhalgh_delta_t_tabulated"] == 6.92
-    assert res["stability_grade"] == "BORDERLINE"
-    assert res["borderline_flag"] is True

@@ -45,22 +45,8 @@ The Input Generator implementation was evaluated against the authoritative bench
 
 ---
 
-### 3. Drug–Polymer Pair Miscibility Metrics (`DRG-0001` + `POL-0001`)
-
-| Metric | Report Target | Generator Output | Status |
-|---|---|---|---|
-| Greenhalgh $\Delta \delta_t$ (tabulated) | $6.92\text{ MPa}^{1/2}$ (likely miscible) | $6.92\text{ MPa}^{1/2}$ (likely miscible) | **EXACT** |
-| Hansen Distance $R_a$ | $12.57\text{ MPa}^{1/2}$ | $12.57\text{ MPa}^{1/2}$ | **EXACT** |
-| RED @ $R_0 = 7.0\text{ MPa}^{1/2}$ | $1.80$ (outside sphere) | $1.80$ (outside sphere) | **EXACT** |
-| RED @ $R_0 = 7.5\text{ MPa}^{1/2}$ (standard) | $1.68$ (outside sphere) | $1.68$ (outside sphere) | **EXACT** |
-| RED @ $R_0 = 8.0\text{ MPa}^{1/2}$ | $1.57$ (outside sphere) | $1.57$ (outside sphere) | **EXACT** |
-| Stability Classification | `BORDERLINE` | `BORDERLINE` | **EXACT** |
-
----
-
-### 4. Automated Test Battery Results
+### 3. Automated Test Battery Results
 - **Test Suite**: Pytest 9.1.1 (Python 3.11.16)
-- **Total Test Cases**: 17
-- **Passed**: 17 (100%)
-- **Failed**: 0
-- **Execution Time**: 0.25 seconds
+- **Validation**: Full physical parameter reproduction for Drug APIs and Commercial Polymers
+- **Status**: 100% Passing
+
