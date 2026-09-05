@@ -1,0 +1,33 @@
+cff-version: 1.2.0
+message: "If you use this software in your research or solid dispersion formulation studies, please cite it as below."
+title: "PharmaPolySCOPE Physicochemical Input Generator: Authoritative Upstream Parameter Engine for Solid Dispersion Formulation Modeling"
+version: 1.0.0
+date-released: 2026-09-05
+license: MIT
+repository-code: "https://github.com/pharmapolyscope/pharmapolyscope-input-generator"
+keywords:
+  - "pharmaceutical-engineering"
+  - "amorphous-solid-dispersions"
+  - "solubility-parameters"
+  - "hansen-solubility-parameters"
+  - "rdkit"
+  - "cheminformatics"
+  - "quality-by-design"
+  - "uncertainty-quantification"
+  - "monte-carlo"
+  - "formulation-screening"
+abstract: >-
+  The PharmaPolySCOPE Upstream Physicochemical Input Generator is an authoritative,
+  open-source scientific application and decision-support engine for amorphous solid
+  dispersion (ASD) formulation workflows. It resolves the severe upstream data quality
+  crisis in pharmaceutical literature by standardizing neutral molecular structures,
+  evaluating Boyer–Kauzmann glass transition heuristics (Tg = 0.70 × Tm), decomposing
+  substructures via Fedors group increments, computing 3D Hoftyzer–van Krevelen Hansen
+  Solubility Parameters, and conducting 10,000-trial Monte Carlo uncertainty quantification
+  (95% Bayesian CIs). The software enforces a rigorous 12-gate quality control battery
+  and exports standardized, zero-spill single-page PDF certificates (PharmaPolySCOPE Ready
+  Sheets) compliant with ICH Q8/Q9 Quality-by-Design guidelines.
+authors:
+  - family-names: "Formulation Science & Computational Chemistry Team"
+    given-names: "PharmaPolySCOPE Research Consortium"
+    affiliation: "Department of Pharmaceutical Sciences & Advanced Drug Delivery"

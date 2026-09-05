@@ -1,0 +1,61 @@
+{
+  "registry_version": "1.0",
+  "methods": [
+    {
+      "method_id": "TG-RATIO-01",
+      "name": "Small-Molecule Glass Transition Temperature Estimation",
+      "formula": "Tg = 0.70 * Tm (T in K)",
+      "target": "drugs",
+      "uncertainty": "+/- 21 K (1-sigma)",
+      "reference": "Koop et al. 2011, Phys Chem Chem Phys 13(40):19238-19255"
+    },
+    {
+      "method_id": "DENS-FEDORS-01",
+      "name": "Fedors Group-Contribution Molar Volume & Density",
+      "formula": "Vm = sum(Delta Vi); rho = M / Vm",
+      "target": "drugs",
+      "uncertainty": "approx. -5 to +5 percent vs pycnometric true density",
+      "reference": "Fedors 1974, Polym Eng Sci 14(2):147-154"
+    },
+    {
+      "method_id": "HSP-HVK-01",
+      "name": "Hoftyzer-van Krevelen Hansen Solubility Parameters",
+      "formula": "delta_D = sum(Fd)/Vm; delta_P = sqrt(sum(Fp^2))/Vm; delta_H = sqrt(sum(Eh)/Vm)",
+      "target": "drugs, polymers",
+      "uncertainty": "approx. 1.0-1.5 MPa^0.5 per component",
+      "reference": "van Krevelen 1990, Properties of Polymers (3rd ed.)"
+    },
+    {
+      "method_id": "R0-SCREEN-01",
+      "name": "Fixed Screening Interaction Radius Convention",
+      "formula": "R0 = 7.5 MPa^0.5 (sensitivity band 7.0 - 8.0 MPa^0.5)",
+      "target": "drugs, polymers",
+      "uncertainty": "declared screening convention; band sensitivity reported",
+      "reference": "Methodology Report Chapter 7"
+    },
+    {
+      "method_id": "DESC-RDKIT-01",
+      "name": "RDKit Standard Cheminformatics Descriptors",
+      "formula": "MolWt, Crippen MolLogP, Ertl TPSA, Lipinski HBD/HBA",
+      "target": "drugs",
+      "uncertainty": "exact by definition for MolWt/TPSA/counts; PubChem XLogP3 cross-check",
+      "reference": "Wildman & Crippen 1999; Ertl et al. 2000; Lipinski et al. 1997; RDKit 2026.03.5"
+    },
+    {
+      "method_id": "LIT-ACQ-01",
+      "name": "Deterministic Melting Point Literature Acquisition Rule",
+      "formula": "Priority hierarchy Table 4-1 (Primary DSC -> Alternative DSC -> Database range -> Vendor -> Stereoisomer)",
+      "target": "drugs",
+      "uncertainty": "2-5 K for primary/curated; 10 K for estimated",
+      "reference": "Methodology Report Chapter 4"
+    },
+    {
+      "method_id": "LIT-ACQ-02",
+      "name": "Grade-Specific Polymer Literature & Manufacturer Acquisition",
+      "formula": "Grade-specific dry-state DSC midpoint for Tg; vendor datasheets for Mn and bulk density",
+      "target": "polymers",
+      "uncertainty": "2-5 K for Tg; datasheet specification range for Mn",
+      "reference": "Methodology Report Chapters 3, 5, 9"
+    }
+  ]
+}

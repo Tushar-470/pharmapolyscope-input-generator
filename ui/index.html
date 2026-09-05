@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PharmaPolySCOPE Physicochemical Input Generator</title>
+  <link rel="stylesheet" href="/static/css/style.css?v=1.6.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <div class="app-shell">
+    <!-- 1. Left Streamlined Navigation Sidebar -->
+    <aside class="sidebar">
+      <div class="brand-header">
+        <div class="brand-logo-icon">
+          <i class="fa-solid fa-atom"></i>
+        </div>
+        <div class="brand-title-group">
+          <span class="brand-name">PharmaPolySCOPE</span>
+          <span class="brand-app-type">Input Generator</span>
+        </div>
+      </div>
+
+      <nav class="nav-menu">
+        <div class="nav-group-title">Workflows</div>
+        <div class="nav-item active" onclick="switchNav('workspace')">
+          <span class="nav-item-left"><i class="fa-solid fa-house"></i> <span>Overview & Queue</span></span>
+          <span class="nav-count" id="count-total-records">0</span>
+        </div>
+
+        <div class="nav-item" onclick="switchNav('workstation')">
+          <span class="nav-item-left"><i class="fa-solid fa-calculator"></i> <span>Input Workstation</span></span>
+        </div>
+
+        <div class="nav-item" onclick="switchNav('library')">
+          <span class="nav-item-left"><i class="fa-solid fa-database"></i> <span>Entity Libraries</span></span>
+          <span class="nav-count" id="count-library-total">0</span>
+        </div>
+
+        <div class="nav-group-title">Export & Reference</div>
+        <div class="nav-item cta-nav" onclick="switchNav('output')">
+          <span class="nav-item-left"><i class="fa-solid fa-clipboard-check"></i> <span>Ready Sheet & Export</span></span>
+        </div>
+
+        <div class="nav-item" onclick="switchNav('methodology')">
+          <span class="nav-item-left"><i class="fa-solid fa-book-open-reader"></i> <span>Scientific Manual & SOP</span></span>
+        </div>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div>Developed by Tushar Mathapati</div>
+        <div style="font-size: 9px; color: var(--color-muted-text);">PharmaPolySCOPE Upstream Preprocessor</div>
+      </div>
+    </aside>
+
+    <!-- 2. Main Content Canvas -->
+    <main class="main-content">
+      <header class="top-header">
+        <div class="breadcrumb-trail">
+          <span>PharmaPolySCOPE</span> / <span class="active" id="breadcrumb-active-view">Overview & Queue</span>
+        </div>
+
+        <div class="header-center">
+          <div style="position: relative; width: 340px;">
+            <input type="text" id="global-search" class="form-input font-mono" placeholder="Search stored SMILES, ID, name..." oninput="handleGlobalSearch()">
+          </div>
+        </div>
+
+        <div class="header-status">
+          <button class="btn btn-secondary btn-sm" onclick="syncDataset()"><i class="fa-solid fa-rotate"></i> Refresh Data</button>
+        </div>
+      </header>
+
+      <div class="content-layout">
+        <div class="views-area">
+          
+          <!-- ============================================================
+               VIEW 1: WORKSPACE OVERVIEW & QUEUE
+          ============================================================ -->
+          <section id="view-workspace" class="workspace-view active">
+            <!-- Action Cards -->
+            <div class="direct-action-grid">
+              <div class="action-card" onclick="switchNav('workstation', 'sub-drug-gen')">
+                <div class="action-card-icon blue"><i class="fa-solid fa-capsules"></i></div>
+                <div class="action-card-body">
+                  <span class="action-card-title">Calculate Drug Parameters</span>
+                  <span class="action-card-desc">SMILES, Tg, Fedors Density & HVK HSP</span>
+                </div>
+              </div>
+
+              <div class="action-card" onclick="switchNav('workstation', 'sub-poly-gen')">
+                <div class="action-card-icon purple"><i class="fa-solid fa-dna"></i></div>
+                <div class="action-card-body">
+                  <span class="action-card-title">Select Polymer Grade</span>
+                  <span class="action-card-desc">Commercial grade specs & dry Tg</span>
+                </div>
+              </div>
+
+              <div class="action-card" onclick="switchNav('output', 'sub-ready-sheet')">
+                <div class="action-card-icon green"><i class="fa-solid fa-clipboard-check"></i></div>
+                <div class="action-card-body">
+                  <span class="action-card-title">Pharmapolyscope Ready Sheet</span>
+                  <span class="action-card-desc">1-Click single value copy for manual entry</span>
+                </div>
+              </div>
+
+              <div class="action-card" onclick="switchNav('methodology')">
+                <div class="action-card-icon navy"><i class="fa-solid fa-book-bookmark"></i></div>
+                <div class="action-card-body">
+                  <span class="action-card-title">Methodology & Formulas</span>
+                  <span class="action-card-desc">SOP equations, constants & QC rules</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Active Entities Table -->
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <h3 class="card-title"><i class="fa-solid fa-table-list"></i> Stored Physicochemical Parameters</h3>
+                  <p class="card-subtitle">Click any record row to inspect calculation provenance</p>
+                </div>
+                <div style="display: flex; gap: 6px;">
+                  <button class="btn btn-primary btn-sm" onclick="switchNav('workstation', 'sub-drug-gen')"><i class="fa-solid fa-plus"></i> New Drug</button>
+                  <button class="btn btn-secondary btn-sm" onclick="switchNav('workstation', 'sub-poly-gen')"><i class="fa-solid fa-plus"></i> New Polymer</button>
+                </div>
+              </div>
+              <div class="data-table-container">
+                <table class="data-table" id="summary-records-table">
+                  <thead>
+                    <tr>
+                      <th>Entity ID</th>
+                      <th>Class</th>
+                      <th>INN Name / Commercial Grade</th>
+                      <th>Canonical SMILES / Repeat Unit</th>
+                      <th class="num-col">Tm (K)</th>
+                      <th class="num-col">Tg (K)</th>
+                      <th class="num-col">Density (g/cm³)</th>
+                      <th>HSP (δD / δP / δH)</th>
+                      <th>QC State</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Status Summary Bar -->
+            <div class="grid-4">
+              <div class="gate-box gate-pass" style="margin-bottom: 0;">
+                <div class="gate-header"><span class="gate-title">APPROVED (CLEAN)</span><span class="gate-pill pass" id="q-approved">0</span></div>
+                <div class="gate-details">Verified within physical bounds</div>
+              </div>
+              <div class="gate-box gate-warn" style="margin-bottom: 0;">
+                <div class="gate-header"><span class="gate-title">APPROVED W/ FLAGS</span><span class="gate-pill warn" id="q-flags">0</span></div>
+                <div class="gate-details">Method displacement flagged</div>
+              </div>
+              <div class="gate-box gate-fail" style="margin-bottom: 0;">
+                <div class="gate-header"><span class="gate-title">REJECTED / BLOCKED</span><span class="gate-pill fail" id="q-rejected">0</span></div>
+                <div class="gate-details">Out-of-range physical values</div>
+              </div>
+              <div class="gate-box gate-pass" style="margin-bottom: 0;">
+                <div class="gate-header"><span class="gate-title">READY FOR ENTRY</span><span class="gate-pill pass" id="q-ready">0</span></div>
+                <div class="gate-details">Available for manual export</div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ============================================================
+               VIEW 2: INPUT WORKSTATION (DRUGS & POLYMERS)
+          ============================================================ -->
+          <section id="view-workstation" class="workspace-view">
+            <!-- Sub-Tabs -->
+            <div class="sub-tabs">
+              <button class="sub-tab-btn active" onclick="switchSubTab('workstation-tabs', 'sub-drug-gen')"><i class="fa-solid fa-capsules"></i> Drug Parameters</button>
+              <button class="sub-tab-btn" onclick="switchSubTab('workstation-tabs', 'sub-poly-gen')"><i class="fa-solid fa-dna"></i> Polymer Grade Parameters</button>
+            </div>
+
+            <div id="workstation-tabs">
+              <!-- SUB-TAB A: DRUG GENERATOR -->
+              <div id="sub-drug-gen" class="sub-tab-content active">
+                <div class="grid-2">
+                  <!-- LEFT: INPUTS -->
+                  <div>
+                    <!-- Optional PubChem Live Search Box -->
+                    <div class="card" style="margin-bottom: 12px; background: #F8FAFC; border: 1px dashed var(--color-border);">
+                      <div class="card-header" style="padding: 10px 14px; background: transparent;">
+                        <h3 class="card-title" style="font-size: 12px;"><i class="fa-solid fa-cloud-arrow-down"></i> PubChem Live Lookup (Optional Helper)</h3>
+                      </div>
+                      <div class="card-body" style="padding: 10px 14px;">
+                        <div style="display: flex; gap: 6px;">
+                          <input type="text" id="drug-search-input" class="form-input font-mono" placeholder="Search drug name, brand, or CID (e.g. Ibuprofen, 3672)" onkeydown="if(event.key==='Enter') searchPubchemDrug()">
+                          <button class="btn btn-secondary btn-sm" onclick="searchPubchemDrug()"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+                        </div>
+                        <div style="display: flex; gap: 4px; flex-wrap: wrap; margin-top: 6px; align-items: center;">
+                          <span style="font-size: 10px; color: var(--color-muted-text);">Quick Load:</span>
+                          <span class="badge badge-info" style="cursor: pointer; font-size: 10px;" onclick="quickSearch('Ibuprofen')">Ibuprofen</span>
+                          <span class="badge badge-info" style="cursor: pointer; font-size: 10px;" onclick="quickSearch('Naproxen')">Naproxen</span>
+                          <span class="badge badge-info" style="cursor: pointer; font-size: 10px;" onclick="quickSearch('Paracetamol')">Paracetamol</span>
+                          <span class="badge badge-info" style="cursor: pointer; font-size: 10px;" onclick="quickSearch('Indomethacin')">Indomethacin</span>
+                          <span class="badge badge-info" style="cursor: pointer; font-size: 10px;" onclick="quickSearch('Aspirin')">Aspirin</span>
+                        </div>
+                        <div id="drug-search-status" style="font-size: 11px; margin-top: 5px;"></div>
+
+                        <!-- Preview & Explicit Transfer Container -->
+                        <div id="pubchem-preview-box" class="pubchem-transfer-card" style="display: none;">
+                          <div class="pubchem-transfer-header">
+                            <i class="fa-solid fa-check-circle"></i> <span id="pubchem-preview-title">Found Molecule</span>
+                          </div>
+                          <div class="pubchem-transfer-body" id="pubchem-preview-content"></div>
+                          <button class="btn btn-primary btn-sm" style="width: 100%;" onclick="transferPubchemDataToInputs()">
+                            <i class="fa-solid fa-arrow-down"></i> Transfer Fetched Data to Inputs
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Main Core Manual Inputs -->
+                    <div class="card">
+                      <div class="card-header">
+                        <h3 class="card-title"><i class="fa-solid fa-sliders"></i> Drug Inputs</h3>
+                      </div>
+                      <div class="card-body">
+                        <div class="form-group">
+                          <label class="form-label">Generic Name (INN)</label>
+                          <input type="text" id="drug-name" class="form-input" placeholder="e.g. ibuprofen">
+                        </div>
+
+                        <div class="form-group">
+                          <label class="form-label">Canonical SMILES (Neutral Active Moiety)</label>
+                          <input type="text" id="drug-smiles" class="form-input font-mono" placeholder="CC(C)CC1=CC=C(C=C1)C(C)C(=O)O" oninput="onSmilesInputLive()">
+                        </div>
+
+                        <div class="grid-2">
+                          <div class="form-group">
+                            <label class="form-label">PubChem CID (Optional)</label>
+                            <input type="number" id="drug-cid" class="form-input font-mono" placeholder="3672">
+                          </div>
+                          <div class="form-group">
+                            <label class="form-label">BCS Class</label>
+                            <select id="drug-bcs" class="form-input" onchange="calculateDrugLive()">
+                              <option value="I">Class I (High Sol, High Perm)</option>
+                              <option value="II" selected>Class II (Low Sol, High Perm)</option>
+                              <option value="III">Class III (High Sol, Low Perm)</option>
+                              <option value="IV">Class IV (Low Sol, Low Perm)</option>
+                            </select>
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label class="form-label">Melting Temperature Tm (°C or K) & Polymorph</label>
+                          <div style="display: flex; gap: 6px;">
+                            <input type="number" step="0.01" id="drug-tm-c" class="form-input font-mono" placeholder="Tm °C (e.g. 76.0)" oninput="updateTmFromC(); calculateDrugLive();">
+                            <input type="number" step="0.01" id="drug-tm-k" class="form-input font-mono" placeholder="Tm K (e.g. 349.15)" oninput="updateTmFromK(); calculateDrugLive();">
+                          </div>
+                          <input type="text" id="drug-tm-form" class="form-input" style="margin-top: 4px;" placeholder="Polymorph form (e.g. form I stable at 25 C)">
+                        </div>
+
+                        <div class="form-group">
+                          <label class="form-label">Pycnometric Density (Optional g/cm³)</label>
+                          <input type="number" step="0.001" id="drug-lit-density" class="form-input font-mono" placeholder="e.g. 1.11" onchange="calculateDrugLive()">
+                        </div>
+
+                        <button class="btn btn-primary" style="width: 100%; margin-top: 4px;" onclick="calculateDrugLive()">
+                          <i class="fa-solid fa-calculator"></i> Calculate Properties
+                        </button>
+
+                        <div style="margin-top: 10px;">
+                          <label class="form-label">2D Chemical Structure</label>
+                          <div id="drug-svg-container" style="background-color: var(--color-surface-subtle); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 8px; text-align: center; min-height: 90px; display: flex; align-items: center; justify-content: center;">
+                            <span style="color: var(--color-muted-text); font-size: 11px;">2D structure renders upon SMILES entry</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- RIGHT: DUAL-COLUMN RESULTS -->
+                  <div>
+                    <div class="card">
+                      <div class="card-header">
+                        <div>
+                          <h3 class="card-title"><i class="fa-solid fa-table"></i> Calculated Physicochemical Values</h3>
+                          <p class="card-subtitle">Click any property row to inspect formulas and constants. Copy whichever format you need.</p>
+                        </div>
+                        <span id="drug-qc-badge" class="badge" style="display: none;"></span>
+                      </div>
+                      <div class="card-body">
+                        <!-- Dual-Column Results Table -->
+                        <div class="data-table-container" style="max-height: 320px; margin-bottom: 12px;">
+                          <table class="data-table dual-results-table" id="drug-calc-results-table">
+                            <thead>
+                              <tr>
+                                <th>Parameter</th>
+                                <th>Base Value (Before UQ)</th>
+                                <th>With Uncertainty (After UQ)</th>
+                                <th>Unit</th>
+                                <th>Method ID</th>
+                              </tr>
+                            </thead>
+                            <tbody></tbody>
+                          </table>
+                        </div>
+
+                        <!-- Table 2: 10,000-Run Monte Carlo Uncertainty & Final Single Value Derivation Table -->
+                        <div class="card" style="margin-bottom: 12px; border: 1px solid #CBD5E1; background: #FAFBFD;">
+                          <div class="card-header" style="padding: 8px 12px; background: #F1F5F9;">
+                            <div>
+                              <h4 class="card-title" style="font-size: 12px;"><i class="fa-solid fa-chart-line"></i> Uncertainty Quantification & Final Single Values (10,000-Run MC)</h4>
+                              <p class="card-subtitle" style="font-size: 10.5px;">10,000 Gaussian resampling runs with 95% Confidence Interval deriving converged final representative values for PharmaPolySCOPE</p>
+                            </div>
+                          </div>
+                          <div class="card-body" style="padding: 8px 12px;">
+                            <div class="data-table-container" style="max-height: 240px;">
+                              <table class="data-table dual-results-table" id="drug-uq-calc-table">
+                                <thead>
+                                  <tr>
+                                    <th>Parameter</th>
+                                    <th>Nominal</th>
+                                    <th>Model (10k MC)</th>
+                                    <th>Uncertainty (±1σ)</th>
+                                    <th>95% CI</th>
+                                    <th style="color: var(--color-primary-action);">Final Single Value</th>
+                                    <th>Unit</th>
+                                  </tr>
+                                </thead>
+                                <tbody></tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+
+                        <details style="margin-bottom: 12px; font-size: 11.5px; color: var(--color-secondary-text);">
+                          <summary style="cursor: pointer; font-weight: 600; padding: 4px 0; color: var(--color-primary-action);">
+                            <i class="fa-solid fa-layer-group"></i> View SMARTS Functional Group Decomposition Table
+                          </summary>
+                          <div class="data-table-container" style="max-height: 140px; margin-top: 6px;">
+                            <table class="data-table" id="drug-groups-table">
+                              <thead>
+                                <tr>
+                                  <th>Matched Group</th>
+                                  <th class="num-col">Count</th>
+                                  <th class="num-col">ΔU</th>
+                                  <th class="num-col">ΔV</th>
+                                  <th class="num-col">Fd</th>
+                                  <th class="num-col">Fp</th>
+                                  <th class="num-col">Eh</th>
+                                </tr>
+                              </thead>
+                              <tbody></tbody>
+                            </table>
+                          </div>
+                        </details>
+
+                        <div style="display: flex; gap: 8px;">
+                          <button class="btn btn-primary" style="flex: 1;" onclick="saveCurrentDrug()"><i class="fa-solid fa-floppy-disk"></i> Commit Record to Store</button>
+                          <button class="btn btn-secondary" onclick="viewReadySheetForCurrent('DRG')"><i class="fa-solid fa-clipboard-check"></i> View in Ready Sheet</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- SUB-TAB B: POLYMER GENERATOR -->
+              <div id="sub-poly-gen" class="sub-tab-content">
+                <div class="grid-2">
+                  <!-- LEFT: POLYMER INPUTS -->
+                  <div>
+                    <!-- Optional PubChem Live Search for Polymer -->
+                    <div class="card" style="margin-bottom: 14px; border: 1px dashed var(--color-border); background: #FAFBFD;">
+                      <div class="card-header" style="padding: 10px 14px;">
+                        <div>
+                          <h4 class="card-title" style="font-size: 13px;"><i class="fa-solid fa-magnifying-glass"></i> PubChem Live Lookup (Optional Helper)</h4>
+                          <p class="card-subtitle" style="font-size: 11px;">Search polymer/monomer by chemical name or CID</p>
+                        </div>
+                      </div>
+                      <div class="card-body" style="padding: 10px 14px;">
+                        <div style="display: flex; gap: 8px;">
+                          <input type="text" id="poly-pubchem-query" class="form-input" placeholder="e.g. Polyvinylpyrrolidone, Povidone, PEG, 282" onkeydown="if(event.key==='Enter') searchPubchemPolymer()">
+                          <button class="btn btn-secondary" style="white-space: nowrap;" onclick="searchPubchemPolymer()">
+                            <i class="fa-solid fa-cloud-arrow-down"></i> Search
+                          </button>
+                        </div>
+                        <div id="poly-search-status" style="font-size: 11px; margin-top: 5px;"></div>
+
+                        <!-- Preview & Explicit Transfer Container -->
+                        <div id="poly-pubchem-preview-box" class="pubchem-transfer-card" style="display: none; margin-top: 8px;">
+                          <div class="pubchem-transfer-header">
+                            <i class="fa-solid fa-check-circle"></i> <span id="poly-pubchem-preview-title">Found Polymer / Monomer</span>
+                          </div>
+                          <div class="pubchem-transfer-body" id="poly-pubchem-preview-content"></div>
+                          <button class="btn btn-primary btn-sm" style="width: 100%;" onclick="transferPubchemDataToPolymerInputs()">
+                            <i class="fa-solid fa-arrow-down"></i> Transfer Fetched Data to Inputs
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="card">
+                      <div class="card-header">
+                        <div>
+                          <h3 class="card-title"><i class="fa-solid fa-sliders"></i> Polymer Inputs</h3>
+                          <p class="card-subtitle">Enter your polymer chemical identity and experimental values</p>
+                        </div>
+                      </div>
+                      <div class="card-body">
+                        <div class="form-group">
+                          <label class="form-label">Polymer Name / Commercial Grade</label>
+                          <input type="text" id="poly-name" class="form-input" placeholder="e.g. PVP K30, Soluplus, HPMC-AS, or Custom Polymer">
+                        </div>
+
+                        <div class="form-group">
+                          <label class="form-label">Repeat-Unit SMILES (Wildcard * allowed)</label>
+                          <input type="text" id="poly-repeat-smiles" class="form-input font-mono" placeholder="e.g. *CC(*)N1CCCC1=O">
+                        </div>
+
+                        <div class="grid-2">
+                          <div class="form-group">
+                            <label class="form-label">Dry-State Tg (°C)</label>
+                            <input type="number" step="0.1" id="poly-tg-c" class="form-input font-mono" placeholder="e.g. 153.6" oninput="syncPolymerTg('C')">
+                          </div>
+                          <div class="form-group">
+                            <label class="form-label">Dry-State Tg (K)</label>
+                            <input type="number" step="0.1" id="poly-tg-k" class="form-input font-mono" placeholder="e.g. 426.8" oninput="syncPolymerTg('K')">
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label class="form-label">Density (g/cm³)</label>
+                          <input type="number" step="0.01" id="poly-density" class="form-input font-mono" placeholder="e.g. 0.40">
+                        </div>
+
+                        <div style="display: flex; gap: 8px; margin-top: 8px;">
+                          <button class="btn btn-primary" style="flex: 1;" onclick="calculatePolymerLive()">
+                            <i class="fa-solid fa-calculator"></i> Calculate Polymer Properties
+                          </button>
+                          <button class="btn btn-secondary" onclick="saveCurrentPolymer()">
+                            <i class="fa-solid fa-floppy-disk"></i> Commit Record
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- RIGHT: POLYMER DUAL-COLUMN RESULTS -->
+                  <div>
+                    <div class="card">
+                      <div class="card-header">
+                        <div>
+                          <h3 class="card-title"><i class="fa-solid fa-book-open"></i> Calculated Polymer Properties</h3>
+                          <p class="card-subtitle">Click any property row to inspect formulas. Copy whichever format you need.</p>
+                        </div>
+                      </div>
+                      <div class="card-body">
+                        <div class="data-table-container" style="max-height: 280px; margin-bottom: 12px;">
+                          <table class="data-table dual-results-table" id="poly-calc-results-table">
+                            <thead>
+                              <tr>
+                                <th>Property</th>
+                                <th>Base Value (Before UQ)</th>
+                                <th>With Uncertainty (After UQ)</th>
+                                <th>Unit</th>
+                                <th>Provenance</th>
+                              </tr>
+                            </thead>
+                            <tbody></tbody>
+                          </table>
+                        </div>
+
+                        <!-- Polymer Table 2: 10,000-Run Monte Carlo Uncertainty & Final Single Value Derivation Table -->
+                        <div class="card" style="margin-bottom: 12px; border: 1px solid #CBD5E1; background: #FAFBFD;">
+                          <div class="card-header" style="padding: 8px 12px; background: #F1F5F9;">
+                            <div>
+                              <h4 class="card-title" style="font-size: 12px;"><i class="fa-solid fa-chart-line"></i> Uncertainty Quantification & Final Single Values (10,000-Run MC)</h4>
+                              <p class="card-subtitle" style="font-size: 10.5px;">10,000 Gaussian resampling runs with 95% Confidence Interval deriving converged final representative values</p>
+                            </div>
+                          </div>
+                          <div class="card-body" style="padding: 8px 12px;">
+                            <div class="data-table-container" style="max-height: 240px;">
+                              <table class="data-table dual-results-table" id="poly-uq-calc-table">
+                                <thead>
+                                  <tr>
+                                    <th>Property</th>
+                                    <th>Nominal</th>
+                                    <th>Model (10k MC)</th>
+                                    <th>Uncertainty (±1σ)</th>
+                                    <th>95% CI</th>
+                                    <th style="color: var(--color-primary-action);">Final Single Value</th>
+                                    <th>Unit</th>
+                                  </tr>
+                                </thead>
+                                <tbody></tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div style="display: flex; gap: 8px;">
+                          <button class="btn btn-secondary" style="width: 100%;" onclick="viewReadySheetForCurrent('POL')">
+                            <i class="fa-solid fa-clipboard-check"></i> View in Ready Sheet
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ============================================================
+               VIEW 3: ENTITY LIBRARIES
+          ============================================================ -->
+          <section id="view-library" class="workspace-view">
+            <div class="sub-tabs">
+              <button class="sub-tab-btn active" onclick="switchSubTab('library-tabs', 'sub-drug-lib')"><i class="fa-solid fa-capsules"></i> Drug Library</button>
+              <button class="sub-tab-btn" onclick="switchSubTab('library-tabs', 'sub-poly-lib')"><i class="fa-solid fa-dna"></i> Polymer Carrier Library</button>
+            </div>
+
+            <div id="library-tabs">
+              <div id="sub-drug-lib" class="sub-tab-content active">
+                <div class="card">
+                  <div class="card-header">
+                    <div>
+                      <h3 class="card-title"><i class="fa-solid fa-capsules"></i> Active Pharmaceutical Ingredients (APIs)</h3>
+                      <p class="card-subtitle">Neutral active moieties with verified melting point and calculated HSP coordinates</p>
+                    </div>
+                    <button class="btn btn-primary btn-sm" onclick="switchNav('workstation', 'sub-drug-gen')"><i class="fa-solid fa-plus"></i> New Drug</button>
+                  </div>
+                  <div class="data-table-container">
+                    <table class="data-table" id="drug-registry-table">
+                      <thead>
+                        <tr>
+                          <th>Entity ID</th>
+                          <th>INN Name</th>
+                          <th>Canonical SMILES</th>
+                          <th class="num-col">MW (g/mol)</th>
+                          <th class="num-col">Tm (K)</th>
+                          <th class="num-col">Tg (K)</th>
+                          <th class="num-col">Density (g/cm³)</th>
+                          <th class="num-col">δD</th>
+                          <th class="num-col">δP</th>
+                          <th class="num-col">δH</th>
+                          <th class="num-col">δt</th>
+                          <th>QC Status</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <div id="sub-poly-lib" class="sub-tab-content">
+                <div class="card">
+                  <div class="card-header">
+                    <div>
+                      <h3 class="card-title"><i class="fa-solid fa-dna"></i> Polymer Carrier Library</h3>
+                      <p class="card-subtitle">Strict distinction: <strong>POLYMER FAMILY ≠ COMMERCIAL GRADE</strong></p>
+                    </div>
+                    <button class="btn btn-secondary btn-sm" onclick="switchNav('workstation', 'sub-poly-gen')"><i class="fa-solid fa-plus"></i> New Grade</button>
+                  </div>
+                  <div class="data-table-container">
+                    <table class="data-table" id="polymer-registry-table">
+                      <thead>
+                        <tr>
+                          <th>Entity ID</th>
+                          <th>Carrier Family</th>
+                          <th>Commercial Grade</th>
+                          <th>Repeat Unit</th>
+                          <th class="num-col">Mn (g/mol)</th>
+                          <th class="num-col">Literature Tg (K)</th>
+                          <th class="num-col">Bulk Density (g/cm³)</th>
+                          <th class="num-col">δD</th>
+                          <th class="num-col">δP</th>
+                          <th class="num-col">δH</th>
+                          <th class="num-col">δt</th>
+                          <th>QC Status</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ============================================================
+               VIEW 4: PHARMAPOLYSCOPE MANUAL ENTRY SHEET
+          ============================================================ -->
+          <section id="view-output" class="workspace-view">
+            <div id="output-tabs">
+              <div id="sub-ready-sheet" class="sub-tab-content active">
+                <div class="card">
+                  <div class="card-header">
+                    <div>
+                      <h3 class="card-title"><i class="fa-solid fa-clipboard-check"></i> PharmaPolySCOPE Manual Entry Sheet</h3>
+                      <p class="card-subtitle">Authoritative physicochemical input sheet with 1-click single-value & batch copy</p>
+                    </div>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                      <select id="ready-entity-select" class="form-input" style="min-width: 220px;" onchange="loadReadySheet()"></select>
+                      <button class="btn btn-primary btn-sm" onclick="copyReadyAllFinal()"><i class="fa-solid fa-copy"></i> Copy Final Values</button>
+                      <button class="btn btn-secondary btn-sm" onclick="copyReadyCsvRow()"><i class="fa-solid fa-table-cells"></i> Copy CSV / Row</button>
+                      <button class="btn btn-secondary btn-sm" onclick="copyReadyJson()"><i class="fa-solid fa-code"></i> Copy JSON</button>
+                      <button class="btn btn-secondary btn-sm" onclick="printReadySheet()"><i class="fa-solid fa-print"></i> Print / PDF</button>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <div id="ready-sheet-render-container"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ============================================================
+               VIEW 5: SCIENTIFIC USER MANUAL & METHODOLOGICAL COMPENDIUM (SOP)
+          ============================================================ -->
+          <section id="view-methodology" class="workspace-view">
+            <div class="sop-manual-wrapper">
+
+              <!-- Sticky In-Page Navigation Bar -->
+              <nav class="sop-nav-bar">
+                <span style="font-size: 11px; font-weight: 700; color: var(--color-primary-text); margin-right: 4px;"><i class="fa-solid fa-compass"></i> Contents:</span>
+                <a href="#sop-manifesto" class="sop-nav-btn"><i class="fa-solid fa-bullseye"></i> 1. Manifesto & Scope</a>
+                <a href="#sop-flowchart" class="sop-nav-btn"><i class="fa-solid fa-diagram-project"></i> 2. Operational Flowchart</a>
+                <a href="#sop-walkthrough" class="sop-nav-btn"><i class="fa-solid fa-user-graduate"></i> 3. New User Walkthrough</a>
+                <a href="#sop-equations" class="sop-nav-btn"><i class="fa-solid fa-square-root-variable"></i> 4. Governing Equations</a>
+                <a href="#sop-faq" class="sop-nav-btn"><i class="fa-solid fa-circle-question"></i> 5. Formulator FAQ</a>
+              </nav>
+
+              <!-- Section 1: Executive Manifesto & Software Intention -->
+              <div id="sop-manifesto" class="sop-section-card">
+                <div class="sop-section-header">
+                  <div>
+                    <h3 class="sop-section-title"><i class="fa-solid fa-bullseye" style="color: #0284C7;"></i> 1. Executive Manifesto & Software Intention</h3>
+                    <p style="font-size: 12px; color: var(--color-muted-text); margin-top: 2px;">The physical chemistry rationale, formulation screening dilemma, and division of responsibility</p>
+                  </div>
+                  <span class="sop-section-badge">Theoretical Foundation</span>
+                </div>
+
+                <div class="sop-prose">
+                  <h4 style="color: var(--color-primary-text); margin-bottom: 8px;"><i class="fa-solid fa-triangle-exclamation" style="color: #D97706;"></i> 1.1 The Upstream Crisis in Solid Dispersion Formulation Screening</h4>
+                  <p>
+                    Downstream formulation modeling platforms such as <strong>PharmaPolySCOPE</strong> and Flory–Huggins thermodynamic simulators require an exact battery of drug and polymer physicochemical parameters: melting point (<em>T<sub>m</sub></em>), glass transition temperature (<em>T<sub>g</sub></em>), solid-state density (<em>&rho;</em>), 3D Hansen Solubility Parameters (<em>&delta;<sub>D</sub></em>, <em>&delta;<sub>P</sub></em>, <em>&delta;<sub>H</sub></em>, <em>&delta;<sub>t</sub></em>), and interaction radius (<em>R<sub>0</sub></em>).
+                  </p>
+                  <p>
+                    However, exploratory and early-stage formulation workflows consistently fail due to five pervasive failure modes in upstream literature:
+                  </p>
+                  <ul style="padding-left: 20px; margin-bottom: 12px; display: flex; flex-direction: column; gap: 4px;">
+                    <li><strong>1. Missing Amorphous Data:</strong> Small-molecule Active Pharmaceutical Ingredients (APIs) frequently lack experimental <em>T<sub>g</sub></em> measurements because supercooled amorphous states rapidly crystallize under standard DSC heating rates.</li>
+                    <li><strong>2. Conflicting Literature Values:</strong> Published melting points frequently differ by 10–30 K depending on heating rate, polymorph (metastable vs stable Form I), or solvate stoichiometry.</li>
+                    <li><strong>3. Inconsistent Density Standards:</strong> Pycnometric true skeletal densities are often confused with commercial bulk tapped densities, distorting molar volume calculations.</li>
+                    <li><strong>4. Subjective Group Contributions:</strong> Manual functional group counting in Hoftyzer–van Krevelen and Fedors tables leads to high inter-operator variability and irreproducible miscibility predictions.</li>
+                    <li><strong>5. Untracked Uncertainty:</strong> Downstream models are fed single deterministic point values without quantified uncertainty, creating a false sense of certainty in borderline formulations.</li>
+                  </ul>
+
+                  <div class="sop-callout sop-callout-info">
+                    <i class="fa-solid fa-lightbulb sop-callout-icon"></i>
+                    <div>
+                      <strong>The Purpose of This Software:</strong> PharmaPolySCOPE Upstream Physicochemical Generator was engineered as an authoritative, automated, deterministic bridge. It ingests verified chemical structures (PubChem CID / Canonical SMILES) and commercial polymer specifications, applies frozen physical chemistry methods (Boyer–Kauzmann, Fedors, Hoftyzer–van Krevelen), executes automated physical chemistry quality control gatekeeping, runs 10,000 Monte Carlo uncertainty simulations, and exports a standardized single-page <strong>Manual Entry Sheet</strong> ready for direct transcription.
+                    </div>
+                  </div>
+
+                  <h4 style="color: var(--color-primary-text); margin-top: 14px; margin-bottom: 8px;"><i class="fa-solid fa-scale-balanced" style="color: #4F46E5;"></i> 1.2 Epistemic Boundary & Division of Responsibility</h4>
+                  <p>
+                    A foundational design tenet of this workstation is the strict boundary between <strong>algorithmic calculation</strong> and <strong>scientific responsibility</strong>:
+                  </p>
+                  <div class="sop-callout sop-callout-warning">
+                    <i class="fa-solid fa-triangle-exclamation sop-callout-icon"></i>
+                    <div>
+                      <strong>Scientist Responsibility Notice (Garbage-In, Garbage-Out Safeguard):</strong><br>
+                      Our system is an algorithmic physical chemistry calculator and quality gatekeeper—nothing more and nothing less. It computes thermodynamic parameters strictly from entered structural and thermal inputs. The <strong>user formulator retains sole responsibility</strong> for verifying that the entered SMILES represents the correct chemical active moiety, confirming that the acquired melting point corresponds to the intended polymorph, and assessing whether the resulting solid dispersion complies with pharmaceutical regulatory standards (ICH Q8/Q9).
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Section 2: Complete Operational Pipeline Flowchart -->
+              <div id="sop-flowchart" class="sop-section-card">
+                <div class="sop-section-header">
+                  <div>
+                    <h3 class="sop-section-title"><i class="fa-solid fa-diagram-project" style="color: #0284C7;"></i> 2. Complete End-to-End Operational Pipeline & Visual Flowchart</h3>
+                    <p style="font-size: 12px; color: var(--color-muted-text); margin-top: 2px;">Comprehensive visual journey from raw molecular identifiers to downstream PharmaPolySCOPE entry</p>
+                  </div>
+                  <span class="sop-section-badge">Pipeline Architecture</span>
+                </div>
+
+                <div class="sop-prose">
+                  <p>The system executes an automated 12-stage sequential pipeline split across Pipeline A (Small-Molecule Drug APIs) and Pipeline B (Commercial Polymer Carriers):</p>
+
+                  <div class="sop-pipeline-grid">
+                    <div class="sop-pipeline-card">
+                      <span class="sop-pipeline-step-num">STAGE 01</span>
+                      <div class="sop-pipeline-card-title"><i class="fa-solid fa-magnifying-glass"></i> Structure Ingestion</div>
+                      <div class="sop-pipeline-desc">User queries PubChem by generic name / CID or inputs raw SMILES. System downloads validated structural records and 2D depiction.</div>
+                    </div>
+
+                    <div class="sop-pipeline-card">
+                      <span class="sop-pipeline-step-num">STAGE 02</span>
+                      <div class="sop-pipeline-card-title"><i class="fa-solid fa-filter"></i> Neutral Standardization</div>
+                      <div class="sop-pipeline-desc">RDKit strips salt counter-ions (e.g. Na⁺, Cl⁻, mesylate) to isolate the unionized neutral active moiety that governs solid dispersion phase behavior.</div>
+                    </div>
+
+                    <div class="sop-pipeline-card">
+                      <span class="sop-pipeline-step-num">STAGE 03</span>
+                      <div class="sop-pipeline-card-title"><i class="fa-solid fa-calculator"></i> Molecular Descriptors</div>
+                      <div class="sop-pipeline-desc">Computes pinned molecular descriptors: exact MW, Crippen LogP, Ertl Topological Polar Surface Area (TPSA), and Lipinski H-bond donor/acceptor counts.</div>
+                    </div>
+
+                    <div class="sop-pipeline-card">
+                      <span class="sop-pipeline-step-num">STAGE 04</span>
+                      <div class="sop-pipeline-card-title"><i class="fa-solid fa-temperature-arrow-up"></i> Deterministic Tm Acquisition</div>
+                      <div class="sop-pipeline-desc">Applies 5-tier Table 4-1 hierarchy (Primary DSC onset &gt; Alternative DSC &gt; Curated DB &gt; Manufacturer CoA &gt; Enantiomer estimate). Converts °C to K.</div>
+                    </div>
+
+                    <div class="sop-pipeline-card">
+                      <span class="sop-pipeline-step-num">STAGE 05</span>
+                      <div class="sop-pipeline-card-title"><i class="fa-solid fa-atom"></i> Boyer–Kauzmann Tg Calculation</div>
+                      <div class="sop-pipeline-desc">Evaluates <em>T<sub>g</sub> = 0.70 &times; T<sub>m</sub></em> with validated ±21.0 K (1&sigma;) uncertainty margin based on the Koop et al. (2011) survey of 142 pharmaceutical APIs.</div>
+                    </div>
+
+                    <div class="sop-pipeline-card">
+                      <span class="sop-pipeline-step-num">STAGE 06</span>
+                      <div class="sop-pipeline-card-title"><i class="fa-solid fa-cube"></i> Fedors Density &amp; Volume</div>
+                      <div class="sop-pipeline-desc">Decomposes molecule into non-overlapping Fedors group increments via SMARTS. Calculates molar volume <em>V<sub>m</sub> = &Sigma; &Delta;v<sub>i</sub></em> and solid-state density <em>&rho; = MW / V<sub>m</sub></em>.</div>
+                    </div>
+
+                    <div class="sop-pipeline-card">
+                      <span class="sop-pipeline-step-num">STAGE 07</span>
+                      <div class="sop-pipeline-card-title"><i class="fa-solid fa-layer-group"></i> 3D Hansen Parameters (HVK)</div>
+                      <div class="sop-pipeline-desc">Executes Hoftyzer–van Krevelen group contributions for dispersive (<em>&delta;<sub>D</sub></em>), polar (<em>&delta;<sub>P</sub></em>), and hydrogen-bonding (<em>&delta;<sub>H</sub></em>) vectors, plus total Euclidean norm (<em>&delta;<sub>t</sub></em>).</div>
+                    </div>
+
+                    <div class="sop-pipeline-card">
+                      <span class="sop-pipeline-step-num">STAGE 08</span>
+                      <div class="sop-pipeline-card-title"><i class="fa-solid fa-dna"></i> Polymer Excipient Pipeline</div>
+                      <div class="sop-pipeline-desc">Pipeline B ingests curated commercial grades (PVP K30, Soluplus, VA64, HPMC AS). Acquires BigSMILES, monograph standards, bulk density, and dry-state literature <em>T<sub>g</sub></em>.</div>
+                    </div>
+
+                    <div class="sop-pipeline-card">
+                      <span class="sop-pipeline-step-num">STAGE 09</span>
+                      <div class="sop-pipeline-card-title"><i class="fa-solid fa-shield-halved"></i> Automated QC Gatekeeper</div>
+                      <div class="sop-pipeline-desc">Evaluates structural validity, physical bounds (Table 17-1), and thermodynamic displacement (<em>|&delta;<sub>t,HVK</sub> - &delta;<sub>t,Fedors</sub>| &lt; 5.0 MPa<sup>&frac12;</sup></em>). Assigns PASS, FLAG, or REJECT.</div>
+                    </div>
+
+                    <div class="sop-pipeline-card">
+                      <span class="sop-pipeline-step-num">STAGE 10</span>
+                      <div class="sop-pipeline-card-title"><i class="fa-solid fa-chart-line"></i> 10k Monte Carlo UQ</div>
+                      <div class="sop-pipeline-desc">Perturbs input parameters across 10,000 trials according to their empirical probability density functions. Generates Bayesian 95% Confidence Intervals.</div>
+                    </div>
+
+                    <div class="sop-pipeline-card">
+                      <span class="sop-pipeline-step-num">STAGE 11</span>
+                      <div class="sop-pipeline-card-title"><i class="fa-solid fa-file-lines"></i> Manual Entry Sheet Render</div>
+                      <div class="sop-pipeline-desc">Builds structured Manual Entry Sheet with Dual Representation: Nominal Base (analytical baseline) alongside 10k MC Final (converged post-UQ value).</div>
+                    </div>
+
+                    <div class="sop-pipeline-card">
+                      <span class="sop-pipeline-step-num">STAGE 12</span>
+                      <div class="sop-pipeline-card-title"><i class="fa-solid fa-arrow-right-to-bracket"></i> Downstream Transcription</div>
+                      <div class="sop-pipeline-desc">Formulator uses cell copy buttons, CSV/JSON exports, or strict 1-page PDF certificate to transcribe qualified inputs directly into PharmaPolySCOPE.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Section 3: New User Guided Walkthrough -->
+              <div id="sop-walkthrough" class="sop-section-card">
+                <div class="sop-section-header">
+                  <div>
+                    <h3 class="sop-section-title"><i class="fa-solid fa-user-graduate" style="color: #0284C7;"></i> 3. Step-by-Step Practical Operational SOP (New User Guide)</h3>
+                    <p style="font-size: 12px; color: var(--color-muted-text); margin-top: 2px;">Comprehensive operational protocol for first-time formulators and analytical chemists</p>
+                  </div>
+                  <span class="sop-section-badge">Standard Operating Procedure</span>
+                </div>
+
+                <div class="sop-prose">
+                  <h4 style="color: var(--color-primary-text); margin-bottom: 8px;"><i class="fa-solid fa-capsules" style="color: #0284C7;"></i> Protocol A: Processing an Active Pharmaceutical Ingredient (Drug)</h4>
+                  <ol style="padding-left: 22px; margin-bottom: 14px; display: flex; flex-direction: column; gap: 6px;">
+                    <li><strong>Launch Workspace:</strong> Open the web application at <code>http://127.0.0.1:8000</code> and select <strong>Input Workstation</strong> from the left navigation sidebar.</li>
+                    <li><strong>Select Drug Pipeline:</strong> Ensure the top sub-tab is set to <strong>Pipeline A: Active Pharmaceutical Ingredient (Drug)</strong>.</li>
+                    <li><strong>Search or Paste Structure:</strong>
+                      <ul style="padding-left: 18px; margin-top: 4px;">
+                        <li><em>Option 1 (Recommended):</em> Type the compound's generic International Nonproprietary Name (e.g. <code>ibuprofen</code>, <code>naproxen</code>, <code>indomethacin</code>) or numeric PubChem CID into the search field and click <strong>Search PubChem</strong>.</li>
+                        <li><em>Option 2:</em> Directly paste a valid neutral SMILES string (e.g. <code>CC(C)CC1=CC=C(C=C1)C(C)C(=O)O</code>) into the Canonical SMILES field.</li>
+                      </ul>
+                    </li>
+                    <li><strong>Inspect Neutral Parent:</strong> Verify the 2D molecular preview. If a salt was queried, notice that the system isolates the neutral free acid/base parent.</li>
+                    <li><strong>Enter Literature Melting Point (<em>T<sub>m</sub></em>):</strong>
+                      <ul style="padding-left: 18px; margin-top: 4px;">
+                        <li>Enter the experimental melting onset temperature in Celsius (°C) or Kelvin (K).</li>
+                        <li>Document the experimental citation (e.g., <em>"Grzybowska et al. 2020, DSC onset Form I"</em>).</li>
+                      </ul>
+                    </li>
+                    <li><strong>Inspect Live Calculations:</strong> The engine will instantly display computed RDKit descriptors (MW, LogP, TPSA, HBD, HBA), Boyer–Kauzmann <em>T<sub>g</sub></em>, Fedors density, and Hoftyzer–van Krevelen HSP coordinates.</li>
+                    <li><strong>Commit to Database:</strong> Click the green button <strong>Commit Quality-Controlled Drug Entry</strong>. The automated QC engine verifies all physical chemistry gates and saves the record.</li>
+                  </ol>
+
+                  <h4 style="color: var(--color-primary-text); margin-top: 16px; margin-bottom: 8px;"><i class="fa-solid fa-dna" style="color: #0891B2;"></i> Protocol B: Processing a Commercial Polymer Carrier Excipient</h4>
+                  <ol style="padding-left: 22px; margin-bottom: 14px; display: flex; flex-direction: column; gap: 6px;">
+                    <li><strong>Navigate to Polymer Pipeline:</strong> Click <strong>Pipeline B: Polymer Carrier Excipient</strong> under the Input Workstation.</li>
+                    <li><strong>Select Commercial Grade:</strong> Select the carrier polymer family (e.g. <code>povidone (polyvinylpyrrolidone)</code>) and then choose the exact commercial grade (e.g. <code>K30</code>, <code>K90</code>, <code>Soluplus</code>, <code>Kollidon VA64</code>).</li>
+                    <li><strong>Verify Specification Parameters:</strong> Inspect the repeat-unit BigSMILES string, pharmacopoeial monograph standards (Ph. Eur. / USP / JPE), number-average molecular weight (<em>M<sub>n</sub></em>), manufacturer bulk density, and dry-state literature glass transition (<em>T<sub>g</sub></em>).</li>
+                    <li><strong>Inspect Group Contribution HSP:</strong> Review tabulated literature HSP parameters against recomputed group contribution vectors and check that displacement is within acceptable limits (<em>&lt; 5.0 MPa<sup>&frac12;</sup></em>).</li>
+                    <li><strong>Commit Polymer Grade:</strong> Click <strong>Commit Quality-Controlled Polymer Grade</strong> to store the validated polymer record.</li>
+                  </ol>
+
+                  <h4 style="color: var(--color-primary-text); margin-top: 16px; margin-bottom: 8px;"><i class="fa-solid fa-clipboard-check" style="color: #16A34A;"></i> Protocol C: Transcribing Qualified Values into PharmaPolySCOPE</h4>
+                  <ol style="padding-left: 22px; margin-bottom: 10px; display: flex; flex-direction: column; gap: 6px;">
+                    <li><strong>Open Ready Sheet:</strong> Click <strong>Ready Sheet &amp; Export</strong> in the left sidebar navigation.</li>
+                    <li><strong>Select Entity:</strong> Choose your desired Drug or Polymer from the target dropdown menu.</li>
+                    <li><strong>Review Categorized Table:</strong> Observe the three structured sections:
+                      <ul style="padding-left: 18px; margin-top: 4px;">
+                        <li><em>Chemical / Polymer Identity &amp; Specification</em> (SMILES, Monograph, MW, LogP, TPSA, HBD, HBA)</li>
+                        <li><em>Thermal &amp; Physical Properties</em> (<em>T<sub>m</sub></em>, <em>T<sub>g</sub></em>, density)</li>
+                        <li><em>Hansen Solubility Parameters</em> (<em>&delta;<sub>D</sub></em>, <em>&delta;<sub>P</sub></em>, <em>&delta;<sub>H</sub></em>, <em>&delta;<sub>t</sub></em>, and <em>R<sub>0</sub></em>)</li>
+                      </ul>
+                    </li>
+                    <li><strong>Choose Representation &amp; Copy:</strong>
+                      <ul style="padding-left: 18px; margin-top: 4px;">
+                        <li>To copy nominal analytical base values: Click <strong>Copy Nominal Base</strong> or individual cell copy icons.</li>
+                        <li>To copy 10k Monte Carlo converged values (recommended for formulation modeling): Click <strong>Copy Converged Final</strong>.</li>
+                      </ul>
+                    </li>
+                    <li><strong>Generate PDF Archive:</strong> Click <strong>Print / PDF</strong> to create an authoritative, 1-page certificate without length or breadth overflow.</li>
+                  </ol>
+                </div>
+              </div>
+
+              <!-- Section 4: Mathematical Formulations & Governing Equations -->
+              <div id="sop-equations" class="sop-section-card">
+                <div class="sop-section-header">
+                  <div>
+                    <h3 class="sop-section-title"><i class="fa-solid fa-square-root-variable" style="color: #0284C7;"></i> 4. Mathematical Formulations &amp; Governing Equations</h3>
+                    <p style="font-size: 12px; color: var(--color-muted-text); margin-top: 2px;">Peer-reviewed first-principles derivations, empirical correlations, and thermodynamic metrics</p>
+                  </div>
+                  <span class="sop-section-badge">Mathematical Theory</span>
+                </div>
+
+                <div class="sop-prose">
+                  <div class="sop-equation-grid">
+                    
+                    <!-- Eq 1: Boyer-Kauzmann -->
+                    <div class="sop-equation-card">
+                      <div class="sop-equation-title">
+                        <span>1. Drug Glass Transition Heuristic</span>
+                        <span class="badge badge-calculated">TG-RATIO-01</span>
+                      </div>
+                      <div class="sop-equation-display">
+                        Tg = 0.70 × Tm  (Kelvin)
+                      </div>
+                      <p style="font-size: 11.5px; line-height: 1.45; color: var(--color-secondary-text);">
+                        <strong>Physical Rationale:</strong> Empirical Boyer–Kauzmann relationship for organic small molecules. Symmetrical molecular packing limits range from 0.50 to 0.80; survey of 142 pharmaceutical APIs establishes a mean expectation ratio of 0.70 with validated Gaussian uncertainty: <strong>&plusmn; 21.0 K (1&sigma;)</strong>.
+                      </p>
+                      <div style="font-size: 10.5px; color: var(--color-muted-text); margin-top: 6px;">
+                        <em>Reference: Koop et al. (2011), Phys. Chem. Chem. Phys., 13(40), 19238–19255.</em>
+                      </div>
+                    </div>
+
+                    <!-- Eq 2: Fedors Molar Volume & Density -->
+                    <div class="sop-equation-card">
+                      <div class="sop-equation-title">
+                        <span>2. Fedors Molar Volume &amp; Density</span>
+                        <span class="badge badge-calculated">DENS-FEDORS-01</span>
+                      </div>
+                      <div class="sop-equation-display">
+                        Vm = Σ Δvi (cm³/mol)  |  ρ = MW / Vm (g/cm³)
+                      </div>
+                      <p style="font-size: 11.5px; line-height: 1.45; color: var(--color-secondary-text);">
+                        <strong>Physical Rationale:</strong> Additive group contribution method estimating atomic packing volume at 25 °C without requiring 3D crystallographic coordinates. Validated density uncertainty: <strong>&plusmn; 5.0%</strong>.
+                      </p>
+                      <div style="font-size: 10.5px; color: var(--color-muted-text); margin-top: 6px;">
+                        <em>Reference: Fedors, R.F. (1974), Polym. Eng. Sci., 14(2), 147–154.</em>
+                      </div>
+                    </div>
+
+                    <!-- Eq 3: Hoftyzer-van Krevelen HSP -->
+                    <div class="sop-equation-card">
+                      <div class="sop-equation-title">
+                        <span>3. Hoftyzer–van Krevelen 3D HSP</span>
+                        <span class="badge badge-calculated">HSP-HVK-01</span>
+                      </div>
+                      <div class="sop-equation-display">
+                        δD = (Σ Fdi) / Vm<br>
+                        δP = √(Σ Fpi²) / Vm<br>
+                        δH = √(Σ Ehi) / Vm<br>
+                        δt = √(δD² + δP² + δH²)
+                      </div>
+                      <p style="font-size: 11.5px; line-height: 1.45; color: var(--color-secondary-text);">
+                        <strong>Physical Rationale:</strong> Decomposes cohesive energy into dispersive van der Waals forces (<em>F<sub>d</sub></em>), permanent dipole moments (<em>F<sub>p</sub></em>), and hydrogen-bonding interactions (<em>E<sub>h</sub></em>). All parameters in MPa<sup>&frac12;</sup>.
+                      </p>
+                      <div style="font-size: 10.5px; color: var(--color-muted-text); margin-top: 6px;">
+                        <em>Reference: van Krevelen, D.W. (1990), Properties of Polymers (3rd ed.), Elsevier.</em>
+                      </div>
+                    </div>
+
+                    <!-- Eq 4: Thermodynamic Displacement -->
+                    <div class="sop-equation-card">
+                      <div class="sop-equation-title">
+                        <span>4. Cross-Method Displacement</span>
+                        <span class="badge badge-warning">QC-GATE-06</span>
+                      </div>
+                      <div class="sop-equation-display">
+                        Δδt,disp = |δt,HVK - δt,Fedors|<br>
+                        δt,Fedors = √(Σ Δui / Σ Δvi) × 2.0455
+                      </div>
+                      <p style="font-size: 11.5px; line-height: 1.45; color: var(--color-secondary-text);">
+                        <strong>Acceptance Thresholds:</strong><br>
+                        • <em>&Delta; &lt; 2.5 MPa<sup>&frac12;</sup>:</em> High confidence (Clean Pass).<br>
+                        • <em>2.5 &le; &Delta; &le; 5.0 MPa<sup>&frac12;</sup>:</em> Moderate displacement (Approved w/ Flags).<br>
+                        • <em>&Delta; &gt; 5.0 MPa<sup>&frac12;</sup>:</em> Unacceptable divergence (Rejected).
+                      </p>
+                    </div>
+
+                    <!-- Eq 5: Molecular Descriptors -->
+                    <div class="sop-equation-card">
+                      <div class="sop-equation-title">
+                        <span>5. Molecular Descriptors (RDKit)</span>
+                        <span class="badge badge-calculated">DESC-RDKIT-01</span>
+                      </div>
+                      <div class="sop-equation-display">
+                        MW = Σ Atomic Masses<br>
+                        LogP = Crippen Wildman-Crippen Model<br>
+                        TPSA = Ertl Topological Polar Surface Area
+                      </div>
+                      <p style="font-size: 11.5px; line-height: 1.45; color: var(--color-secondary-text);">
+                        <strong>Descriptor Engine:</strong> Computed from neutral parent canonical SMILES via RDKit algorithms. Tracks hydrogen bond donors (HBD), acceptors (HBA), and heavy atom counts for Lipinski Rule compliance.
+                      </p>
+                    </div>
+
+                    <!-- Eq 6: Monte Carlo Uncertainty Bounds -->
+                    <div class="sop-equation-card">
+                      <div class="sop-equation-title">
+                        <span>6. Monte Carlo Uncertainty (95% CI)</span>
+                        <span class="badge badge-calculated">UQ-MC-10K</span>
+                      </div>
+                      <div class="sop-equation-display">
+                        X_Final = (1/N) Σ X_j  (N = 10,000)<br>
+                        CI_95 = [Percentile_2.5, Percentile_97.5]
+                      </div>
+                      <p style="font-size: 11.5px; line-height: 1.45; color: var(--color-secondary-text);">
+                        <strong>Probabilistic Convergence:</strong> 10,000 Latin-hypercube stochastic perturbations across input uncertainties yield converged expectation means and robust 95% Bayesian Confidence Intervals.
+                      </p>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+              <!-- Section 5: Exhaustive Formulator FAQ -->
+              <div id="sop-faq" class="sop-section-card">
+                <div class="sop-section-header">
+                  <div>
+                    <h3 class="sop-section-title"><i class="fa-solid fa-circle-question" style="color: #0284C7;"></i> 5. Exhaustive Formulator FAQ &amp; Scientific Rationale</h3>
+                    <p style="font-size: 12px; color: var(--color-muted-text); margin-top: 2px;">Direct answers to formulator questions regarding data provenance, calculations, and downstream entry</p>
+                  </div>
+                  <span class="sop-section-badge">Formulator Troubleshooting</span>
+                </div>
+
+                <div class="sop-faq-grid">
+
+                  <div class="sop-faq-card">
+                    <div class="sop-faq-q">
+                      <i class="fa-solid fa-circle-question"></i>
+                      <span>Q1: Why does the software strip salt counter-ions to the neutral active parent?</span>
+                    </div>
+                    <div class="sop-faq-a">
+                      In amorphous solid dispersions (ASDs), the drug is dissolved or molecularly dispersed inside a neutral polymer matrix (e.g. PVP, HPMC, Soluplus). The ionic crystal lattice of a salt (e.g., ibuprofen sodium, chlorpheniramine maleate) does not exist in the amorphous state; it dissociates or interacts via neutral dipole coordinates. Keeping ionic counter-ions in group contribution calculations catastrophically overestimates cohesive energy, molar volume, and polarity. The neutral active parent is the physically legitimate entity for solid dispersion solubility parameter modeling.
+                    </div>
+                  </div>
+
+                  <div class="sop-faq-card">
+                    <div class="sop-faq-q">
+                      <i class="fa-solid fa-circle-question"></i>
+                      <span>Q2: Why is Tg = 0.70 × Tm used instead of an unverified database number?</span>
+                    </div>
+                    <div class="sop-faq-a">
+                      Published <em>T<sub>g</sub></em> values for small-molecule drugs are notoriously noisy. Because the amorphous state of fast-crystallizing drugs is difficult to isolate, published DSC values often reflect onset of decomposition, plasticization by residual moisture, or non-equilibrated reheat cycles. The Boyer–Kauzmann <em>0.70 &times; T<sub>m</sub></em> relationship provides a reproducible, thermodynamically grounded baseline anchored to the reliable melting point of the stable polymorph, accompanied by a rigorous &plusmn;21.0 K (1&sigma;) uncertainty envelope.
+                    </div>
+                  </div>
+
+                  <div class="sop-faq-card">
+                    <div class="sop-faq-q">
+                      <i class="fa-solid fa-circle-question"></i>
+                      <span>Q3: What is the difference between "Nominal Base" and "10k MC Final"? Which one do I type into PharmaPolySCOPE?</span>
+                    </div>
+                    <div class="sop-faq-a">
+                      <strong>Nominal Base (Before UQ)</strong> is the purely analytical point value calculated directly from frozen equations before running uncertainty perturbations.<br>
+                      <strong>10k MC Final (After UQ)</strong> is the converged expectation mean derived after running 10,000 Monte Carlo perturbation iterations across all empirical uncertainty distributions.<br>
+                      <strong>Which to use?</strong> For standard regulatory and formulation modeling in PharmaPolySCOPE, <strong>we strongly recommend using the 10k MC Final converged value</strong> because it incorporates thermodynamic non-linearities and reflects the true probabilistic center of the parameter space.
+                    </div>
+                  </div>
+
+                  <div class="sop-faq-card">
+                    <div class="sop-faq-q">
+                      <i class="fa-solid fa-circle-question"></i>
+                      <span>Q4: Why is polymer Tg strictly a literature input and never estimated via 0.70 × Tm?</span>
+                    </div>
+                    <div class="sop-faq-a">
+                      Pharmaceutical polymers (PVP, HPMCAS, Soluplus) do not have defined melting temperatures (<em>T<sub>m</sub></em>) because they are either completely amorphous or decompose before melting. Applying <em>0.70 &times; T<sub>m</sub></em> to a polymer is a fatal physical chemistry violation. Polymer <em>T<sub>g</sub></em> depends heavily on molecular weight (Fox–Flory relationship) and copolymer ratios; therefore, it must strictly be acquired as a grade-specific dry-state DSC literature measurement.
+                    </div>
+                  </div>
+
+                  <div class="sop-faq-card">
+                    <div class="sop-faq-q">
+                      <i class="fa-solid fa-circle-question"></i>
+                      <span>Q5: Why do polymer records report bulk density instead of helium pycnometry skeletal density?</span>
+                    </div>
+                    <div class="sop-faq-a">
+                      In downstream manufacturing (e.g. hot-melt extrusion feeding, spray-drying cyclone separation, and tablet compression), polymer feed rates and volumetric fill are strictly governed by manufacturer-specified <strong>bulk tapped density</strong> (typically 0.20–0.45 g/cm³), whereas true skeletal pycnometric density (1.1–1.3 g/cm³) ignores inter-particle void volume. PharmaPolySCOPE's downstream mass-balance engine specifically requires bulk density for accurate extruder residence time calculations.
+                    </div>
+                  </div>
+
+                  <div class="sop-faq-card">
+                    <div class="sop-faq-q">
+                      <i class="fa-solid fa-circle-question"></i>
+                      <span>Q6: What does a "Displacement Warning Flag" (&gt; 2.5 MPa½) mean? Does it invalidate my calculation?</span>
+                    </div>
+                    <div class="sop-faq-a">
+                      The cross-method displacement metric calculates the absolute divergence between the Hoftyzer–van Krevelen 3D total parameter and the Fedors 1D cohesive energy parameter: <em>&Delta; = |&delta;<sub>t,HVK</sub> - &delta;<sub>t,Fedors</sub>|</em>. A value between 2.5 and 5.0 MPa<sup>&frac12;</sup> triggers an <code>APPROVED WITH FLAGS</code> warning. It typically occurs in compounds containing heavily conjugated lactam rings (like PVP), extensive sulfonamides, or heavy halogen atoms where Fedors and HVK assign slightly different group contributions. <strong>It does NOT invalidate your calculation</strong>; it serves as a scientific transparency indicator advising the formulator to expect wider uncertainty. Only displacements &gt; 5.0 MPa<sup>&frac12;</sup> trigger an automatic rejection.
+                    </div>
+                  </div>
+
+                  <div class="sop-faq-card">
+                    <div class="sop-faq-q">
+                      <i class="fa-solid fa-circle-question"></i>
+                      <span>Q7: How are the generated parameters transcribed into PharmaPolySCOPE?</span>
+                    </div>
+                    <div class="sop-faq-a">
+                      Once your drug and polymer records pass the quality gates, open the <strong>PharmaPolySCOPE Ready Sheet</strong> tab. The sheet organizes all parameters into clean categories with single-click copy buttons for every cell, bulk copy options for nominal base or 10k MC converged final values, and an exact 1-page PDF export. Formulators can easily copy or reference these authoritative values to populate their downstream PharmaPolySCOPE thermodynamic models.
+                    </div>
+                  </div>
+
+                  <div class="sop-faq-card">
+                    <div class="sop-faq-q">
+                      <i class="fa-solid fa-circle-question"></i>
+                      <span>Q8: What if my drug contains a functional group unmapped in Fedors or HVK tables?</span>
+                    </div>
+                    <div class="sop-faq-a">
+                      If a molecule contains an exotic heteroaromatic core or novel organometallic center lacking tabulated Fedors/HVK contributions, the system flags the missing group. In such cases, the formulator must document a surrogate fragment approximation or rely on experimental inverse gas chromatography (IGC) with documented provenance.
+                    </div>
+                  </div>
+
+                  <div class="sop-faq-card">
+                    <div class="sop-faq-q">
+                      <i class="fa-solid fa-circle-question"></i>
+                      <span>Q9: How does the software ensure exact 1-page PDF printing with zero length and breadth spilling?</span>
+                    </div>
+                    <div class="sop-faq-a">
+                      The Manual Entry Sheet container is engineered with strict print isolation CSS: <code>@page { size: portrait; margin: 8mm 10mm; }</code> with <code>table-layout: fixed; width: 100%;</code>. During print execution, the navigation sidebar, top headers, action buttons, and instructions bar are completely unmounted from the layout tree, and table padding is dynamically condensed to micro-print scales. All values wrap automatically with <code>overflow-wrap: anywhere;</code>, guaranteeing that the entire 15-parameter certificate fits onto <strong>exactly one single physical page</strong>.
+                    </div>
+                  </div>
+
+                  <div class="sop-faq-card">
+                    <div class="sop-faq-q">
+                      <i class="fa-solid fa-circle-question"></i>
+                      <span>Q10: How do I interpret the 95% Bayesian Confidence Intervals?</span>
+                    </div>
+                    <div class="sop-faq-a">
+                      Bracketed intervals such as <code>[337.2–349.0]</code> in the Uncertainty column represent the 2.5th and 97.5th percentiles of the 10,000 Monte Carlo iterations. There is a 95% Bayesian probability that the true physical property lies within this interval under the specified uncertainty assumptions.
+                    </div>
+                  </div>
+
+                  <div class="sop-faq-card">
+                    <div class="sop-faq-q">
+                      <i class="fa-solid fa-circle-question"></i>
+                      <span>Q11: Why does the software emphasize that the user is responsible for entered data?</span>
+                    </div>
+                    <div class="sop-faq-a">
+                      In pharmaceutical development, computational modeling tools are decision-support systems, not certified testing laboratories. The software cannot verify whether a physical bottle of drug substance has undergone chemical degradation, polymorphic transformation, or moisture uptake. Emphasizing user responsibility ensures proper compliance with good scientific documentation practices and prevents unverified computational numbers from being treated as regulatory batch release specifications.
+                    </div>
+                  </div>
+
+                  <div class="sop-faq-card">
+                    <div class="sop-faq-q">
+                      <i class="fa-solid fa-circle-question"></i>
+                      <span>Q12: Can this software be used for regulatory submission documentation (FDA / EMA / ICH Q8/Q9)?</span>
+                    </div>
+                    <div class="sop-faq-a">
+                      Yes. The output certificate records full methodological provenance (Method IDs like <code>HSP-HVK-01</code>, <code>DENS-FEDORS-01</code>, <code>TG-RATIO-01</code>), source citations, group contributions, and quantified uncertainty intervals. This complete audit trail complies with the Quality-by-Design (QbD) principles outlined in <strong>ICH Q8 (Pharmaceutical Development)</strong> and <strong>ICH Q9 (Quality Risk Management)</strong> for in silico excipient compatibility screening.
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </section>
+
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- 3. Dynamic Parameter Calculation Inspector Modal -->
+  <div id="calc-inspector-modal" class="modal-overlay" style="display: none;" onclick="closeInspectorModal(event)">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modal-param-title"><i class="fa-solid fa-calculator"></i> Parameter Calculation Details</h3>
+        <button class="modal-close-btn" onclick="closeInspectorModal()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body" id="modal-param-body">
+        <!-- Content injected dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/js/app.js?v=1.6.0"></script>
+</body>
+</html>

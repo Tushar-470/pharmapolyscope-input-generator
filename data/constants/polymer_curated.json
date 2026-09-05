@@ -1,0 +1,239 @@
+{
+  "description": "Curated polymer repeat-unit representations, compositions, and grade specifications for ASD carriers",
+  "version": "1.0",
+  "polymers": [
+    {
+      "carrier": "povidone",
+      "name": "povidone (polyvinylpyrrolidone)",
+      "chemical_family": "vinylpyrrolidone homopolymer",
+      "functional_class": "ASD matrix former / solubilizer",
+      "grades": [
+        {
+          "grade": "K30",
+          "abbreviation": "PVP K30",
+          "pharmacopoeia": "Ph. Eur. / USP povidone",
+          "k_value": "27-32",
+          "repeat_unit_smiles": "*CC(*)N1CCCC1=O",
+          "formula": "C6H9NO",
+          "repeat_unit_mw": 111.14,
+          "mn_range": "15000-20000",
+          "mw_range": "40000-65000",
+          "tg_K": 426.8,
+          "tg_uncertainty_K": 2.1,
+          "tg_method": "mDSC onset, dry state",
+          "tg_source": "Browne et al. 2020, Pharmaceutics 12(5):433",
+          "bulk_density_g_cm3": 0.40,
+          "bulk_density_note": "typical powder range 0.3-0.5 g/cm3 (MANUFACTURER-SPEC)",
+          "true_density_g_cm3": 1.20,
+          "hsp": { "delta_D": 20.44, "delta_P": 13.67, "delta_H": 6.86, "tabulated_total": 26.28, "secondary_fedors_total": 23.75 }
+        },
+        {
+          "grade": "K17",
+          "abbreviation": "PVP K17",
+          "pharmacopoeia": "Ph. Eur. / USP povidone",
+          "k_value": "16-18",
+          "repeat_unit_smiles": "*CC(*)N1CCCC1=O",
+          "formula": "C6H9NO",
+          "repeat_unit_mw": 111.14,
+          "mn_range": "7000-11000",
+          "mw_range": "9000-15000",
+          "tg_K": 411.15,
+          "tg_uncertainty_K": 3.0,
+          "tg_method": "DSC dry state (approx 138 C)",
+          "tg_source": "Browne et al. 2020",
+          "bulk_density_g_cm3": 0.40,
+          "true_density_g_cm3": 1.20,
+          "hsp": { "delta_D": 20.44, "delta_P": 13.67, "delta_H": 6.86, "tabulated_total": 26.28, "secondary_fedors_total": 23.75 }
+        },
+        {
+          "grade": "K90",
+          "abbreviation": "PVP K90",
+          "pharmacopoeia": "Ph. Eur. / USP povidone",
+          "k_value": "85-95",
+          "repeat_unit_smiles": "*CC(*)N1CCCC1=O",
+          "formula": "C6H9NO",
+          "repeat_unit_mw": 111.14,
+          "mn_range": "200000-300000",
+          "mw_range": "1000000-1500000",
+          "tg_K": 429.15,
+          "tg_uncertainty_K": 3.0,
+          "tg_method": "DSC dry state (approx 156 C)",
+          "tg_source": "LaFountaine et al. 2016",
+          "bulk_density_g_cm3": 0.40,
+          "true_density_g_cm3": 1.24,
+          "hsp": { "delta_D": 20.44, "delta_P": 13.67, "delta_H": 6.86, "tabulated_total": 26.28, "secondary_fedors_total": 23.75 }
+        }
+      ]
+    },
+    {
+      "carrier": "copovidone",
+      "name": "copovidone (poly(vinylpyrrolidone-co-vinyl acetate))",
+      "chemical_family": "vinylpyrrolidone / vinyl acetate copolymer",
+      "functional_class": "ASD matrix former (hot melt extrusion / spray drying)",
+      "grades": [
+        {
+          "grade": "VA64",
+          "abbreviation": "PVP-VA 64",
+          "pharmacopoeia": "Ph. Eur. / USP copovidone",
+          "composition": "60:40 mass ratio VP:VA",
+          "repeat_unit_smiles": "{[#6][#6](c1n(cccc1=O))<,>[#6][#6](oc(=O)c)<}",
+          "formula": "0.6(C6H9NO) + 0.4(C4H6O2)",
+          "repeat_unit_mw": 101.12,
+          "mn_range": "14000-19000",
+          "mw_range": "45000-70000",
+          "tg_K": 381.15,
+          "tg_uncertainty_K": 3.0,
+          "tg_method": "DSC dry state (108 C)",
+          "tg_source": "Browne et al. 2020 / Oktay & Polli 2024",
+          "bulk_density_g_cm3": 0.35,
+          "true_density_g_cm3": 1.22,
+          "hsp": { "delta_D": 19.50, "delta_P": 11.20, "delta_H": 7.40, "tabulated_total": 23.68, "secondary_fedors_total": 22.80 }
+        }
+      ]
+    },
+    {
+      "carrier": "hypromellose",
+      "name": "hypromellose (hydroxypropyl methylcellulose)",
+      "chemical_family": "cellulosic ether",
+      "functional_class": "ASD matrix former / precipitation inhibitor",
+      "grades": [
+        {
+          "grade": "E5",
+          "abbreviation": "HPMC E5",
+          "pharmacopoeia": "USP substitution 2910",
+          "composition": "28-30% methoxy, 7-12% hydroxypropoxy",
+          "repeat_unit_smiles": "*OC1C(CO*)OC(O*)C(OC)C1OC",
+          "formula": "substituted anhydroglucose",
+          "repeat_unit_mw": 200.0,
+          "mn_range": "10000-15000",
+          "mw_range": "28000-35000",
+          "tg_K": 435.15,
+          "tg_uncertainty_K": 4.0,
+          "tg_method": "MTDSC midpoint (approx 162 C)",
+          "tg_source": "McPhillips et al. 1999",
+          "bulk_density_g_cm3": 0.38,
+          "true_density_g_cm3": 1.30,
+          "hsp": { "delta_D": 18.20, "delta_P": 12.80, "delta_H": 11.50, "tabulated_total": 25.04, "secondary_fedors_total": 24.10 }
+        }
+      ]
+    },
+    {
+      "carrier": "hypromellose acetate succinate",
+      "name": "hypromellose acetate succinate (HPMCAS)",
+      "chemical_family": "cellulosic ester-ether",
+      "functional_class": "Enteric ASD carrier (pH-triggered release)",
+      "grades": [
+        {
+          "grade": "M",
+          "abbreviation": "HPMCAS-M",
+          "pharmacopoeia": "NF / JP hypromellose acetate succinate",
+          "composition": "acetyl 7-11%, succinoyl 10-14%, methoxy 21-25%, hydroxypropoxy 5-9%",
+          "dissolution_pH": 6.0,
+          "repeat_unit_smiles": "substituted anhydroglucose backbone with acetyl and succinoyl esters",
+          "formula": "substituted cellulosics",
+          "repeat_unit_mw": 250.0,
+          "mn_range": "15000-22000",
+          "mw_range": "40000-60000",
+          "tg_K": 393.15,
+          "tg_uncertainty_K": 3.0,
+          "tg_method": "DSC dry state (120 C)",
+          "tg_source": "Sarabu et al. 2020 / Klar & Urbanetz 2016",
+          "bulk_density_g_cm3": 0.35,
+          "true_density_g_cm3": 1.25,
+          "hsp": { "delta_D": 18.50, "delta_P": 10.40, "delta_H": 9.80, "tabulated_total": 23.41, "secondary_fedors_total": 22.90 }
+        },
+        {
+          "grade": "L",
+          "abbreviation": "HPMCAS-L",
+          "pharmacopoeia": "NF / JP hypromellose acetate succinate",
+          "composition": "acetyl 5-9%, succinoyl 14-18%, methoxy 20-24%, hydroxypropoxy 5-9%",
+          "dissolution_pH": 5.5,
+          "repeat_unit_smiles": "substituted anhydroglucose backbone with acetyl and succinoyl esters",
+          "formula": "substituted cellulosics",
+          "repeat_unit_mw": 250.0,
+          "mn_range": "15000-22000",
+          "mw_range": "40000-60000",
+          "tg_K": 395.65,
+          "tg_uncertainty_K": 3.0,
+          "tg_method": "DSC dry state (122.5 C)",
+          "tg_source": "Sarabu et al. 2020",
+          "bulk_density_g_cm3": 0.35,
+          "true_density_g_cm3": 1.25,
+          "hsp": { "delta_D": 18.30, "delta_P": 11.20, "delta_H": 10.50, "tabulated_total": 23.94, "secondary_fedors_total": 23.40 }
+        },
+        {
+          "grade": "H",
+          "abbreviation": "HPMCAS-H",
+          "pharmacopoeia": "NF / JP hypromellose acetate succinate",
+          "composition": "acetyl 10-14%, succinoyl 4-8%, methoxy 22-26%, hydroxypropoxy 6-10%",
+          "dissolution_pH": 6.5,
+          "repeat_unit_smiles": "substituted anhydroglucose backbone with acetyl and succinoyl esters",
+          "formula": "substituted cellulosics",
+          "repeat_unit_mw": 250.0,
+          "mn_range": "15000-22000",
+          "mw_range": "40000-60000",
+          "tg_K": 392.15,
+          "tg_uncertainty_K": 3.0,
+          "tg_method": "DSC dry state (119 C)",
+          "tg_source": "Sarabu et al. 2020",
+          "bulk_density_g_cm3": 0.35,
+          "true_density_g_cm3": 1.25,
+          "hsp": { "delta_D": 18.70, "delta_P": 9.60, "delta_H": 9.10, "tabulated_total": 22.88, "secondary_fedors_total": 22.30 }
+        }
+      ]
+    },
+    {
+      "carrier": "soluplus",
+      "name": "Soluplus (polyvinyl caprolactam-polyvinyl acetate-polyethylene glycol graft copolymer)",
+      "chemical_family": "graft amphiphilic copolymer",
+      "functional_class": "Solubilizing matrix former for HME",
+      "grades": [
+        {
+          "grade": "Standard",
+          "abbreviation": "Soluplus",
+          "pharmacopoeia": "Manufacturer monograph (BASF)",
+          "composition": "57% PCL, 30% PVAc, 13% PEG 6000",
+          "repeat_unit_smiles": "{[#6][#6](c1n(cccccc1=O))<,>[#6][#6](oc(=O)c)<,>OCC<}",
+          "formula": "PCL-PVAc-PEG graft",
+          "repeat_unit_mw": 125.0,
+          "mn_range": "30000-50000",
+          "mw_range": "90000-140000",
+          "tg_K": 343.15,
+          "tg_uncertainty_K": 3.0,
+          "tg_method": "DSC midpoint (approx 70 C)",
+          "tg_source": "Guembe-Michel et al. 2025 / Oktay & Polli 2024",
+          "bulk_density_g_cm3": 0.45,
+          "true_density_g_cm3": 1.08,
+          "hsp": { "delta_D": 17.60, "delta_P": 11.80, "delta_H": 7.20, "tabulated_total": 22.39, "secondary_fedors_total": 21.60 }
+        }
+      ]
+    },
+    {
+      "carrier": "methacrylate",
+      "name": "methacrylic acid - methyl methacrylate copolymer (1:1)",
+      "chemical_family": "poly(methacrylic acid-co-methyl methacrylate)",
+      "functional_class": "Enteric film former / ASD matrix",
+      "grades": [
+        {
+          "grade": "L100",
+          "abbreviation": "Eudragit L100",
+          "pharmacopoeia": "USP / Ph. Eur. methacrylic acid copolymer type A",
+          "composition": "1:1 molar ratio methacrylic acid : methyl methacrylate",
+          "dissolution_pH": 6.0,
+          "repeat_unit_smiles": "*CC(*(C))C(=O)O.*CC(*(C))C(=O)OC",
+          "formula": "C4H6O2 : C5H8O2 (1:1)",
+          "repeat_unit_mw": 186.2,
+          "mn_range": "40000-60000",
+          "mw_range": "125000",
+          "tg_K": 423.15,
+          "tg_uncertainty_K": 4.0,
+          "tg_method": "DSC dry state (approx 150 C)",
+          "tg_source": "Oktay & Polli 2024",
+          "bulk_density_g_cm3": 0.38,
+          "true_density_g_cm3": 1.28,
+          "hsp": { "delta_D": 17.80, "delta_P": 9.40, "delta_H": 9.90, "tabulated_total": 22.45, "secondary_fedors_total": 21.90 }
+        }
+      ]
+    }
+  ]
+}

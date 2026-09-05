@@ -1,0 +1,59 @@
+[project]
+name = "pharmapolyscope-input-generator"
+version = "1.0.0"
+description = "Authoritative Upstream Physicochemical Input Generator for PharmaPolySCOPE Formulation Screening"
+authors = [
+    { name = "PharmaPolySCOPE Research Consortium", email = "research@pharmapolyscope.org" }
+]
+license = { text = "MIT" }
+readme = "README.md"
+requires-python = ">=3.11"
+keywords = [
+    "pharmaceutical-engineering",
+    "amorphous-solid-dispersions",
+    "solubility-parameters",
+    "hansen-solubility-parameters",
+    "rdkit",
+    "cheminformatics",
+    "quality-by-design",
+    "uncertainty-quantification",
+    "monte-carlo",
+    "formulation-screening"
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Healthcare Industry",
+    "Topic :: Scientific/Engineering :: Chemistry",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+    "Topic :: Scientific/Engineering :: Medical Science Apps.",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: OS Independent"
+]
+dependencies = [
+    "rdkit>=2024.03.1",
+    "fastapi>=0.110.0",
+    "uvicorn>=0.29.0",
+    "pydantic>=2.7.0",
+    "requests>=2.31.0",
+    "pytest>=8.1.0"
+]
+
+[project.scripts]
+pharmapolyscope-gen = "cli:app"
+
+[project.urls]
+Homepage = "https://github.com/pharmapolyscope/pharmapolyscope-input-generator"
+Repository = "https://github.com/pharmapolyscope/pharmapolyscope-input-generator.git"
+Documentation = "https://github.com/pharmapolyscope/pharmapolyscope-input-generator/tree/main/docs"
+Issues = "https://github.com/pharmapolyscope/pharmapolyscope-input-generator/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["engine", "api"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
