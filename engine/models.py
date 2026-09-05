@@ -157,23 +157,6 @@ class EntityRecord(BaseModel):
     software_version: str = "input-generator/1.0"
 
 
-class PairMiscibilityResult(BaseModel):
-    drug_id: str
-    drug_name: str
-    polymer_id: str
-    polymer_name: str
-    delta_t_drug: float
-    delta_t_polymer: float
-    greenhalgh_delta_t: float
-    greenhalgh_verdict: str
-    hansen_distance_Ra: float
-    RED_7_0: float
-    RED_7_5: float
-    RED_8_0: float
-    RED_verdict_7_5: str
-    stability_grade: str  # "STABLE_MISCIBLE", "STABLE_IMMISCIBLE", "BORDERLINE"
-    qc_notes: List[str] = Field(default_factory=list)
-
 
 class InputDatasetStore(BaseModel):
     schema_version: str = "1.0"
