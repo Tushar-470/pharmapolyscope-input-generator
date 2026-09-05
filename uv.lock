@@ -439,7 +439,7 @@ requires-dist = [
     { name = "fastapi", specifier = ">=0.110.0" },
     { name = "pydantic", specifier = ">=2.7.0" },
     { name = "pytest", specifier = ">=8.1.0" },
-    { name = "rdkit", specifier = ">=2026.3.5" },
+    { name = "rdkit", specifier = ">=2024.3.1" },
     { name = "requests", specifier = ">=2.31.0" },
     { name = "uvicorn", specifier = ">=0.29.0" },
 ]
