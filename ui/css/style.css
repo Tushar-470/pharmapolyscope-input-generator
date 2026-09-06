@@ -1390,6 +1390,11 @@ html, body {
   animation: modalFadeIn 0.15s ease-out;
 }
 
+.modal-card.modal-card-lg {
+  max-width: 920px;
+  max-height: 90vh;
+}
+
 @keyframes modalFadeIn {
   from { opacity: 0; transform: scale(0.97); }
   to { opacity: 1; transform: scale(1); }
@@ -1445,6 +1450,176 @@ html, body {
   font-size: 12px;
   color: var(--color-primary-text);
   margin: 10px 0;
+}
+
+/* -------------------------------------------------------------
+   Interactive QC Status Badge Button & Compliance Modal
+------------------------------------------------------------- */
+.badge-clickable {
+  cursor: pointer !important;
+  transition: all 0.15s ease-in-out;
+  user-select: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  text-decoration: none;
+}
+.badge-clickable:hover {
+  transform: translateY(-1px) scale(1.04);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  filter: brightness(0.95);
+}
+.badge-clickable:active {
+  transform: translateY(0) scale(0.98);
+}
+.badge-clickable.badge-warning {
+  border: 1px solid #F59E0B;
+}
+.badge-clickable.badge-success {
+  border: 1px solid #10B981;
+}
+
+.qc-modal-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.qc-summary-stat-box {
+  background: var(--color-surface-subtle);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 10px 12px;
+  text-align: center;
+}
+.qc-summary-stat-val {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+.qc-summary-stat-label {
+  font-size: 10px;
+  color: var(--color-muted-text);
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.qc-compliance-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11.5px;
+  margin-bottom: 16px;
+}
+.qc-compliance-table th {
+  background: var(--color-surface-subtle);
+  color: var(--color-secondary-text);
+  font-weight: 600;
+  text-align: left;
+  padding: 8px 10px;
+  border-bottom: 2px solid var(--color-border);
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+.qc-compliance-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--color-border);
+  vertical-align: top;
+}
+.qc-row-flagged {
+  background: #FFFBEB !important;
+}
+.qc-row-flagged:hover {
+  background: #FEF3C7 !important;
+}
+.qc-row-compliant:hover {
+  background: #F8FAFC !important;
+}
+
+.qc-pill-pass {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #ECFDF5;
+  color: #065F46;
+  border: 1px solid #A7F3D0;
+  border-radius: 9999px;
+  padding: 2px 8px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+.qc-pill-flag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #FEF3C7;
+  color: #92400E;
+  border: 1px solid #FCD34D;
+  border-radius: 9999px;
+  padding: 2px 8px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+.qc-pill-error {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #FEF2F2;
+  color: #991B1B;
+  border: 1px solid #FCA5A5;
+  border-radius: 9999px;
+  padding: 2px 8px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+
+.qc-diagnostics-section {
+  background: var(--color-surface-subtle);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  margin-top: 12px;
+}
+.qc-diag-card {
+  background: #FFFFFF;
+  border: 1px solid #FCD34D;
+  border-left: 4px solid #F59E0B;
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  margin-bottom: 8px;
+}
+.qc-diag-card:last-child {
+  margin-bottom: 0;
+}
+.qc-diag-card-title {
+  font-weight: 700;
+  font-size: 11.5px;
+  color: #92400E;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+.qc-diag-rationale {
+  font-size: 11px;
+  color: #475569;
+  line-height: 1.45;
+  margin-bottom: 4px;
+}
+.qc-diag-remediation {
+  font-size: 11px;
+  color: #1E40AF;
+  background: #EFF6FF;
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid #DBEAFE;
 }
 
 /* -------------------------------------------------------------

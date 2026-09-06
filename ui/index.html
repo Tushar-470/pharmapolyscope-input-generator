@@ -1111,6 +1111,22 @@
     </div>
   </div>
 
+  <!-- 4. QC Engine Parameter Compliance Inspector Modal -->
+  <div id="qc-compliance-modal" class="modal-overlay" style="display: none;" onclick="closeQcComplianceModal(event)">
+    <div class="modal-card modal-card-lg" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <h3 class="modal-title" id="qc-modal-title"><i class="fa-solid fa-shield-halved"></i> QC Parameter Compliance Inspector</h3>
+          <span id="qc-modal-status-badge"></span>
+        </div>
+        <button class="modal-close-btn" onclick="closeQcComplianceModal()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body" id="qc-modal-body" style="padding: 16px 20px;">
+        <!-- Injected dynamically -->
+      </div>
+    </div>
+  </div>
+
   <script src="/static/js/app.js?v=1.6.0"></script>
 </body>
 </html>

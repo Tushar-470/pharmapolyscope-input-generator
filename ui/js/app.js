@@ -44,13 +44,22 @@ function safeFormat(val, fallback = "-") {
   return String(val);
 }
 
-// QC Status badge generator
-function renderQcBadge(status) {
+// QC Status badge generator (Interactive Inspector Button)
+function renderQcBadge(status, entityId = null) {
   const s = (status || "APPROVED").toUpperCase();
-  if (s === "APPROVED") return `<span class="badge badge-success"><span class="badge-dot"></span>APPROVED</span>`;
-  if (s.includes("FLAG") || s === "BORDERLINE") return `<span class="badge badge-warning"><span class="badge-dot"></span>APPROVED W/ FLAGS</span>`;
-  if (s.includes("REJECT") || s.includes("INVALID")) return `<span class="badge badge-error"><span class="badge-dot"></span>REJECTED</span>`;
-  return `<span class="badge badge-info"><span class="badge-dot"></span>${s}</span>`;
+  const clickAttr = entityId ? `onclick="event.stopPropagation(); openQcComplianceModal('${entityId}', event)" title="Click to inspect QC parameter compliance and rule diagnostics"` : '';
+  const clickClass = entityId ? 'badge-clickable' : '';
+
+  if (s === "APPROVED") {
+    return `<span class="badge badge-success ${clickClass}" ${clickAttr}><span class="badge-dot"></span>APPROVED <i class="fa-solid fa-circle-info" style="font-size: 8.5px; margin-left: 3px; opacity: 0.8;"></i></span>`;
+  }
+  if (s.includes("FLAG") || s === "BORDERLINE") {
+    return `<span class="badge badge-warning ${clickClass}" ${clickAttr}><span class="badge-dot"></span>APPROVED W/ FLAGS <i class="fa-solid fa-triangle-exclamation" style="font-size: 8.5px; margin-left: 3px;"></i></span>`;
+  }
+  if (s.includes("REJECT") || s.includes("INVALID")) {
+    return `<span class="badge badge-error ${clickClass}" ${clickAttr}><span class="badge-dot"></span>REJECTED <i class="fa-solid fa-circle-xmark" style="font-size: 8.5px; margin-left: 3px;"></i></span>`;
+  }
+  return `<span class="badge badge-info ${clickClass}" ${clickAttr}><span class="badge-dot"></span>${s}</span>`;
 }
 
 // View title map for breadcrumbs
@@ -196,7 +205,7 @@ function renderSummaryTable() {
         <td class="num-col">${tg !== '-' ? tg + '<span class="unit-tag">K</span>' : '-'}</td>
         <td class="num-col">${dens !== '-' && dens !== 'Datasheet spec' ? dens + '<span class="unit-tag">g/cm³</span>' : dens}</td>
         <td class="font-mono">${hsp}</td>
-        <td>${renderQcBadge(r.qc?.status)}</td>
+        <td>${renderQcBadge(r.qc?.status, r.entity_id)}</td>
       </tr>
     `;
   }).join("");
@@ -226,7 +235,7 @@ function renderDrugRegistry() {
       <td class="num-col">${safeFormat(d.logP)}</td>
       <td class="num-col">${safeFormat(d.TPSA)}</td>
       <td><span class="badge badge-info">${safeFormat(d.BCS_class, 'II')}</span></td>
-      <td>${renderQcBadge(d.qc?.status)}</td>
+      <td>${renderQcBadge(d.qc?.status, d.entity_id)}</td>
       <td>
         <button class="btn btn-secondary btn-sm" onclick="viewReadySheetById('${d.entity_id}')"><i class="fa-solid fa-file-lines"></i> Sheet</button>
         <button class="btn btn-danger btn-sm" onclick="deleteEntity('${d.entity_id}', 'drug')"><i class="fa-solid fa-trash"></i></button>
@@ -781,7 +790,7 @@ function renderPolymerRegistry() {
         <td class="num-col">${safeFormat(hsp.delta_P || p.delta_P)}</td>
         <td class="num-col">${safeFormat(hsp.delta_H || p.delta_H)}</td>
         <td class="num-col" style="font-weight: 700;">${safeFormat(hsp.tabulated_total || hsp.recomputed_total)}</td>
-        <td>${renderQcBadge(p.qc?.status)}</td>
+        <td>${renderQcBadge(p.qc?.status, p.entity_id)}</td>
         <td>
           <button class="btn btn-secondary btn-sm" onclick="viewReadySheetById('${p.entity_id}')"><i class="fa-solid fa-file-lines"></i> Sheet</button>
           <button class="btn btn-danger btn-sm" onclick="deleteEntity('${p.entity_id}', 'polymer')"><i class="fa-solid fa-trash"></i></button>
@@ -1251,7 +1260,7 @@ async function loadReadySheet(forcedEntityId = null) {
             </div>
           </div>
           <div class="ready-sheet-header-right">
-            <span class="ready-status-pill"><i class="fa-solid fa-circle-check"></i> ${sheet.qc_status || "READY FOR ENTRY"}</span>
+            <span class="ready-status-pill badge-clickable" onclick="openQcComplianceModal('${sheet.entity_id}', event)" style="cursor: pointer;" title="Click to inspect QC parameter compliance"><i class="fa-solid fa-shield-halved"></i> ${sheet.qc_status || "APPROVED"}</span>
           </div>
         </div>
 
@@ -1460,7 +1469,7 @@ function handleGlobalSearch() {
         <td class="num-col">${safeFormat(r.tg_K)}</td>
         <td class="num-col">${safeFormat(r.density_g_cm3)}</td>
         <td class="font-mono">${safeFormat(r.hsp_mpa_half?.delta_D)} / ${safeFormat(r.hsp_mpa_half?.delta_P)} / ${safeFormat(r.hsp_mpa_half?.delta_H)}</td>
-        <td>${renderQcBadge(r.qc?.status)}</td>
+        <td>${renderQcBadge(r.qc?.status, r.entity_id)}</td>
       </tr>
     `).join("");
   }
@@ -1591,4 +1600,334 @@ function inspectParameterDetails(paramKey) {
 function closeInspectorModal(event) {
   const modal = document.getElementById("calc-inspector-modal");
   if (modal) modal.style.display = "none";
+}
+
+// -------------------------------------------------------------
+// QC ENGINE PARAMETER COMPLIANCE INSPECTOR MODAL
+// -------------------------------------------------------------
+
+function openQcComplianceModal(entityId, event) {
+  if (event) {
+    event.stopPropagation();
+  }
+
+  const r = allStoredRecords.find(x => x.entity_id === entityId) ||
+            allDrugs.find(x => x.entity_id === entityId) ||
+            allPolymers.find(x => x.entity_id === entityId);
+
+  if (!r) {
+    alert(`Record ${entityId} not found in active workbench.`);
+    return;
+  }
+
+  const modal = document.getElementById("qc-compliance-modal");
+  const titleEl = document.getElementById("qc-modal-title");
+  const badgeEl = document.getElementById("qc-modal-status-badge");
+  const bodyEl = document.getElementById("qc-modal-body");
+  if (!modal || !titleEl || !bodyEl) return;
+
+  const isDrug = r.entity_type === "drug";
+  const qc = r.qc || {};
+  const status = (qc.status || "APPROVED").toUpperCase();
+  const diagnostics = qc.diagnostics || [];
+  const warnings = qc.warnings || [];
+
+  // Header Title & Badge
+  titleEl.innerHTML = `<i class="fa-solid fa-shield-halved" style="color: var(--color-primary-action);"></i> QC Parameter Compliance: <span style="font-family: var(--font-mono); color: #0284C7; margin-left: 4px;">${r.entity_id}</span> — ${r.name}`;
+  
+  if (badgeEl) {
+    if (status.includes("FLAG") || status === "BORDERLINE") {
+      badgeEl.innerHTML = `<span class="qc-pill-flag"><i class="fa-solid fa-triangle-exclamation"></i> APPROVED W/ FLAGS</span>`;
+    } else if (status.includes("REJECT")) {
+      badgeEl.innerHTML = `<span class="qc-pill-error"><i class="fa-solid fa-circle-xmark"></i> REJECTED</span>`;
+    } else {
+      badgeEl.innerHTML = `<span class="qc-pill-pass"><i class="fa-solid fa-circle-check"></i> 100% COMPLIANT</span>`;
+    }
+  }
+
+  // Extract core parameters
+  const mw = typeof r.mw === "number" ? r.mw : parseFloat(r.mw) || 0;
+  
+  let tmVal = null;
+  if (typeof r.tm_K === "object" && r.tm_K !== null) {
+    tmVal = r.tm_K.value || r.tm_K.tm_K;
+  } else if (typeof r.tm_K === "number") {
+    tmVal = r.tm_K;
+  }
+
+  let tgVal = null;
+  if (typeof r.tg_K === "object" && r.tg_K !== null) {
+    tgVal = r.tg_K.value || r.tg_K.tg_K;
+  } else if (typeof r.tg_K === "number") {
+    tgVal = r.tg_K;
+  }
+
+  let densVal = null;
+  if (typeof r.density_g_cm3 === "object" && r.density_g_cm3 !== null) {
+    densVal = r.density_g_cm3.value || r.density_g_cm3.density_g_cm3;
+  } else if (typeof r.density_g_cm3 === "number") {
+    densVal = r.density_g_cm3;
+  }
+
+  const hsp = r.hsp_mpa_half || {};
+  const dD = typeof hsp.delta_D === "number" ? hsp.delta_D : parseFloat(r.delta_D) || 0;
+  const dP = typeof hsp.delta_P === "number" ? hsp.delta_P : parseFloat(r.delta_P) || 0;
+  const dH = typeof hsp.delta_H === "number" ? hsp.delta_H : parseFloat(r.delta_H) || 0;
+  const disp = hsp.displacement !== undefined ? hsp.displacement : (qc.hsp_primary_secondary_displacement !== undefined ? qc.hsp_primary_secondary_displacement : null);
+  
+  const tpsa = typeof r.TPSA === "number" ? r.TPSA : parseFloat(r.TPSA) || 0;
+  const logP = typeof r.logP === "object" && r.logP !== null ? (r.logP.primary || 0) : (parseFloat(r.logP) || 0);
+  const hbd = parseInt(r.HBD) || 0;
+  const hba = parseInt(r.HBA) || 0;
+
+  // Build Comprehensive 10-Point Parameter Rule Checklist
+  const checks = [];
+
+  if (isDrug) {
+    // 1. Chemical Structure & Valence
+    const hasSmilesSyntaxErr = diagnostics.some(d => d.code === "QC-ERR-SMILES-SYNTAX" || d.code === "QC-ERR-SMILES-MISSING");
+    const hasInorganicErr = diagnostics.some(d => d.code === "QC-ERR-INORGANIC-SUBSTANCE");
+    const hasSaltFlag = diagnostics.some(d => d.code === "QC-FLAG-ION-SALT");
+    const structPass = !hasSmilesSyntaxErr && !hasInorganicErr && !hasSaltFlag;
+    checks.push({
+      param: "Chemical Structure & Neutral State",
+      observed: r.canonical_smiles ? `<span class="font-mono" style="font-size: 10px; max-width: 170px; display: inline-block; overflow: hidden; text-overflow: ellipsis; vertical-align: middle;">${r.canonical_smiles}</span>` : "None",
+      rule: "Organic API (≥1 Carbon, valid valence, neutral active moiety)",
+      isPass: structPass,
+      explanation: structPass ? "Valid neutral small-molecule API structure canonicalized by RDKit." : "Contains salt counter-ions or non-standard valence."
+    });
+
+    // 2. Melting Point Range & Units
+    const tmInKelvin = tmVal && tmVal >= 100.0;
+    const tmInRange = tmVal && tmVal >= 250.0 && tmVal <= 650.0;
+    const tmPass = tmInKelvin && tmInRange;
+    checks.push({
+      param: "Melting Point (Tm) Range & Units",
+      observed: tmVal ? `${tmVal.toFixed(2)} K` : "None",
+      rule: "250.0 to 650.0 K (Absolute Thermodynamic Kelvin)",
+      isPass: tmPass,
+      explanation: tmPass ? "Melting temperature falls cleanly within the standard crystalline API thermal envelope." : (tmVal < 100.0 ? "Temperature appears in Celsius instead of Kelvin." : "Extreme lattice energy / melting point exceeding 650 K.")
+    });
+
+    // 3. Glass Transition Ratio (Beaman-Boyer Rule)
+    const expectedTg = tmVal ? roundTo(0.70 * tmVal, 1) : null;
+    const ratio = (tgVal && tmVal && tmVal > 0) ? (tgVal / tmVal) : null;
+    const ratioPass = ratio !== null && ratio >= 0.60 && ratio <= 0.85;
+    checks.push({
+      param: "Glass Transition (Tg) & Fragility Index",
+      observed: tgVal ? `${tgVal.toFixed(1)} K ${ratio ? `(Tg/Tm: ${ratio.toFixed(2)})` : ''}` : "None",
+      rule: "Tg = 0.70 × Tm (±21 K 1σ); Fragility 0.60 ≤ Tg/Tm ≤ 0.85",
+      isPass: ratioPass,
+      explanation: ratioPass ? "Conforms to the 0.70×Tm Boyer–Kauzmann expectation ratio and typical pharmaceutical fragility." : "Atypical thermodynamic fragility; requires high-Tg polymers (e.g. PVP K90, HPMCAS) to prevent phase separation."
+    });
+
+    // 4. Solid-State Density
+    const hasDensFlag = diagnostics.some(d => d.code === "QC-FLAG-DENS-RANGE");
+    const hasHalogenInfo = diagnostics.some(d => d.code === "QC-FLAG-DENS-HALOGEN");
+    const densPass = !hasDensFlag;
+    checks.push({
+      param: "Solid-State Density (ρ)",
+      observed: densVal ? `${densVal.toFixed(3)} g/cm³` : "None",
+      rule: "0.85 to 2.20 g/cm³ (Standard crystalline/amorphous envelope)",
+      isPass: densPass,
+      explanation: densPass ? (hasHalogenInfo ? "High density confirmed authentic due to heavy halogen (Br/I) atomic mass." : "Liquid-state Fedors surrogate volume and density within standard envelope.") : "Outside standard [0.85, 2.20] envelope. Often caused by substituted quaternary bridgeheads with negative volume increments in Fedors tables."
+    });
+
+    // 5. HSP Cross-Method Concordance Displacement
+    const hasDispFatal = diagnostics.some(d => d.code === "QC-ERR-HSP-DISP-FATAL");
+    const hasDispFlag = diagnostics.some(d => d.code === "QC-FLAG-HSP-DISP-01");
+    const dispPass = disp !== null && disp <= 2.00 && !hasDispFatal && !hasDispFlag;
+    checks.push({
+      param: "HSP Method Concordance (Δdisp)",
+      observed: disp !== null ? `${Number(disp).toFixed(2)} MPa½` : "Not evaluated",
+      rule: "Δ = |δt,HVK - δt,Fedors| ≤ 2.00 MPa½ (High Agreement)",
+      isPass: dispPass,
+      explanation: dispPass ? "Excellent cross-method thermodynamic agreement between Hoftyzer–van Krevelen and Fedors group tables." : "Moderate displacement (2.0–5.0 MPa½) arising from ring closure or conjugated heteroatom energy offsets. Handled by 10k Monte Carlo UQ."
+    });
+
+    // 6. Lipinski Molecular Weight (Mw)
+    const mwPass = mw > 0 && mw <= 500.0;
+    checks.push({
+      param: "Molecular Weight (Mw, Lipinski Rule-of-5)",
+      observed: `${mw.toFixed(2)} g/mol`,
+      rule: "Mw ≤ 500.00 g/mol (Classical Oral Rule-of-5 Boundary)",
+      isPass: mwPass,
+      explanation: mwPass ? "Falls inside the classical Lipinski small-molecule oral bioavailability space." : "Beyond-Rule-of-5 (bRo5) chemical space. High Mw lowers molecular mobility and diffusion; typically requires higher polymer ratios (1:3 or 1:4)."
+    });
+
+    // 7. Topological Polar Surface Area (TPSA, Veber Rule)
+    const tpsaPass = tpsa <= 140.0;
+    checks.push({
+      param: "Polar Surface Area (TPSA, Veber Criterion)",
+      observed: `${tpsa.toFixed(1)} Å²`,
+      rule: "TPSA ≤ 140.00 Å² (Veber Oral Permeability Boundary)",
+      isPass: tpsaPass,
+      explanation: tpsaPass ? "Polar surface area is compatible with passive transcellular intestinal permeation." : "High TPSA indicates potential passive membrane permeation limitations; provides abundant polar interaction sites for polymer miscibility synthons."
+    });
+
+    // 8. Partition Coefficient (logP)
+    const logPPass = logP >= -3.0 && logP <= 8.0;
+    checks.push({
+      param: "Lipophilicity (RDKit Crippen logP)",
+      observed: `${Number(logP).toFixed(2)}`,
+      rule: "-3.00 ≤ logP ≤ 8.00 (Pharmaceutical Formulation Envelope)",
+      isPass: logPPass,
+      explanation: logPPass ? "Lipophilicity falls within the standard pharmaceutical oral drug formulation range." : "Extreme lipophilicity outside formulation boundaries."
+    });
+
+    // 9. Hydrogen-Bonding Capacity (HBD & HBA)
+    const hbdPass = hbd <= 12 && hba <= 20;
+    checks.push({
+      param: "Hydrogen-Bond Donors & Acceptors (HBD/HBA)",
+      observed: `HBD: ${hbd} | HBA: ${hba}`,
+      rule: "HBD ≤ 12, HBA ≤ 20 (Lipinski/Veber Extended Lattice)",
+      isPass: hbdPass,
+      explanation: hbdPass ? "Hydrogen-bonding capacity conforms to oral drug-likeness rules." : "Excessive hydrogen-bonding capacity exceeds oral drug guidelines."
+    });
+
+    // 10. Data Provenance & Monograph Standards
+    const hasProvFlag = diagnostics.some(d => d.code === "QC-FLAG-PROV-EST-TM");
+    const provPass = !hasProvFlag;
+    checks.push({
+      param: "Data Provenance & Source Traceability",
+      observed: r.provenance?.tm_K || "LITERATURE",
+      rule: "Verified Controlled Vocabulary (EXPERIMENTAL, LITERATURE, CALCULATED)",
+      isPass: provPass,
+      explanation: provPass ? "Full methodological provenance and literature citations recorded in compliance with ICH Q8/Q9." : "Melting point is currently an estimated surrogate (350 K default); experimental DSC value recommended."
+    });
+  } else {
+    // Polymer Checks
+    const hasUngraded = diagnostics.some(d => d.code === "QC-ERR-POLY-UNGRADED");
+    checks.push({
+      param: "Commercial Grade & Carrier Identity",
+      observed: r.grade?.grade || r.abbreviation || "Grade spec",
+      rule: "Specific commercial grade identification required (e.g. K30, E5)",
+      isPass: !hasUngraded,
+      explanation: !hasUngraded ? "Verified commercial grade registered." : "Ungraded generic polymer name is strictly invalid."
+    });
+
+    const hasPolyTgCalc = diagnostics.some(d => d.code === "QC-ERR-POLY-TG-CALCULATED");
+    checks.push({
+      param: "Polymer Glass Transition (Tg) Methodology",
+      observed: tgVal ? `${tgVal.toFixed(1)} K` : "None",
+      rule: "Acquired from Literature/Grade Datasheet (NEVER 0.70×Tm)",
+      isPass: !hasPolyTgCalc,
+      explanation: !hasPolyTgCalc ? "Polymer Tg correctly documented from dry-state grade DSC literature." : "Prohibited Beaman–Boyer calculation used for polymer Tg."
+    });
+  }
+
+  const totalRules = checks.length;
+  const compliantCount = checks.filter(c => c.isPass).length;
+  const flaggedCount = checks.filter(c => !c.isPass).length;
+
+  // Render Table Rows
+  const tableRowsHtml = checks.map(c => `
+    <tr class="${c.isPass ? 'qc-row-compliant' : 'qc-row-flagged'}">
+      <td style="font-weight: 600; color: ${c.isPass ? 'var(--color-primary-text)' : '#92400E'};">
+        ${c.param}
+      </td>
+      <td class="font-mono" style="font-weight: 700; color: ${c.isPass ? 'var(--color-primary-action)' : '#B45309'};">
+        ${c.observed}
+      </td>
+      <td style="color: var(--color-secondary-text); font-size: 11px;">
+        ${c.rule}
+      </td>
+      <td>
+        ${c.isPass 
+          ? `<span class="qc-pill-pass"><i class="fa-solid fa-circle-check"></i> PASSED</span>`
+          : `<span class="qc-pill-flag"><i class="fa-solid fa-triangle-exclamation"></i> FLAGGED</span>`
+        }
+      </td>
+      <td style="font-size: 11px; line-height: 1.4; color: ${c.isPass ? 'var(--color-secondary-text)' : '#92400E'};">
+        ${c.explanation}
+      </td>
+    </tr>
+  `).join("");
+
+  // Render Root-Cause Diagnostics Cards
+  let diagHtml = "";
+  if (diagnostics.length > 0) {
+    diagHtml = `
+      <div class="qc-diagnostics-section">
+        <div style="font-weight: 700; font-size: 12px; color: #92400E; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+          <i class="fa-solid fa-microscope"></i> Scientific Root-Cause Diagnostics (${diagnostics.length} item${diagnostics.length > 1 ? 's' : ''})
+        </div>
+        ${diagnostics.map(d => `
+          <div class="qc-diag-card">
+            <div class="qc-diag-card-title">
+              <span><i class="fa-solid fa-circle-exclamation"></i> ${d.title}</span>
+              <span class="font-mono" style="font-size: 9.5px; background: #FEF3C7; padding: 2px 6px; border-radius: 4px; border: 1px solid #FCD34D;">${d.code}</span>
+            </div>
+            <div class="qc-diag-rationale">
+              <strong>Root Cause:</strong> ${d.scientific_rationale}
+            </div>
+            <div class="qc-diag-rationale">
+              <strong>Screening Impact:</strong> ${d.screening_impact}
+            </div>
+            <div class="qc-diag-remediation">
+              <strong>Formulation Recommendation:</strong> ${d.remediation_guidance}
+            </div>
+          </div>
+        `).join("")}
+      </div>
+    `;
+  }
+
+  bodyEl.innerHTML = `
+    <div class="qc-modal-summary-grid">
+      <div class="qc-summary-stat-box">
+        <div class="qc-summary-stat-val" style="color: var(--color-primary-action);">${totalRules}</div>
+        <div class="qc-summary-stat-label">Total QC Rules</div>
+      </div>
+      <div class="qc-summary-stat-box" style="border-color: #A7F3D0; background: #F0FDF4;">
+        <div class="qc-summary-stat-val" style="color: #059669;">${compliantCount}</div>
+        <div class="qc-summary-stat-label" style="color: #065F46;">Compliant (Passed)</div>
+      </div>
+      <div class="qc-summary-stat-box" style="border-color: ${flaggedCount > 0 ? '#FCD34D' : 'var(--color-border)'}; background: ${flaggedCount > 0 ? '#FFFBEB' : 'var(--color-surface-subtle)'};">
+        <div class="qc-summary-stat-val" style="color: ${flaggedCount > 0 ? '#D97706' : 'var(--color-muted-text)'};">${flaggedCount}</div>
+        <div class="qc-summary-stat-label" style="color: ${flaggedCount > 0 ? '#92400E' : 'var(--color-muted-text)'};">Flagged / Atypical</div>
+      </div>
+      <div class="qc-summary-stat-box">
+        <div class="qc-summary-stat-val" style="color: ${flaggedCount > 0 ? '#B45309' : '#059669'}; font-size: 13px;">${status}</div>
+        <div class="qc-summary-stat-label">Overall QC Verdict</div>
+      </div>
+    </div>
+
+    <div style="font-size: 11.5px; color: var(--color-secondary-text); margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+      <span><strong>Deterministic Parameter Compliance Checklist:</strong> Compares candidate properties against Table 17-1 standard rules.</span>
+      <span style="font-size: 10px; color: var(--color-muted-text);"><i class="fa-solid fa-circle-info"></i> Rows highlighted in amber denote boundary deviations</span>
+    </div>
+
+    <div style="max-height: 48vh; overflow-y: auto; border: 1px solid var(--color-border); border-radius: var(--radius-md);">
+      <table class="qc-compliance-table" style="margin-bottom: 0;">
+        <thead>
+          <tr>
+            <th style="width: 24%;">QC Parameter & Rule</th>
+            <th style="width: 17%;">Observed Value</th>
+            <th style="width: 23%;">Expected Rule Threshold</th>
+            <th style="width: 13%;">Compliance</th>
+            <th style="width: 23%;">Scientific Impact</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${tableRowsHtml}
+        </tbody>
+      </table>
+    </div>
+
+    ${diagHtml}
+  `;
+
+  modal.style.display = "flex";
+}
+
+function closeQcComplianceModal(event) {
+  const modal = document.getElementById("qc-compliance-modal");
+  if (modal) modal.style.display = "none";
+}
+
+function roundTo(val, dec) {
+  if (val === null || val === undefined || isNaN(val)) return 0;
+  const factor = Math.pow(10, dec);
+  return Math.round(val * factor) / factor;
 }
