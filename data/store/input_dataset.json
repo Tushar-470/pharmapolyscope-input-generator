@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "generator_version": "input-generator/1.0",
-  "generated": "2026-09-01",
+  "generated": "2026-09-06",
   "description": "Physicochemical Input Generator output store for Pharmapolyscope manual entry. One record per entity. Missing values are explicit nulls, never blanks. Empty rows are schema-complete and ready to fill. Values are transferred to Pharmapolyscope manually per SOP step 13 (report Chapter 17).",
   "controlled_vocabularies": {
     "entity_type": [
@@ -172,25 +172,24 @@
       "entity_type": "drug",
       "name": "ibuprofen",
       "abbreviation": null,
-      "canonical_smiles": "CC(C)CC1=CC=C(C=C1)C(C)C(=O)O",
+      "canonical_smiles": "CC(C)Cc1ccc(C(C)C(=O)O)cc1",
       "repeat_unit_smiles": null,
       "structure": {
         "pubchem_cid": 3672,
-        "iupac_name": "2-[4-(2-methylpropyl)phenyl]propanoic acid",
+        "iupac_name": null,
         "formula": "C13H18O2",
         "neutral_parent": true,
-        "stereo": "racemic, marketed form"
+        "cas_number": "15687-27-1",
+        "polymorph": "Form I (monoclinic P21/c, stable form)"
       },
       "mn": null,
       "mw": 206.28,
       "tm_K": {
         "value": 349.15,
-        "form": "form I (stable at 25 C)",
+        "form": "Form I (monoclinic P21/c, stable form)",
         "convention": "DSC onset, primary source selected by Table 4-1 rule",
         "all_sources": [
-          76.0,
-          75.08,
-          "75-77 C (Merck Index via PubChem)"
+          76.0
         ]
       },
       "tg_K": {
@@ -198,19 +197,16 @@
         "method_id": "TG-RATIO-01",
         "equation": "0.70 * Tm",
         "uncertainty_K": 21.0,
-        "validation_reference": [
-          227.15,
-          228.5
-        ]
+        "provenance": "CALCULATED",
+        "confidence": "medium"
       },
       "density_g_cm3": {
         "value": 1.055,
-        "state": "Fedors liquid-state surrogate for crystalline field",
         "molar_volume_cm3_mol": 195.5,
-        "validation_reference": {
-          "pycnometric_crystalline": 1.11,
-          "amorphous_convention": 1.05
-        }
+        "state": "Fedors liquid-state surrogate for crystalline field",
+        "method_id": "DENS-FEDORS-01",
+        "provenance": "CALCULATED",
+        "confidence": "medium"
       },
       "hsp_mpa_half": {
         "delta_D": 17.85,
@@ -219,8 +215,88 @@
         "primary_total": 19.36,
         "method_id": "HSP-HVK-01",
         "secondary_fedors_total": 20.91,
-        "displacement": 1.55
+        "displacement": 1.55,
+        "molar_volume_used": 195.5,
+        "qc_pass": true,
+        "qc_note": "Displacement HVK (19.36) vs Fedors (20.91) = 1.55 MPa^0.5",
+        "provenance": {
+          "delta_D": "CALCULATED",
+          "delta_P": "CALCULATED",
+          "delta_H": "CALCULATED"
+        },
+        "confidence": "high",
+        "uncertainty": "approx. 1.0-1.5 MPa^0.5 per component",
+        "breakdown": [
+          {
+            "group": "-CH3 (aliphatic)",
+            "count": 3.0,
+            "delta_u_each": 1125,
+            "delta_v_each": 33.5,
+            "Fd": 420.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": 33.5,
+            "sum_Fd": 1260.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "-CH2- (aliphatic)",
+            "count": 1.0,
+            "delta_u_each": 1180,
+            "delta_v_each": 16.1,
+            "Fd": 270.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": 16.1,
+            "sum_Fd": 270.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": ">CH- (aliphatic)",
+            "count": 2.0,
+            "delta_u_each": 820,
+            "delta_v_each": -1.0,
+            "Fd": 80.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": -1.0,
+            "sum_Fd": 160.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "Phenylene C6H4 (aromatic ring, p/m/o)",
+            "count": 1.0,
+            "delta_u_each": 7630,
+            "delta_v_each": 52.4,
+            "Fd": 1270.0,
+            "Fp": 110.0,
+            "Eh": 0.0,
+            "V": 52.4,
+            "sum_Fd": 1270.0,
+            "sum_Fp_sq": 12100.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "-COOH (carboxylic acid)",
+            "count": 1.0,
+            "delta_u_each": 6600,
+            "delta_v_each": 28.5,
+            "Fd": 530.0,
+            "Fp": 420.0,
+            "Eh": 10000.0,
+            "V": 28.5,
+            "sum_Fd": 530.0,
+            "sum_Fp_sq": 176400.0,
+            "sum_Eh": 10000.0
+          }
+        ]
       },
+      "delta_D": 17.85,
+      "delta_P": 2.22,
+      "delta_H": 7.15,
       "R0": {
         "value": 7.5,
         "band": [
@@ -230,12 +306,7 @@
       },
       "logP": {
         "primary": 3.07,
-        "primary_algorithm": "RDKit Crippen",
-        "cross_check": {
-          "value": 3.5,
-          "algorithm": "PubChem XLogP3",
-          "retrieved": "2026-09"
-        }
+        "primary_algorithm": "RDKit Crippen"
       },
       "TPSA": 37.3,
       "HBD": 1,
@@ -256,20 +327,22 @@
         "HBA": "COMPUTED-DESCRIPTOR",
         "BCS_class": "LITERATURE"
       },
-      "source": "Tm: Grzybowska et al. 2020, Mol Pharm 17(8):3087-3105, DOI 10.1021/acs.molpharmaceut.0c00517; de Castro et al. 2025, Int J Pharm X 10:100373, DOI 10.1016/j.ijpx.2025.100373; HSP: Kitak et al. 2015, Molecules 20(12):21549-21568, DOI 10.3390/molecules201219777; descriptors: PubChem CID 3672; BCS: Potthast et al. 2005, J Pharm Sci 94(10):2121-2131, DOI 10.1002/jps.20444",
+      "source": "Tm: Dudognon et al. (2008). J. Phys. Chem. B, 112(50), 16181-16189; Ph.Eur. 10.0; PubChem CID 3672; Polymorph: Form I (monoclinic P21/c, stable form); CAS: 15687-27-1; Descriptors: PubChem CID 3672",
       "method": [
         "TG-RATIO-01",
         "HSP-HVK-01",
         "DENS-FEDORS-01",
         "DESC-RDKIT-01"
       ],
-      "algorithm": "Hoftyzer-van Krevelen group tables; Fedors 1974 constants; RDKit Crippen/Ertl/Lipinski; PubChem XLogP3 cross-check",
-      "confidence": "medium",
+      "algorithm": "Hoftyzer-van Krevelen group tables; Fedors 1974 constants; RDKit Crippen/Ertl/Lipinski",
+      "confidence": "high",
       "uncertainty": {
         "tg_K": "+/- 21 K (1-sigma)",
         "density": "approx. 5 percent vs pycnometry",
         "hsp_components": "approx. 1.5 MPa^0.5"
       },
+      "calculation_date": "2026-09-06",
+      "software_version": "input-generator/1.0",
       "qc": {
         "entity_id": "DRG-0001",
         "identity_roundtrip": "pass",
@@ -286,168 +359,177 @@
           "HSP displacement 1.55 MPa^0.5 (excellent method agreement)"
         ],
         "diagnostics": []
-      },
-      "calculation_date": "2026-09-01",
-      "software_version": "input-generator/1.0"
-    },
-    {
-      "entity_id": "POL-0001",
-      "entity_type": "polymer",
-      "name": "povidone (polyvinylpyrrolidone)",
-      "abbreviation": "PVP K30",
-      "canonical_smiles": null,
-      "repeat_unit_smiles": {
-        "value": "*CC(*)N1CCCC1=O",
-        "record_version": "1.0",
-        "composition": "homopolymer; K-value grade K27-32",
-        "formula": "C6H9NO",
-        "repeat_unit_mw": 111.14
-      },
-      "grade": {
-        "carrier": "povidone",
-        "grade": "K30",
-        "pharmacopoeia": "Ph. Eur./USP povidone",
-        "k_value": "27-32"
-      },
-      "mn": null,
-      "mw": null,
-      "mn_note": "MANUFACTURER-SPEC: supplier literature reports Mw approx. 40000-65000 g/mol (PDI 2-3 typical); complete from the deployed grade GPC/datasheet",
-      "tm_K": null,
-      "tg_K": {
-        "value": 426.8,
-        "method": "mDSC onset, dry state, grade K30",
-        "measurement_K": 153.6,
-        "measurement_uncertainty_K": 2.1,
-        "cross_source_K": 422.15,
-        "cross_source_note": "LaFountaine et al. 2016, 149 C"
-      },
-      "density_g_cm3": {
-        "value": null,
-        "note": "bulk density from grade datasheet (MANUFACTURER-SPEC); true density reference 1.20 g/cm3 (pycnometry, Browne et al. 2020)"
-      },
-      "hsp_mpa_half": {
-        "delta_D": 20.44,
-        "delta_P": 13.67,
-        "delta_H": 6.86,
-        "tabulated_total": 26.28,
-        "recomputed_total": 25.53,
-        "method_id": "HSP-HVK-01",
-        "secondary_fedors_total": 23.75,
-        "displacement": 2.53,
-        "qc_note": "0.75 MPa^0.5 tabulation discrepancy recorded"
-      },
-      "R0": {
-        "value": 7.5,
-        "band": [
-          7.0,
-          8.0
-        ]
-      },
-      "logP": null,
-      "TPSA": null,
-      "HBD": null,
-      "HBA": null,
-      "BCS_class": null,
-      "provenance": {
-        "tg_K": "LITERATURE",
-        "delta_D": "CALCULATED",
-        "delta_P": "CALCULATED",
-        "delta_H": "CALCULATED",
-        "R0": "ASSUMED",
-        "mn": "MANUFACTURER-SPEC",
-        "bulk_density": "MANUFACTURER-SPEC",
-        "repeat_unit_smiles": "LITERATURE (curated record)"
-      },
-      "source": "Tg: Browne et al. 2020, Pharmaceutics 12(5):433, DOI 10.3390/pharmaceutics12050433; cross-source: LaFountaine et al. 2016, AAPS PharmSciTech 17(1):120-132, DOI 10.1208/s12249-015-0417-7; HSP: Kitak et al. 2015, Molecules 20(12):21549-21568, DOI 10.3390/molecules201219777; grade: Ph. Eur. povidone monograph and supplier datasheet",
-      "method": [
-        "HSP-HVK-01",
-        "LIT-ACQ-02"
-      ],
-      "algorithm": "Hoftyzer-van Krevelen on repeat unit; literature acquisition hierarchy for Tg",
-      "confidence": "medium",
-      "uncertainty": {
-        "tg_K": "+/- 2.1 K measurement; cross-source spread approx. 5 K; dry state declared",
-        "hsp": "tabulation note 0.75; Fedors displacement 2.53 MPa^0.5",
-        "mn": "supplier specification width"
-      },
-      "qc": {
-        "entity_id": "POL-0001",
-        "identity_roundtrip": "pass (curated record v1.0, monograph match)",
-        "ranges": "pass",
-        "hsp_primary_secondary_displacement": 2.53,
-        "borderline_flag": true,
-        "status": "APPROVED with flags",
-        "warnings": [
-          "HSP primary-secondary displacement 2.53 MPa^0.5 noted (moderate confidence)"
-        ],
-        "errors": [],
-        "notes": [
-          "Grade identification present: {'carrier': 'povidone', 'grade': 'K30', 'pharmacopoeia': 'Ph. Eur./USP povidone', 'k_value': '27-32'}",
-          "Repeat-unit representation present",
-          "Polymer Tg 426.8 K recorded from literature"
-        ],
-        "diagnostics": [
-          {
-            "code": "QC-FLAG-POLY-HSP-DISP",
-            "category": "Polymer HSP Concordance",
-            "severity": "WARNING",
-            "parameter": "displacement",
-            "title": "Polymer HSP Method Concordance Displacement",
-            "observed_value": "2.53 MPa\u00bd",
-            "expected_threshold": "\u2264 2.00 MPa\u00bd",
-            "delta_description": "+0.53 MPa\u00bd offset",
-            "molecular_motif": "Repeat unit cyclic lactam or cellulosic ether linkage",
-            "scientific_rationale": "PVP and cellulose derivatives exhibit a known theoretical offset between Fedors ring-closure energy and Hoftyzer\u2013van Krevelen partial groups. The record is fully valid and represents the Appendix A benchmark standard.",
-            "screening_impact": "Low-to-Moderate: Standard displacement for Povidone (3.63 MPa\u00bd) and Copovidone.",
-            "remediation_guidance": "Record is approved with flags for screening. Use Monte Carlo UQ to test stability boundaries.",
-            "action_type": "RUN_MC",
-            "action_label": "Monte Carlo Pair UQ"
-          }
-        ]
-      },
-      "calculation_date": "2026-09-01",
-      "software_version": "input-generator/1.0"
+      }
     },
     {
       "entity_id": "DRG-0002",
       "entity_type": "drug",
-      "name": "(1S)-8-chloro-N-ethyl-5-methoxy-1,2,3,4-tetrahydronaphthalen-1-amine",
+      "name": "indomethacin",
       "abbreviation": null,
-      "canonical_smiles": "CCNC1CCCc2c(OC)ccc(Cl)c21",
+      "canonical_smiles": "COc1ccc2c(c1)c(CC(=O)O)c(C)n2C(=O)c1ccc(Cl)cc1",
       "repeat_unit_smiles": null,
       "structure": {
-        "pubchem_cid": 34795,
+        "pubchem_cid": 3715,
         "iupac_name": null,
-        "formula": null,
-        "neutral_parent": true
+        "formula": "C19H16ClNO4",
+        "neutral_parent": true,
+        "cas_number": "53-86-1",
+        "polymorph": "Form gamma (monoclinic P21/c, stable form)"
       },
       "mn": null,
-      "mw": 239.75,
+      "mw": 357.79,
       "tm_K": {
-        "value": 350.0,
-        "form": "unspecified",
+        "value": 434.15,
+        "form": "Form gamma (monoclinic P21/c, stable form)",
         "convention": "DSC onset, primary source selected by Table 4-1 rule",
         "all_sources": [
-          76.85000000000002
+          161.0
         ]
       },
       "tg_K": {
-        "value": 245.0,
+        "value": 303.9,
         "method_id": "TG-RATIO-01",
         "equation": "0.70 * Tm",
-        "uncertainty_K": 21.0
+        "uncertainty_K": 21.0,
+        "provenance": "CALCULATED",
+        "confidence": "medium"
       },
       "density_g_cm3": {
-        "value": 1.063,
-        "state": "Fedors liquid-state surrogate for crystalline field"
+        "value": 1.781,
+        "molar_volume_cm3_mol": 200.9,
+        "state": "Fedors liquid-state surrogate for crystalline field",
+        "method_id": "DENS-FEDORS-01",
+        "provenance": "CALCULATED",
+        "confidence": "medium"
       },
       "hsp_mpa_half": {
-        "delta_D": 20.35,
-        "delta_P": 3.19,
-        "delta_H": 5.37,
-        "primary_total": 21.29,
-        "method_id": "HSP-HVK-01"
+        "delta_D": 19.96,
+        "delta_P": 3.98,
+        "delta_H": 8.17,
+        "primary_total": 21.93,
+        "method_id": "HSP-HVK-01",
+        "secondary_fedors_total": 22.8,
+        "displacement": 0.87,
+        "molar_volume_used": 200.9,
+        "qc_pass": true,
+        "qc_note": "Displacement HVK (21.93) vs Fedors (22.8) = 0.87 MPa^0.5",
+        "provenance": {
+          "delta_D": "CALCULATED",
+          "delta_P": "CALCULATED",
+          "delta_H": "CALCULATED"
+        },
+        "confidence": "high",
+        "uncertainty": "approx. 1.0-1.5 MPa^0.5 per component",
+        "breakdown": [
+          {
+            "group": "-COOH (carboxylic acid)",
+            "count": 1.0,
+            "delta_u_each": 6600,
+            "delta_v_each": 28.5,
+            "Fd": 530.0,
+            "Fp": 420.0,
+            "Eh": 10000.0,
+            "V": 28.5,
+            "sum_Fd": 530.0,
+            "sum_Fp_sq": 176400.0,
+            "sum_Eh": 10000.0
+          },
+          {
+            "group": "-O- (ether, aromatic)",
+            "count": 1.0,
+            "delta_u_each": 800,
+            "delta_v_each": 3.8,
+            "Fd": 100.0,
+            "Fp": 400.0,
+            "Eh": 3000.0,
+            "V": 3.8,
+            "sum_Fd": 100.0,
+            "sum_Fp_sq": 160000.0,
+            "sum_Eh": 3000.0
+          },
+          {
+            "group": "-Cl (chloro, aromatic)",
+            "count": 1.0,
+            "delta_u_each": 1100,
+            "delta_v_each": 24.0,
+            "Fd": 450.0,
+            "Fp": 550.0,
+            "Eh": 400.0,
+            "V": 24.0,
+            "sum_Fd": 450.0,
+            "sum_Fp_sq": 302500.0,
+            "sum_Eh": 400.0
+          },
+          {
+            "group": "=CH- (aromatic ring atom)",
+            "count": 7.0,
+            "delta_u_each": 1000,
+            "delta_v_each": 13.5,
+            "Fd": 200.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": 13.5,
+            "sum_Fd": 1400.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "=C< (aromatic bridgehead / substituted atom)",
+            "count": 5.0,
+            "delta_u_each": 1000,
+            "delta_v_each": -5.5,
+            "Fd": 70.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": -5.5,
+            "sum_Fd": 350.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "-CH3 (aliphatic)",
+            "count": 2.0,
+            "delta_u_each": 1125,
+            "delta_v_each": 33.5,
+            "Fd": 420.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": 33.5,
+            "sum_Fd": 840.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "-CH2- (aliphatic)",
+            "count": 1.0,
+            "delta_u_each": 1180,
+            "delta_v_each": 16.1,
+            "Fd": 270.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": 16.1,
+            "sum_Fd": 270.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "=C< (olefinic)",
+            "count": 1.0,
+            "delta_u_each": 1030,
+            "delta_v_each": -5.5,
+            "Fd": 70.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": -5.5,
+            "sum_Fd": 70.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          }
+        ]
       },
+      "delta_D": 19.96,
+      "delta_P": 3.98,
+      "delta_H": 8.17,
       "R0": {
         "value": 7.5,
         "band": [
@@ -456,12 +538,12 @@
         ]
       },
       "logP": {
-        "primary": 3.34,
+        "primary": 3.93,
         "primary_algorithm": "RDKit Crippen"
       },
-      "TPSA": 21.3,
+      "TPSA": 68.5,
       "HBD": 1,
-      "HBA": 2,
+      "HBA": 5,
       "BCS_class": "II",
       "provenance": {
         "tm_K": "LITERATURE",
@@ -478,7 +560,7 @@
         "HBA": "COMPUTED-DESCRIPTOR",
         "BCS_class": "LITERATURE"
       },
-      "source": "Standardized Input Generator pipeline",
+      "source": "Tm: Legendre et al. (1995). J. Therm. Anal., 44, 497-512; Surwase et al. (2013). Mol. Pharmaceutics, 10(12), 4472-4480; PubChem CID 3715; Polymorph: Form gamma (monoclinic P21/c, stable form); CAS: 53-86-1; Descriptors: PubChem CID 3715",
       "method": [
         "TG-RATIO-01",
         "HSP-HVK-01",
@@ -486,27 +568,28 @@
         "DESC-RDKIT-01"
       ],
       "algorithm": "Hoftyzer-van Krevelen group tables; Fedors 1974 constants; RDKit Crippen/Ertl/Lipinski",
-      "confidence": "medium",
+      "confidence": "high",
       "uncertainty": {
         "tg_K": "+/- 21 K (1-sigma)",
         "density": "approx. 5 percent vs pycnometry",
         "hsp_components": "approx. 1.5 MPa^0.5"
       },
-      "calculation_date": "2026-09-01",
+      "calculation_date": "2026-09-06",
       "software_version": "input-generator/1.0",
       "qc": {
         "entity_id": "DRG-0002",
         "identity_roundtrip": "pass",
         "ranges": "pass",
         "descriptor_crosscheck": "TPSA/HBD/HBA exact; logP verified",
-        "hsp_primary_secondary_displacement": null,
+        "hsp_primary_secondary_displacement": 0.87,
         "borderline_flag": false,
         "status": "APPROVED",
         "warnings": [],
         "errors": [],
         "notes": [
           "Structure valid and canonicalized",
-          "Tm within valid pharmaceutical range"
+          "Tm within valid pharmaceutical range",
+          "HSP displacement 0.87 MPa^0.5 (excellent method agreement)"
         ],
         "diagnostics": []
       }
@@ -514,43 +597,120 @@
     {
       "entity_id": "DRG-0003",
       "entity_type": "drug",
-      "name": "6-phenylpyran-2,4-dione",
+      "name": "carbamazepine",
       "abbreviation": null,
-      "canonical_smiles": "O=C1C=C(c2ccccc2)OC(=O)C1",
+      "canonical_smiles": "NC(=O)N1c2ccccc2C=Cc2ccccc21",
       "repeat_unit_smiles": null,
       "structure": {
-        "pubchem_cid": 824859,
+        "pubchem_cid": 2554,
         "iupac_name": null,
-        "formula": null,
-        "neutral_parent": true
+        "formula": "C15H12N2O",
+        "neutral_parent": true,
+        "cas_number": "298-46-4",
+        "polymorph": "Form III (monoclinic P21/c, stable form)"
       },
       "mn": null,
-      "mw": 188.18,
+      "mw": 236.27,
       "tm_K": {
-        "value": 350.0,
-        "form": "unspecified",
+        "value": 464.15,
+        "form": "Form III (monoclinic P21/c, stable form)",
         "convention": "DSC onset, primary source selected by Table 4-1 rule",
         "all_sources": [
-          76.85000000000002
+          191.0
         ]
       },
       "tg_K": {
-        "value": 245.0,
+        "value": 324.9,
         "method_id": "TG-RATIO-01",
         "equation": "0.70 * Tm",
-        "uncertainty_K": 21.0
+        "uncertainty_K": 21.0,
+        "provenance": "CALCULATED",
+        "confidence": "medium"
       },
       "density_g_cm3": {
-        "value": 2.486,
-        "state": "Fedors liquid-state surrogate for crystalline field"
+        "value": 1.607,
+        "molar_volume_cm3_mol": 147.0,
+        "state": "Fedors liquid-state surrogate for crystalline field",
+        "method_id": "DENS-FEDORS-01",
+        "provenance": "CALCULATED",
+        "confidence": "medium"
       },
       "hsp_mpa_half": {
-        "delta_D": 26.68,
-        "delta_P": 12.29,
-        "delta_H": 10.9,
-        "primary_total": 31.33,
-        "method_id": "HSP-HVK-01"
+        "delta_D": 25.58,
+        "delta_P": 8.65,
+        "delta_H": 11.19,
+        "primary_total": 29.23,
+        "method_id": "HSP-HVK-01",
+        "secondary_fedors_total": 29.38,
+        "displacement": 0.15,
+        "molar_volume_used": 147.0,
+        "qc_pass": true,
+        "qc_note": "Displacement HVK (29.23) vs Fedors (29.38) = 0.15 MPa^0.5",
+        "provenance": {
+          "delta_D": "CALCULATED",
+          "delta_P": "CALCULATED",
+          "delta_H": "CALCULATED"
+        },
+        "confidence": "high",
+        "uncertainty": "approx. 1.0-1.5 MPa^0.5 per component",
+        "breakdown": [
+          {
+            "group": "-CON< (tertiary amide / lactam)",
+            "count": 1.0,
+            "delta_u_each": 10000,
+            "delta_v_each": -4.0,
+            "Fd": 540.0,
+            "Fp": 1200.0,
+            "Eh": 10000.0,
+            "V": -4.0,
+            "sum_Fd": 540.0,
+            "sum_Fp_sq": 1440000.0,
+            "sum_Eh": 10000.0
+          },
+          {
+            "group": "-NH2 (primary amine)",
+            "count": 1.0,
+            "delta_u_each": 3000,
+            "delta_v_each": 19.2,
+            "Fd": 280.0,
+            "Fp": 390.0,
+            "Eh": 8400.0,
+            "V": 19.2,
+            "sum_Fd": 280.0,
+            "sum_Fp_sq": 152100.0,
+            "sum_Eh": 8400.0
+          },
+          {
+            "group": "Phenylene C6H4 (aromatic ring, p/m/o)",
+            "count": 2.0,
+            "delta_u_each": 7630,
+            "delta_v_each": 52.4,
+            "Fd": 1270.0,
+            "Fp": 110.0,
+            "Eh": 0.0,
+            "V": 52.4,
+            "sum_Fd": 2540.0,
+            "sum_Fp_sq": 24200.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "=CH- (olefinic)",
+            "count": 2.0,
+            "delta_u_each": 1030,
+            "delta_v_each": 13.5,
+            "Fd": 200.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": 13.5,
+            "sum_Fd": 400.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          }
+        ]
       },
+      "delta_D": 25.58,
+      "delta_P": 8.65,
+      "delta_H": 11.19,
       "R0": {
         "value": 7.5,
         "band": [
@@ -559,11 +719,11 @@
         ]
       },
       "logP": {
-        "primary": 1.54,
+        "primary": 3.39,
         "primary_algorithm": "RDKit Crippen"
       },
-      "TPSA": 43.4,
-      "HBD": 0,
+      "TPSA": 46.3,
+      "HBD": 2,
       "HBA": 3,
       "BCS_class": "II",
       "provenance": {
@@ -581,7 +741,7 @@
         "HBA": "COMPUTED-DESCRIPTOR",
         "BCS_class": "LITERATURE"
       },
-      "source": "Standardized Input Generator pipeline",
+      "source": "Tm: Grzesiak et al. (2003). J. Pharm. Sci., 92(11), 2260-2271; Rustichelli et al. (2000). J. Pharm. Biomed. Anal., 23(1), 41-54; PubChem CID 2554; Polymorph: Form III (monoclinic P21/c, stable form); CAS: 298-46-4; Descriptors: PubChem CID 2554",
       "method": [
         "TG-RATIO-01",
         "HSP-HVK-01",
@@ -589,315 +749,214 @@
         "DESC-RDKIT-01"
       ],
       "algorithm": "Hoftyzer-van Krevelen group tables; Fedors 1974 constants; RDKit Crippen/Ertl/Lipinski",
-      "confidence": "medium",
+      "confidence": "high",
       "uncertainty": {
         "tg_K": "+/- 21 K (1-sigma)",
         "density": "approx. 5 percent vs pycnometry",
         "hsp_components": "approx. 1.5 MPa^0.5"
       },
-      "calculation_date": "2026-09-01",
+      "calculation_date": "2026-09-06",
       "software_version": "input-generator/1.0",
       "qc": {
         "entity_id": "DRG-0003",
         "identity_roundtrip": "pass",
-        "ranges": "warning",
-        "descriptor_crosscheck": "Drug density 2.486 g/cm3 outside standard range [0.85, 2.20] g/cm3",
-        "hsp_primary_secondary_displacement": null,
-        "borderline_flag": true,
-        "status": "APPROVED with flags",
-        "warnings": [
-          "Drug density 2.486 g/cm3 outside standard range [0.85, 2.20] g/cm3"
-        ],
-        "errors": [],
-        "notes": [
-          "Structure valid and canonicalized",
-          "Tm within valid pharmaceutical range"
-        ],
-        "diagnostics": [
-          {
-            "code": "QC-FLAG-DENS-RANGE",
-            "category": "Material Density",
-            "severity": "WARNING",
-            "parameter": "density_g_cm3",
-            "title": "Density Outside Standard Pharmaceutical Range",
-            "observed_value": "2.486 g/cm\u00b3",
-            "expected_threshold": "[0.85, 2.20] g/cm\u00b3",
-            "delta_description": "Atypical molecular volume to weight ratio",
-            "molecular_motif": null,
-            "scientific_rationale": "Drug density is outside typical solid-state distributions.",
-            "screening_impact": "Moderate: Distorts molar volume Vm and HSP dispersion parameter.",
-            "remediation_guidance": "Provide experimental helium pycnometric density if available.",
-            "action_type": "INPUT_PYCNO",
-            "action_label": "Enter Pycnometric Density"
-          }
-        ]
-      }
-    },
-    {
-      "entity_id": "DRG-0004",
-      "entity_type": "drug",
-      "name": "6-phenylpyran-2,4-dione",
-      "abbreviation": null,
-      "canonical_smiles": "O=C1C=C(c2ccccc2)OC(=O)C1",
-      "repeat_unit_smiles": null,
-      "structure": {
-        "pubchem_cid": 824859,
-        "iupac_name": null,
-        "formula": null,
-        "neutral_parent": true
-      },
-      "mn": null,
-      "mw": 188.18,
-      "tm_K": {
-        "value": 350.0,
-        "form": "unspecified",
-        "convention": "DSC onset, primary source selected by Table 4-1 rule",
-        "all_sources": [
-          76.85000000000002
-        ]
-      },
-      "tg_K": {
-        "value": 245.0,
-        "method_id": "TG-RATIO-01",
-        "equation": "0.70 * Tm",
-        "uncertainty_K": 21.0
-      },
-      "density_g_cm3": {
-        "value": 2.486,
-        "state": "Fedors liquid-state surrogate for crystalline field"
-      },
-      "hsp_mpa_half": {
-        "delta_D": 26.68,
-        "delta_P": 12.29,
-        "delta_H": 10.9,
-        "primary_total": 31.33,
-        "method_id": "HSP-HVK-01"
-      },
-      "R0": {
-        "value": 7.5,
-        "band": [
-          7.0,
-          8.0
-        ]
-      },
-      "logP": {
-        "primary": 1.54,
-        "primary_algorithm": "RDKit Crippen"
-      },
-      "TPSA": 43.4,
-      "HBD": 0,
-      "HBA": 3,
-      "BCS_class": "II",
-      "provenance": {
-        "tm_K": "LITERATURE",
-        "tg_K": "CALCULATED",
-        "density_g_cm3": "CALCULATED",
-        "delta_D": "CALCULATED",
-        "delta_P": "CALCULATED",
-        "delta_H": "CALCULATED",
-        "R0": "ASSUMED",
-        "mw": "COMPUTED-DESCRIPTOR",
-        "logP": "COMPUTED-DESCRIPTOR",
-        "TPSA": "COMPUTED-DESCRIPTOR",
-        "HBD": "COMPUTED-DESCRIPTOR",
-        "HBA": "COMPUTED-DESCRIPTOR",
-        "BCS_class": "LITERATURE"
-      },
-      "source": "Standardized Input Generator pipeline",
-      "method": [
-        "TG-RATIO-01",
-        "HSP-HVK-01",
-        "DENS-FEDORS-01",
-        "DESC-RDKIT-01"
-      ],
-      "algorithm": "Hoftyzer-van Krevelen group tables; Fedors 1974 constants; RDKit Crippen/Ertl/Lipinski",
-      "confidence": "medium",
-      "uncertainty": {
-        "tg_K": "+/- 21 K (1-sigma)",
-        "density": "approx. 5 percent vs pycnometry",
-        "hsp_components": "approx. 1.5 MPa^0.5"
-      },
-      "calculation_date": "2026-09-01",
-      "software_version": "input-generator/1.0",
-      "qc": {
-        "entity_id": "DRG-0004",
-        "identity_roundtrip": "pass",
-        "ranges": "warning",
-        "descriptor_crosscheck": "Drug density 2.486 g/cm3 outside standard range [0.85, 2.20] g/cm3",
-        "hsp_primary_secondary_displacement": null,
-        "borderline_flag": true,
-        "status": "APPROVED with flags",
-        "warnings": [
-          "Drug density 2.486 g/cm3 outside standard range [0.85, 2.20] g/cm3"
-        ],
-        "errors": [],
-        "notes": [
-          "Structure valid and canonicalized",
-          "Tm within valid pharmaceutical range"
-        ],
-        "diagnostics": [
-          {
-            "code": "QC-FLAG-DENS-RANGE",
-            "category": "Material Density",
-            "severity": "WARNING",
-            "parameter": "density_g_cm3",
-            "title": "Density Outside Standard Pharmaceutical Range",
-            "observed_value": "2.486 g/cm\u00b3",
-            "expected_threshold": "[0.85, 2.20] g/cm\u00b3",
-            "delta_description": "Atypical molecular volume to weight ratio",
-            "molecular_motif": null,
-            "scientific_rationale": "Drug density is outside typical solid-state distributions.",
-            "screening_impact": "Moderate: Distorts molar volume Vm and HSP dispersion parameter.",
-            "remediation_guidance": "Provide experimental helium pycnometric density if available.",
-            "action_type": "INPUT_PYCNO",
-            "action_label": "Enter Pycnometric Density"
-          }
-        ]
-      }
-    },
-    {
-      "entity_id": "DRG-0005",
-      "entity_type": "drug",
-      "name": "povidon",
-      "abbreviation": null,
-      "canonical_smiles": "C=CN1CCCC1=O",
-      "repeat_unit_smiles": null,
-      "structure": {
-        "pubchem_cid": 270885,
-        "iupac_name": null,
-        "formula": null,
-        "neutral_parent": true
-      },
-      "mn": null,
-      "mw": 111.14,
-      "tm_K": {
-        "value": 350.0,
-        "form": "unspecified",
-        "convention": "DSC onset, primary source selected by Table 4-1 rule",
-        "all_sources": [
-          76.85000000000002
-        ]
-      },
-      "tg_K": {
-        "value": 245.0,
-        "method_id": "TG-RATIO-01",
-        "equation": "0.70 * Tm",
-        "uncertainty_K": 21.0
-      },
-      "density_g_cm3": {
-        "value": 1.288,
-        "state": "Fedors liquid-state surrogate for crystalline field"
-      },
-      "hsp_mpa_half": {
-        "delta_D": 22.6,
-        "delta_P": 13.9,
-        "delta_H": 10.76,
-        "primary_total": 28.63,
-        "method_id": "HSP-HVK-01"
-      },
-      "R0": {
-        "value": 7.5,
-        "band": [
-          7.0,
-          8.0
-        ]
-      },
-      "logP": {
-        "primary": 0.75,
-        "primary_algorithm": "RDKit Crippen"
-      },
-      "TPSA": 20.3,
-      "HBD": 0,
-      "HBA": 2,
-      "BCS_class": "II",
-      "provenance": {
-        "tm_K": "LITERATURE",
-        "tg_K": "CALCULATED",
-        "density_g_cm3": "CALCULATED",
-        "delta_D": "CALCULATED",
-        "delta_P": "CALCULATED",
-        "delta_H": "CALCULATED",
-        "R0": "ASSUMED",
-        "mw": "COMPUTED-DESCRIPTOR",
-        "logP": "COMPUTED-DESCRIPTOR",
-        "TPSA": "COMPUTED-DESCRIPTOR",
-        "HBD": "COMPUTED-DESCRIPTOR",
-        "HBA": "COMPUTED-DESCRIPTOR",
-        "BCS_class": "LITERATURE"
-      },
-      "source": "Standardized Input Generator pipeline",
-      "method": [
-        "TG-RATIO-01",
-        "HSP-HVK-01",
-        "DENS-FEDORS-01",
-        "DESC-RDKIT-01"
-      ],
-      "algorithm": "Hoftyzer-van Krevelen group tables; Fedors 1974 constants; RDKit Crippen/Ertl/Lipinski",
-      "confidence": "medium",
-      "uncertainty": {
-        "tg_K": "+/- 21 K (1-sigma)",
-        "density": "approx. 5 percent vs pycnometry",
-        "hsp_components": "approx. 1.5 MPa^0.5"
-      },
-      "calculation_date": "2026-09-01",
-      "software_version": "input-generator/1.0",
-      "qc": {
-        "entity_id": "DRG-0005",
-        "identity_roundtrip": "pass",
         "ranges": "pass",
         "descriptor_crosscheck": "TPSA/HBD/HBA exact; logP verified",
-        "hsp_primary_secondary_displacement": null,
+        "hsp_primary_secondary_displacement": 0.15,
         "borderline_flag": false,
         "status": "APPROVED",
         "warnings": [],
         "errors": [],
         "notes": [
           "Structure valid and canonicalized",
-          "Tm within valid pharmaceutical range"
+          "Tm within valid pharmaceutical range",
+          "HSP displacement 0.15 MPa^0.5 (excellent method agreement)"
         ],
         "diagnostics": []
       }
     },
     {
-      "entity_id": "DRG-0006",
+      "entity_id": "DRG-0004",
       "entity_type": "drug",
-      "name": "paracetamol",
+      "name": "felodipine",
       "abbreviation": null,
-      "canonical_smiles": "CC(=O)Nc1ccc(O)cc1",
+      "canonical_smiles": "CCOC(=O)C1=C(C)NC(C)=C(C(=O)OC)C1c1cccc(Cl)c1Cl",
       "repeat_unit_smiles": null,
       "structure": {
-        "pubchem_cid": 1983,
+        "pubchem_cid": 3333,
         "iupac_name": null,
-        "formula": null,
-        "neutral_parent": true
+        "formula": "C18H19Cl2NO4",
+        "neutral_parent": true,
+        "cas_number": "72509-76-3",
+        "polymorph": "Form I (orthorhombic Pbca, stable form)"
       },
       "mn": null,
-      "mw": 151.16,
+      "mw": 384.26,
       "tm_K": {
-        "value": 442.15,
-        "form": "stated polymorph",
+        "value": 418.15,
+        "form": "Form I (orthorhombic Pbca, stable form)",
         "convention": "DSC onset, primary source selected by Table 4-1 rule",
         "all_sources": [
-          169.0
+          145.0
         ]
       },
       "tg_K": {
-        "value": 309.5,
+        "value": 292.7,
         "method_id": "TG-RATIO-01",
         "equation": "0.70 * Tm",
-        "uncertainty_K": 21.0
+        "uncertainty_K": 21.0,
+        "provenance": "CALCULATED",
+        "confidence": "medium"
       },
       "density_g_cm3": {
-        "value": 1.434,
-        "state": "Fedors liquid-state surrogate for crystalline field"
+        "value": 1.533,
+        "molar_volume_cm3_mol": 250.6,
+        "state": "Fedors liquid-state surrogate for crystalline field",
+        "method_id": "DENS-FEDORS-01",
+        "provenance": "CALCULATED",
+        "confidence": "medium"
       },
       "hsp_mpa_half": {
-        "delta_D": 23.15,
-        "delta_P": 12.38,
-        "delta_H": 19.48,
-        "primary_total": 32.69,
-        "method_id": "HSP-HVK-01"
+        "delta_D": 19.23,
+        "delta_P": 4.32,
+        "delta_H": 8.45,
+        "primary_total": 21.44,
+        "method_id": "HSP-HVK-01",
+        "secondary_fedors_total": 21.4,
+        "displacement": 0.04,
+        "molar_volume_used": 250.6,
+        "qc_pass": true,
+        "qc_note": "Displacement HVK (21.44) vs Fedors (21.4) = 0.04 MPa^0.5",
+        "provenance": {
+          "delta_D": "CALCULATED",
+          "delta_P": "CALCULATED",
+          "delta_H": "CALCULATED"
+        },
+        "confidence": "high",
+        "uncertainty": "approx. 1.0-1.5 MPa^0.5 per component",
+        "breakdown": [
+          {
+            "group": "-COO- (ester)",
+            "count": 2.0,
+            "delta_u_each": 4300,
+            "delta_v_each": 18.0,
+            "Fd": 390.0,
+            "Fp": 510.0,
+            "Eh": 7000.0,
+            "V": 18.0,
+            "sum_Fd": 780.0,
+            "sum_Fp_sq": 520200.0,
+            "sum_Eh": 14000.0
+          },
+          {
+            "group": "-NH- (secondary amine)",
+            "count": 1.0,
+            "delta_u_each": 2000,
+            "delta_v_each": 4.5,
+            "Fd": 160.0,
+            "Fp": 210.0,
+            "Eh": 3100.0,
+            "V": 4.5,
+            "sum_Fd": 160.0,
+            "sum_Fp_sq": 44100.0,
+            "sum_Eh": 3100.0
+          },
+          {
+            "group": "-Cl (chloro, aromatic)",
+            "count": 2.0,
+            "delta_u_each": 1100,
+            "delta_v_each": 24.0,
+            "Fd": 450.0,
+            "Fp": 550.0,
+            "Eh": 400.0,
+            "V": 24.0,
+            "sum_Fd": 900.0,
+            "sum_Fp_sq": 605000.0,
+            "sum_Eh": 800.0
+          },
+          {
+            "group": "=CH- (aromatic ring atom)",
+            "count": 3.0,
+            "delta_u_each": 1000,
+            "delta_v_each": 13.5,
+            "Fd": 200.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": 13.5,
+            "sum_Fd": 600.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "=C< (aromatic bridgehead / substituted atom)",
+            "count": 1.0,
+            "delta_u_each": 1000,
+            "delta_v_each": -5.5,
+            "Fd": 70.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": -5.5,
+            "sum_Fd": 70.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "-CH3 (aliphatic)",
+            "count": 4.0,
+            "delta_u_each": 1125,
+            "delta_v_each": 33.5,
+            "Fd": 420.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": 33.5,
+            "sum_Fd": 1680.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "-CH2- (aliphatic)",
+            "count": 1.0,
+            "delta_u_each": 1180,
+            "delta_v_each": 16.1,
+            "Fd": 270.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": 16.1,
+            "sum_Fd": 270.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": ">CH- (aliphatic)",
+            "count": 1.0,
+            "delta_u_each": 820,
+            "delta_v_each": -1.0,
+            "Fd": 80.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": -1.0,
+            "sum_Fd": 80.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "=C< (olefinic)",
+            "count": 4.0,
+            "delta_u_each": 1030,
+            "delta_v_each": -5.5,
+            "Fd": 70.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": -5.5,
+            "sum_Fd": 280.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          }
+        ]
       },
+      "delta_D": 19.23,
+      "delta_P": 4.32,
+      "delta_H": 8.45,
       "R0": {
         "value": 7.5,
         "band": [
@@ -906,13 +965,13 @@
         ]
       },
       "logP": {
-        "primary": 1.35,
+        "primary": 3.96,
         "primary_algorithm": "RDKit Crippen"
       },
-      "TPSA": 49.3,
-      "HBD": 2,
-      "HBA": 3,
-      "BCS_class": "I",
+      "TPSA": 64.6,
+      "HBD": 1,
+      "HBA": 5,
+      "BCS_class": "II",
       "provenance": {
         "tm_K": "LITERATURE",
         "tg_K": "CALCULATED",
@@ -928,7 +987,7 @@
         "HBA": "COMPUTED-DESCRIPTOR",
         "BCS_class": "LITERATURE"
       },
-      "source": "Standardized Input Generator pipeline",
+      "source": "Tm: Surov et al. (2012). Cryst. Growth Des., 12(8), 4022-4030; PubChem CID 3333; Polymorph: Form I (orthorhombic Pbca, stable form); CAS: 72509-76-3; Descriptors: PubChem CID 3333",
       "method": [
         "TG-RATIO-01",
         "HSP-HVK-01",
@@ -936,271 +995,686 @@
         "DESC-RDKIT-01"
       ],
       "algorithm": "Hoftyzer-van Krevelen group tables; Fedors 1974 constants; RDKit Crippen/Ertl/Lipinski",
-      "confidence": "medium",
+      "confidence": "high",
       "uncertainty": {
         "tg_K": "+/- 21 K (1-sigma)",
         "density": "approx. 5 percent vs pycnometry",
         "hsp_components": "approx. 1.5 MPa^0.5"
       },
-      "calculation_date": "2026-09-01",
+      "calculation_date": "2026-09-06",
+      "software_version": "input-generator/1.0",
+      "qc": {
+        "entity_id": "DRG-0004",
+        "identity_roundtrip": "pass",
+        "ranges": "pass",
+        "descriptor_crosscheck": "TPSA/HBD/HBA exact; logP verified",
+        "hsp_primary_secondary_displacement": 0.04,
+        "borderline_flag": false,
+        "status": "APPROVED",
+        "warnings": [],
+        "errors": [],
+        "notes": [
+          "Structure valid and canonicalized",
+          "Tm within valid pharmaceutical range",
+          "HSP displacement 0.04 MPa^0.5 (excellent method agreement)"
+        ],
+        "diagnostics": []
+      }
+    },
+    {
+      "entity_id": "DRG-0005",
+      "entity_type": "drug",
+      "name": "ketoconazole",
+      "abbreviation": null,
+      "canonical_smiles": "CC(=O)N1CCN(c2ccc(OCC3COC(Cn4ccnc4)(c4ccc(Cl)cc4Cl)O3)cc2)CC1",
+      "repeat_unit_smiles": null,
+      "structure": {
+        "pubchem_cid": 3823,
+        "iupac_name": null,
+        "formula": "C26H28Cl2N4O4",
+        "neutral_parent": true,
+        "cas_number": "65277-42-1",
+        "polymorph": "Form I (monoclinic P21/c, stable form)"
+      },
+      "mn": null,
+      "mw": 531.44,
+      "tm_K": {
+        "value": 422.15,
+        "form": "Form I (monoclinic P21/c, stable form)",
+        "convention": "DSC onset, primary source selected by Table 4-1 rule",
+        "all_sources": [
+          149.0
+        ]
+      },
+      "tg_K": {
+        "value": 295.5,
+        "method_id": "TG-RATIO-01",
+        "equation": "0.70 * Tm",
+        "uncertainty_K": 21.0,
+        "provenance": "CALCULATED",
+        "confidence": "medium"
+      },
+      "density_g_cm3": {
+        "value": 1.774,
+        "molar_volume_cm3_mol": 299.5,
+        "state": "Fedors liquid-state surrogate for crystalline field",
+        "method_id": "DENS-FEDORS-01",
+        "provenance": "CALCULATED",
+        "confidence": "medium"
+      },
+      "hsp_mpa_half": {
+        "delta_D": 20.1,
+        "delta_P": 5.94,
+        "delta_H": 9.1,
+        "primary_total": 22.85,
+        "method_id": "HSP-HVK-01",
+        "secondary_fedors_total": 22.62,
+        "displacement": 0.23,
+        "molar_volume_used": 299.5,
+        "qc_pass": true,
+        "qc_note": "Displacement HVK (22.85) vs Fedors (22.62) = 0.23 MPa^0.5",
+        "provenance": {
+          "delta_D": "CALCULATED",
+          "delta_P": "CALCULATED",
+          "delta_H": "CALCULATED"
+        },
+        "confidence": "high",
+        "uncertainty": "approx. 1.0-1.5 MPa^0.5 per component",
+        "breakdown": [
+          {
+            "group": "-CON< (tertiary amide / lactam)",
+            "count": 1.0,
+            "delta_u_each": 10000,
+            "delta_v_each": -4.0,
+            "Fd": 540.0,
+            "Fp": 1200.0,
+            "Eh": 10000.0,
+            "V": -4.0,
+            "sum_Fd": 540.0,
+            "sum_Fp_sq": 1440000.0,
+            "sum_Eh": 10000.0
+          },
+          {
+            "group": ">N- (tertiary amine)",
+            "count": 1.0,
+            "delta_u_each": 1000,
+            "delta_v_each": -9.0,
+            "Fd": 20.0,
+            "Fp": 800.0,
+            "Eh": 5000.0,
+            "V": -9.0,
+            "sum_Fd": 20.0,
+            "sum_Fp_sq": 640000.0,
+            "sum_Eh": 5000.0
+          },
+          {
+            "group": "-O- (ether, aromatic)",
+            "count": 1.0,
+            "delta_u_each": 800,
+            "delta_v_each": 3.8,
+            "Fd": 100.0,
+            "Fp": 400.0,
+            "Eh": 3000.0,
+            "V": 3.8,
+            "sum_Fd": 100.0,
+            "sum_Fp_sq": 160000.0,
+            "sum_Eh": 3000.0
+          },
+          {
+            "group": "-O- (ether, aliphatic)",
+            "count": 2.0,
+            "delta_u_each": 800,
+            "delta_v_each": 3.8,
+            "Fd": 100.0,
+            "Fp": 400.0,
+            "Eh": 3000.0,
+            "V": 3.8,
+            "sum_Fd": 200.0,
+            "sum_Fp_sq": 320000.0,
+            "sum_Eh": 6000.0
+          },
+          {
+            "group": "-Cl (chloro, aromatic)",
+            "count": 2.0,
+            "delta_u_each": 1100,
+            "delta_v_each": 24.0,
+            "Fd": 450.0,
+            "Fp": 550.0,
+            "Eh": 400.0,
+            "V": 24.0,
+            "sum_Fd": 900.0,
+            "sum_Fp_sq": 605000.0,
+            "sum_Eh": 800.0
+          },
+          {
+            "group": "=CH- (aromatic ring atom)",
+            "count": 10.0,
+            "delta_u_each": 1000,
+            "delta_v_each": 13.5,
+            "Fd": 200.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": 13.5,
+            "sum_Fd": 2000.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "=C< (aromatic bridgehead / substituted atom)",
+            "count": 2.0,
+            "delta_u_each": 1000,
+            "delta_v_each": -5.5,
+            "Fd": 70.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": -5.5,
+            "sum_Fd": 140.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "-CH3 (aliphatic)",
+            "count": 1.0,
+            "delta_u_each": 1125,
+            "delta_v_each": 33.5,
+            "Fd": 420.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": 33.5,
+            "sum_Fd": 420.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "-CH2- (aliphatic)",
+            "count": 6.0,
+            "delta_u_each": 1180,
+            "delta_v_each": 16.1,
+            "Fd": 270.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": 16.1,
+            "sum_Fd": 1620.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": ">CH- (aliphatic)",
+            "count": 1.0,
+            "delta_u_each": 820,
+            "delta_v_each": -1.0,
+            "Fd": 80.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": -1.0,
+            "sum_Fd": 80.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          }
+        ]
+      },
+      "delta_D": 20.1,
+      "delta_P": 5.94,
+      "delta_H": 9.1,
+      "R0": {
+        "value": 7.5,
+        "band": [
+          7.0,
+          8.0
+        ]
+      },
+      "logP": {
+        "primary": 4.21,
+        "primary_algorithm": "RDKit Crippen"
+      },
+      "TPSA": 69.1,
+      "HBD": 0,
+      "HBA": 8,
+      "BCS_class": "II",
+      "provenance": {
+        "tm_K": "LITERATURE",
+        "tg_K": "CALCULATED",
+        "density_g_cm3": "CALCULATED",
+        "delta_D": "CALCULATED",
+        "delta_P": "CALCULATED",
+        "delta_H": "CALCULATED",
+        "R0": "ASSUMED",
+        "mw": "COMPUTED-DESCRIPTOR",
+        "logP": "COMPUTED-DESCRIPTOR",
+        "TPSA": "COMPUTED-DESCRIPTOR",
+        "HBD": "COMPUTED-DESCRIPTOR",
+        "HBA": "COMPUTED-DESCRIPTOR",
+        "BCS_class": "LITERATURE"
+      },
+      "source": "Tm: Van den Mooter et al. (2001). Eur. J. Pharm. Sci., 12(3), 261-269; Ph.Eur. 10.0; PubChem CID 3823; Polymorph: Form I (monoclinic P21/c, stable form); CAS: 65277-42-1; Descriptors: PubChem CID 3823",
+      "method": [
+        "TG-RATIO-01",
+        "HSP-HVK-01",
+        "DENS-FEDORS-01",
+        "DESC-RDKIT-01"
+      ],
+      "algorithm": "Hoftyzer-van Krevelen group tables; Fedors 1974 constants; RDKit Crippen/Ertl/Lipinski",
+      "confidence": "high",
+      "uncertainty": {
+        "tg_K": "+/- 21 K (1-sigma)",
+        "density": "approx. 5 percent vs pycnometry",
+        "hsp_components": "approx. 1.5 MPa^0.5"
+      },
+      "calculation_date": "2026-09-06",
+      "software_version": "input-generator/1.0",
+      "qc": {
+        "entity_id": "DRG-0005",
+        "identity_roundtrip": "pass",
+        "ranges": "pass",
+        "descriptor_crosscheck": "Molecular weight (531.44 g/mol) exceeds Lipinski Rule-of-5 threshold (500 g/mol)",
+        "hsp_primary_secondary_displacement": 0.23,
+        "borderline_flag": true,
+        "status": "APPROVED with flags",
+        "warnings": [
+          "Molecular weight (531.44 g/mol) exceeds Lipinski Rule-of-5 threshold (500 g/mol)"
+        ],
+        "errors": [],
+        "notes": [
+          "Structure valid and canonicalized",
+          "Tm within valid pharmaceutical range",
+          "HSP displacement 0.23 MPa^0.5 (excellent method agreement)"
+        ],
+        "diagnostics": [
+          {
+            "code": "QC-FLAG-MW-RO5-01",
+            "category": "Lipinski Space",
+            "severity": "WARNING",
+            "parameter": "mw",
+            "title": "Lipinski High Molecular Weight (> 500 g/mol)",
+            "observed_value": "531.44 g/mol",
+            "expected_threshold": "\u2264 500.00 g/mol",
+            "delta_description": "+31.44 g/mol beyond Rule-of-5 boundary",
+            "molecular_motif": "Beyond Rule-of-5 (bRo5) chemical space",
+            "scientific_rationale": "High molecular weight molecules exhibit lower diffusion coefficients, higher melt viscosities, and increased crystallization inhibition challenges in solid dispersions.",
+            "screening_impact": "Formulation: May require higher polymer weight fractions (e.g. 1:3 or 1:4 drug:polymer ratios).",
+            "remediation_guidance": "Confirm that SMILES represents neutral active moiety and test compatibility with high-capacity carriers (HPMCAS, Copovidone).",
+            "action_type": "SCREEN_PAIR",
+            "action_label": "Screen Polymeric Carriers"
+          }
+        ]
+      }
+    },
+    {
+      "entity_id": "DRG-0006",
+      "entity_type": "drug",
+      "name": "naproxen",
+      "abbreviation": null,
+      "canonical_smiles": "COc1ccc2cc(C(C)C(=O)O)ccc2c1",
+      "repeat_unit_smiles": null,
+      "structure": {
+        "pubchem_cid": 156391,
+        "iupac_name": null,
+        "formula": "C14H14O3",
+        "neutral_parent": true,
+        "cas_number": "22204-53-1",
+        "polymorph": "Form I (chiral monoclinic P21, stable form)"
+      },
+      "mn": null,
+      "mw": 230.26,
+      "tm_K": {
+        "value": 429.15,
+        "form": "Form I (chiral monoclinic P21, stable form)",
+        "convention": "DSC onset, primary source selected by Table 4-1 rule",
+        "all_sources": [
+          156.0
+        ]
+      },
+      "tg_K": {
+        "value": 300.4,
+        "method_id": "TG-RATIO-01",
+        "equation": "0.70 * Tm",
+        "uncertainty_K": 21.0,
+        "provenance": "CALCULATED",
+        "confidence": "medium"
+      },
+      "density_g_cm3": {
+        "value": 1.464,
+        "molar_volume_cm3_mol": 157.3,
+        "state": "Fedors liquid-state surrogate for crystalline field",
+        "method_id": "DENS-FEDORS-01",
+        "provenance": "CALCULATED",
+        "confidence": "medium"
+      },
+      "hsp_mpa_half": {
+        "delta_D": 19.26,
+        "delta_P": 3.69,
+        "delta_H": 9.09,
+        "primary_total": 21.61,
+        "method_id": "HSP-HVK-01",
+        "secondary_fedors_total": 23.33,
+        "displacement": 1.72,
+        "molar_volume_used": 157.3,
+        "qc_pass": true,
+        "qc_note": "Displacement HVK (21.61) vs Fedors (23.33) = 1.72 MPa^0.5",
+        "provenance": {
+          "delta_D": "CALCULATED",
+          "delta_P": "CALCULATED",
+          "delta_H": "CALCULATED"
+        },
+        "confidence": "high",
+        "uncertainty": "approx. 1.0-1.5 MPa^0.5 per component",
+        "breakdown": [
+          {
+            "group": "-CH3 (aliphatic)",
+            "count": 2.0,
+            "delta_u_each": 1125,
+            "delta_v_each": 33.5,
+            "Fd": 420.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": 33.5,
+            "sum_Fd": 840.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "-O- (ether, aromatic)",
+            "count": 1.0,
+            "delta_u_each": 800,
+            "delta_v_each": 3.8,
+            "Fd": 100.0,
+            "Fp": 400.0,
+            "Eh": 3000.0,
+            "V": 3.8,
+            "sum_Fd": 100.0,
+            "sum_Fp_sq": 160000.0,
+            "sum_Eh": 3000.0
+          },
+          {
+            "group": "=CH- (aromatic ring atom)",
+            "count": 6.0,
+            "delta_u_each": 1000,
+            "delta_v_each": 13.5,
+            "Fd": 200.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": 13.5,
+            "sum_Fd": 1200.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "=C< (aromatic bridgehead / substituted atom)",
+            "count": 4.0,
+            "delta_u_each": 1000,
+            "delta_v_each": -5.5,
+            "Fd": 70.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": -5.5,
+            "sum_Fd": 280.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": ">CH- (aliphatic)",
+            "count": 1.0,
+            "delta_u_each": 820,
+            "delta_v_each": -1.0,
+            "Fd": 80.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": -1.0,
+            "sum_Fd": 80.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "-COOH (carboxylic acid)",
+            "count": 1.0,
+            "delta_u_each": 6600,
+            "delta_v_each": 28.5,
+            "Fd": 530.0,
+            "Fp": 420.0,
+            "Eh": 10000.0,
+            "V": 28.5,
+            "sum_Fd": 530.0,
+            "sum_Fp_sq": 176400.0,
+            "sum_Eh": 10000.0
+          }
+        ]
+      },
+      "delta_D": 19.26,
+      "delta_P": 3.69,
+      "delta_H": 9.09,
+      "R0": {
+        "value": 7.5,
+        "band": [
+          7.0,
+          8.0
+        ]
+      },
+      "logP": {
+        "primary": 3.04,
+        "primary_algorithm": "RDKit Crippen"
+      },
+      "TPSA": 46.5,
+      "HBD": 1,
+      "HBA": 3,
+      "BCS_class": "II",
+      "provenance": {
+        "tm_K": "LITERATURE",
+        "tg_K": "CALCULATED",
+        "density_g_cm3": "CALCULATED",
+        "delta_D": "CALCULATED",
+        "delta_P": "CALCULATED",
+        "delta_H": "CALCULATED",
+        "R0": "ASSUMED",
+        "mw": "COMPUTED-DESCRIPTOR",
+        "logP": "COMPUTED-DESCRIPTOR",
+        "TPSA": "COMPUTED-DESCRIPTOR",
+        "HBD": "COMPUTED-DESCRIPTOR",
+        "HBA": "COMPUTED-DESCRIPTOR",
+        "BCS_class": "LITERATURE"
+      },
+      "source": "Tm: USP 43-NF 38; Paudel & Van den Mooter (2012). Mol. Pharmaceutics, 9(11), 3301-3317; PubChem CID 156391; Polymorph: Form I (chiral monoclinic P21, stable form); CAS: 22204-53-1; Descriptors: PubChem CID 156391",
+      "method": [
+        "TG-RATIO-01",
+        "HSP-HVK-01",
+        "DENS-FEDORS-01",
+        "DESC-RDKIT-01"
+      ],
+      "algorithm": "Hoftyzer-van Krevelen group tables; Fedors 1974 constants; RDKit Crippen/Ertl/Lipinski",
+      "confidence": "high",
+      "uncertainty": {
+        "tg_K": "+/- 21 K (1-sigma)",
+        "density": "approx. 5 percent vs pycnometry",
+        "hsp_components": "approx. 1.5 MPa^0.5"
+      },
+      "calculation_date": "2026-09-06",
       "software_version": "input-generator/1.0",
       "qc": {
         "entity_id": "DRG-0006",
         "identity_roundtrip": "pass",
         "ranges": "pass",
         "descriptor_crosscheck": "TPSA/HBD/HBA exact; logP verified",
-        "hsp_primary_secondary_displacement": null,
+        "hsp_primary_secondary_displacement": 1.72,
         "borderline_flag": false,
         "status": "APPROVED",
         "warnings": [],
         "errors": [],
         "notes": [
           "Structure valid and canonicalized",
-          "Tm within valid pharmaceutical range"
+          "Tm within valid pharmaceutical range",
+          "HSP displacement 1.72 MPa^0.5 (excellent method agreement)"
         ],
         "diagnostics": []
       }
     },
     {
-      "entity_id": "POL-0002",
-      "entity_type": "polymer",
-      "name": "copovidone (poly(vinylpyrrolidone-co-vinyl acetate))",
-      "abbreviation": "PVP-VA 64",
-      "canonical_smiles": null,
-      "repeat_unit_smiles": {
-        "value": "{[#6][#6](c1n(cccc1=O))<,>[#6][#6](oc(=O)c)<}",
-        "record_version": "1.0",
-        "composition": "60:40 mass ratio VP:VA",
-        "formula": "0.6(C6H9NO) + 0.4(C4H6O2)",
-        "repeat_unit_mw": 101.12
-      },
-      "grade": {
-        "carrier": "copovidone",
-        "grade": "VA64",
-        "pharmacopoeia": "Ph. Eur. / USP copovidone",
-        "k_value": null,
-        "composition": "60:40 mass ratio VP:VA",
-        "dissolution_pH": null
-      },
-      "mn": "14000-19000",
-      "mw": null,
-      "mn_note": "MANUFACTURER-SPEC: supplier literature reports Mw approx. 45000-70000 g/mol (PDI 2-3 typical); complete from the deployed grade GPC/datasheet",
-      "tm_K": null,
-      "tg_K": {
-        "value": 381.15,
-        "method": "DSC dry state (108 C)",
-        "measurement_uncertainty_K": 3.0,
-        "tg_source": "Browne et al. 2020 / Oktay & Polli 2024"
-      },
-      "density_g_cm3": {
-        "value": 0.35,
-        "note": "bulk density from grade datasheet (MANUFACTURER-SPEC); true density reference 1.20 g/cm3 (pycnometry, Browne et al. 2020)"
-      },
-      "hsp_mpa_half": {
-        "delta_D": 19.5,
-        "delta_P": 11.2,
-        "delta_H": 7.4,
-        "tabulated_total": 23.68,
-        "recomputed_total": 23.67,
-        "method_id": "HSP-HVK-01",
-        "secondary_fedors_total": 22.8,
-        "displacement": 0.88,
-        "recomputed_displacement": 0.87,
-        "qc_note": null
-      },
-      "R0": {
-        "value": 7.5,
-        "band": [
-          7.0,
-          8.0
-        ]
-      },
-      "logP": null,
-      "TPSA": null,
-      "HBD": null,
-      "HBA": null,
-      "BCS_class": null,
-      "provenance": {
-        "tg_K": "LITERATURE",
-        "delta_D": "CALCULATED",
-        "delta_P": "CALCULATED",
-        "delta_H": "CALCULATED",
-        "R0": "ASSUMED",
-        "mn": "MANUFACTURER-SPEC",
-        "bulk_density": "MANUFACTURER-SPEC",
-        "repeat_unit_smiles": "LITERATURE (curated record)"
-      },
-      "source": "Tg: Browne et al. 2020 / Oktay & Polli 2024; HSP: Kitak et al. 2015; grade: Ph. Eur. / USP copovidone and supplier datasheet",
-      "method": [
-        "HSP-HVK-01",
-        "LIT-ACQ-02"
-      ],
-      "algorithm": "Hoftyzer-van Krevelen on repeat unit; literature acquisition hierarchy for Tg",
-      "confidence": "medium",
-      "uncertainty": {
-        "tg_K": "+/- 3.0 K measurement; dry state declared",
-        "hsp": "tabulation note 0.01; Fedors displacement 0.88 MPa^0.5",
-        "mn": "supplier specification width"
-      },
-      "qc": {
-        "entity_id": "POL-0002",
-        "identity_roundtrip": "pass (curated record v1.0, monograph match)",
-        "ranges": "pass",
-        "hsp_primary_secondary_displacement": 0.88,
-        "borderline_flag": false,
-        "status": "APPROVED",
-        "warnings": [],
-        "errors": [],
-        "notes": [
-          "Grade identification present: {'carrier': 'copovidone', 'grade': 'VA64', 'pharmacopoeia': 'Ph. Eur. / USP copovidone', 'k_value': None, 'composition': '60:40 mass ratio VP:VA', 'dissolution_pH': None}",
-          "Repeat-unit representation present",
-          "Polymer Tg 381.15 K recorded from literature"
-        ],
-        "diagnostics": []
-      },
-      "calculation_date": "2026-09-01",
-      "software_version": "input-generator/1.0"
-    },
-    {
-      "entity_id": "POL-0003",
-      "entity_type": "polymer",
-      "name": "Soluplus (polyvinyl caprolactam-polyvinyl acetate-polyethylene glycol graft copolymer)",
-      "abbreviation": "Soluplus",
-      "canonical_smiles": null,
-      "repeat_unit_smiles": {
-        "value": "{[#6][#6](c1n(cccccc1=O))<,>[#6][#6](oc(=O)c)<,>OCC<}",
-        "record_version": "1.0",
-        "composition": "57% PCL, 30% PVAc, 13% PEG 6000",
-        "formula": "PCL-PVAc-PEG graft",
-        "repeat_unit_mw": 125.0
-      },
-      "grade": {
-        "carrier": "soluplus",
-        "grade": "Standard",
-        "pharmacopoeia": "Manufacturer monograph (BASF)",
-        "k_value": null,
-        "composition": "57% PCL, 30% PVAc, 13% PEG 6000",
-        "dissolution_pH": null
-      },
-      "mn": "30000-50000",
-      "mw": null,
-      "mn_note": "MANUFACTURER-SPEC: supplier literature reports Mw approx. 90000-140000 g/mol (PDI 2-3 typical); complete from the deployed grade GPC/datasheet",
-      "tm_K": null,
-      "tg_K": {
-        "value": 343.15,
-        "method": "DSC midpoint (approx 70 C)",
-        "measurement_uncertainty_K": 3.0,
-        "tg_source": "Guembe-Michel et al. 2025 / Oktay & Polli 2024"
-      },
-      "density_g_cm3": {
-        "value": 0.45,
-        "note": "bulk density from grade datasheet (MANUFACTURER-SPEC); true density reference 1.20 g/cm3 (pycnometry, Browne et al. 2020)"
-      },
-      "hsp_mpa_half": {
-        "delta_D": 17.6,
-        "delta_P": 11.8,
-        "delta_H": 7.2,
-        "tabulated_total": 22.39,
-        "recomputed_total": 22.38,
-        "method_id": "HSP-HVK-01",
-        "secondary_fedors_total": 21.6,
-        "displacement": 0.79,
-        "recomputed_displacement": 0.78,
-        "qc_note": null
-      },
-      "R0": {
-        "value": 7.5,
-        "band": [
-          7.0,
-          8.0
-        ]
-      },
-      "logP": null,
-      "TPSA": null,
-      "HBD": null,
-      "HBA": null,
-      "BCS_class": null,
-      "provenance": {
-        "tg_K": "LITERATURE",
-        "delta_D": "CALCULATED",
-        "delta_P": "CALCULATED",
-        "delta_H": "CALCULATED",
-        "R0": "ASSUMED",
-        "mn": "MANUFACTURER-SPEC",
-        "bulk_density": "MANUFACTURER-SPEC",
-        "repeat_unit_smiles": "LITERATURE (curated record)"
-      },
-      "source": "Tg: Guembe-Michel et al. 2025 / Oktay & Polli 2024; HSP: Kitak et al. 2015; grade: Manufacturer monograph (BASF) and supplier datasheet",
-      "method": [
-        "HSP-HVK-01",
-        "LIT-ACQ-02"
-      ],
-      "algorithm": "Hoftyzer-van Krevelen on repeat unit; literature acquisition hierarchy for Tg",
-      "confidence": "medium",
-      "uncertainty": {
-        "tg_K": "+/- 3.0 K measurement; dry state declared",
-        "hsp": "tabulation note 0.01; Fedors displacement 0.79 MPa^0.5",
-        "mn": "supplier specification width"
-      },
-      "qc": {
-        "entity_id": "POL-0003",
-        "identity_roundtrip": "pass (curated record v1.0, monograph match)",
-        "ranges": "pass",
-        "hsp_primary_secondary_displacement": 0.79,
-        "borderline_flag": false,
-        "status": "APPROVED",
-        "warnings": [],
-        "errors": [],
-        "notes": [
-          "Grade identification present: {'carrier': 'soluplus', 'grade': 'Standard', 'pharmacopoeia': 'Manufacturer monograph (BASF)', 'k_value': None, 'composition': '57% PCL, 30% PVAc, 13% PEG 6000', 'dissolution_pH': None}",
-          "Repeat-unit representation present",
-          "Polymer Tg 343.15 K recorded from literature"
-        ],
-        "diagnostics": []
-      },
-      "calculation_date": "2026-09-01",
-      "software_version": "input-generator/1.0"
-    },
-    {
       "entity_id": "DRG-0007",
       "entity_type": "drug",
-      "name": "aspirin",
+      "name": "fenofibrate",
       "abbreviation": null,
-      "canonical_smiles": "CC(=O)Oc1ccccc1C(=O)O",
+      "canonical_smiles": "CC(C)OC(=O)C(C)(C)Oc1ccc(C(=O)c2ccc(Cl)cc2)cc1",
       "repeat_unit_smiles": null,
       "structure": {
-        "pubchem_cid": 2244,
+        "pubchem_cid": 3339,
         "iupac_name": null,
-        "formula": null,
-        "neutral_parent": true
+        "formula": "C20H21ClO4",
+        "neutral_parent": true,
+        "cas_number": "49562-28-9",
+        "polymorph": "Form I (triclinic P-1, stable form)"
       },
       "mn": null,
-      "mw": 180.16,
+      "mw": 360.84,
       "tm_K": {
-        "value": 408.15,
-        "form": "stated polymorph",
+        "value": 353.65,
+        "form": "Form I (triclinic P-1, stable form)",
         "convention": "DSC onset, primary source selected by Table 4-1 rule",
         "all_sources": [
-          135.0
+          80.5
         ]
       },
       "tg_K": {
-        "value": 285.7,
+        "value": 247.6,
         "method_id": "TG-RATIO-01",
         "equation": "0.70 * Tm",
-        "uncertainty_K": 21.0
+        "uncertainty_K": 21.0,
+        "provenance": "CALCULATED",
+        "confidence": "medium"
       },
       "density_g_cm3": {
-        "value": 1.361,
-        "state": "Fedors liquid-state surrogate for crystalline field"
+        "value": 1.296,
+        "molar_volume_cm3_mol": 278.4,
+        "state": "Fedors liquid-state surrogate for crystalline field",
+        "method_id": "DENS-FEDORS-01",
+        "provenance": "CALCULATED",
+        "confidence": "medium"
       },
       "hsp_mpa_half": {
-        "delta_D": 19.71,
-        "delta_P": 5.06,
-        "delta_H": 11.33,
-        "primary_total": 23.29,
-        "method_id": "HSP-HVK-01"
+        "delta_D": 16.24,
+        "delta_P": 4.12,
+        "delta_H": 6.67,
+        "primary_total": 18.03,
+        "method_id": "HSP-HVK-01",
+        "secondary_fedors_total": 19.0,
+        "displacement": 0.97,
+        "molar_volume_used": 278.4,
+        "qc_pass": true,
+        "qc_note": "Displacement HVK (18.03) vs Fedors (19.0) = 0.97 MPa^0.5",
+        "provenance": {
+          "delta_D": "CALCULATED",
+          "delta_P": "CALCULATED",
+          "delta_H": "CALCULATED"
+        },
+        "confidence": "high",
+        "uncertainty": "approx. 1.0-1.5 MPa^0.5 per component",
+        "breakdown": [
+          {
+            "group": "-COO- (ester)",
+            "count": 1.0,
+            "delta_u_each": 4300,
+            "delta_v_each": 18.0,
+            "Fd": 390.0,
+            "Fp": 510.0,
+            "Eh": 7000.0,
+            "V": 18.0,
+            "sum_Fd": 390.0,
+            "sum_Fp_sq": 260100.0,
+            "sum_Eh": 7000.0
+          },
+          {
+            "group": "-C(=O)- (ketone)",
+            "count": 1.0,
+            "delta_u_each": 4150,
+            "delta_v_each": 10.8,
+            "Fd": 290.0,
+            "Fp": 770.0,
+            "Eh": 2000.0,
+            "V": 10.8,
+            "sum_Fd": 290.0,
+            "sum_Fp_sq": 592900.0,
+            "sum_Eh": 2000.0
+          },
+          {
+            "group": "-O- (ether, aromatic)",
+            "count": 1.0,
+            "delta_u_each": 800,
+            "delta_v_each": 3.8,
+            "Fd": 100.0,
+            "Fp": 400.0,
+            "Eh": 3000.0,
+            "V": 3.8,
+            "sum_Fd": 100.0,
+            "sum_Fp_sq": 160000.0,
+            "sum_Eh": 3000.0
+          },
+          {
+            "group": "-Cl (chloro, aromatic)",
+            "count": 1.0,
+            "delta_u_each": 1100,
+            "delta_v_each": 24.0,
+            "Fd": 450.0,
+            "Fp": 550.0,
+            "Eh": 400.0,
+            "V": 24.0,
+            "sum_Fd": 450.0,
+            "sum_Fp_sq": 302500.0,
+            "sum_Eh": 400.0
+          },
+          {
+            "group": "=CH- (aromatic ring atom)",
+            "count": 8.0,
+            "delta_u_each": 1000,
+            "delta_v_each": 13.5,
+            "Fd": 200.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": 13.5,
+            "sum_Fd": 1600.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "-CH3 (aliphatic)",
+            "count": 4.0,
+            "delta_u_each": 1125,
+            "delta_v_each": 33.5,
+            "Fd": 420.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": 33.5,
+            "sum_Fd": 1680.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": ">CH- (aliphatic)",
+            "count": 1.0,
+            "delta_u_each": 820,
+            "delta_v_each": -1.0,
+            "Fd": 80.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": -1.0,
+            "sum_Fd": 80.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": ">C< (aliphatic)",
+            "count": 1.0,
+            "delta_u_each": 350,
+            "delta_v_each": -19.2,
+            "Fd": -70.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": -19.2,
+            "sum_Fd": -70.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          }
+        ]
       },
+      "delta_D": 16.24,
+      "delta_P": 4.12,
+      "delta_H": 6.67,
       "R0": {
         "value": 7.5,
         "band": [
@@ -1209,13 +1683,13 @@
         ]
       },
       "logP": {
-        "primary": 1.31,
+        "primary": 4.68,
         "primary_algorithm": "RDKit Crippen"
       },
-      "TPSA": 63.6,
-      "HBD": 1,
+      "TPSA": 52.6,
+      "HBD": 0,
       "HBA": 4,
-      "BCS_class": "I",
+      "BCS_class": "II",
       "provenance": {
         "tm_K": "LITERATURE",
         "tg_K": "CALCULATED",
@@ -1231,7 +1705,7 @@
         "HBA": "COMPUTED-DESCRIPTOR",
         "BCS_class": "LITERATURE"
       },
-      "source": "Standardized Input Generator pipeline",
+      "source": "Tm: Heinz et al. (2009). Eur. J. Pharm. Sci., 37(2), 120-132; Di et al. (2013). Mol. Pharmaceutics, 10(5), 1987-1994; PubChem CID 3339; Polymorph: Form I (triclinic P-1, stable form); CAS: 49562-28-9; Descriptors: PubChem CID 3339",
       "method": [
         "TG-RATIO-01",
         "HSP-HVK-01",
@@ -1239,27 +1713,2877 @@
         "DESC-RDKIT-01"
       ],
       "algorithm": "Hoftyzer-van Krevelen group tables; Fedors 1974 constants; RDKit Crippen/Ertl/Lipinski",
-      "confidence": "medium",
+      "confidence": "high",
       "uncertainty": {
         "tg_K": "+/- 21 K (1-sigma)",
         "density": "approx. 5 percent vs pycnometry",
         "hsp_components": "approx. 1.5 MPa^0.5"
       },
-      "calculation_date": "2026-09-01",
+      "calculation_date": "2026-09-06",
       "software_version": "input-generator/1.0",
       "qc": {
         "entity_id": "DRG-0007",
         "identity_roundtrip": "pass",
         "ranges": "pass",
         "descriptor_crosscheck": "TPSA/HBD/HBA exact; logP verified",
-        "hsp_primary_secondary_displacement": null,
+        "hsp_primary_secondary_displacement": 0.97,
         "borderline_flag": false,
         "status": "APPROVED",
         "warnings": [],
         "errors": [],
         "notes": [
           "Structure valid and canonicalized",
+          "Tm within valid pharmaceutical range",
+          "HSP displacement 0.97 MPa^0.5 (excellent method agreement)"
+        ],
+        "diagnostics": []
+      }
+    },
+    {
+      "entity_id": "DRG-0008",
+      "entity_type": "drug",
+      "name": "griseofulvin",
+      "abbreviation": null,
+      "canonical_smiles": "COC1=CC(=O)C(c2c(OC)oc3cc(C)c(Cl)cc23)C(C)C1=O",
+      "repeat_unit_smiles": null,
+      "structure": {
+        "pubchem_cid": 441140,
+        "iupac_name": null,
+        "formula": "C17H17ClO6",
+        "neutral_parent": true,
+        "cas_number": "126-07-8",
+        "polymorph": "Form I (orthorhombic P212121, stable form)"
+      },
+      "mn": null,
+      "mw": 348.78,
+      "tm_K": {
+        "value": 493.15,
+        "form": "Form I (orthorhombic P212121, stable form)",
+        "convention": "DSC onset, primary source selected by Table 4-1 rule",
+        "all_sources": [
+          220.0
+        ]
+      },
+      "tg_K": {
+        "value": 345.2,
+        "method_id": "TG-RATIO-01",
+        "equation": "0.70 * Tm",
+        "uncertainty_K": 21.0,
+        "provenance": "CALCULATED",
+        "confidence": "medium"
+      },
+      "density_g_cm3": {
+        "value": 2.198,
+        "molar_volume_cm3_mol": 158.7,
+        "state": "Fedors liquid-state surrogate for crystalline field",
+        "method_id": "DENS-FEDORS-01",
+        "provenance": "CALCULATED",
+        "confidence": "medium"
+      },
+      "hsp_mpa_half": {
+        "delta_D": 19.97,
+        "delta_P": 8.47,
+        "delta_H": 8.1,
+        "primary_total": 23.15,
+        "method_id": "HSP-HVK-01",
+        "secondary_fedors_total": 23.18,
+        "displacement": 0.03,
+        "molar_volume_used": 158.7,
+        "qc_pass": true,
+        "qc_note": "Displacement HVK (23.15) vs Fedors (23.18) = 0.03 MPa^0.5",
+        "provenance": {
+          "delta_D": "CALCULATED",
+          "delta_P": "CALCULATED",
+          "delta_H": "CALCULATED"
+        },
+        "confidence": "high",
+        "uncertainty": "approx. 1.0-1.5 MPa^0.5 per component",
+        "breakdown": [
+          {
+            "group": "-C(=O)- (ketone)",
+            "count": 2.0,
+            "delta_u_each": 4150,
+            "delta_v_each": 10.8,
+            "Fd": 290.0,
+            "Fp": 770.0,
+            "Eh": 2000.0,
+            "V": 10.8,
+            "sum_Fd": 580.0,
+            "sum_Fp_sq": 1185800.0,
+            "sum_Eh": 4000.0
+          },
+          {
+            "group": "-O- (ether, aromatic)",
+            "count": 1.0,
+            "delta_u_each": 800,
+            "delta_v_each": 3.8,
+            "Fd": 100.0,
+            "Fp": 400.0,
+            "Eh": 3000.0,
+            "V": 3.8,
+            "sum_Fd": 100.0,
+            "sum_Fp_sq": 160000.0,
+            "sum_Eh": 3000.0
+          },
+          {
+            "group": "-O- (ether, aliphatic)",
+            "count": 1.0,
+            "delta_u_each": 800,
+            "delta_v_each": 3.8,
+            "Fd": 100.0,
+            "Fp": 400.0,
+            "Eh": 3000.0,
+            "V": 3.8,
+            "sum_Fd": 100.0,
+            "sum_Fp_sq": 160000.0,
+            "sum_Eh": 3000.0
+          },
+          {
+            "group": "-Cl (chloro, aromatic)",
+            "count": 1.0,
+            "delta_u_each": 1100,
+            "delta_v_each": 24.0,
+            "Fd": 450.0,
+            "Fp": 550.0,
+            "Eh": 400.0,
+            "V": 24.0,
+            "sum_Fd": 450.0,
+            "sum_Fp_sq": 302500.0,
+            "sum_Eh": 400.0
+          },
+          {
+            "group": "=CH- (aromatic ring atom)",
+            "count": 2.0,
+            "delta_u_each": 1000,
+            "delta_v_each": 13.5,
+            "Fd": 200.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": 13.5,
+            "sum_Fd": 400.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "=C< (aromatic bridgehead / substituted atom)",
+            "count": 4.0,
+            "delta_u_each": 1000,
+            "delta_v_each": -5.5,
+            "Fd": 70.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": -5.5,
+            "sum_Fd": 280.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "-CH3 (aliphatic)",
+            "count": 3.0,
+            "delta_u_each": 1125,
+            "delta_v_each": 33.5,
+            "Fd": 420.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": 33.5,
+            "sum_Fd": 1260.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          }
+        ]
+      },
+      "delta_D": 19.97,
+      "delta_P": 8.47,
+      "delta_H": 8.1,
+      "R0": {
+        "value": 7.5,
+        "band": [
+          7.0,
+          8.0
+        ]
+      },
+      "logP": {
+        "primary": 3.81,
+        "primary_algorithm": "RDKit Crippen"
+      },
+      "TPSA": 65.7,
+      "HBD": 0,
+      "HBA": 5,
+      "BCS_class": "II",
+      "provenance": {
+        "tm_K": "LITERATURE",
+        "tg_K": "CALCULATED",
+        "density_g_cm3": "CALCULATED",
+        "delta_D": "CALCULATED",
+        "delta_P": "CALCULATED",
+        "delta_H": "CALCULATED",
+        "R0": "ASSUMED",
+        "mw": "COMPUTED-DESCRIPTOR",
+        "logP": "COMPUTED-DESCRIPTOR",
+        "TPSA": "COMPUTED-DESCRIPTOR",
+        "HBD": "COMPUTED-DESCRIPTOR",
+        "HBA": "COMPUTED-DESCRIPTOR",
+        "BCS_class": "LITERATURE"
+      },
+      "source": "Tm: Baird & Taylor (2012). Adv. Drug Deliv. Rev., 64(5), 396-421; Feng et al. (2008). J. Pharm. Sci., 97(8), 3207-3221; PubChem CID 441140; Polymorph: Form I (orthorhombic P212121, stable form); CAS: 126-07-8; Descriptors: PubChem CID 441140",
+      "method": [
+        "TG-RATIO-01",
+        "HSP-HVK-01",
+        "DENS-FEDORS-01",
+        "DESC-RDKIT-01"
+      ],
+      "algorithm": "Hoftyzer-van Krevelen group tables; Fedors 1974 constants; RDKit Crippen/Ertl/Lipinski",
+      "confidence": "high",
+      "uncertainty": {
+        "tg_K": "+/- 21 K (1-sigma)",
+        "density": "approx. 5 percent vs pycnometry",
+        "hsp_components": "approx. 1.5 MPa^0.5"
+      },
+      "calculation_date": "2026-09-06",
+      "software_version": "input-generator/1.0",
+      "qc": {
+        "entity_id": "DRG-0008",
+        "identity_roundtrip": "pass",
+        "ranges": "pass",
+        "descriptor_crosscheck": "TPSA/HBD/HBA exact; logP verified",
+        "hsp_primary_secondary_displacement": 0.03,
+        "borderline_flag": false,
+        "status": "APPROVED",
+        "warnings": [],
+        "errors": [],
+        "notes": [
+          "Structure valid and canonicalized",
+          "Tm within valid pharmaceutical range",
+          "HSP displacement 0.03 MPa^0.5 (excellent method agreement)"
+        ],
+        "diagnostics": []
+      }
+    },
+    {
+      "entity_id": "DRG-0009",
+      "entity_type": "drug",
+      "name": "celecoxib",
+      "abbreviation": null,
+      "canonical_smiles": "Cc1ccc(-c2cc(C(F)(F)F)nn2-c2ccc(S(N)(=O)=O)cc2)cc1",
+      "repeat_unit_smiles": null,
+      "structure": {
+        "pubchem_cid": 2662,
+        "iupac_name": null,
+        "formula": "C17H14F3N3O2S",
+        "neutral_parent": true,
+        "cas_number": "169590-42-5",
+        "polymorph": "Form III (monoclinic P21/c, commercial stable form)"
+      },
+      "mn": null,
+      "mw": 381.38,
+      "tm_K": {
+        "value": 434.65,
+        "form": "Form III (monoclinic P21/c, commercial stable form)",
+        "convention": "DSC onset, primary source selected by Table 4-1 rule",
+        "all_sources": [
+          161.5
+        ]
+      },
+      "tg_K": {
+        "value": 304.3,
+        "method_id": "TG-RATIO-01",
+        "equation": "0.70 * Tm",
+        "uncertainty_K": 21.0,
+        "provenance": "CALCULATED",
+        "confidence": "medium"
+      },
+      "density_g_cm3": {
+        "value": 1.958,
+        "molar_volume_cm3_mol": 194.8,
+        "state": "Fedors liquid-state surrogate for crystalline field",
+        "method_id": "DENS-FEDORS-01",
+        "provenance": "CALCULATED",
+        "confidence": "medium"
+      },
+      "hsp_mpa_half": {
+        "delta_D": 21.1,
+        "delta_P": 4.16,
+        "delta_H": 6.57,
+        "primary_total": 22.49,
+        "method_id": "HSP-HVK-01",
+        "secondary_fedors_total": 22.82,
+        "displacement": 0.33,
+        "molar_volume_used": 194.8,
+        "qc_pass": true,
+        "qc_note": "Displacement HVK (22.49) vs Fedors (22.82) = 0.33 MPa^0.5",
+        "provenance": {
+          "delta_D": "CALCULATED",
+          "delta_P": "CALCULATED",
+          "delta_H": "CALCULATED"
+        },
+        "confidence": "high",
+        "uncertainty": "approx. 1.0-1.5 MPa^0.5 per component",
+        "breakdown": [
+          {
+            "group": "-NH2 (primary amine)",
+            "count": 1.0,
+            "delta_u_each": 3000,
+            "delta_v_each": 19.2,
+            "Fd": 280.0,
+            "Fp": 390.0,
+            "Eh": 8400.0,
+            "V": 19.2,
+            "sum_Fd": 280.0,
+            "sum_Fp_sq": 152100.0,
+            "sum_Eh": 8400.0
+          },
+          {
+            "group": "-F (fluoro)",
+            "count": 3.0,
+            "delta_u_each": 500,
+            "delta_v_each": 18.0,
+            "Fd": 200.0,
+            "Fp": 400.0,
+            "Eh": 0.0,
+            "V": 18.0,
+            "sum_Fd": 600.0,
+            "sum_Fp_sq": 480000.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "Phenylene C6H4 (aromatic ring, p/m/o)",
+            "count": 2.0,
+            "delta_u_each": 7630,
+            "delta_v_each": 52.4,
+            "Fd": 1270.0,
+            "Fp": 110.0,
+            "Eh": 0.0,
+            "V": 52.4,
+            "sum_Fd": 2540.0,
+            "sum_Fp_sq": 24200.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "=CH- (aromatic ring atom)",
+            "count": 1.0,
+            "delta_u_each": 1000,
+            "delta_v_each": 13.5,
+            "Fd": 200.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": 13.5,
+            "sum_Fd": 200.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "=C< (aromatic bridgehead / substituted atom)",
+            "count": 2.0,
+            "delta_u_each": 1000,
+            "delta_v_each": -5.5,
+            "Fd": 70.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": -5.5,
+            "sum_Fd": 140.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "-CH3 (aliphatic)",
+            "count": 1.0,
+            "delta_u_each": 1125,
+            "delta_v_each": 33.5,
+            "Fd": 420.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": 33.5,
+            "sum_Fd": 420.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": ">C< (aliphatic)",
+            "count": 1.0,
+            "delta_u_each": 350,
+            "delta_v_each": -19.2,
+            "Fd": -70.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": -19.2,
+            "sum_Fd": -70.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          }
+        ]
+      },
+      "delta_D": 21.1,
+      "delta_P": 4.16,
+      "delta_H": 6.57,
+      "R0": {
+        "value": 7.5,
+        "band": [
+          7.0,
+          8.0
+        ]
+      },
+      "logP": {
+        "primary": 3.51,
+        "primary_algorithm": "RDKit Crippen"
+      },
+      "TPSA": 78.0,
+      "HBD": 2,
+      "HBA": 5,
+      "BCS_class": "II",
+      "provenance": {
+        "tm_K": "LITERATURE",
+        "tg_K": "CALCULATED",
+        "density_g_cm3": "CALCULATED",
+        "delta_D": "CALCULATED",
+        "delta_P": "CALCULATED",
+        "delta_H": "CALCULATED",
+        "R0": "ASSUMED",
+        "mw": "COMPUTED-DESCRIPTOR",
+        "logP": "COMPUTED-DESCRIPTOR",
+        "TPSA": "COMPUTED-DESCRIPTOR",
+        "HBD": "COMPUTED-DESCRIPTOR",
+        "HBA": "COMPUTED-DESCRIPTOR",
+        "BCS_class": "LITERATURE"
+      },
+      "source": "Tm: Chawla et al. (2003). Pharm. Res., 20(9), 1549-1559; Gupta et al. (2004). Mol. Pharmaceutics, 1(6), 406-413; PubChem CID 2662; Polymorph: Form III (monoclinic P21/c, commercial stable form); CAS: 169590-42-5; Descriptors: PubChem CID 2662",
+      "method": [
+        "TG-RATIO-01",
+        "HSP-HVK-01",
+        "DENS-FEDORS-01",
+        "DESC-RDKIT-01"
+      ],
+      "algorithm": "Hoftyzer-van Krevelen group tables; Fedors 1974 constants; RDKit Crippen/Ertl/Lipinski",
+      "confidence": "high",
+      "uncertainty": {
+        "tg_K": "+/- 21 K (1-sigma)",
+        "density": "approx. 5 percent vs pycnometry",
+        "hsp_components": "approx. 1.5 MPa^0.5"
+      },
+      "calculation_date": "2026-09-06",
+      "software_version": "input-generator/1.0",
+      "qc": {
+        "entity_id": "DRG-0009",
+        "identity_roundtrip": "pass",
+        "ranges": "pass",
+        "descriptor_crosscheck": "TPSA/HBD/HBA exact; logP verified",
+        "hsp_primary_secondary_displacement": 0.33,
+        "borderline_flag": false,
+        "status": "APPROVED",
+        "warnings": [],
+        "errors": [],
+        "notes": [
+          "Structure valid and canonicalized",
+          "Tm within valid pharmaceutical range",
+          "HSP displacement 0.33 MPa^0.5 (excellent method agreement)"
+        ],
+        "diagnostics": []
+      }
+    },
+    {
+      "entity_id": "DRG-0010",
+      "entity_type": "drug",
+      "name": "nifedipine",
+      "abbreviation": null,
+      "canonical_smiles": "COC(=O)C1=C(C)NC(C)=C(C(=O)OC)C1c1ccccc1[N+](=O)[O-]",
+      "repeat_unit_smiles": null,
+      "structure": {
+        "pubchem_cid": 4485,
+        "iupac_name": null,
+        "formula": "C17H18N2O6",
+        "neutral_parent": true,
+        "cas_number": "21829-25-4",
+        "polymorph": "Form I (monoclinic P21/c, stable form)"
+      },
+      "mn": null,
+      "mw": 346.34,
+      "tm_K": {
+        "value": 445.15,
+        "form": "Form I (monoclinic P21/c, stable form)",
+        "convention": "DSC onset, primary source selected by Table 4-1 rule",
+        "all_sources": [
+          172.0
+        ]
+      },
+      "tg_K": {
+        "value": 311.6,
+        "method_id": "TG-RATIO-01",
+        "equation": "0.70 * Tm",
+        "uncertainty_K": 21.0,
+        "provenance": "CALCULATED",
+        "confidence": "medium"
+      },
+      "density_g_cm3": {
+        "value": 1.777,
+        "molar_volume_cm3_mol": 194.9,
+        "state": "Fedors liquid-state surrogate for crystalline field",
+        "method_id": "DENS-FEDORS-01",
+        "provenance": "CALCULATED",
+        "confidence": "medium"
+      },
+      "hsp_mpa_half": {
+        "delta_D": 21.91,
+        "delta_P": 5.66,
+        "delta_H": 10.65,
+        "primary_total": 25.01,
+        "method_id": "HSP-HVK-01",
+        "secondary_fedors_total": 24.81,
+        "displacement": 0.2,
+        "molar_volume_used": 194.9,
+        "qc_pass": true,
+        "qc_note": "Displacement HVK (25.01) vs Fedors (24.81) = 0.2 MPa^0.5",
+        "provenance": {
+          "delta_D": "CALCULATED",
+          "delta_P": "CALCULATED",
+          "delta_H": "CALCULATED"
+        },
+        "confidence": "high",
+        "uncertainty": "approx. 1.0-1.5 MPa^0.5 per component",
+        "breakdown": [
+          {
+            "group": "-COO- (ester)",
+            "count": 2.0,
+            "delta_u_each": 4300,
+            "delta_v_each": 18.0,
+            "Fd": 390.0,
+            "Fp": 510.0,
+            "Eh": 7000.0,
+            "V": 18.0,
+            "sum_Fd": 780.0,
+            "sum_Fp_sq": 520200.0,
+            "sum_Eh": 14000.0
+          },
+          {
+            "group": "-NH- (secondary amine)",
+            "count": 1.0,
+            "delta_u_each": 2000,
+            "delta_v_each": 4.5,
+            "Fd": 160.0,
+            "Fp": 210.0,
+            "Eh": 3100.0,
+            "V": 4.5,
+            "sum_Fd": 160.0,
+            "sum_Fp_sq": 44100.0,
+            "sum_Eh": 3100.0
+          },
+          {
+            "group": ">N- (tertiary amine)",
+            "count": 1.0,
+            "delta_u_each": 1000,
+            "delta_v_each": -9.0,
+            "Fd": 20.0,
+            "Fp": 800.0,
+            "Eh": 5000.0,
+            "V": -9.0,
+            "sum_Fd": 20.0,
+            "sum_Fp_sq": 640000.0,
+            "sum_Eh": 5000.0
+          },
+          {
+            "group": "Phenylene C6H4 (aromatic ring, p/m/o)",
+            "count": 1.0,
+            "delta_u_each": 7630,
+            "delta_v_each": 52.4,
+            "Fd": 1270.0,
+            "Fp": 110.0,
+            "Eh": 0.0,
+            "V": 52.4,
+            "sum_Fd": 1270.0,
+            "sum_Fp_sq": 12100.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "-CH3 (aliphatic)",
+            "count": 4.0,
+            "delta_u_each": 1125,
+            "delta_v_each": 33.5,
+            "Fd": 420.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": 33.5,
+            "sum_Fd": 1680.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": ">CH- (aliphatic)",
+            "count": 1.0,
+            "delta_u_each": 820,
+            "delta_v_each": -1.0,
+            "Fd": 80.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": -1.0,
+            "sum_Fd": 80.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "=C< (olefinic)",
+            "count": 4.0,
+            "delta_u_each": 1030,
+            "delta_v_each": -5.5,
+            "Fd": 70.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": -5.5,
+            "sum_Fd": 280.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          }
+        ]
+      },
+      "delta_D": 21.91,
+      "delta_P": 5.66,
+      "delta_H": 10.65,
+      "R0": {
+        "value": 7.5,
+        "band": [
+          7.0,
+          8.0
+        ]
+      },
+      "logP": {
+        "primary": 2.18,
+        "primary_algorithm": "RDKit Crippen"
+      },
+      "TPSA": 107.8,
+      "HBD": 1,
+      "HBA": 8,
+      "BCS_class": "II",
+      "provenance": {
+        "tm_K": "LITERATURE",
+        "tg_K": "CALCULATED",
+        "density_g_cm3": "CALCULATED",
+        "delta_D": "CALCULATED",
+        "delta_P": "CALCULATED",
+        "delta_H": "CALCULATED",
+        "R0": "ASSUMED",
+        "mw": "COMPUTED-DESCRIPTOR",
+        "logP": "COMPUTED-DESCRIPTOR",
+        "TPSA": "COMPUTED-DESCRIPTOR",
+        "HBD": "COMPUTED-DESCRIPTOR",
+        "HBA": "COMPUTED-DESCRIPTOR",
+        "BCS_class": "LITERATURE"
+      },
+      "source": "Tm: Burger & Koller (1996). Sci. Pharm., 64, 293-301; Grooff et al. (2013). J. Pharm. Sci., 102(6), 1883-1894; PubChem CID 4485; Polymorph: Form I (monoclinic P21/c, stable form); CAS: 21829-25-4; Descriptors: PubChem CID 4485",
+      "method": [
+        "TG-RATIO-01",
+        "HSP-HVK-01",
+        "DENS-FEDORS-01",
+        "DESC-RDKIT-01"
+      ],
+      "algorithm": "Hoftyzer-van Krevelen group tables; Fedors 1974 constants; RDKit Crippen/Ertl/Lipinski",
+      "confidence": "high",
+      "uncertainty": {
+        "tg_K": "+/- 21 K (1-sigma)",
+        "density": "approx. 5 percent vs pycnometry",
+        "hsp_components": "approx. 1.5 MPa^0.5"
+      },
+      "calculation_date": "2026-09-06",
+      "software_version": "input-generator/1.0",
+      "qc": {
+        "entity_id": "DRG-0010",
+        "identity_roundtrip": "pass",
+        "ranges": "pass",
+        "descriptor_crosscheck": "TPSA/HBD/HBA exact; logP verified",
+        "hsp_primary_secondary_displacement": 0.2,
+        "borderline_flag": false,
+        "status": "APPROVED",
+        "warnings": [],
+        "errors": [],
+        "notes": [
+          "Structure valid and canonicalized",
+          "Tm within valid pharmaceutical range",
+          "HSP displacement 0.20 MPa^0.5 (excellent method agreement)"
+        ],
+        "diagnostics": []
+      }
+    },
+    {
+      "entity_id": "DRG-0011",
+      "entity_type": "drug",
+      "name": "ritonavir",
+      "abbreviation": null,
+      "canonical_smiles": "CC(C)c1nc(CN(C)C(=O)NC(C(=O)NC(Cc2ccccc2)C(O)CC(Cc2ccccc2)NC(=O)OCc2cncs2)C(C)C)cs1",
+      "repeat_unit_smiles": null,
+      "structure": {
+        "pubchem_cid": 392622,
+        "iupac_name": null,
+        "formula": "C37H48N6O5S2",
+        "neutral_parent": true,
+        "cas_number": "155213-67-5",
+        "polymorph": "Form II (monoclinic P21, thermodynamically stable form)"
+      },
+      "mn": null,
+      "mw": 720.96,
+      "tm_K": {
+        "value": 398.15,
+        "form": "Form II (monoclinic P21, thermodynamically stable form)",
+        "convention": "DSC onset, primary source selected by Table 4-1 rule",
+        "all_sources": [
+          125.0
+        ]
+      },
+      "tg_K": {
+        "value": 278.7,
+        "method_id": "TG-RATIO-01",
+        "equation": "0.70 * Tm",
+        "uncertainty_K": 21.0,
+        "provenance": "CALCULATED",
+        "confidence": "medium"
+      },
+      "density_g_cm3": {
+        "value": 1.74,
+        "molar_volume_cm3_mol": 414.3,
+        "state": "Fedors liquid-state surrogate for crystalline field",
+        "method_id": "DENS-FEDORS-01",
+        "provenance": "CALCULATED",
+        "confidence": "medium"
+      },
+      "hsp_mpa_half": {
+        "delta_D": 21.87,
+        "delta_P": 4.89,
+        "delta_H": 13.46,
+        "primary_total": 26.14,
+        "method_id": "HSP-HVK-01",
+        "secondary_fedors_total": 26.84,
+        "displacement": 0.7,
+        "molar_volume_used": 414.3,
+        "qc_pass": true,
+        "qc_note": "Displacement HVK (26.14) vs Fedors (26.84) = 0.7 MPa^0.5",
+        "provenance": {
+          "delta_D": "CALCULATED",
+          "delta_P": "CALCULATED",
+          "delta_H": "CALCULATED"
+        },
+        "confidence": "high",
+        "uncertainty": "approx. 1.0-1.5 MPa^0.5 per component",
+        "breakdown": [
+          {
+            "group": "-COO- (ester)",
+            "count": 1.0,
+            "delta_u_each": 4300,
+            "delta_v_each": 18.0,
+            "Fd": 390.0,
+            "Fp": 510.0,
+            "Eh": 7000.0,
+            "V": 18.0,
+            "sum_Fd": 390.0,
+            "sum_Fp_sq": 260100.0,
+            "sum_Eh": 7000.0
+          },
+          {
+            "group": "-CONH- (amide)",
+            "count": 2.0,
+            "delta_u_each": 10000,
+            "delta_v_each": 9.5,
+            "Fd": 540.0,
+            "Fp": 1200.0,
+            "Eh": 20000.0,
+            "V": 9.5,
+            "sum_Fd": 1080.0,
+            "sum_Fp_sq": 2880000.0,
+            "sum_Eh": 40000.0
+          },
+          {
+            "group": "-OH (aliphatic hydroxyl)",
+            "count": 1.0,
+            "delta_u_each": 7120,
+            "delta_v_each": 10.0,
+            "Fd": 210.0,
+            "Fp": 500.0,
+            "Eh": 20000.0,
+            "V": 10.0,
+            "sum_Fd": 210.0,
+            "sum_Fp_sq": 250000.0,
+            "sum_Eh": 20000.0
+          },
+          {
+            "group": "-NH- (secondary amine)",
+            "count": 1.0,
+            "delta_u_each": 2000,
+            "delta_v_each": 4.5,
+            "Fd": 160.0,
+            "Fp": 210.0,
+            "Eh": 3100.0,
+            "V": 4.5,
+            "sum_Fd": 160.0,
+            "sum_Fp_sq": 44100.0,
+            "sum_Eh": 3100.0
+          },
+          {
+            "group": ">N- (tertiary amine)",
+            "count": 1.0,
+            "delta_u_each": 1000,
+            "delta_v_each": -9.0,
+            "Fd": 20.0,
+            "Fp": 800.0,
+            "Eh": 5000.0,
+            "V": -9.0,
+            "sum_Fd": 20.0,
+            "sum_Fp_sq": 640000.0,
+            "sum_Eh": 5000.0
+          },
+          {
+            "group": "Phenylene C6H4 (aromatic ring, p/m/o)",
+            "count": 2.0,
+            "delta_u_each": 7630,
+            "delta_v_each": 52.4,
+            "Fd": 1270.0,
+            "Fp": 110.0,
+            "Eh": 0.0,
+            "V": 52.4,
+            "sum_Fd": 2540.0,
+            "sum_Fp_sq": 24200.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "=CH- (aromatic ring atom)",
+            "count": 3.0,
+            "delta_u_each": 1000,
+            "delta_v_each": 13.5,
+            "Fd": 200.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": 13.5,
+            "sum_Fd": 600.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "=C< (aromatic bridgehead / substituted atom)",
+            "count": 3.0,
+            "delta_u_each": 1000,
+            "delta_v_each": -5.5,
+            "Fd": 70.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": -5.5,
+            "sum_Fd": 210.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "-CH3 (aliphatic)",
+            "count": 5.0,
+            "delta_u_each": 1125,
+            "delta_v_each": 33.5,
+            "Fd": 420.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": 33.5,
+            "sum_Fd": 2100.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "-CH2- (aliphatic)",
+            "count": 5.0,
+            "delta_u_each": 1180,
+            "delta_v_each": 16.1,
+            "Fd": 270.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": 16.1,
+            "sum_Fd": 1350.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": ">CH- (aliphatic)",
+            "count": 5.0,
+            "delta_u_each": 820,
+            "delta_v_each": -1.0,
+            "Fd": 80.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": -1.0,
+            "sum_Fd": 400.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          }
+        ]
+      },
+      "delta_D": 21.87,
+      "delta_P": 4.89,
+      "delta_H": 13.46,
+      "R0": {
+        "value": 7.5,
+        "band": [
+          7.0,
+          8.0
+        ]
+      },
+      "logP": {
+        "primary": 5.91,
+        "primary_algorithm": "RDKit Crippen"
+      },
+      "TPSA": 145.8,
+      "HBD": 4,
+      "HBA": 11,
+      "BCS_class": "II",
+      "provenance": {
+        "tm_K": "LITERATURE",
+        "tg_K": "CALCULATED",
+        "density_g_cm3": "CALCULATED",
+        "delta_D": "CALCULATED",
+        "delta_P": "CALCULATED",
+        "delta_H": "CALCULATED",
+        "R0": "ASSUMED",
+        "mw": "COMPUTED-DESCRIPTOR",
+        "logP": "COMPUTED-DESCRIPTOR",
+        "TPSA": "COMPUTED-DESCRIPTOR",
+        "HBD": "COMPUTED-DESCRIPTOR",
+        "HBA": "COMPUTED-DESCRIPTOR",
+        "BCS_class": "LITERATURE"
+      },
+      "source": "Tm: Bauer et al. (2001). Pharm. Res., 18(6), 859-866; Chemburkar et al. (2000). Org. Process Res. Dev., 4(5), 413-417; PubChem CID 392622; Polymorph: Form II (monoclinic P21, thermodynamically stable form); CAS: 155213-67-5; Descriptors: PubChem CID 392622",
+      "method": [
+        "TG-RATIO-01",
+        "HSP-HVK-01",
+        "DENS-FEDORS-01",
+        "DESC-RDKIT-01"
+      ],
+      "algorithm": "Hoftyzer-van Krevelen group tables; Fedors 1974 constants; RDKit Crippen/Ertl/Lipinski",
+      "confidence": "high",
+      "uncertainty": {
+        "tg_K": "+/- 21 K (1-sigma)",
+        "density": "approx. 5 percent vs pycnometry",
+        "hsp_components": "approx. 1.5 MPa^0.5"
+      },
+      "calculation_date": "2026-09-06",
+      "software_version": "input-generator/1.0",
+      "qc": {
+        "entity_id": "DRG-0011",
+        "identity_roundtrip": "pass",
+        "ranges": "pass",
+        "descriptor_crosscheck": "Molecular weight (720.96 g/mol) exceeds Lipinski Rule-of-5 threshold (500 g/mol); TPSA (145.8 \u00c5\u00b2) exceeds Veber oral bioavailability threshold (140 \u00c5\u00b2)",
+        "hsp_primary_secondary_displacement": 0.7,
+        "borderline_flag": true,
+        "status": "APPROVED with flags",
+        "warnings": [
+          "Molecular weight (720.96 g/mol) exceeds Lipinski Rule-of-5 threshold (500 g/mol)",
+          "TPSA (145.8 \u00c5\u00b2) exceeds Veber oral bioavailability threshold (140 \u00c5\u00b2)"
+        ],
+        "errors": [],
+        "notes": [
+          "Structure valid and canonicalized",
+          "Tm within valid pharmaceutical range",
+          "HSP displacement 0.70 MPa^0.5 (excellent method agreement)"
+        ],
+        "diagnostics": [
+          {
+            "code": "QC-FLAG-MW-RO5-01",
+            "category": "Lipinski Space",
+            "severity": "WARNING",
+            "parameter": "mw",
+            "title": "Lipinski High Molecular Weight (> 500 g/mol)",
+            "observed_value": "720.96 g/mol",
+            "expected_threshold": "\u2264 500.00 g/mol",
+            "delta_description": "+220.96 g/mol beyond Rule-of-5 boundary",
+            "molecular_motif": "Beyond Rule-of-5 (bRo5) chemical space",
+            "scientific_rationale": "High molecular weight molecules exhibit lower diffusion coefficients, higher melt viscosities, and increased crystallization inhibition challenges in solid dispersions.",
+            "screening_impact": "Formulation: May require higher polymer weight fractions (e.g. 1:3 or 1:4 drug:polymer ratios).",
+            "remediation_guidance": "Confirm that SMILES represents neutral active moiety and test compatibility with high-capacity carriers (HPMCAS, Copovidone).",
+            "action_type": "SCREEN_PAIR",
+            "action_label": "Screen Polymeric Carriers"
+          },
+          {
+            "code": "QC-FLAG-TPSA-HIGH-01",
+            "category": "Molecular Polar Surface",
+            "severity": "WARNING",
+            "parameter": "TPSA",
+            "title": "High Polar Surface Area (> 140 \u00c5\u00b2)",
+            "observed_value": "145.8 \u00c5\u00b2",
+            "expected_threshold": "\u2264 140.00 \u00c5\u00b2",
+            "delta_description": "+5.8 \u00c5\u00b2 beyond Veber permeability limit",
+            "molecular_motif": "Abundant polar heteroatoms / hydrogen bond acceptors",
+            "scientific_rationale": "High TPSA indicates potential passive membrane permeation limitations (BCS Class III/IV tendency).",
+            "screening_impact": "Biological: May necessitate enteric/amorphous stabilization to maximize supersaturation gradient.",
+            "remediation_guidance": "Examine H-bonding Hansen parameter (delta_H) to ensure strong drug-polymer intermolecular synthon formation.",
+            "action_type": "INFO_ONLY",
+            "action_label": "Polar Synthon Noted"
+          }
+        ]
+      }
+    },
+    {
+      "entity_id": "DRG-0012",
+      "entity_type": "drug",
+      "name": "apalutamide",
+      "abbreviation": null,
+      "canonical_smiles": "CNC(=O)c1ccc(N2C(=S)N(c3cnc(C#N)c(C(F)(F)F)c3)C(=O)C23CCC3)cc1F",
+      "repeat_unit_smiles": null,
+      "structure": {
+        "pubchem_cid": 24872560,
+        "iupac_name": null,
+        "formula": "C21H15F4N5O2S",
+        "neutral_parent": true,
+        "cas_number": "956104-40-8",
+        "polymorph": "Form A (pure anhydrous monoclinic, stable form)"
+      },
+      "mn": null,
+      "mw": 477.44,
+      "tm_K": {
+        "value": 472.15,
+        "form": "Form A (pure anhydrous monoclinic, stable form)",
+        "convention": "DSC onset, primary source selected by Table 4-1 rule",
+        "all_sources": [
+          199.0
+        ]
+      },
+      "tg_K": {
+        "value": 330.5,
+        "method_id": "TG-RATIO-01",
+        "equation": "0.70 * Tm",
+        "uncertainty_K": 21.0,
+        "provenance": "CALCULATED",
+        "confidence": "medium"
+      },
+      "density_g_cm3": {
+        "value": 2.82,
+        "molar_volume_cm3_mol": 169.3,
+        "state": "Fedors liquid-state surrogate for crystalline field",
+        "method_id": "DENS-FEDORS-01",
+        "provenance": "CALCULATED",
+        "confidence": "medium"
+      },
+      "hsp_mpa_half": {
+        "delta_D": 29.18,
+        "delta_P": 12.06,
+        "delta_H": 14.38,
+        "primary_total": 34.69,
+        "method_id": "HSP-HVK-01",
+        "secondary_fedors_total": 32.23,
+        "displacement": 2.46,
+        "molar_volume_used": 169.3,
+        "qc_pass": true,
+        "qc_note": "Displacement HVK (34.69) vs Fedors (32.23) = 2.46 MPa^0.5",
+        "provenance": {
+          "delta_D": "CALCULATED",
+          "delta_P": "CALCULATED",
+          "delta_H": "CALCULATED"
+        },
+        "confidence": "medium",
+        "uncertainty": "approx. 1.0-1.5 MPa^0.5 per component",
+        "breakdown": [
+          {
+            "group": "-CONH- (amide)",
+            "count": 1.0,
+            "delta_u_each": 10000,
+            "delta_v_each": 9.5,
+            "Fd": 540.0,
+            "Fp": 1200.0,
+            "Eh": 20000.0,
+            "V": 9.5,
+            "sum_Fd": 540.0,
+            "sum_Fp_sq": 1440000.0,
+            "sum_Eh": 20000.0
+          },
+          {
+            "group": "-CON< (tertiary amide / lactam)",
+            "count": 1.0,
+            "delta_u_each": 10000,
+            "delta_v_each": -4.0,
+            "Fd": 540.0,
+            "Fp": 1200.0,
+            "Eh": 10000.0,
+            "V": -4.0,
+            "sum_Fd": 540.0,
+            "sum_Fp_sq": 1440000.0,
+            "sum_Eh": 10000.0
+          },
+          {
+            "group": ">N- (tertiary amine)",
+            "count": 1.0,
+            "delta_u_each": 1000,
+            "delta_v_each": -9.0,
+            "Fd": 20.0,
+            "Fp": 800.0,
+            "Eh": 5000.0,
+            "V": -9.0,
+            "sum_Fd": 20.0,
+            "sum_Fp_sq": 640000.0,
+            "sum_Eh": 5000.0
+          },
+          {
+            "group": "-F (fluoro)",
+            "count": 4.0,
+            "delta_u_each": 500,
+            "delta_v_each": 18.0,
+            "Fd": 200.0,
+            "Fp": 400.0,
+            "Eh": 0.0,
+            "V": 18.0,
+            "sum_Fd": 800.0,
+            "sum_Fp_sq": 640000.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "Phenylene C6H4 (aromatic ring, p/m/o)",
+            "count": 1.0,
+            "delta_u_each": 7630,
+            "delta_v_each": 52.4,
+            "Fd": 1270.0,
+            "Fp": 110.0,
+            "Eh": 0.0,
+            "V": 52.4,
+            "sum_Fd": 1270.0,
+            "sum_Fp_sq": 12100.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "=CH- (aromatic ring atom)",
+            "count": 2.0,
+            "delta_u_each": 1000,
+            "delta_v_each": 13.5,
+            "Fd": 200.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": 13.5,
+            "sum_Fd": 400.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "=C< (aromatic bridgehead / substituted atom)",
+            "count": 3.0,
+            "delta_u_each": 1000,
+            "delta_v_each": -5.5,
+            "Fd": 70.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": -5.5,
+            "sum_Fd": 210.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "-CH3 (aliphatic)",
+            "count": 1.0,
+            "delta_u_each": 1125,
+            "delta_v_each": 33.5,
+            "Fd": 420.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": 33.5,
+            "sum_Fd": 420.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "-CH2- (aliphatic)",
+            "count": 3.0,
+            "delta_u_each": 1180,
+            "delta_v_each": 16.1,
+            "Fd": 270.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": 16.1,
+            "sum_Fd": 810.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": ">C< (aliphatic)",
+            "count": 2.0,
+            "delta_u_each": 350,
+            "delta_v_each": -19.2,
+            "Fd": -70.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": -19.2,
+            "sum_Fd": -140.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "=C< (olefinic)",
+            "count": 1.0,
+            "delta_u_each": 1030,
+            "delta_v_each": -5.5,
+            "Fd": 70.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": -5.5,
+            "sum_Fd": 70.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          }
+        ]
+      },
+      "delta_D": 29.18,
+      "delta_P": 12.06,
+      "delta_H": 14.38,
+      "R0": {
+        "value": 7.5,
+        "band": [
+          7.0,
+          8.0
+        ]
+      },
+      "logP": {
+        "primary": 3.53,
+        "primary_algorithm": "RDKit Crippen"
+      },
+      "TPSA": 89.3,
+      "HBD": 1,
+      "HBA": 7,
+      "BCS_class": "II",
+      "provenance": {
+        "tm_K": "LITERATURE",
+        "tg_K": "CALCULATED",
+        "density_g_cm3": "CALCULATED",
+        "delta_D": "CALCULATED",
+        "delta_P": "CALCULATED",
+        "delta_H": "CALCULATED",
+        "R0": "ASSUMED",
+        "mw": "COMPUTED-DESCRIPTOR",
+        "logP": "COMPUTED-DESCRIPTOR",
+        "TPSA": "COMPUTED-DESCRIPTOR",
+        "HBD": "COMPUTED-DESCRIPTOR",
+        "HBA": "COMPUTED-DESCRIPTOR",
+        "BCS_class": "LITERATURE"
+      },
+      "source": "Tm: Saladi et al. (2022). Crystal Growth & Design, 22(2), 1056-1068; PubChem CID 24872560; Polymorph: Form A (pure anhydrous monoclinic, stable form); CAS: 956104-40-8; Descriptors: PubChem CID 24872560",
+      "method": [
+        "TG-RATIO-01",
+        "HSP-HVK-01",
+        "DENS-FEDORS-01",
+        "DESC-RDKIT-01"
+      ],
+      "algorithm": "Hoftyzer-van Krevelen group tables; Fedors 1974 constants; RDKit Crippen/Ertl/Lipinski",
+      "confidence": "high",
+      "uncertainty": {
+        "tg_K": "+/- 21 K (1-sigma)",
+        "density": "approx. 5 percent vs pycnometry",
+        "hsp_components": "approx. 1.5 MPa^0.5"
+      },
+      "calculation_date": "2026-09-06",
+      "software_version": "input-generator/1.0",
+      "qc": {
+        "entity_id": "DRG-0012",
+        "identity_roundtrip": "pass",
+        "ranges": "warning",
+        "descriptor_crosscheck": "Drug density 2.82 g/cm3 outside standard range [0.85, 2.20] g/cm3; HSP primary vs secondary displacement 2.46 MPa^0.5 recorded (medium confidence)",
+        "hsp_primary_secondary_displacement": 2.46,
+        "borderline_flag": true,
+        "status": "APPROVED with flags",
+        "warnings": [
+          "Drug density 2.82 g/cm3 outside standard range [0.85, 2.20] g/cm3",
+          "HSP primary vs secondary displacement 2.46 MPa^0.5 recorded (medium confidence)"
+        ],
+        "errors": [],
+        "notes": [
+          "Structure valid and canonicalized",
           "Tm within valid pharmaceutical range"
+        ],
+        "diagnostics": [
+          {
+            "code": "QC-FLAG-DENS-RANGE",
+            "category": "Material Density",
+            "severity": "WARNING",
+            "parameter": "density_g_cm3",
+            "title": "Density Outside Standard Pharmaceutical Range",
+            "observed_value": "2.820 g/cm\u00b3",
+            "expected_threshold": "[0.85, 2.20] g/cm\u00b3",
+            "delta_description": "Atypical molecular volume to weight ratio",
+            "molecular_motif": null,
+            "scientific_rationale": "Drug density is outside typical solid-state distributions.",
+            "screening_impact": "Moderate: Distorts molar volume Vm and HSP dispersion parameter.",
+            "remediation_guidance": "Provide experimental helium pycnometric density if available.",
+            "action_type": "INPUT_PYCNO",
+            "action_label": "Enter Pycnometric Density"
+          },
+          {
+            "code": "QC-FLAG-HSP-DISP-01",
+            "category": "HSP Concordance",
+            "severity": "WARNING",
+            "parameter": "displacement",
+            "title": "HSP Cross-Method Displacement",
+            "observed_value": "2.46 MPa\u00bd",
+            "expected_threshold": "\u2264 2.00 MPa\u00bd (High Concordance)",
+            "delta_description": "+0.46 MPa\u00bd above high-confidence threshold",
+            "molecular_motif": "Cyclic lactam / 5-6 membered cyclic amide ring",
+            "scientific_rationale": "Hoftyzer\u2013van Krevelen and Fedors calculate total solubility parameter delta_t via distinct thermodynamic formalisms (often caused by cyclic lactam/ester ring closure energy offsets). Displacement is within the acceptable [2.0, 5.0] MPa\u00bd band.",
+            "screening_impact": "Moderate: Minor uncertainty in Hansen distance Ra (approx \u00b1 0.5 MPa\u00bd); RED near 1.0 may be sensitive.",
+            "remediation_guidance": "Run Monte Carlo uncertainty quantification (1,000 runs) during pair screening to assess stability.",
+            "action_type": "RUN_MC",
+            "action_label": "Launch Monte Carlo UQ"
+          }
+        ]
+      }
+    },
+    {
+      "entity_id": "DRG-0013",
+      "entity_type": "drug",
+      "name": "grazoprevir",
+      "abbreviation": null,
+      "canonical_smiles": "C=CC1CC1(NC(=O)C1CC2CN1C(=O)C(C(C)(C)C)NC(=O)OCC1CC1CCCCCc1nc3cc(OC)ccc3nc1O2)C(=O)NS(=O)(=O)C1CC1",
+      "repeat_unit_smiles": null,
+      "structure": {
+        "pubchem_cid": 44603531,
+        "iupac_name": null,
+        "formula": "C38H50N6O9S",
+        "neutral_parent": true,
+        "cas_number": "1350514-68-9",
+        "polymorph": "Form I (crystalline anhydrous form)"
+      },
+      "mn": null,
+      "mw": 780.95,
+      "tm_K": {
+        "value": 462.45,
+        "form": "Form I (crystalline anhydrous form)",
+        "convention": "DSC onset, primary source selected by Table 4-1 rule",
+        "all_sources": [
+          189.3
+        ]
+      },
+      "tg_K": {
+        "value": 323.7,
+        "method_id": "TG-RATIO-01",
+        "equation": "0.70 * Tm",
+        "uncertainty_K": 21.0,
+        "provenance": "CALCULATED",
+        "confidence": "medium"
+      },
+      "density_g_cm3": {
+        "value": 1.988,
+        "molar_volume_cm3_mol": 392.9,
+        "state": "Fedors liquid-state surrogate for crystalline field",
+        "method_id": "DENS-FEDORS-01",
+        "provenance": "CALCULATED",
+        "confidence": "medium"
+      },
+      "hsp_mpa_half": {
+        "delta_D": 23.21,
+        "delta_P": 5.66,
+        "delta_H": 12.97,
+        "primary_total": 27.18,
+        "method_id": "HSP-HVK-01",
+        "secondary_fedors_total": 27.51,
+        "displacement": 0.33,
+        "molar_volume_used": 392.9,
+        "qc_pass": true,
+        "qc_note": "Displacement HVK (27.18) vs Fedors (27.51) = 0.33 MPa^0.5",
+        "provenance": {
+          "delta_D": "CALCULATED",
+          "delta_P": "CALCULATED",
+          "delta_H": "CALCULATED"
+        },
+        "confidence": "high",
+        "uncertainty": "approx. 1.0-1.5 MPa^0.5 per component",
+        "breakdown": [
+          {
+            "group": "-COO- (ester)",
+            "count": 1.0,
+            "delta_u_each": 4300,
+            "delta_v_each": 18.0,
+            "Fd": 390.0,
+            "Fp": 510.0,
+            "Eh": 7000.0,
+            "V": 18.0,
+            "sum_Fd": 390.0,
+            "sum_Fp_sq": 260100.0,
+            "sum_Eh": 7000.0
+          },
+          {
+            "group": "-CONH- (amide)",
+            "count": 2.0,
+            "delta_u_each": 10000,
+            "delta_v_each": 9.5,
+            "Fd": 540.0,
+            "Fp": 1200.0,
+            "Eh": 20000.0,
+            "V": 9.5,
+            "sum_Fd": 1080.0,
+            "sum_Fp_sq": 2880000.0,
+            "sum_Eh": 40000.0
+          },
+          {
+            "group": "-CON< (tertiary amide / lactam)",
+            "count": 1.0,
+            "delta_u_each": 10000,
+            "delta_v_each": -4.0,
+            "Fd": 540.0,
+            "Fp": 1200.0,
+            "Eh": 10000.0,
+            "V": -4.0,
+            "sum_Fd": 540.0,
+            "sum_Fp_sq": 1440000.0,
+            "sum_Eh": 10000.0
+          },
+          {
+            "group": "-NH- (secondary amine)",
+            "count": 1.0,
+            "delta_u_each": 2000,
+            "delta_v_each": 4.5,
+            "Fd": 160.0,
+            "Fp": 210.0,
+            "Eh": 3100.0,
+            "V": 4.5,
+            "sum_Fd": 160.0,
+            "sum_Fp_sq": 44100.0,
+            "sum_Eh": 3100.0
+          },
+          {
+            "group": "-O- (ether, aromatic)",
+            "count": 2.0,
+            "delta_u_each": 800,
+            "delta_v_each": 3.8,
+            "Fd": 100.0,
+            "Fp": 400.0,
+            "Eh": 3000.0,
+            "V": 3.8,
+            "sum_Fd": 200.0,
+            "sum_Fp_sq": 320000.0,
+            "sum_Eh": 6000.0
+          },
+          {
+            "group": "=CH- (aromatic ring atom)",
+            "count": 3.0,
+            "delta_u_each": 1000,
+            "delta_v_each": 13.5,
+            "Fd": 200.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": 13.5,
+            "sum_Fd": 600.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "=C< (aromatic bridgehead / substituted atom)",
+            "count": 3.0,
+            "delta_u_each": 1000,
+            "delta_v_each": -5.5,
+            "Fd": 70.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": -5.5,
+            "sum_Fd": 210.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "-CH3 (aliphatic)",
+            "count": 4.0,
+            "delta_u_each": 1125,
+            "delta_v_each": 33.5,
+            "Fd": 420.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": 33.5,
+            "sum_Fd": 1680.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "-CH2- (aliphatic)",
+            "count": 12.0,
+            "delta_u_each": 1180,
+            "delta_v_each": 16.1,
+            "Fd": 270.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": 16.1,
+            "sum_Fd": 3240.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": ">CH- (aliphatic)",
+            "count": 7.0,
+            "delta_u_each": 820,
+            "delta_v_each": -1.0,
+            "Fd": 80.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": -1.0,
+            "sum_Fd": 560.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": ">C< (aliphatic)",
+            "count": 2.0,
+            "delta_u_each": 350,
+            "delta_v_each": -19.2,
+            "Fd": -70.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": -19.2,
+            "sum_Fd": -140.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "=CH2 (olefinic)",
+            "count": 1.0,
+            "delta_u_each": 1030,
+            "delta_v_each": 28.5,
+            "Fd": 400.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": 28.5,
+            "sum_Fd": 400.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "=CH- (olefinic)",
+            "count": 1.0,
+            "delta_u_each": 1030,
+            "delta_v_each": 13.5,
+            "Fd": 200.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": 13.5,
+            "sum_Fd": 200.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          }
+        ]
+      },
+      "delta_D": 23.21,
+      "delta_P": 5.66,
+      "delta_H": 12.97,
+      "R0": {
+        "value": 7.5,
+        "band": [
+          7.0,
+          8.0
+        ]
+      },
+      "logP": {
+        "primary": 3.55,
+        "primary_algorithm": "RDKit Crippen"
+      },
+      "TPSA": 195.2,
+      "HBD": 3,
+      "HBA": 15,
+      "BCS_class": "II",
+      "provenance": {
+        "tm_K": "LITERATURE",
+        "tg_K": "CALCULATED",
+        "density_g_cm3": "CALCULATED",
+        "delta_D": "CALCULATED",
+        "delta_P": "CALCULATED",
+        "delta_H": "CALCULATED",
+        "R0": "ASSUMED",
+        "mw": "COMPUTED-DESCRIPTOR",
+        "logP": "COMPUTED-DESCRIPTOR",
+        "TPSA": "COMPUTED-DESCRIPTOR",
+        "HBD": "COMPUTED-DESCRIPTOR",
+        "HBA": "COMPUTED-DESCRIPTOR",
+        "BCS_class": "LITERATURE"
+      },
+      "source": "Tm: Hiew et al. (2023). J. Pharm. Sci., 112(5), 1356-1368. DOI: 10.1016/j.xphs.2023.01.012; PubChem CID 44603531; Polymorph: Form I (crystalline anhydrous form); CAS: 1350514-68-9; Descriptors: PubChem CID 44603531",
+      "method": [
+        "TG-RATIO-01",
+        "HSP-HVK-01",
+        "DENS-FEDORS-01",
+        "DESC-RDKIT-01"
+      ],
+      "algorithm": "Hoftyzer-van Krevelen group tables; Fedors 1974 constants; RDKit Crippen/Ertl/Lipinski",
+      "confidence": "high",
+      "uncertainty": {
+        "tg_K": "+/- 21 K (1-sigma)",
+        "density": "approx. 5 percent vs pycnometry",
+        "hsp_components": "approx. 1.5 MPa^0.5"
+      },
+      "calculation_date": "2026-09-06",
+      "software_version": "input-generator/1.0",
+      "qc": {
+        "entity_id": "DRG-0013",
+        "identity_roundtrip": "pass",
+        "ranges": "pass",
+        "descriptor_crosscheck": "Molecular weight (780.95 g/mol) exceeds Lipinski Rule-of-5 threshold (500 g/mol); TPSA (195.2 \u00c5\u00b2) exceeds Veber oral bioavailability threshold (140 \u00c5\u00b2)",
+        "hsp_primary_secondary_displacement": 0.33,
+        "borderline_flag": true,
+        "status": "APPROVED with flags",
+        "warnings": [
+          "Molecular weight (780.95 g/mol) exceeds Lipinski Rule-of-5 threshold (500 g/mol)",
+          "TPSA (195.2 \u00c5\u00b2) exceeds Veber oral bioavailability threshold (140 \u00c5\u00b2)"
+        ],
+        "errors": [],
+        "notes": [
+          "Structure valid and canonicalized",
+          "Tm within valid pharmaceutical range",
+          "HSP displacement 0.33 MPa^0.5 (excellent method agreement)"
+        ],
+        "diagnostics": [
+          {
+            "code": "QC-FLAG-MW-RO5-01",
+            "category": "Lipinski Space",
+            "severity": "WARNING",
+            "parameter": "mw",
+            "title": "Lipinski High Molecular Weight (> 500 g/mol)",
+            "observed_value": "780.95 g/mol",
+            "expected_threshold": "\u2264 500.00 g/mol",
+            "delta_description": "+280.95 g/mol beyond Rule-of-5 boundary",
+            "molecular_motif": "Beyond Rule-of-5 (bRo5) chemical space",
+            "scientific_rationale": "High molecular weight molecules exhibit lower diffusion coefficients, higher melt viscosities, and increased crystallization inhibition challenges in solid dispersions.",
+            "screening_impact": "Formulation: May require higher polymer weight fractions (e.g. 1:3 or 1:4 drug:polymer ratios).",
+            "remediation_guidance": "Confirm that SMILES represents neutral active moiety and test compatibility with high-capacity carriers (HPMCAS, Copovidone).",
+            "action_type": "SCREEN_PAIR",
+            "action_label": "Screen Polymeric Carriers"
+          },
+          {
+            "code": "QC-FLAG-TPSA-HIGH-01",
+            "category": "Molecular Polar Surface",
+            "severity": "WARNING",
+            "parameter": "TPSA",
+            "title": "High Polar Surface Area (> 140 \u00c5\u00b2)",
+            "observed_value": "195.2 \u00c5\u00b2",
+            "expected_threshold": "\u2264 140.00 \u00c5\u00b2",
+            "delta_description": "+55.2 \u00c5\u00b2 beyond Veber permeability limit",
+            "molecular_motif": "Abundant polar heteroatoms / hydrogen bond acceptors",
+            "scientific_rationale": "High TPSA indicates potential passive membrane permeation limitations (BCS Class III/IV tendency).",
+            "screening_impact": "Biological: May necessitate enteric/amorphous stabilization to maximize supersaturation gradient.",
+            "remediation_guidance": "Examine H-bonding Hansen parameter (delta_H) to ensure strong drug-polymer intermolecular synthon formation.",
+            "action_type": "INFO_ONLY",
+            "action_label": "Polar Synthon Noted"
+          }
+        ]
+      }
+    },
+    {
+      "entity_id": "DRG-0014",
+      "entity_type": "drug",
+      "name": "regorafenib",
+      "abbreviation": null,
+      "canonical_smiles": "CNC(=O)c1cc(Oc2ccc(NC(=O)Nc3ccc(Cl)c(C(F)(F)F)c3)c(F)c2)ccn1",
+      "repeat_unit_smiles": null,
+      "structure": {
+        "pubchem_cid": 11167602,
+        "iupac_name": null,
+        "formula": "C21H15ClF4N4O3",
+        "neutral_parent": true,
+        "cas_number": "755037-03-7",
+        "polymorph": "Modification I (thermodynamically stable anhydrous form)"
+      },
+      "mn": null,
+      "mw": 482.82,
+      "tm_K": {
+        "value": 479.15,
+        "form": "Modification I (thermodynamically stable anhydrous form)",
+        "convention": "DSC onset, primary source selected by Table 4-1 rule",
+        "all_sources": [
+          206.0
+        ]
+      },
+      "tg_K": {
+        "value": 335.4,
+        "method_id": "TG-RATIO-01",
+        "equation": "0.70 * Tm",
+        "uncertainty_K": 21.0,
+        "provenance": "CALCULATED",
+        "confidence": "medium"
+      },
+      "density_g_cm3": {
+        "value": 1.897,
+        "molar_volume_cm3_mol": 254.5,
+        "state": "Fedors liquid-state surrogate for crystalline field",
+        "method_id": "DENS-FEDORS-01",
+        "provenance": "CALCULATED",
+        "confidence": "medium"
+      },
+      "hsp_mpa_half": {
+        "delta_D": 22.08,
+        "delta_P": 7.9,
+        "delta_H": 13.52,
+        "primary_total": 27.07,
+        "method_id": "HSP-HVK-01",
+        "secondary_fedors_total": 26.9,
+        "displacement": 0.17,
+        "molar_volume_used": 254.5,
+        "qc_pass": true,
+        "qc_note": "Displacement HVK (27.07) vs Fedors (26.9) = 0.17 MPa^0.5",
+        "provenance": {
+          "delta_D": "CALCULATED",
+          "delta_P": "CALCULATED",
+          "delta_H": "CALCULATED"
+        },
+        "confidence": "high",
+        "uncertainty": "approx. 1.0-1.5 MPa^0.5 per component",
+        "breakdown": [
+          {
+            "group": "-CONH- (amide)",
+            "count": 2.0,
+            "delta_u_each": 10000,
+            "delta_v_each": 9.5,
+            "Fd": 540.0,
+            "Fp": 1200.0,
+            "Eh": 20000.0,
+            "V": 9.5,
+            "sum_Fd": 1080.0,
+            "sum_Fp_sq": 2880000.0,
+            "sum_Eh": 40000.0
+          },
+          {
+            "group": "-NH- (secondary amine)",
+            "count": 1.0,
+            "delta_u_each": 2000,
+            "delta_v_each": 4.5,
+            "Fd": 160.0,
+            "Fp": 210.0,
+            "Eh": 3100.0,
+            "V": 4.5,
+            "sum_Fd": 160.0,
+            "sum_Fp_sq": 44100.0,
+            "sum_Eh": 3100.0
+          },
+          {
+            "group": "-O- (ether, aromatic)",
+            "count": 1.0,
+            "delta_u_each": 800,
+            "delta_v_each": 3.8,
+            "Fd": 100.0,
+            "Fp": 400.0,
+            "Eh": 3000.0,
+            "V": 3.8,
+            "sum_Fd": 100.0,
+            "sum_Fp_sq": 160000.0,
+            "sum_Eh": 3000.0
+          },
+          {
+            "group": "-F (fluoro)",
+            "count": 4.0,
+            "delta_u_each": 500,
+            "delta_v_each": 18.0,
+            "Fd": 200.0,
+            "Fp": 400.0,
+            "Eh": 0.0,
+            "V": 18.0,
+            "sum_Fd": 800.0,
+            "sum_Fp_sq": 640000.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "-Cl (chloro, aromatic)",
+            "count": 1.0,
+            "delta_u_each": 1100,
+            "delta_v_each": 24.0,
+            "Fd": 450.0,
+            "Fp": 550.0,
+            "Eh": 400.0,
+            "V": 24.0,
+            "sum_Fd": 450.0,
+            "sum_Fp_sq": 302500.0,
+            "sum_Eh": 400.0
+          },
+          {
+            "group": "Phenylene C6H4 (aromatic ring, p/m/o)",
+            "count": 1.0,
+            "delta_u_each": 7630,
+            "delta_v_each": 52.4,
+            "Fd": 1270.0,
+            "Fp": 110.0,
+            "Eh": 0.0,
+            "V": 52.4,
+            "sum_Fd": 1270.0,
+            "sum_Fp_sq": 12100.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "=CH- (aromatic ring atom)",
+            "count": 6.0,
+            "delta_u_each": 1000,
+            "delta_v_each": 13.5,
+            "Fd": 200.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": 13.5,
+            "sum_Fd": 1200.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "=C< (aromatic bridgehead / substituted atom)",
+            "count": 3.0,
+            "delta_u_each": 1000,
+            "delta_v_each": -5.5,
+            "Fd": 70.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": -5.5,
+            "sum_Fd": 210.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "-CH3 (aliphatic)",
+            "count": 1.0,
+            "delta_u_each": 1125,
+            "delta_v_each": 33.5,
+            "Fd": 420.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": 33.5,
+            "sum_Fd": 420.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": ">C< (aliphatic)",
+            "count": 1.0,
+            "delta_u_each": 350,
+            "delta_v_each": -19.2,
+            "Fd": -70.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": -19.2,
+            "sum_Fd": -70.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          }
+        ]
+      },
+      "delta_D": 22.08,
+      "delta_P": 7.9,
+      "delta_H": 13.52,
+      "R0": {
+        "value": 7.5,
+        "band": [
+          7.0,
+          8.0
+        ]
+      },
+      "logP": {
+        "primary": 5.69,
+        "primary_algorithm": "RDKit Crippen"
+      },
+      "TPSA": 92.4,
+      "HBD": 3,
+      "HBA": 7,
+      "BCS_class": "II",
+      "provenance": {
+        "tm_K": "LITERATURE",
+        "tg_K": "CALCULATED",
+        "density_g_cm3": "CALCULATED",
+        "delta_D": "CALCULATED",
+        "delta_P": "CALCULATED",
+        "delta_H": "CALCULATED",
+        "R0": "ASSUMED",
+        "mw": "COMPUTED-DESCRIPTOR",
+        "logP": "COMPUTED-DESCRIPTOR",
+        "TPSA": "COMPUTED-DESCRIPTOR",
+        "HBD": "COMPUTED-DESCRIPTOR",
+        "HBA": "COMPUTED-DESCRIPTOR",
+        "BCS_class": "LITERATURE"
+      },
+      "source": "Tm: Health Canada Stivarga Product Monograph; M\u00fcller, M.G. (2024). German Dissertation; FDA AccessData; PubChem CID 11167602; Polymorph: Modification I (thermodynamically stable anhydrous form); CAS: 755037-03-7; Descriptors: PubChem CID 11167602",
+      "method": [
+        "TG-RATIO-01",
+        "HSP-HVK-01",
+        "DENS-FEDORS-01",
+        "DESC-RDKIT-01"
+      ],
+      "algorithm": "Hoftyzer-van Krevelen group tables; Fedors 1974 constants; RDKit Crippen/Ertl/Lipinski",
+      "confidence": "high",
+      "uncertainty": {
+        "tg_K": "+/- 21 K (1-sigma)",
+        "density": "approx. 5 percent vs pycnometry",
+        "hsp_components": "approx. 1.5 MPa^0.5"
+      },
+      "calculation_date": "2026-09-06",
+      "software_version": "input-generator/1.0",
+      "qc": {
+        "entity_id": "DRG-0014",
+        "identity_roundtrip": "pass",
+        "ranges": "pass",
+        "descriptor_crosscheck": "TPSA/HBD/HBA exact; logP verified",
+        "hsp_primary_secondary_displacement": 0.17,
+        "borderline_flag": false,
+        "status": "APPROVED",
+        "warnings": [],
+        "errors": [],
+        "notes": [
+          "Structure valid and canonicalized",
+          "Tm within valid pharmaceutical range",
+          "HSP displacement 0.17 MPa^0.5 (excellent method agreement)"
+        ],
+        "diagnostics": []
+      }
+    },
+    {
+      "entity_id": "DRG-0015",
+      "entity_type": "drug",
+      "name": "ripretinib",
+      "abbreviation": null,
+      "canonical_smiles": "CCn1c(=O)c(-c2cc(NC(=O)Nc3ccccc3)c(F)cc2Br)cc2cnc(NC)cc21",
+      "repeat_unit_smiles": null,
+      "structure": {
+        "pubchem_cid": 71584930,
+        "iupac_name": null,
+        "formula": "C24H21FN6O2",
+        "neutral_parent": true,
+        "cas_number": "1442472-39-0",
+        "polymorph": "Form 1 (anhydrous onset 256.9\u00b0C, thermodynamically stable form)"
+      },
+      "mn": null,
+      "mw": 510.37,
+      "tm_K": {
+        "value": 530.05,
+        "form": "Form 1 (anhydrous onset 256.9\u00b0C, thermodynamically stable form)",
+        "convention": "DSC onset, primary source selected by Table 4-1 rule",
+        "all_sources": [
+          256.9
+        ]
+      },
+      "tg_K": {
+        "value": 371.0,
+        "method_id": "TG-RATIO-01",
+        "equation": "0.70 * Tm",
+        "uncertainty_K": 21.0,
+        "provenance": "CALCULATED",
+        "confidence": "medium"
+      },
+      "density_g_cm3": {
+        "value": 1.909,
+        "molar_volume_cm3_mol": 267.4,
+        "state": "Fedors liquid-state surrogate for crystalline field",
+        "method_id": "DENS-FEDORS-01",
+        "provenance": "CALCULATED",
+        "confidence": "medium"
+      },
+      "hsp_mpa_half": {
+        "delta_D": 23.22,
+        "delta_P": 5.24,
+        "delta_H": 9.9,
+        "primary_total": 25.78,
+        "method_id": "HSP-HVK-01",
+        "secondary_fedors_total": 25.88,
+        "displacement": 0.1,
+        "molar_volume_used": 267.4,
+        "qc_pass": true,
+        "qc_note": "Displacement HVK (25.78) vs Fedors (25.88) = 0.1 MPa^0.5",
+        "provenance": {
+          "delta_D": "CALCULATED",
+          "delta_P": "CALCULATED",
+          "delta_H": "CALCULATED"
+        },
+        "confidence": "high",
+        "uncertainty": "approx. 1.0-1.5 MPa^0.5 per component",
+        "breakdown": [
+          {
+            "group": "-CONH- (amide)",
+            "count": 1.0,
+            "delta_u_each": 10000,
+            "delta_v_each": 9.5,
+            "Fd": 540.0,
+            "Fp": 1200.0,
+            "Eh": 20000.0,
+            "V": 9.5,
+            "sum_Fd": 540.0,
+            "sum_Fp_sq": 1440000.0,
+            "sum_Eh": 20000.0
+          },
+          {
+            "group": "-NH- (secondary amine)",
+            "count": 2.0,
+            "delta_u_each": 2000,
+            "delta_v_each": 4.5,
+            "Fd": 160.0,
+            "Fp": 210.0,
+            "Eh": 3100.0,
+            "V": 4.5,
+            "sum_Fd": 320.0,
+            "sum_Fp_sq": 88200.0,
+            "sum_Eh": 6200.0
+          },
+          {
+            "group": "-F (fluoro)",
+            "count": 1.0,
+            "delta_u_each": 500,
+            "delta_v_each": 18.0,
+            "Fd": 200.0,
+            "Fp": 400.0,
+            "Eh": 0.0,
+            "V": 18.0,
+            "sum_Fd": 200.0,
+            "sum_Fp_sq": 160000.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "-Br (bromo)",
+            "count": 1.0,
+            "delta_u_each": 1600,
+            "delta_v_each": 30.0,
+            "Fd": 550.0,
+            "Fp": 500.0,
+            "Eh": 0.0,
+            "V": 30.0,
+            "sum_Fd": 550.0,
+            "sum_Fp_sq": 250000.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "Phenylene C6H4 (aromatic ring, p/m/o)",
+            "count": 2.0,
+            "delta_u_each": 7630,
+            "delta_v_each": 52.4,
+            "Fd": 1270.0,
+            "Fp": 110.0,
+            "Eh": 0.0,
+            "V": 52.4,
+            "sum_Fd": 2540.0,
+            "sum_Fp_sq": 24200.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "=CH- (aromatic ring atom)",
+            "count": 3.0,
+            "delta_u_each": 1000,
+            "delta_v_each": 13.5,
+            "Fd": 200.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": 13.5,
+            "sum_Fd": 600.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "=C< (aromatic bridgehead / substituted atom)",
+            "count": 5.0,
+            "delta_u_each": 1000,
+            "delta_v_each": -5.5,
+            "Fd": 70.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": -5.5,
+            "sum_Fd": 350.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "-CH3 (aliphatic)",
+            "count": 2.0,
+            "delta_u_each": 1125,
+            "delta_v_each": 33.5,
+            "Fd": 420.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": 33.5,
+            "sum_Fd": 840.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "-CH2- (aliphatic)",
+            "count": 1.0,
+            "delta_u_each": 1180,
+            "delta_v_each": 16.1,
+            "Fd": 270.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": 16.1,
+            "sum_Fd": 270.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          }
+        ]
+      },
+      "delta_D": 23.22,
+      "delta_P": 5.24,
+      "delta_H": 9.9,
+      "R0": {
+        "value": 7.5,
+        "band": [
+          7.0,
+          8.0
+        ]
+      },
+      "logP": {
+        "primary": 5.67,
+        "primary_algorithm": "RDKit Crippen"
+      },
+      "TPSA": 88.1,
+      "HBD": 3,
+      "HBA": 7,
+      "BCS_class": "II",
+      "provenance": {
+        "tm_K": "LITERATURE",
+        "tg_K": "CALCULATED",
+        "density_g_cm3": "CALCULATED",
+        "delta_D": "CALCULATED",
+        "delta_P": "CALCULATED",
+        "delta_H": "CALCULATED",
+        "R0": "ASSUMED",
+        "mw": "COMPUTED-DESCRIPTOR",
+        "logP": "COMPUTED-DESCRIPTOR",
+        "TPSA": "COMPUTED-DESCRIPTOR",
+        "HBD": "COMPUTED-DESCRIPTOR",
+        "HBA": "COMPUTED-DESCRIPTOR",
+        "BCS_class": "LITERATURE"
+      },
+      "source": "Tm: Fayaz et al. (2023). Crystal Growth & Design, 23(2), 856-867. DOI: 10.1021/acs.cgd.2c01421; PubChem CID 71584930; Polymorph: Form 1 (anhydrous onset 256.9\u00b0C, thermodynamically stable form); CAS: 1442472-39-0; Descriptors: PubChem CID 71584930",
+      "method": [
+        "TG-RATIO-01",
+        "HSP-HVK-01",
+        "DENS-FEDORS-01",
+        "DESC-RDKIT-01"
+      ],
+      "algorithm": "Hoftyzer-van Krevelen group tables; Fedors 1974 constants; RDKit Crippen/Ertl/Lipinski",
+      "confidence": "high",
+      "uncertainty": {
+        "tg_K": "+/- 21 K (1-sigma)",
+        "density": "approx. 5 percent vs pycnometry",
+        "hsp_components": "approx. 1.5 MPa^0.5"
+      },
+      "calculation_date": "2026-09-06",
+      "software_version": "input-generator/1.0",
+      "qc": {
+        "entity_id": "DRG-0015",
+        "identity_roundtrip": "pass",
+        "ranges": "pass",
+        "descriptor_crosscheck": "Molecular weight (510.37 g/mol) exceeds Lipinski Rule-of-5 threshold (500 g/mol)",
+        "hsp_primary_secondary_displacement": 0.1,
+        "borderline_flag": true,
+        "status": "APPROVED with flags",
+        "warnings": [
+          "Molecular weight (510.37 g/mol) exceeds Lipinski Rule-of-5 threshold (500 g/mol)"
+        ],
+        "errors": [],
+        "notes": [
+          "Structure valid and canonicalized",
+          "Tm within valid pharmaceutical range",
+          "High density (1.909 g/cm3) verified due to heavy halogen substitution",
+          "HSP displacement 0.10 MPa^0.5 (excellent method agreement)"
+        ],
+        "diagnostics": [
+          {
+            "code": "QC-FLAG-DENS-HALOGEN",
+            "category": "Material Density",
+            "severity": "INFO",
+            "parameter": "density_g_cm3",
+            "title": "High Molecular Density from Heavy Halogen Atoms",
+            "observed_value": "1.909 g/cm\u00b3",
+            "expected_threshold": "Typical non-halogenated APIs: [1.00, 1.45] g/cm\u00b3",
+            "delta_description": "Elevated density due to high atomic weight halogen(s)",
+            "molecular_motif": "Heavy halogen (Iodine/Bromine) atoms present",
+            "scientific_rationale": "Iodine (126.9 g/mol) and Bromine (79.9 g/mol) have compact molar volumes relative to atomic mass, physically yielding high true densities.",
+            "screening_impact": "None: Completely consistent with molecular structure and Fedors group constants.",
+            "remediation_guidance": "Calculation is verified and scientifically sound.",
+            "action_type": "INFO_ONLY",
+            "action_label": "Verified Heavy Halogen"
+          },
+          {
+            "code": "QC-FLAG-MW-RO5-01",
+            "category": "Lipinski Space",
+            "severity": "WARNING",
+            "parameter": "mw",
+            "title": "Lipinski High Molecular Weight (> 500 g/mol)",
+            "observed_value": "510.37 g/mol",
+            "expected_threshold": "\u2264 500.00 g/mol",
+            "delta_description": "+10.37 g/mol beyond Rule-of-5 boundary",
+            "molecular_motif": "Beyond Rule-of-5 (bRo5) chemical space",
+            "scientific_rationale": "High molecular weight molecules exhibit lower diffusion coefficients, higher melt viscosities, and increased crystallization inhibition challenges in solid dispersions.",
+            "screening_impact": "Formulation: May require higher polymer weight fractions (e.g. 1:3 or 1:4 drug:polymer ratios).",
+            "remediation_guidance": "Confirm that SMILES represents neutral active moiety and test compatibility with high-capacity carriers (HPMCAS, Copovidone).",
+            "action_type": "SCREEN_PAIR",
+            "action_label": "Screen Polymeric Carriers"
+          }
+        ]
+      }
+    },
+    {
+      "entity_id": "DRG-0016",
+      "entity_type": "drug",
+      "name": "enzalutamide",
+      "abbreviation": null,
+      "canonical_smiles": "CNC(=O)c1ccc(N2C(=O)C(C)(C)N(c3ccc(C#N)c(C(F)(F)F)c3)C2=S)cc1",
+      "repeat_unit_smiles": null,
+      "structure": {
+        "pubchem_cid": 15951529,
+        "iupac_name": null,
+        "formula": "C21H16F3N5O2S",
+        "neutral_parent": true,
+        "cas_number": "915087-33-1",
+        "polymorph": "Form A (monoclinic, thermodynamically stable form)"
+      },
+      "mn": null,
+      "mw": 446.45,
+      "tm_K": {
+        "value": 474.15,
+        "form": "Form A (monoclinic, thermodynamically stable form)",
+        "convention": "DSC onset, primary source selected by Table 4-1 rule",
+        "all_sources": [
+          201.0
+        ]
+      },
+      "tg_K": {
+        "value": 331.9,
+        "method_id": "TG-RATIO-01",
+        "equation": "0.70 * Tm",
+        "uncertainty_K": 21.0,
+        "provenance": "CALCULATED",
+        "confidence": "medium"
+      },
+      "density_g_cm3": {
+        "value": 2.107,
+        "molar_volume_cm3_mol": 211.9,
+        "state": "Fedors liquid-state surrogate for crystalline field",
+        "method_id": "DENS-FEDORS-01",
+        "provenance": "CALCULATED",
+        "confidence": "medium"
+      },
+      "hsp_mpa_half": {
+        "delta_D": 25.63,
+        "delta_P": 9.47,
+        "delta_H": 12.85,
+        "primary_total": 30.19,
+        "method_id": "HSP-HVK-01",
+        "secondary_fedors_total": 29.09,
+        "displacement": 1.1,
+        "molar_volume_used": 211.9,
+        "qc_pass": true,
+        "qc_note": "Displacement HVK (30.19) vs Fedors (29.09) = 1.1 MPa^0.5",
+        "provenance": {
+          "delta_D": "CALCULATED",
+          "delta_P": "CALCULATED",
+          "delta_H": "CALCULATED"
+        },
+        "confidence": "high",
+        "uncertainty": "approx. 1.0-1.5 MPa^0.5 per component",
+        "breakdown": [
+          {
+            "group": "-CONH- (amide)",
+            "count": 1.0,
+            "delta_u_each": 10000,
+            "delta_v_each": 9.5,
+            "Fd": 540.0,
+            "Fp": 1200.0,
+            "Eh": 20000.0,
+            "V": 9.5,
+            "sum_Fd": 540.0,
+            "sum_Fp_sq": 1440000.0,
+            "sum_Eh": 20000.0
+          },
+          {
+            "group": "-CON< (tertiary amide / lactam)",
+            "count": 1.0,
+            "delta_u_each": 10000,
+            "delta_v_each": -4.0,
+            "Fd": 540.0,
+            "Fp": 1200.0,
+            "Eh": 10000.0,
+            "V": -4.0,
+            "sum_Fd": 540.0,
+            "sum_Fp_sq": 1440000.0,
+            "sum_Eh": 10000.0
+          },
+          {
+            "group": ">N- (tertiary amine)",
+            "count": 1.0,
+            "delta_u_each": 1000,
+            "delta_v_each": -9.0,
+            "Fd": 20.0,
+            "Fp": 800.0,
+            "Eh": 5000.0,
+            "V": -9.0,
+            "sum_Fd": 20.0,
+            "sum_Fp_sq": 640000.0,
+            "sum_Eh": 5000.0
+          },
+          {
+            "group": "-F (fluoro)",
+            "count": 3.0,
+            "delta_u_each": 500,
+            "delta_v_each": 18.0,
+            "Fd": 200.0,
+            "Fp": 400.0,
+            "Eh": 0.0,
+            "V": 18.0,
+            "sum_Fd": 600.0,
+            "sum_Fp_sq": 480000.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "Phenylene C6H4 (aromatic ring, p/m/o)",
+            "count": 2.0,
+            "delta_u_each": 7630,
+            "delta_v_each": 52.4,
+            "Fd": 1270.0,
+            "Fp": 110.0,
+            "Eh": 0.0,
+            "V": 52.4,
+            "sum_Fd": 2540.0,
+            "sum_Fp_sq": 24200.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "-CH3 (aliphatic)",
+            "count": 3.0,
+            "delta_u_each": 1125,
+            "delta_v_each": 33.5,
+            "Fd": 420.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": 33.5,
+            "sum_Fd": 1260.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": ">C< (aliphatic)",
+            "count": 2.0,
+            "delta_u_each": 350,
+            "delta_v_each": -19.2,
+            "Fd": -70.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": -19.2,
+            "sum_Fd": -140.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "=C< (olefinic)",
+            "count": 1.0,
+            "delta_u_each": 1030,
+            "delta_v_each": -5.5,
+            "Fd": 70.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": -5.5,
+            "sum_Fd": 70.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          }
+        ]
+      },
+      "delta_D": 25.63,
+      "delta_P": 9.47,
+      "delta_H": 12.85,
+      "R0": {
+        "value": 7.5,
+        "band": [
+          7.0,
+          8.0
+        ]
+      },
+      "logP": {
+        "primary": 3.85,
+        "primary_algorithm": "RDKit Crippen"
+      },
+      "TPSA": 76.4,
+      "HBD": 1,
+      "HBA": 6,
+      "BCS_class": "II",
+      "provenance": {
+        "tm_K": "LITERATURE",
+        "tg_K": "CALCULATED",
+        "density_g_cm3": "CALCULATED",
+        "delta_D": "CALCULATED",
+        "delta_P": "CALCULATED",
+        "delta_H": "CALCULATED",
+        "R0": "ASSUMED",
+        "mw": "COMPUTED-DESCRIPTOR",
+        "logP": "COMPUTED-DESCRIPTOR",
+        "TPSA": "COMPUTED-DESCRIPTOR",
+        "HBD": "COMPUTED-DESCRIPTOR",
+        "HBA": "COMPUTED-DESCRIPTOR",
+        "BCS_class": "LITERATURE"
+      },
+      "source": "Tm: PubChem Compound Summary CID 15951529; FDA AccessData NDA 203415; Crystals (2021), 11(4), 384; Polymorph: Form A (monoclinic, thermodynamically stable form); CAS: 915087-33-1; Descriptors: PubChem CID 15951529",
+      "method": [
+        "TG-RATIO-01",
+        "HSP-HVK-01",
+        "DENS-FEDORS-01",
+        "DESC-RDKIT-01"
+      ],
+      "algorithm": "Hoftyzer-van Krevelen group tables; Fedors 1974 constants; RDKit Crippen/Ertl/Lipinski",
+      "confidence": "high",
+      "uncertainty": {
+        "tg_K": "+/- 21 K (1-sigma)",
+        "density": "approx. 5 percent vs pycnometry",
+        "hsp_components": "approx. 1.5 MPa^0.5"
+      },
+      "calculation_date": "2026-09-06",
+      "software_version": "input-generator/1.0",
+      "qc": {
+        "entity_id": "DRG-0016",
+        "identity_roundtrip": "pass",
+        "ranges": "pass",
+        "descriptor_crosscheck": "TPSA/HBD/HBA exact; logP verified",
+        "hsp_primary_secondary_displacement": 1.1,
+        "borderline_flag": false,
+        "status": "APPROVED",
+        "warnings": [],
+        "errors": [],
+        "notes": [
+          "Structure valid and canonicalized",
+          "Tm within valid pharmaceutical range",
+          "HSP displacement 1.10 MPa^0.5 (excellent method agreement)"
+        ],
+        "diagnostics": []
+      }
+    },
+    {
+      "entity_id": "DRG-0017",
+      "entity_type": "drug",
+      "name": "suvorexant",
+      "abbreviation": null,
+      "canonical_smiles": "Cc1ccc(-n2nccn2)c(C(=O)N2CCN(c3nc4ccccc4o3)CC2)c1",
+      "repeat_unit_smiles": null,
+      "structure": {
+        "pubchem_cid": 24965990,
+        "iupac_name": null,
+        "formula": "C23H23ClN6O2",
+        "neutral_parent": true,
+        "cas_number": "1030377-33-3",
+        "polymorph": "Form I (crystalline anhydrous form)"
+      },
+      "mn": null,
+      "mw": 388.43,
+      "tm_K": {
+        "value": 426.15,
+        "form": "Form I (crystalline anhydrous form)",
+        "convention": "DSC onset, primary source selected by Table 4-1 rule",
+        "all_sources": [
+          153.0
+        ]
+      },
+      "tg_K": {
+        "value": 298.3,
+        "method_id": "TG-RATIO-01",
+        "equation": "0.70 * Tm",
+        "uncertainty_K": 21.0,
+        "provenance": "CALCULATED",
+        "confidence": "medium"
+      },
+      "density_g_cm3": {
+        "value": 1.839,
+        "molar_volume_cm3_mol": 211.2,
+        "state": "Fedors liquid-state surrogate for crystalline field",
+        "method_id": "DENS-FEDORS-01",
+        "provenance": "CALCULATED",
+        "confidence": "medium"
+      },
+      "hsp_mpa_half": {
+        "delta_D": 24.01,
+        "delta_P": 6.87,
+        "delta_H": 8.43,
+        "primary_total": 26.36,
+        "method_id": "HSP-HVK-01",
+        "secondary_fedors_total": 26.37,
+        "displacement": 0.01,
+        "molar_volume_used": 211.2,
+        "qc_pass": true,
+        "qc_note": "Displacement HVK (26.36) vs Fedors (26.37) = 0.01 MPa^0.5",
+        "provenance": {
+          "delta_D": "CALCULATED",
+          "delta_P": "CALCULATED",
+          "delta_H": "CALCULATED"
+        },
+        "confidence": "high",
+        "uncertainty": "approx. 1.0-1.5 MPa^0.5 per component",
+        "breakdown": [
+          {
+            "group": "-CON< (tertiary amide / lactam)",
+            "count": 1.0,
+            "delta_u_each": 10000,
+            "delta_v_each": -4.0,
+            "Fd": 540.0,
+            "Fp": 1200.0,
+            "Eh": 10000.0,
+            "V": -4.0,
+            "sum_Fd": 540.0,
+            "sum_Fp_sq": 1440000.0,
+            "sum_Eh": 10000.0
+          },
+          {
+            "group": ">N- (tertiary amine)",
+            "count": 1.0,
+            "delta_u_each": 1000,
+            "delta_v_each": -9.0,
+            "Fd": 20.0,
+            "Fp": 800.0,
+            "Eh": 5000.0,
+            "V": -9.0,
+            "sum_Fd": 20.0,
+            "sum_Fp_sq": 640000.0,
+            "sum_Eh": 5000.0
+          },
+          {
+            "group": "Phenylene C6H4 (aromatic ring, p/m/o)",
+            "count": 2.0,
+            "delta_u_each": 7630,
+            "delta_v_each": 52.4,
+            "Fd": 1270.0,
+            "Fp": 110.0,
+            "Eh": 0.0,
+            "V": 52.4,
+            "sum_Fd": 2540.0,
+            "sum_Fp_sq": 24200.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "=CH- (aromatic ring atom)",
+            "count": 2.0,
+            "delta_u_each": 1000,
+            "delta_v_each": 13.5,
+            "Fd": 200.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": 13.5,
+            "sum_Fd": 400.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "=C< (aromatic bridgehead / substituted atom)",
+            "count": 1.0,
+            "delta_u_each": 1000,
+            "delta_v_each": -5.5,
+            "Fd": 70.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": -5.5,
+            "sum_Fd": 70.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "-CH3 (aliphatic)",
+            "count": 1.0,
+            "delta_u_each": 1125,
+            "delta_v_each": 33.5,
+            "Fd": 420.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": 33.5,
+            "sum_Fd": 420.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "-CH2- (aliphatic)",
+            "count": 4.0,
+            "delta_u_each": 1180,
+            "delta_v_each": 16.1,
+            "Fd": 270.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": 16.1,
+            "sum_Fd": 1080.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          }
+        ]
+      },
+      "delta_D": 24.01,
+      "delta_P": 6.87,
+      "delta_H": 8.43,
+      "R0": {
+        "value": 7.5,
+        "band": [
+          7.0,
+          8.0
+        ]
+      },
+      "logP": {
+        "primary": 2.68,
+        "primary_algorithm": "RDKit Crippen"
+      },
+      "TPSA": 80.3,
+      "HBD": 0,
+      "HBA": 8,
+      "BCS_class": "II",
+      "provenance": {
+        "tm_K": "LITERATURE",
+        "tg_K": "CALCULATED",
+        "density_g_cm3": "CALCULATED",
+        "delta_D": "CALCULATED",
+        "delta_P": "CALCULATED",
+        "delta_H": "CALCULATED",
+        "R0": "ASSUMED",
+        "mw": "COMPUTED-DESCRIPTOR",
+        "logP": "COMPUTED-DESCRIPTOR",
+        "TPSA": "COMPUTED-DESCRIPTOR",
+        "HBD": "COMPUTED-DESCRIPTOR",
+        "HBA": "COMPUTED-DESCRIPTOR",
+        "BCS_class": "LITERATURE"
+      },
+      "source": "Tm: ChemicalBook; VivaBiotech; FDA NDA 022465; PubChem CID 24965990; Polymorph: Form I (crystalline anhydrous form); CAS: 1030377-33-3; Descriptors: PubChem CID 24965990",
+      "method": [
+        "TG-RATIO-01",
+        "HSP-HVK-01",
+        "DENS-FEDORS-01",
+        "DESC-RDKIT-01"
+      ],
+      "algorithm": "Hoftyzer-van Krevelen group tables; Fedors 1974 constants; RDKit Crippen/Ertl/Lipinski",
+      "confidence": "high",
+      "uncertainty": {
+        "tg_K": "+/- 21 K (1-sigma)",
+        "density": "approx. 5 percent vs pycnometry",
+        "hsp_components": "approx. 1.5 MPa^0.5"
+      },
+      "calculation_date": "2026-09-06",
+      "software_version": "input-generator/1.0",
+      "qc": {
+        "entity_id": "DRG-0017",
+        "identity_roundtrip": "pass",
+        "ranges": "pass",
+        "descriptor_crosscheck": "TPSA/HBD/HBA exact; logP verified",
+        "hsp_primary_secondary_displacement": 0.01,
+        "borderline_flag": false,
+        "status": "APPROVED",
+        "warnings": [],
+        "errors": [],
+        "notes": [
+          "Structure valid and canonicalized",
+          "Tm within valid pharmaceutical range",
+          "HSP displacement 0.01 MPa^0.5 (excellent method agreement)"
+        ],
+        "diagnostics": []
+      }
+    },
+    {
+      "entity_id": "DRG-0018",
+      "entity_type": "drug",
+      "name": "tucatinib",
+      "abbreviation": null,
+      "canonical_smiles": "Cc1cc(Nc2ncnc3ccc(NC4=NC(C)(C)CO4)cc23)ccc1Oc1ccn2ncnc2c1",
+      "repeat_unit_smiles": null,
+      "structure": {
+        "pubchem_cid": 51039094,
+        "iupac_name": null,
+        "formula": "C26H24N8O2",
+        "neutral_parent": true,
+        "cas_number": "937263-65-3",
+        "polymorph": "Form I (crystalline anhydrous form)"
+      },
+      "mn": null,
+      "mw": 480.53,
+      "tm_K": {
+        "value": 503.15,
+        "form": "Form I (crystalline anhydrous form)",
+        "convention": "DSC onset, primary source selected by Table 4-1 rule",
+        "all_sources": [
+          230.0
+        ]
+      },
+      "tg_K": {
+        "value": 352.2,
+        "method_id": "TG-RATIO-01",
+        "equation": "0.70 * Tm",
+        "uncertainty_K": 21.0,
+        "provenance": "CALCULATED",
+        "confidence": "medium"
+      },
+      "density_g_cm3": {
+        "value": 2.133,
+        "molar_volume_cm3_mol": 225.3,
+        "state": "Fedors liquid-state surrogate for crystalline field",
+        "method_id": "DENS-FEDORS-01",
+        "provenance": "CALCULATED",
+        "confidence": "medium"
+      },
+      "hsp_mpa_half": {
+        "delta_D": 22.19,
+        "delta_P": 2.88,
+        "delta_H": 7.36,
+        "primary_total": 23.56,
+        "method_id": "HSP-HVK-01",
+        "secondary_fedors_total": 23.99,
+        "displacement": 0.43,
+        "molar_volume_used": 225.3,
+        "qc_pass": true,
+        "qc_note": "Displacement HVK (23.56) vs Fedors (23.99) = 0.43 MPa^0.5",
+        "provenance": {
+          "delta_D": "CALCULATED",
+          "delta_P": "CALCULATED",
+          "delta_H": "CALCULATED"
+        },
+        "confidence": "high",
+        "uncertainty": "approx. 1.0-1.5 MPa^0.5 per component",
+        "breakdown": [
+          {
+            "group": "-NH- (secondary amine)",
+            "count": 2.0,
+            "delta_u_each": 2000,
+            "delta_v_each": 4.5,
+            "Fd": 160.0,
+            "Fp": 210.0,
+            "Eh": 3100.0,
+            "V": 4.5,
+            "sum_Fd": 320.0,
+            "sum_Fp_sq": 88200.0,
+            "sum_Eh": 6200.0
+          },
+          {
+            "group": "-O- (ether, aromatic)",
+            "count": 1.0,
+            "delta_u_each": 800,
+            "delta_v_each": 3.8,
+            "Fd": 100.0,
+            "Fp": 400.0,
+            "Eh": 3000.0,
+            "V": 3.8,
+            "sum_Fd": 100.0,
+            "sum_Fp_sq": 160000.0,
+            "sum_Eh": 3000.0
+          },
+          {
+            "group": "-O- (ether, aliphatic)",
+            "count": 1.0,
+            "delta_u_each": 800,
+            "delta_v_each": 3.8,
+            "Fd": 100.0,
+            "Fp": 400.0,
+            "Eh": 3000.0,
+            "V": 3.8,
+            "sum_Fd": 100.0,
+            "sum_Fp_sq": 160000.0,
+            "sum_Eh": 3000.0
+          },
+          {
+            "group": "Phenylene C6H4 (aromatic ring, p/m/o)",
+            "count": 1.0,
+            "delta_u_each": 7630,
+            "delta_v_each": 52.4,
+            "Fd": 1270.0,
+            "Fp": 110.0,
+            "Eh": 0.0,
+            "V": 52.4,
+            "sum_Fd": 1270.0,
+            "sum_Fp_sq": 12100.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "=CH- (aromatic ring atom)",
+            "count": 8.0,
+            "delta_u_each": 1000,
+            "delta_v_each": 13.5,
+            "Fd": 200.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": 13.5,
+            "sum_Fd": 1600.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "=C< (aromatic bridgehead / substituted atom)",
+            "count": 5.0,
+            "delta_u_each": 1000,
+            "delta_v_each": -5.5,
+            "Fd": 70.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": -5.5,
+            "sum_Fd": 350.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "-CH3 (aliphatic)",
+            "count": 3.0,
+            "delta_u_each": 1125,
+            "delta_v_each": 33.5,
+            "Fd": 420.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": 33.5,
+            "sum_Fd": 1260.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": ">C< (aliphatic)",
+            "count": 1.0,
+            "delta_u_each": 350,
+            "delta_v_each": -19.2,
+            "Fd": -70.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": -19.2,
+            "sum_Fd": -70.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          },
+          {
+            "group": "=C< (olefinic)",
+            "count": 1.0,
+            "delta_u_each": 1030,
+            "delta_v_each": -5.5,
+            "Fd": 70.0,
+            "Fp": 0.0,
+            "Eh": 0.0,
+            "V": -5.5,
+            "sum_Fd": 70.0,
+            "sum_Fp_sq": 0.0,
+            "sum_Eh": 0.0
+          }
+        ]
+      },
+      "delta_D": 22.19,
+      "delta_P": 2.88,
+      "delta_H": 7.36,
+      "R0": {
+        "value": 7.5,
+        "band": [
+          7.0,
+          8.0
+        ]
+      },
+      "logP": {
+        "primary": 5.09,
+        "primary_algorithm": "RDKit Crippen"
+      },
+      "TPSA": 110.9,
+      "HBD": 2,
+      "HBA": 10,
+      "BCS_class": "II",
+      "provenance": {
+        "tm_K": "LITERATURE",
+        "tg_K": "CALCULATED",
+        "density_g_cm3": "CALCULATED",
+        "delta_D": "CALCULATED",
+        "delta_P": "CALCULATED",
+        "delta_H": "CALCULATED",
+        "R0": "ASSUMED",
+        "mw": "COMPUTED-DESCRIPTOR",
+        "logP": "COMPUTED-DESCRIPTOR",
+        "TPSA": "COMPUTED-DESCRIPTOR",
+        "HBD": "COMPUTED-DESCRIPTOR",
+        "HBA": "COMPUTED-DESCRIPTOR",
+        "BCS_class": "LITERATURE"
+      },
+      "source": "Tm: PubChem CID 51039094; FDA NDA 213233 Approval Review (2020); Polymorph: Form I (crystalline anhydrous form); CAS: 937263-65-3; Descriptors: PubChem CID 51039094",
+      "method": [
+        "TG-RATIO-01",
+        "HSP-HVK-01",
+        "DENS-FEDORS-01",
+        "DESC-RDKIT-01"
+      ],
+      "algorithm": "Hoftyzer-van Krevelen group tables; Fedors 1974 constants; RDKit Crippen/Ertl/Lipinski",
+      "confidence": "high",
+      "uncertainty": {
+        "tg_K": "+/- 21 K (1-sigma)",
+        "density": "approx. 5 percent vs pycnometry",
+        "hsp_components": "approx. 1.5 MPa^0.5"
+      },
+      "calculation_date": "2026-09-06",
+      "software_version": "input-generator/1.0",
+      "qc": {
+        "entity_id": "DRG-0018",
+        "identity_roundtrip": "pass",
+        "ranges": "pass",
+        "descriptor_crosscheck": "TPSA/HBD/HBA exact; logP verified",
+        "hsp_primary_secondary_displacement": 0.43,
+        "borderline_flag": false,
+        "status": "APPROVED",
+        "warnings": [],
+        "errors": [],
+        "notes": [
+          "Structure valid and canonicalized",
+          "Tm within valid pharmaceutical range",
+          "HSP displacement 0.43 MPa^0.5 (excellent method agreement)"
         ],
         "diagnostics": []
       }

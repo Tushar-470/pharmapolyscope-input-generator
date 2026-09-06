@@ -18,9 +18,9 @@ def test_json_load_and_sheet_generation():
     assert drg_sheet["entity_id"] == "DRG-0001"
     assert any(f["label"].startswith("Molecular Weight") for f in drg_sheet["fields"])
     
-    pol_sheet = io_mgr.generate_pharmapolyscope_ready_sheet("POL-0001")
-    assert pol_sheet["entity_id"] == "POL-0001"
-    assert any(f["label"].startswith("Glass Transition") for f in pol_sheet["fields"])
+    drg2_sheet = io_mgr.generate_pharmapolyscope_ready_sheet("DRG-0002")
+    assert drg2_sheet["entity_id"] == "DRG-0002"
+    assert any(f["label"].startswith("Molecular Weight") for f in drg2_sheet["fields"])
 
 
 def test_csv_sync_and_structure():
@@ -35,4 +35,4 @@ def test_csv_sync_and_structure():
     assert len(lines) >= 3  # Header + 2 rows
     assert lines[0].startswith("entity_id,entity_type,name")
     assert "DRG-0001" in lines[1]
-    assert "POL-0001" in lines[2]
+    assert "DRG-0002" in lines[2]
