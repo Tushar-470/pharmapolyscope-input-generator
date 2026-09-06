@@ -24,7 +24,7 @@ def main():
     # 1. Server command
     server_parser = subparsers.add_parser("serve", help="Launch the local scientific web application")
     server_parser.add_argument("--host", default="127.0.0.1", help="Host IP (default: 127.0.0.1)")
-    server_parser.add_argument("--port", type=int, default=8000, help="Port number (default: 8000)")
+    server_parser.add_argument("--port", type=int, default=8080, help="Port number (default: 8080)")
     server_parser.add_argument("--reload", action="store_true", help="Enable auto-reload")
 
     # 2. Validate command
