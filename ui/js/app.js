@@ -155,6 +155,7 @@ async function loadAllWorkbenchData() {
     renderSummaryTable();
     renderDrugRegistry();
     renderPolymerRegistry();
+    populateReadyEntityDropdown();
 
   } catch (err) {
     console.error("Failed to load workbench data:", err);
@@ -684,29 +685,29 @@ function renderQCDiagnosticCards(diagnostics, containerId) {
   }).join("");
 }
 
-async function saveCurrentDrug(forceDistinct = false) {
+async function saveCurrentDrug(forceDistinct = false, silent = false) {
   if (!currentCalculatedDrug) {
     await calculateDrugLive();
   }
-  if (!currentCalculatedDrug) return;
+  if (!currentCalculatedDrug) return null;
 
   const r = currentCalculatedDrug;
   const payload = {
     name: r.name,
     canonical_smiles: r.canonical_smiles,
-    tm_K: r.tm_K.tm_K || r.tm_K.value || r.tm_K,
-    tm_form: r.tm_K.form || "form I (stable at 25 C)",
-    tg_K: r.tg_K.tg_K || r.tg_K.value || r.tg_K,
-    density_g_cm3: r.density_g_cm3.density_g_cm3 || r.density_g_cm3.value || r.density_g_cm3,
-    delta_D: r.hsp_mpa_half.delta_D,
-    delta_P: r.hsp_mpa_half.delta_P,
-    delta_H: r.hsp_mpa_half.delta_H,
+    tm_K: r.tm_K?.tm_K || r.tm_K?.value || r.tm_K,
+    tm_form: r.tm_K?.form || "form I (stable at 25 C)",
+    tg_K: r.tg_K?.tg_K || r.tg_K?.value || r.tg_K,
+    density_g_cm3: r.density_g_cm3?.density_g_cm3 || r.density_g_cm3?.value || r.density_g_cm3,
+    delta_D: r.hsp_mpa_half?.delta_D,
+    delta_P: r.hsp_mpa_half?.delta_P,
+    delta_H: r.hsp_mpa_half?.delta_H,
     logP: r.logP,
     TPSA: r.TPSA,
     HBD: r.HBD,
     HBA: r.HBA,
     BCS_class: r.BCS_class || "II",
-    pubchem_cid: parseInt(document.getElementById("drug-cid").value) || null,
+    pubchem_cid: parseInt(document.getElementById("drug-cid")?.value) || null,
     force_distinct: forceDistinct
   };
 
@@ -719,25 +720,38 @@ async function saveCurrentDrug(forceDistinct = false) {
 
     const result = await res.json();
     if (result.duplicate_detected) {
+      if (silent) {
+        if (currentCalculatedDrug) currentCalculatedDrug.entity_id = result.existing_record.entity_id;
+        return { success: true, entity_id: result.existing_record.entity_id, is_duplicate: true };
+      }
       const choice = prompt(
-        `DUPLICATE RECORD DETECTED\n\nExisting record:\n${result.existing_record.entity_id} — ${result.existing_record.name}\n\nOptions:\n1: Open existing record\n2: Create intentionally distinct version\n3: Cancel`,
+        `DUPLICATE RECORD DETECTED\n\nExisting record:\n${result.existing_record.entity_id} — ${result.existing_record.name}\n\nOptions:\n1: Open existing record in Ready Sheet\n2: Create intentionally distinct version\n3: Cancel`,
         "1"
       );
       if (choice === "1") {
         viewReadySheetById(result.existing_record.entity_id);
       } else if (choice === "2") {
-        saveCurrentDrug(true);
+        return await saveCurrentDrug(true, silent);
       }
-      return;
+      return { success: false, entity_id: result.existing_record.entity_id };
     }
 
     if (result.success) {
-      alert(`Drug ${result.entity_id} saved successfully with status: ${result.qc.status}`);
-      loadAllWorkbenchData();
-      switchNav("library", "sub-drug-lib");
+      if (currentCalculatedDrug) {
+        currentCalculatedDrug.entity_id = result.entity_id;
+      }
+      await loadAllWorkbenchData();
+      if (!silent) {
+        alert(`Drug ${result.entity_id} saved successfully with status: ${result.qc.status}`);
+        switchNav("library", "sub-drug-lib");
+      }
+      return { success: true, entity_id: result.entity_id };
     }
+    return null;
   } catch (err) {
     console.error("Save error:", err);
+    if (!silent) alert("Failed to save drug record. Check console for details.");
+    return null;
   }
 }
 
@@ -1011,13 +1025,12 @@ async function calculatePolymerLive() {
   }
 }
 
-async function saveCurrentPolymer(forceDistinct = false) {
+async function saveCurrentPolymer(forceDistinct = false, silent = false) {
   const name = document.getElementById("poly-name")?.value.trim() || "Custom Polymer";
   const smiles = document.getElementById("poly-repeat-smiles")?.value.trim() || "*CC(*)N1CCCC1=O";
   const tgK = parseFloat(document.getElementById("poly-tg-k")?.value) || null;
   const tgC = parseFloat(document.getElementById("poly-tg-c")?.value) || null;
   const density = parseFloat(document.getElementById("poly-density")?.value) || 0.40;
-  const seed = 42;
 
   const payload = {
     name: name,
@@ -1025,8 +1038,7 @@ async function saveCurrentPolymer(forceDistinct = false) {
     tg_value_k: tgK,
     tg_value_c: tgC,
     custom_bulk_density: density,
-    force_distinct: forceDistinct,
-    seed: seed
+    force_distinct: forceDistinct
   };
 
   try {
@@ -1038,12 +1050,21 @@ async function saveCurrentPolymer(forceDistinct = false) {
 
     const result = await res.json();
     if (result.success) {
-      alert(`Polymer ${result.entity_id} (${name}) saved successfully.`);
-      loadAllWorkbenchData();
-      switchNav("library", "sub-poly-lib");
+      if (currentCalculatedPolymer) {
+        currentCalculatedPolymer.entity_id = result.entity_id;
+      }
+      await loadAllWorkbenchData();
+      if (!silent) {
+        alert(`Polymer ${result.entity_id} (${name}) saved successfully.`);
+        switchNav("library", "sub-poly-lib");
+      }
+      return { success: true, entity_id: result.entity_id };
     }
+    return null;
   } catch (err) {
     console.error("Polymer save error:", err);
+    if (!silent) alert("Failed to save polymer record. Check console for details.");
+    return null;
   }
 }
 
@@ -1051,57 +1072,102 @@ async function saveCurrentPolymer(forceDistinct = false) {
 // PHARMAPOLYSCOPE READY MANUAL ENTRY SHEET
 // -------------------------------------------------------------
 
-function populateReadyEntityDropdown() {
+function populateReadyEntityDropdown(selectedId = null) {
   const select = document.getElementById("ready-entity-select");
   if (!select) return;
+
+  const prevValue = selectedId || select.value;
 
   select.innerHTML = allStoredRecords.map(r => `
     <option value="${r.entity_id}">${r.name} (${r.entity_id} — ${r.entity_type.toUpperCase()})</option>
   `).join("");
 
   if (allStoredRecords.length > 0) {
-    loadReadySheet();
+    if (prevValue && allStoredRecords.some(r => r.entity_id === prevValue)) {
+      select.value = prevValue;
+    } else {
+      select.value = allStoredRecords[0].entity_id;
+    }
+    loadReadySheet(select.value);
   }
 }
 
-function viewReadySheetById(entityId) {
-  switchNav("output", "sub-ready-sheet");
-  setTimeout(() => {
-    const sel = document.getElementById("ready-entity-select");
-    if (sel) {
-      sel.value = entityId;
-      loadReadySheet();
+async function viewReadySheetById(entityId) {
+  if (!allStoredRecords || allStoredRecords.length === 0) {
+    await loadAllWorkbenchData();
+  }
+
+  // Switch navigation directly without clearing dropdown
+  document.querySelectorAll(".workspace-view").forEach(el => el.classList.remove("active"));
+  document.querySelectorAll(".sidebar .nav-item").forEach(el => el.classList.remove("active"));
+
+  const targetView = document.getElementById("view-output");
+  if (targetView) targetView.classList.add("active");
+
+  const outputNav = Array.from(document.querySelectorAll(".sidebar .nav-item")).find(b => b.getAttribute("onclick")?.includes("'output'"));
+  if (outputNav) outputNav.classList.add("active");
+
+  const breadcrumbEl = document.getElementById("breadcrumb-active-view");
+  if (breadcrumbEl) breadcrumbEl.innerText = viewTitleMap["output"] || "Ready Sheet & Output";
+
+  populateReadyEntityDropdown(entityId);
+  await loadReadySheet(entityId);
+}
+
+async function generateReportForCurrent(type) {
+  try {
+    if (type === "DRG") {
+      if (!currentCalculatedDrug) {
+        await calculateDrugLive();
+      }
+      if (!currentCalculatedDrug) {
+        alert("Please enter drug parameters and verify calculation first.");
+        return;
+      }
+      const res = await saveCurrentDrug(false, true); // save silently
+      const entityId = res?.entity_id || currentCalculatedDrug?.entity_id || "DRG-0001";
+      await viewReadySheetById(entityId);
+    } else if (type === "POL") {
+      if (!currentCalculatedPolymer) {
+        await calculatePolymerLive();
+      }
+      if (!currentCalculatedPolymer) {
+        alert("Please enter polymer parameters and verify calculation first.");
+        return;
+      }
+      const res = await saveCurrentPolymer(false, true); // save silently
+      const entityId = res?.entity_id || currentCalculatedPolymer?.entity_id || "POL-0001";
+      await viewReadySheetById(entityId);
     }
-  }, 100);
+  } catch (err) {
+    console.error("Error generating report for current entity:", err);
+  }
 }
 
 function viewReadySheetForCurrent(type) {
-  if (type === "DRG" && currentCalculatedDrug) {
-    saveCurrentDrug().then(() => {
-      viewReadySheetById(currentCalculatedDrug.entity_id || "DRG-0001");
-    });
-  } else if (type === "POL" && currentCalculatedPolymer) {
-    saveCurrentPolymer().then(() => {
-      viewReadySheetById(currentCalculatedPolymer.entity_id || "POL-0001");
-    });
-  }
+  generateReportForCurrent(type);
 }
 
 let currentLoadedReadySheet = null;
 
-async function loadReadySheet() {
+async function loadReadySheet(forcedEntityId = null) {
   const select = document.getElementById("ready-entity-select");
-  if (!select) return;
-  const entityId = select.value;
+  const entityId = forcedEntityId || (select ? select.value : null);
   if (!entityId) return;
+
+  if (select && select.value !== entityId) {
+    select.value = entityId;
+  }
+
+  const container = document.getElementById("ready-sheet-render-container");
+  if (!container) return;
 
   try {
     const res = await fetch(`/api/export/pharmapolyscope_ready/${entityId}`);
+    if (!res.ok) throw new Error(`Server returned HTTP ${res.status}`);
     const sheet = await res.json();
     currentLoadedReadySheet = sheet;
 
-    const container = document.getElementById("ready-sheet-render-container");
-    
     // Group fields by category
     const categoryOrder = [
       "Chemical Identity & Descriptors",
@@ -1233,6 +1299,16 @@ async function loadReadySheet() {
     `;
   } catch (err) {
     console.error("Error loading ready sheet:", err);
+    if (container) {
+      container.innerHTML = `
+        <div style="padding: 24px; text-align: center; color: var(--color-error); background: #FEF2F2; border: 1px solid #FCA5A5; border-radius: 6px;">
+          <i class="fa-solid fa-triangle-exclamation" style="font-size: 24px; margin-bottom: 8px;"></i>
+          <div style="font-weight: 700; font-size: 14px;">Failed to load Manual Entry Sheet for ${entityId}</div>
+          <p style="font-size: 12px; color: #7F1D1D; margin: 4px 0 12px 0;">${err.message}</p>
+          <button class="btn btn-secondary btn-sm" onclick="loadReadySheet('${entityId}')"><i class="fa-solid fa-rotate-right"></i> Retry Loading</button>
+        </div>
+      `;
+    }
   }
 }
 
@@ -1307,11 +1383,49 @@ function copyReadyJson() {
   });
 }
 
-function printReadySheet() {
-  switchNav("output", "sub-ready-sheet");
-  setTimeout(() => {
-    window.print();
-  }, 100);
+async function printReadySheet() {
+  const select = document.getElementById("ready-entity-select");
+  const entityId = select?.value || (allStoredRecords[0] ? allStoredRecords[0].entity_id : null);
+  if (!entityId) {
+    alert("No records available to print. Please calculate or save a record first.");
+    return;
+  }
+
+  // Ensure output view is active without resetting dropdown
+  document.querySelectorAll(".workspace-view").forEach(el => el.classList.remove("active"));
+  document.querySelectorAll(".sidebar .nav-item").forEach(el => el.classList.remove("active"));
+  const targetView = document.getElementById("view-output");
+  if (targetView) targetView.classList.add("active");
+  const outputNav = Array.from(document.querySelectorAll(".sidebar .nav-item")).find(b => b.getAttribute("onclick")?.includes("'output'"));
+  if (outputNav) outputNav.classList.add("active");
+
+  // Ensure current sheet is fully loaded
+  if (!currentLoadedReadySheet || currentLoadedReadySheet.entity_id !== entityId) {
+    await loadReadySheet(entityId);
+  }
+
+  // Wait for browser paint cycle before triggering print dialog
+  requestAnimationFrame(() => {
+    setTimeout(() => {
+      window.print();
+    }, 150);
+  });
+}
+
+function downloadReadySheetReport() {
+  const select = document.getElementById("ready-entity-select");
+  const entityId = select?.value || currentLoadedReadySheet?.entity_id;
+  if (!entityId) {
+    alert("Please select a record first.");
+    return;
+  }
+  const downloadUrl = `/api/export/report_html/${entityId}?download=true`;
+  const link = document.createElement("a");
+  link.href = downloadUrl;
+  link.download = `PharmaPolySCOPE_Report_${entityId}.html`;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
 }
 
 // -------------------------------------------------------------

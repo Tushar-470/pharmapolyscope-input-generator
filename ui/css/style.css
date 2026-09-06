@@ -540,7 +540,16 @@ html, body {
   background-color: var(--color-surface-subtle);
 }
 
+.btn-success {
+  background-color: #059669;
+  border-color: #059669;
+  color: #FFFFFF;
+}
 
+.btn-success:hover {
+  background-color: #047857;
+  border-color: #047857;
+}
 
 .btn-danger {
   background-color: var(--color-error);
@@ -978,6 +987,7 @@ html, body {
   justify-content: space-between;
   gap: 3px;
   width: 100%;
+  min-width: 0;
 }
 
 .ready-cell-wrap.wrap-numeric {

@@ -146,4 +146,26 @@ def test_calculate_drug_properties_endpoint():
     assert len(res["groups_matched"]) > 0
 
 
-
+def test_html_report_generation():
+    """Validates that standalone HTML report generates with all required headers, tables, and styles."""
+    from api.routes.export import download_report_html
+    
+    # Drug report test
+    resp_drg = download_report_html("DRG-0001", download=False)
+    html_drg = resp_drg.body.decode("utf-8")
+    assert "<!DOCTYPE html>" in html_drg
+    assert "PHARMAPOLYSCOPE: MANUAL ENTRY SHEET" in html_drg
+    assert "ibuprofen" in html_drg.lower()
+    assert "DRG-0001" in html_drg
+    assert "Nominal Base" in html_drg
+    assert "10k MC Final" in html_drg
+    assert "@page" in html_drg
+    
+    # Polymer report test
+    resp_pol = download_report_html("POL-0001", download=True)
+    html_pol = resp_pol.body.decode("utf-8")
+    assert "<!DOCTYPE html>" in html_pol
+    assert "POL-0001" in html_pol
+    assert "povidone" in html_pol.lower()
+    assert "Content-Disposition" in resp_pol.headers
+    assert "PharmaPolySCOPE_Report_POL-0001" in resp_pol.headers["Content-Disposition"]

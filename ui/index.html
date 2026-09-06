@@ -353,9 +353,9 @@
                           </div>
                         </details>
 
-                        <div style="display: flex; gap: 8px;">
+                        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
                           <button class="btn btn-primary" style="flex: 1;" onclick="saveCurrentDrug()"><i class="fa-solid fa-floppy-disk"></i> Commit Record to Store</button>
-                          <button class="btn btn-secondary" onclick="viewReadySheetForCurrent('DRG')"><i class="fa-solid fa-clipboard-check"></i> View in Ready Sheet</button>
+                          <button class="btn btn-success" onclick="generateReportForCurrent('DRG')"><i class="fa-solid fa-file-lines"></i> Generate Report & Ready Sheet</button>
                         </div>
                       </div>
                     </div>
@@ -497,10 +497,9 @@
                           </div>
                         </div>
 
-                        <div style="display: flex; gap: 8px;">
-                          <button class="btn btn-secondary" style="width: 100%;" onclick="viewReadySheetForCurrent('POL')">
-                            <i class="fa-solid fa-clipboard-check"></i> View in Ready Sheet
-                          </button>
+                        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                          <button class="btn btn-primary" style="flex: 1;" onclick="saveCurrentPolymer()"><i class="fa-solid fa-floppy-disk"></i> Save Polymer to Store</button>
+                          <button class="btn btn-success" onclick="generateReportForCurrent('POL')"><i class="fa-solid fa-file-lines"></i> Generate Report & Ready Sheet</button>
                         </div>
                       </div>
                     </div>
@@ -602,12 +601,13 @@
                       <h3 class="card-title"><i class="fa-solid fa-clipboard-check"></i> PharmaPolySCOPE Manual Entry Sheet</h3>
                       <p class="card-subtitle">Authoritative physicochemical input sheet with 1-click single-value & batch copy</p>
                     </div>
-                    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
                       <select id="ready-entity-select" class="form-input" style="min-width: 220px;" onchange="loadReadySheet()"></select>
-                      <button class="btn btn-primary btn-sm" onclick="copyReadyAllFinal()"><i class="fa-solid fa-copy"></i> Copy Final Values</button>
-                      <button class="btn btn-secondary btn-sm" onclick="copyReadyCsvRow()"><i class="fa-solid fa-table-cells"></i> Copy CSV / Row</button>
-                      <button class="btn btn-secondary btn-sm" onclick="copyReadyJson()"><i class="fa-solid fa-code"></i> Copy JSON</button>
-                      <button class="btn btn-secondary btn-sm" onclick="printReadySheet()"><i class="fa-solid fa-print"></i> Print / PDF</button>
+                      <button class="btn btn-primary btn-sm" onclick="copyReadyAllFinal()" title="Copy all converged final values"><i class="fa-solid fa-copy"></i> Copy Final Values</button>
+                      <button class="btn btn-secondary btn-sm" onclick="copyReadyCsvRow()" title="Copy tab-delimited row"><i class="fa-solid fa-table-cells"></i> Copy CSV / Row</button>
+                      <button class="btn btn-secondary btn-sm" onclick="copyReadyJson()" title="Copy JSON payload"><i class="fa-solid fa-code"></i> Copy JSON</button>
+                      <button class="btn btn-success btn-sm" onclick="downloadReadySheetReport()" title="Download standalone single-page HTML report"><i class="fa-solid fa-download"></i> Download Report (.html)</button>
+                      <button class="btn btn-secondary btn-sm" onclick="printReadySheet()" title="Print or save as PDF"><i class="fa-solid fa-print"></i> Print / PDF</button>
                     </div>
                   </div>
                   <div class="card-body">
