@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "generator_version": "input-generator/1.0",
-  "generated": "2026-09-06",
+  "generated": "2026-09-07",
   "description": "Physicochemical Input Generator output store for Pharmapolyscope manual entry. One record per entity. Missing values are explicit nulls, never blanks. Empty rows are schema-complete and ready to fill. Values are transferred to Pharmapolyscope manually per SOP step 13 (report Chapter 17).",
   "controlled_vocabularies": {
     "entity_type": [
@@ -4584,6 +4584,2002 @@
           "Structure valid and canonicalized",
           "Tm within valid pharmaceutical range",
           "HSP displacement 0.43 MPa^0.5 (excellent method agreement)"
+        ],
+        "diagnostics": []
+      }
+    },
+    {
+      "entity_id": "POL-0001",
+      "entity_type": "polymer",
+      "name": "povidone (polyvinylpyrrolidone)",
+      "abbreviation": "PVP K30",
+      "canonical_smiles": null,
+      "repeat_unit_smiles": {
+        "value": "*CC(*)N1CCCC1=O",
+        "record_version": "1.0",
+        "composition": "homopolymer; K-value grade 27-32",
+        "formula": "C6H9NO",
+        "repeat_unit_mw": 111.14
+      },
+      "grade": {
+        "carrier": "povidone",
+        "grade": "K30",
+        "pharmacopoeia": "Ph. Eur. / USP povidone",
+        "k_value": "27-32",
+        "composition": "homopolymer; K-value grade 27-32",
+        "dissolution_pH": null
+      },
+      "mn": null,
+      "mw": null,
+      "mn_note": "MANUFACTURER-SPEC: supplier literature reports Mw approx. 40000-65000 g/mol (PDI 2-3 typical); complete from the deployed grade GPC/datasheet",
+      "tm_K": null,
+      "tg_K": {
+        "value": 426.8,
+        "method": "mDSC onset, dry state, grade K30",
+        "measurement_uncertainty_K": 2.1,
+        "tg_source": "PMC7284699 (dry-state DSC Tg 153.6\u00b0C / 426.8 K); Alshehri et al. (2020) Pharmaceutics 12(10), 964; BASF Kollidon 30 TDS (true density 1.20 g/cm\u00b3, bulk density 0.40-0.45 g/cm\u00b3)"
+      },
+      "density_g_cm3": {
+        "value": 0.4,
+        "true_density_g_cm3": 1.2,
+        "note": "bulk density from grade datasheet (0.4 g/cm3); true density reference 1.2 g/cm3 (pycnometry)"
+      },
+      "hsp_mpa_half": {
+        "delta_D": 20.44,
+        "delta_P": 13.67,
+        "delta_H": 6.86,
+        "tabulated_total": 26.28,
+        "recomputed_total": 25.53,
+        "method_id": "HSP-HVK-01",
+        "secondary_fedors_total": 23.75,
+        "displacement": 2.53,
+        "qc_note": "0.75 MPa^0.5 tabulation discrepancy recorded"
+      },
+      "R0": {
+        "value": 7.5,
+        "band": [
+          7.0,
+          8.0
+        ]
+      },
+      "logP": null,
+      "TPSA": null,
+      "HBD": null,
+      "HBA": null,
+      "BCS_class": null,
+      "provenance": {
+        "tg_K": "LITERATURE",
+        "delta_D": "CALCULATED",
+        "delta_P": "CALCULATED",
+        "delta_H": "CALCULATED",
+        "R0": "ASSUMED",
+        "mn": "MANUFACTURER-SPEC",
+        "bulk_density": "MANUFACTURER-SPEC",
+        "repeat_unit_smiles": "LITERATURE (curated record)"
+      },
+      "source": "Tg: PMC7284699 (dry-state DSC Tg 153.6\u00b0C / 426.8 K); Alshehri et al. (2020) Pharmaceutics 12(10), 964; BASF Kollidon 30 TDS (true density 1.20 g/cm\u00b3, bulk density 0.40-0.45 g/cm\u00b3); HSP: Literature group contribution / Hansen Handbook; grade: Ph. Eur. / USP povidone",
+      "method": [
+        "HSP-HVK-01",
+        "LIT-ACQ-02"
+      ],
+      "algorithm": "Hoftyzer-van Krevelen on repeat unit; literature acquisition hierarchy for Tg",
+      "confidence": "medium",
+      "uncertainty": {
+        "tg_K": "+/- 2.1 K measurement; dry state declared",
+        "hsp": "displacement 2.53 MPa^0.5",
+        "mn": "supplier specification width"
+      },
+      "calculation_date": "2026-09-07",
+      "software_version": "input-generator/1.0",
+      "qc": {
+        "entity_id": "POL-0001",
+        "identity_roundtrip": "pass (curated record v1.0, monograph match)",
+        "ranges": "pass",
+        "hsp_primary_secondary_displacement": 2.53,
+        "borderline_flag": true,
+        "status": "APPROVED with flags",
+        "warnings": [
+          "HSP primary-secondary displacement 2.53 MPa^0.5 noted (moderate confidence)"
+        ],
+        "errors": [],
+        "notes": [
+          "Grade identification present: {'carrier': 'povidone', 'grade': 'K30', 'pharmacopoeia': 'Ph. Eur. / USP povidone', 'k_value': '27-32', 'composition': 'homopolymer; K-value grade 27-32', 'dissolution_pH': None}",
+          "Repeat-unit representation present",
+          "Polymer Tg 426.8 K recorded from literature"
+        ],
+        "diagnostics": [
+          {
+            "code": "QC-FLAG-POLY-HSP-DISP",
+            "category": "Polymer HSP Concordance",
+            "severity": "WARNING",
+            "parameter": "displacement",
+            "title": "Polymer HSP Method Concordance Displacement",
+            "observed_value": "2.53 MPa\u00bd",
+            "expected_threshold": "\u2264 2.00 MPa\u00bd",
+            "delta_description": "+0.53 MPa\u00bd offset",
+            "molecular_motif": "Repeat unit cyclic lactam or cellulosic ether linkage",
+            "scientific_rationale": "PVP and cellulose derivatives exhibit a known theoretical offset between Fedors ring-closure energy and Hoftyzer\u2013van Krevelen partial groups. The record is fully valid and represents the Appendix A benchmark standard.",
+            "screening_impact": "Low-to-Moderate: Standard displacement for Povidone (3.63 MPa\u00bd) and Copovidone.",
+            "remediation_guidance": "Record is approved with flags for screening. Use Monte Carlo UQ to test stability boundaries.",
+            "action_type": "RUN_MC",
+            "action_label": "Monte Carlo Pair UQ"
+          }
+        ]
+      }
+    },
+    {
+      "entity_id": "POL-0002",
+      "entity_type": "polymer",
+      "name": "povidone (polyvinylpyrrolidone)",
+      "abbreviation": "PVP K12",
+      "canonical_smiles": null,
+      "repeat_unit_smiles": {
+        "value": "*CC(*)N1CCCC1=O",
+        "record_version": "1.0",
+        "composition": "homopolymer; K-value grade 11-14",
+        "formula": "C6H9NO",
+        "repeat_unit_mw": 111.14
+      },
+      "grade": {
+        "carrier": "povidone",
+        "grade": "K12",
+        "pharmacopoeia": "Ph. Eur. / USP povidone",
+        "k_value": "11-14",
+        "composition": "homopolymer; K-value grade 11-14",
+        "dissolution_pH": null
+      },
+      "mn": null,
+      "mw": null,
+      "mn_note": "MANUFACTURER-SPEC: supplier literature reports Mw approx. 4000-6000 g/mol (PDI 2-3 typical); complete from the deployed grade GPC/datasheet",
+      "tm_K": null,
+      "tg_K": {
+        "value": 378.0,
+        "method": "mDSC onset, dry state, grade K12",
+        "measurement_uncertainty_K": 2.5,
+        "tg_source": "Alshehri et al. (2020). Pharmaceutics, 12(10), 964 (dry-state DSC); BASF Kollidon 12 PF Technical Information (density 1.20 g/cm\u00b3)"
+      },
+      "density_g_cm3": {
+        "value": 0.5,
+        "true_density_g_cm3": 1.2,
+        "note": "bulk density from grade datasheet (0.5 g/cm3); true density reference 1.2 g/cm3 (pycnometry)"
+      },
+      "hsp_mpa_half": {
+        "delta_D": 20.44,
+        "delta_P": 13.67,
+        "delta_H": 6.86,
+        "tabulated_total": 26.28,
+        "recomputed_total": 25.53,
+        "method_id": "HSP-HVK-01",
+        "secondary_fedors_total": 23.75,
+        "displacement": 2.53,
+        "qc_note": "0.75 MPa^0.5 tabulation discrepancy recorded"
+      },
+      "R0": {
+        "value": 7.5,
+        "band": [
+          7.0,
+          8.0
+        ]
+      },
+      "logP": null,
+      "TPSA": null,
+      "HBD": null,
+      "HBA": null,
+      "BCS_class": null,
+      "provenance": {
+        "tg_K": "LITERATURE",
+        "delta_D": "CALCULATED",
+        "delta_P": "CALCULATED",
+        "delta_H": "CALCULATED",
+        "R0": "ASSUMED",
+        "mn": "MANUFACTURER-SPEC",
+        "bulk_density": "MANUFACTURER-SPEC",
+        "repeat_unit_smiles": "LITERATURE (curated record)"
+      },
+      "source": "Tg: Alshehri et al. (2020). Pharmaceutics, 12(10), 964 (dry-state DSC); BASF Kollidon 12 PF Technical Information (density 1.20 g/cm\u00b3); HSP: Literature group contribution / Hansen Handbook; grade: Ph. Eur. / USP povidone",
+      "method": [
+        "HSP-HVK-01",
+        "LIT-ACQ-02"
+      ],
+      "algorithm": "Hoftyzer-van Krevelen on repeat unit; literature acquisition hierarchy for Tg",
+      "confidence": "medium",
+      "uncertainty": {
+        "tg_K": "+/- 2.5 K measurement; dry state declared",
+        "hsp": "displacement 2.53 MPa^0.5",
+        "mn": "supplier specification width"
+      },
+      "calculation_date": "2026-09-07",
+      "software_version": "input-generator/1.0",
+      "qc": {
+        "entity_id": "POL-0002",
+        "identity_roundtrip": "pass (curated record v1.0, monograph match)",
+        "ranges": "pass",
+        "hsp_primary_secondary_displacement": 2.53,
+        "borderline_flag": true,
+        "status": "APPROVED with flags",
+        "warnings": [
+          "HSP primary-secondary displacement 2.53 MPa^0.5 noted (moderate confidence)"
+        ],
+        "errors": [],
+        "notes": [
+          "Grade identification present: {'carrier': 'povidone', 'grade': 'K12', 'pharmacopoeia': 'Ph. Eur. / USP povidone', 'k_value': '11-14', 'composition': 'homopolymer; K-value grade 11-14', 'dissolution_pH': None}",
+          "Repeat-unit representation present",
+          "Polymer Tg 378.0 K recorded from literature"
+        ],
+        "diagnostics": [
+          {
+            "code": "QC-FLAG-POLY-HSP-DISP",
+            "category": "Polymer HSP Concordance",
+            "severity": "WARNING",
+            "parameter": "displacement",
+            "title": "Polymer HSP Method Concordance Displacement",
+            "observed_value": "2.53 MPa\u00bd",
+            "expected_threshold": "\u2264 2.00 MPa\u00bd",
+            "delta_description": "+0.53 MPa\u00bd offset",
+            "molecular_motif": "Repeat unit cyclic lactam or cellulosic ether linkage",
+            "scientific_rationale": "PVP and cellulose derivatives exhibit a known theoretical offset between Fedors ring-closure energy and Hoftyzer\u2013van Krevelen partial groups. The record is fully valid and represents the Appendix A benchmark standard.",
+            "screening_impact": "Low-to-Moderate: Standard displacement for Povidone (3.63 MPa\u00bd) and Copovidone.",
+            "remediation_guidance": "Record is approved with flags for screening. Use Monte Carlo UQ to test stability boundaries.",
+            "action_type": "RUN_MC",
+            "action_label": "Monte Carlo Pair UQ"
+          }
+        ]
+      }
+    },
+    {
+      "entity_id": "POL-0003",
+      "entity_type": "polymer",
+      "name": "povidone (polyvinylpyrrolidone)",
+      "abbreviation": "PVP K17",
+      "canonical_smiles": null,
+      "repeat_unit_smiles": {
+        "value": "*CC(*)N1CCCC1=O",
+        "record_version": "1.0",
+        "composition": "homopolymer; K-value grade 16-18",
+        "formula": "C6H9NO",
+        "repeat_unit_mw": 111.14
+      },
+      "grade": {
+        "carrier": "povidone",
+        "grade": "K17",
+        "pharmacopoeia": "Ph. Eur. / USP povidone",
+        "k_value": "16-18",
+        "composition": "homopolymer; K-value grade 16-18",
+        "dissolution_pH": null
+      },
+      "mn": null,
+      "mw": null,
+      "mn_note": "MANUFACTURER-SPEC: supplier literature reports Mw approx. 9000-15000 g/mol (PDI 2-3 typical); complete from the deployed grade GPC/datasheet",
+      "tm_K": null,
+      "tg_K": {
+        "value": 415.3,
+        "method": "mDSC onset, dry state, grade K17",
+        "measurement_uncertainty_K": 3.0,
+        "tg_source": "Alshehri et al. (2020). Pharmaceutics, 12(10), 964; BASF Kollidon 17 PF Technical Information"
+      },
+      "density_g_cm3": {
+        "value": 0.45,
+        "true_density_g_cm3": 1.2,
+        "note": "bulk density from grade datasheet (0.45 g/cm3); true density reference 1.2 g/cm3 (pycnometry)"
+      },
+      "hsp_mpa_half": {
+        "delta_D": 20.44,
+        "delta_P": 13.67,
+        "delta_H": 6.86,
+        "tabulated_total": 26.28,
+        "recomputed_total": 25.53,
+        "method_id": "HSP-HVK-01",
+        "secondary_fedors_total": 23.75,
+        "displacement": 2.53,
+        "qc_note": "0.75 MPa^0.5 tabulation discrepancy recorded"
+      },
+      "R0": {
+        "value": 7.5,
+        "band": [
+          7.0,
+          8.0
+        ]
+      },
+      "logP": null,
+      "TPSA": null,
+      "HBD": null,
+      "HBA": null,
+      "BCS_class": null,
+      "provenance": {
+        "tg_K": "LITERATURE",
+        "delta_D": "CALCULATED",
+        "delta_P": "CALCULATED",
+        "delta_H": "CALCULATED",
+        "R0": "ASSUMED",
+        "mn": "MANUFACTURER-SPEC",
+        "bulk_density": "MANUFACTURER-SPEC",
+        "repeat_unit_smiles": "LITERATURE (curated record)"
+      },
+      "source": "Tg: Alshehri et al. (2020). Pharmaceutics, 12(10), 964; BASF Kollidon 17 PF Technical Information; HSP: Literature group contribution / Hansen Handbook; grade: Ph. Eur. / USP povidone",
+      "method": [
+        "HSP-HVK-01",
+        "LIT-ACQ-02"
+      ],
+      "algorithm": "Hoftyzer-van Krevelen on repeat unit; literature acquisition hierarchy for Tg",
+      "confidence": "medium",
+      "uncertainty": {
+        "tg_K": "+/- 3.0 K measurement; dry state declared",
+        "hsp": "displacement 2.53 MPa^0.5",
+        "mn": "supplier specification width"
+      },
+      "calculation_date": "2026-09-07",
+      "software_version": "input-generator/1.0",
+      "qc": {
+        "entity_id": "POL-0003",
+        "identity_roundtrip": "pass (curated record v1.0, monograph match)",
+        "ranges": "pass",
+        "hsp_primary_secondary_displacement": 2.53,
+        "borderline_flag": true,
+        "status": "APPROVED with flags",
+        "warnings": [
+          "HSP primary-secondary displacement 2.53 MPa^0.5 noted (moderate confidence)"
+        ],
+        "errors": [],
+        "notes": [
+          "Grade identification present: {'carrier': 'povidone', 'grade': 'K17', 'pharmacopoeia': 'Ph. Eur. / USP povidone', 'k_value': '16-18', 'composition': 'homopolymer; K-value grade 16-18', 'dissolution_pH': None}",
+          "Repeat-unit representation present",
+          "Polymer Tg 415.3 K recorded from literature"
+        ],
+        "diagnostics": [
+          {
+            "code": "QC-FLAG-POLY-HSP-DISP",
+            "category": "Polymer HSP Concordance",
+            "severity": "WARNING",
+            "parameter": "displacement",
+            "title": "Polymer HSP Method Concordance Displacement",
+            "observed_value": "2.53 MPa\u00bd",
+            "expected_threshold": "\u2264 2.00 MPa\u00bd",
+            "delta_description": "+0.53 MPa\u00bd offset",
+            "molecular_motif": "Repeat unit cyclic lactam or cellulosic ether linkage",
+            "scientific_rationale": "PVP and cellulose derivatives exhibit a known theoretical offset between Fedors ring-closure energy and Hoftyzer\u2013van Krevelen partial groups. The record is fully valid and represents the Appendix A benchmark standard.",
+            "screening_impact": "Low-to-Moderate: Standard displacement for Povidone (3.63 MPa\u00bd) and Copovidone.",
+            "remediation_guidance": "Record is approved with flags for screening. Use Monte Carlo UQ to test stability boundaries.",
+            "action_type": "RUN_MC",
+            "action_label": "Monte Carlo Pair UQ"
+          }
+        ]
+      }
+    },
+    {
+      "entity_id": "POL-0004",
+      "entity_type": "polymer",
+      "name": "povidone (polyvinylpyrrolidone)",
+      "abbreviation": "PVP K25",
+      "canonical_smiles": null,
+      "repeat_unit_smiles": {
+        "value": "*CC(*)N1CCCC1=O",
+        "record_version": "1.0",
+        "composition": "homopolymer; K-value grade 24-26",
+        "formula": "C6H9NO",
+        "repeat_unit_mw": 111.14
+      },
+      "grade": {
+        "carrier": "povidone",
+        "grade": "K25",
+        "pharmacopoeia": "Ph. Eur. / USP povidone",
+        "k_value": "24-26",
+        "composition": "homopolymer; K-value grade 24-26",
+        "dissolution_pH": null
+      },
+      "mn": null,
+      "mw": null,
+      "mn_note": "MANUFACTURER-SPEC: supplier literature reports Mw approx. 28000-34000 g/mol (PDI 2-3 typical); complete from the deployed grade GPC/datasheet",
+      "tm_K": null,
+      "tg_K": {
+        "value": 426.2,
+        "method": "mDSC onset, dry state, grade K25",
+        "measurement_uncertainty_K": 2.5,
+        "tg_source": "Alshehri et al. (2020). Pharmaceutics, 12(10), 964; BASF Kollidon 25 Technical Information"
+      },
+      "density_g_cm3": {
+        "value": 0.42,
+        "true_density_g_cm3": 1.2,
+        "note": "bulk density from grade datasheet (0.42 g/cm3); true density reference 1.2 g/cm3 (pycnometry)"
+      },
+      "hsp_mpa_half": {
+        "delta_D": 20.44,
+        "delta_P": 13.67,
+        "delta_H": 6.86,
+        "tabulated_total": 26.28,
+        "recomputed_total": 25.53,
+        "method_id": "HSP-HVK-01",
+        "secondary_fedors_total": 23.75,
+        "displacement": 2.53,
+        "qc_note": "0.75 MPa^0.5 tabulation discrepancy recorded"
+      },
+      "R0": {
+        "value": 7.5,
+        "band": [
+          7.0,
+          8.0
+        ]
+      },
+      "logP": null,
+      "TPSA": null,
+      "HBD": null,
+      "HBA": null,
+      "BCS_class": null,
+      "provenance": {
+        "tg_K": "LITERATURE",
+        "delta_D": "CALCULATED",
+        "delta_P": "CALCULATED",
+        "delta_H": "CALCULATED",
+        "R0": "ASSUMED",
+        "mn": "MANUFACTURER-SPEC",
+        "bulk_density": "MANUFACTURER-SPEC",
+        "repeat_unit_smiles": "LITERATURE (curated record)"
+      },
+      "source": "Tg: Alshehri et al. (2020). Pharmaceutics, 12(10), 964; BASF Kollidon 25 Technical Information; HSP: Literature group contribution / Hansen Handbook; grade: Ph. Eur. / USP povidone",
+      "method": [
+        "HSP-HVK-01",
+        "LIT-ACQ-02"
+      ],
+      "algorithm": "Hoftyzer-van Krevelen on repeat unit; literature acquisition hierarchy for Tg",
+      "confidence": "medium",
+      "uncertainty": {
+        "tg_K": "+/- 2.5 K measurement; dry state declared",
+        "hsp": "displacement 2.53 MPa^0.5",
+        "mn": "supplier specification width"
+      },
+      "calculation_date": "2026-09-07",
+      "software_version": "input-generator/1.0",
+      "qc": {
+        "entity_id": "POL-0004",
+        "identity_roundtrip": "pass (curated record v1.0, monograph match)",
+        "ranges": "pass",
+        "hsp_primary_secondary_displacement": 2.53,
+        "borderline_flag": true,
+        "status": "APPROVED with flags",
+        "warnings": [
+          "HSP primary-secondary displacement 2.53 MPa^0.5 noted (moderate confidence)"
+        ],
+        "errors": [],
+        "notes": [
+          "Grade identification present: {'carrier': 'povidone', 'grade': 'K25', 'pharmacopoeia': 'Ph. Eur. / USP povidone', 'k_value': '24-26', 'composition': 'homopolymer; K-value grade 24-26', 'dissolution_pH': None}",
+          "Repeat-unit representation present",
+          "Polymer Tg 426.2 K recorded from literature"
+        ],
+        "diagnostics": [
+          {
+            "code": "QC-FLAG-POLY-HSP-DISP",
+            "category": "Polymer HSP Concordance",
+            "severity": "WARNING",
+            "parameter": "displacement",
+            "title": "Polymer HSP Method Concordance Displacement",
+            "observed_value": "2.53 MPa\u00bd",
+            "expected_threshold": "\u2264 2.00 MPa\u00bd",
+            "delta_description": "+0.53 MPa\u00bd offset",
+            "molecular_motif": "Repeat unit cyclic lactam or cellulosic ether linkage",
+            "scientific_rationale": "PVP and cellulose derivatives exhibit a known theoretical offset between Fedors ring-closure energy and Hoftyzer\u2013van Krevelen partial groups. The record is fully valid and represents the Appendix A benchmark standard.",
+            "screening_impact": "Low-to-Moderate: Standard displacement for Povidone (3.63 MPa\u00bd) and Copovidone.",
+            "remediation_guidance": "Record is approved with flags for screening. Use Monte Carlo UQ to test stability boundaries.",
+            "action_type": "RUN_MC",
+            "action_label": "Monte Carlo Pair UQ"
+          }
+        ]
+      }
+    },
+    {
+      "entity_id": "POL-0005",
+      "entity_type": "polymer",
+      "name": "povidone (polyvinylpyrrolidone)",
+      "abbreviation": "PVP K90",
+      "canonical_smiles": null,
+      "repeat_unit_smiles": {
+        "value": "*CC(*)N1CCCC1=O",
+        "record_version": "1.0",
+        "composition": "homopolymer; K-value grade 85-95",
+        "formula": "C6H9NO",
+        "repeat_unit_mw": 111.14
+      },
+      "grade": {
+        "carrier": "povidone",
+        "grade": "K90",
+        "pharmacopoeia": "Ph. Eur. / USP povidone",
+        "k_value": "85-95",
+        "composition": "homopolymer; K-value grade 85-95",
+        "dissolution_pH": null
+      },
+      "mn": null,
+      "mw": null,
+      "mn_note": "MANUFACTURER-SPEC: supplier literature reports Mw approx. 1000000-1500000 g/mol (PDI 2-3 typical); complete from the deployed grade GPC/datasheet",
+      "tm_K": null,
+      "tg_K": {
+        "value": 451.7,
+        "method": "mDSC onset, dry state, grade K90",
+        "measurement_uncertainty_K": 3.0,
+        "tg_source": "Alshehri et al. (2020). Pharmaceutics, 12(10), 964; BASF Kollidon 90 F Technical Information"
+      },
+      "density_g_cm3": {
+        "value": 0.45,
+        "true_density_g_cm3": 1.2,
+        "note": "bulk density from grade datasheet (0.45 g/cm3); true density reference 1.2 g/cm3 (pycnometry)"
+      },
+      "hsp_mpa_half": {
+        "delta_D": 20.44,
+        "delta_P": 13.67,
+        "delta_H": 6.86,
+        "tabulated_total": 26.28,
+        "recomputed_total": 25.53,
+        "method_id": "HSP-HVK-01",
+        "secondary_fedors_total": 23.75,
+        "displacement": 2.53,
+        "qc_note": "0.75 MPa^0.5 tabulation discrepancy recorded"
+      },
+      "R0": {
+        "value": 7.5,
+        "band": [
+          7.0,
+          8.0
+        ]
+      },
+      "logP": null,
+      "TPSA": null,
+      "HBD": null,
+      "HBA": null,
+      "BCS_class": null,
+      "provenance": {
+        "tg_K": "LITERATURE",
+        "delta_D": "CALCULATED",
+        "delta_P": "CALCULATED",
+        "delta_H": "CALCULATED",
+        "R0": "ASSUMED",
+        "mn": "MANUFACTURER-SPEC",
+        "bulk_density": "MANUFACTURER-SPEC",
+        "repeat_unit_smiles": "LITERATURE (curated record)"
+      },
+      "source": "Tg: Alshehri et al. (2020). Pharmaceutics, 12(10), 964; BASF Kollidon 90 F Technical Information; HSP: Literature group contribution / Hansen Handbook; grade: Ph. Eur. / USP povidone",
+      "method": [
+        "HSP-HVK-01",
+        "LIT-ACQ-02"
+      ],
+      "algorithm": "Hoftyzer-van Krevelen on repeat unit; literature acquisition hierarchy for Tg",
+      "confidence": "medium",
+      "uncertainty": {
+        "tg_K": "+/- 3.0 K measurement; dry state declared",
+        "hsp": "displacement 2.53 MPa^0.5",
+        "mn": "supplier specification width"
+      },
+      "calculation_date": "2026-09-07",
+      "software_version": "input-generator/1.0",
+      "qc": {
+        "entity_id": "POL-0005",
+        "identity_roundtrip": "pass (curated record v1.0, monograph match)",
+        "ranges": "warning",
+        "hsp_primary_secondary_displacement": 2.53,
+        "borderline_flag": true,
+        "status": "APPROVED with flags",
+        "warnings": [
+          "Polymer Tg 451.7 K outside standard range [150, 450] K",
+          "HSP primary-secondary displacement 2.53 MPa^0.5 noted (moderate confidence)"
+        ],
+        "errors": [],
+        "notes": [
+          "Grade identification present: {'carrier': 'povidone', 'grade': 'K90', 'pharmacopoeia': 'Ph. Eur. / USP povidone', 'k_value': '85-95', 'composition': 'homopolymer; K-value grade 85-95', 'dissolution_pH': None}",
+          "Repeat-unit representation present",
+          "Polymer Tg 451.7 K recorded from literature"
+        ],
+        "diagnostics": [
+          {
+            "code": "QC-FLAG-POLY-HSP-DISP",
+            "category": "Polymer HSP Concordance",
+            "severity": "WARNING",
+            "parameter": "displacement",
+            "title": "Polymer HSP Method Concordance Displacement",
+            "observed_value": "2.53 MPa\u00bd",
+            "expected_threshold": "\u2264 2.00 MPa\u00bd",
+            "delta_description": "+0.53 MPa\u00bd offset",
+            "molecular_motif": "Repeat unit cyclic lactam or cellulosic ether linkage",
+            "scientific_rationale": "PVP and cellulose derivatives exhibit a known theoretical offset between Fedors ring-closure energy and Hoftyzer\u2013van Krevelen partial groups. The record is fully valid and represents the Appendix A benchmark standard.",
+            "screening_impact": "Low-to-Moderate: Standard displacement for Povidone (3.63 MPa\u00bd) and Copovidone.",
+            "remediation_guidance": "Record is approved with flags for screening. Use Monte Carlo UQ to test stability boundaries.",
+            "action_type": "RUN_MC",
+            "action_label": "Monte Carlo Pair UQ"
+          }
+        ]
+      }
+    },
+    {
+      "entity_id": "POL-0006",
+      "entity_type": "polymer",
+      "name": "copovidone (poly(vinylpyrrolidone-co-vinyl acetate))",
+      "abbreviation": "PVP-VA 64",
+      "canonical_smiles": null,
+      "repeat_unit_smiles": {
+        "value": "*CC(*)N1CCCC1=O.*CC(*)OC(=O)C",
+        "record_version": "1.0",
+        "composition": "60:40 mass ratio VP:VA",
+        "formula": "0.6(C6H9NO) + 0.4(C4H6O2)",
+        "repeat_unit_mw": 101.12
+      },
+      "grade": {
+        "carrier": "copovidone",
+        "grade": "VA64",
+        "pharmacopoeia": "Ph. Eur. / USP copovidone",
+        "k_value": null,
+        "composition": "60:40 mass ratio VP:VA",
+        "dissolution_pH": null
+      },
+      "mn": null,
+      "mw": null,
+      "mn_note": "MANUFACTURER-SPEC: supplier literature reports Mw approx. 45000-70000 g/mol (PDI 2-3 typical); complete from the deployed grade GPC/datasheet",
+      "tm_K": null,
+      "tg_K": {
+        "value": 378.15,
+        "method": "mDSC onset, dry state, grade VA64",
+        "measurement_uncertainty_K": 3.0,
+        "tg_source": "BASF Technical Information: Kollidon VA 64 (Tg 105\u00b0C, true density 1.20 g/cm\u00b3, bulk 0.28-0.38 g/cm\u00b3); VIVAPHARM PVP/VA documentation"
+      },
+      "density_g_cm3": {
+        "value": 0.32,
+        "true_density_g_cm3": 1.2,
+        "note": "bulk density from grade datasheet (0.32 g/cm3); true density reference 1.2 g/cm3 (pycnometry)"
+      },
+      "hsp_mpa_half": {
+        "delta_D": 19.5,
+        "delta_P": 11.2,
+        "delta_H": 7.4,
+        "tabulated_total": 23.68,
+        "recomputed_total": 23.67,
+        "method_id": "HSP-HVK-01",
+        "secondary_fedors_total": 22.8,
+        "displacement": 0.88,
+        "qc_note": null
+      },
+      "R0": {
+        "value": 7.5,
+        "band": [
+          7.0,
+          8.0
+        ]
+      },
+      "logP": null,
+      "TPSA": null,
+      "HBD": null,
+      "HBA": null,
+      "BCS_class": null,
+      "provenance": {
+        "tg_K": "LITERATURE",
+        "delta_D": "CALCULATED",
+        "delta_P": "CALCULATED",
+        "delta_H": "CALCULATED",
+        "R0": "ASSUMED",
+        "mn": "MANUFACTURER-SPEC",
+        "bulk_density": "MANUFACTURER-SPEC",
+        "repeat_unit_smiles": "LITERATURE (curated record)"
+      },
+      "source": "Tg: BASF Technical Information: Kollidon VA 64 (Tg 105\u00b0C, true density 1.20 g/cm\u00b3, bulk 0.28-0.38 g/cm\u00b3); VIVAPHARM PVP/VA documentation; HSP: Literature group contribution / Hansen Handbook; grade: Ph. Eur. / USP copovidone",
+      "method": [
+        "HSP-HVK-01",
+        "LIT-ACQ-02"
+      ],
+      "algorithm": "Hoftyzer-van Krevelen on repeat unit; literature acquisition hierarchy for Tg",
+      "confidence": "medium",
+      "uncertainty": {
+        "tg_K": "+/- 3.0 K measurement; dry state declared",
+        "hsp": "displacement 0.88 MPa^0.5",
+        "mn": "supplier specification width"
+      },
+      "calculation_date": "2026-09-07",
+      "software_version": "input-generator/1.0",
+      "qc": {
+        "entity_id": "POL-0006",
+        "identity_roundtrip": "pass (curated record v1.0, monograph match)",
+        "ranges": "pass",
+        "hsp_primary_secondary_displacement": 0.88,
+        "borderline_flag": false,
+        "status": "APPROVED",
+        "warnings": [],
+        "errors": [],
+        "notes": [
+          "Grade identification present: {'carrier': 'copovidone', 'grade': 'VA64', 'pharmacopoeia': 'Ph. Eur. / USP copovidone', 'k_value': None, 'composition': '60:40 mass ratio VP:VA', 'dissolution_pH': None}",
+          "Repeat-unit representation present",
+          "Polymer Tg 378.15 K recorded from literature"
+        ],
+        "diagnostics": []
+      }
+    },
+    {
+      "entity_id": "POL-0007",
+      "entity_type": "polymer",
+      "name": "Soluplus (polyvinyl caprolactam-polyvinyl acetate-polyethylene glycol graft copolymer)",
+      "abbreviation": "Soluplus",
+      "canonical_smiles": null,
+      "repeat_unit_smiles": {
+        "value": "*CC(*)N1CCCCCC1=O.*CC(*)OC(=O)C.*CCO*",
+        "record_version": "1.0",
+        "composition": "57% PCL, 30% PVAc, 13% PEG 6000",
+        "formula": "PCL-PVAc-PEG graft",
+        "repeat_unit_mw": 125.0
+      },
+      "grade": {
+        "carrier": "soluplus",
+        "grade": "Standard",
+        "pharmacopoeia": "Manufacturer monograph (BASF)",
+        "k_value": null,
+        "composition": "57% PCL, 30% PVAc, 13% PEG 6000",
+        "dissolution_pH": null
+      },
+      "mn": null,
+      "mw": null,
+      "mn_note": "MANUFACTURER-SPEC: supplier literature reports Mw approx. 90000-140000 g/mol (PDI 2-3 typical); complete from the deployed grade GPC/datasheet",
+      "tm_K": null,
+      "tg_K": {
+        "value": 345.15,
+        "method": "mDSC onset, dry state, grade Standard",
+        "measurement_uncertainty_K": 3.0,
+        "tg_source": "BASF Technical Information: Soluplus (Tg ~70-73\u00b0C, bulk density 0.50-0.60 g/cm\u00b3); Pignatello et al. (2022). Pharmaceutics (PMC9242938, true density 1.08 g/cm\u00b3)"
+      },
+      "density_g_cm3": {
+        "value": 0.55,
+        "true_density_g_cm3": 1.08,
+        "note": "bulk density from grade datasheet (0.55 g/cm3); true density reference 1.08 g/cm3 (pycnometry)"
+      },
+      "hsp_mpa_half": {
+        "delta_D": 17.6,
+        "delta_P": 11.8,
+        "delta_H": 7.2,
+        "tabulated_total": 22.39,
+        "recomputed_total": 22.38,
+        "method_id": "HSP-HVK-01",
+        "secondary_fedors_total": 21.6,
+        "displacement": 0.79,
+        "qc_note": null
+      },
+      "R0": {
+        "value": 7.5,
+        "band": [
+          7.0,
+          8.0
+        ]
+      },
+      "logP": null,
+      "TPSA": null,
+      "HBD": null,
+      "HBA": null,
+      "BCS_class": null,
+      "provenance": {
+        "tg_K": "LITERATURE",
+        "delta_D": "CALCULATED",
+        "delta_P": "CALCULATED",
+        "delta_H": "CALCULATED",
+        "R0": "ASSUMED",
+        "mn": "MANUFACTURER-SPEC",
+        "bulk_density": "MANUFACTURER-SPEC",
+        "repeat_unit_smiles": "LITERATURE (curated record)"
+      },
+      "source": "Tg: BASF Technical Information: Soluplus (Tg ~70-73\u00b0C, bulk density 0.50-0.60 g/cm\u00b3); Pignatello et al. (2022). Pharmaceutics (PMC9242938, true density 1.08 g/cm\u00b3); HSP: Literature group contribution / Hansen Handbook; grade: Manufacturer monograph (BASF)",
+      "method": [
+        "HSP-HVK-01",
+        "LIT-ACQ-02"
+      ],
+      "algorithm": "Hoftyzer-van Krevelen on repeat unit; literature acquisition hierarchy for Tg",
+      "confidence": "medium",
+      "uncertainty": {
+        "tg_K": "+/- 3.0 K measurement; dry state declared",
+        "hsp": "displacement 0.79 MPa^0.5",
+        "mn": "supplier specification width"
+      },
+      "calculation_date": "2026-09-07",
+      "software_version": "input-generator/1.0",
+      "qc": {
+        "entity_id": "POL-0007",
+        "identity_roundtrip": "pass (curated record v1.0, monograph match)",
+        "ranges": "pass",
+        "hsp_primary_secondary_displacement": 0.79,
+        "borderline_flag": false,
+        "status": "APPROVED",
+        "warnings": [],
+        "errors": [],
+        "notes": [
+          "Grade identification present: {'carrier': 'soluplus', 'grade': 'Standard', 'pharmacopoeia': 'Manufacturer monograph (BASF)', 'k_value': None, 'composition': '57% PCL, 30% PVAc, 13% PEG 6000', 'dissolution_pH': None}",
+          "Repeat-unit representation present",
+          "Polymer Tg 345.15 K recorded from literature"
+        ],
+        "diagnostics": []
+      }
+    },
+    {
+      "entity_id": "POL-0008",
+      "entity_type": "polymer",
+      "name": "hypromellose (hydroxypropyl methylcellulose)",
+      "abbreviation": "HPMC E5",
+      "canonical_smiles": null,
+      "repeat_unit_smiles": {
+        "value": "*OC1C(O)C(OC)C(COCC(C)O)C(O1)O*",
+        "record_version": "1.0",
+        "composition": "28-30% methoxy, 7-12% hydroxypropoxy",
+        "formula": "substituted anhydroglucose",
+        "repeat_unit_mw": 200.0
+      },
+      "grade": {
+        "carrier": "hypromellose",
+        "grade": "E5",
+        "pharmacopoeia": "USP substitution 2910",
+        "k_value": null,
+        "composition": "28-30% methoxy, 7-12% hydroxypropoxy",
+        "dissolution_pH": null
+      },
+      "mn": null,
+      "mw": null,
+      "mn_note": "MANUFACTURER-SPEC: supplier literature reports Mw approx. 28000-35000 g/mol (PDI 2-3 typical); complete from the deployed grade GPC/datasheet",
+      "tm_K": null,
+      "tg_K": {
+        "value": 427.15,
+        "method": "mDSC onset, dry state, grade E5",
+        "measurement_uncertainty_K": 4.0,
+        "tg_source": "McPhillips et al. (1999). Int. J. Pharm., 180(1), 83-92 (modulated DSC dry Tg); Shin-Etsu Pharmacoat technical manual; Dow Methocel manual (true density 1.27 g/cm\u00b3, bulk 0.3-0.4 g/cm\u00b3)"
+      },
+      "density_g_cm3": {
+        "value": 0.35,
+        "true_density_g_cm3": 1.27,
+        "note": "bulk density from grade datasheet (0.35 g/cm3); true density reference 1.27 g/cm3 (pycnometry)"
+      },
+      "hsp_mpa_half": {
+        "delta_D": 18.2,
+        "delta_P": 12.8,
+        "delta_H": 11.5,
+        "tabulated_total": 25.04,
+        "recomputed_total": 25.05,
+        "method_id": "HSP-HVK-01",
+        "secondary_fedors_total": 24.1,
+        "displacement": 0.94,
+        "qc_note": null
+      },
+      "R0": {
+        "value": 7.5,
+        "band": [
+          7.0,
+          8.0
+        ]
+      },
+      "logP": null,
+      "TPSA": null,
+      "HBD": null,
+      "HBA": null,
+      "BCS_class": null,
+      "provenance": {
+        "tg_K": "LITERATURE",
+        "delta_D": "CALCULATED",
+        "delta_P": "CALCULATED",
+        "delta_H": "CALCULATED",
+        "R0": "ASSUMED",
+        "mn": "MANUFACTURER-SPEC",
+        "bulk_density": "MANUFACTURER-SPEC",
+        "repeat_unit_smiles": "LITERATURE (curated record)"
+      },
+      "source": "Tg: McPhillips et al. (1999). Int. J. Pharm., 180(1), 83-92 (modulated DSC dry Tg); Shin-Etsu Pharmacoat technical manual; Dow Methocel manual (true density 1.27 g/cm\u00b3, bulk 0.3-0.4 g/cm\u00b3); HSP: Literature group contribution / Hansen Handbook; grade: USP substitution 2910",
+      "method": [
+        "HSP-HVK-01",
+        "LIT-ACQ-02"
+      ],
+      "algorithm": "Hoftyzer-van Krevelen on repeat unit; literature acquisition hierarchy for Tg",
+      "confidence": "medium",
+      "uncertainty": {
+        "tg_K": "+/- 4.0 K measurement; dry state declared",
+        "hsp": "displacement 0.94 MPa^0.5",
+        "mn": "supplier specification width"
+      },
+      "calculation_date": "2026-09-07",
+      "software_version": "input-generator/1.0",
+      "qc": {
+        "entity_id": "POL-0008",
+        "identity_roundtrip": "pass (curated record v1.0, monograph match)",
+        "ranges": "pass",
+        "hsp_primary_secondary_displacement": 0.94,
+        "borderline_flag": false,
+        "status": "APPROVED",
+        "warnings": [],
+        "errors": [],
+        "notes": [
+          "Grade identification present: {'carrier': 'hypromellose', 'grade': 'E5', 'pharmacopoeia': 'USP substitution 2910', 'k_value': None, 'composition': '28-30% methoxy, 7-12% hydroxypropoxy', 'dissolution_pH': None}",
+          "Repeat-unit representation present",
+          "Polymer Tg 427.15 K recorded from literature"
+        ],
+        "diagnostics": []
+      }
+    },
+    {
+      "entity_id": "POL-0009",
+      "entity_type": "polymer",
+      "name": "hypromellose acetate succinate (HPMCAS)",
+      "abbreviation": "HPMCAS-L",
+      "canonical_smiles": null,
+      "repeat_unit_smiles": {
+        "value": "*OC1C(OC(=O)C)C(OC(=O)CCC(=O)O)C(COCC(C)O)C(O1)O*",
+        "record_version": "1.0",
+        "composition": "acetyl 5-9%, succinoyl 14-18%, methoxy 20-24%, hydroxypropoxy 5-9%",
+        "formula": "substituted cellulosics",
+        "repeat_unit_mw": 250.0
+      },
+      "grade": {
+        "carrier": "hypromellose acetate succinate",
+        "grade": "L",
+        "pharmacopoeia": "NF / JP hypromellose acetate succinate",
+        "k_value": null,
+        "composition": "acetyl 5-9%, succinoyl 14-18%, methoxy 20-24%, hydroxypropoxy 5-9%",
+        "dissolution_pH": 5.5
+      },
+      "mn": null,
+      "mw": null,
+      "mn_note": "MANUFACTURER-SPEC: supplier literature reports Mw approx. 40000-60000 g/mol (PDI 2-3 typical); complete from the deployed grade GPC/datasheet",
+      "tm_K": null,
+      "tg_K": {
+        "value": 392.15,
+        "method": "mDSC onset, dry state, grade L",
+        "measurement_uncertainty_K": 3.0,
+        "tg_source": "Sarabu et al. (2020). Pharmaceutics, 12(3), 253 (PMC7082948, LG Tg = 119\u00b0C); Shin-Etsu AQOAT Technical Brochure (true density 1.28 g/cm\u00b3, bulk 0.35-0.45 g/cm\u00b3)"
+      },
+      "density_g_cm3": {
+        "value": 0.38,
+        "true_density_g_cm3": 1.28,
+        "note": "bulk density from grade datasheet (0.38 g/cm3); true density reference 1.28 g/cm3 (pycnometry)"
+      },
+      "hsp_mpa_half": {
+        "delta_D": 18.3,
+        "delta_P": 11.2,
+        "delta_H": 10.5,
+        "tabulated_total": 23.94,
+        "recomputed_total": 23.89,
+        "method_id": "HSP-HVK-01",
+        "secondary_fedors_total": 23.4,
+        "displacement": 0.54,
+        "qc_note": null
+      },
+      "R0": {
+        "value": 7.5,
+        "band": [
+          7.0,
+          8.0
+        ]
+      },
+      "logP": null,
+      "TPSA": null,
+      "HBD": null,
+      "HBA": null,
+      "BCS_class": null,
+      "provenance": {
+        "tg_K": "LITERATURE",
+        "delta_D": "CALCULATED",
+        "delta_P": "CALCULATED",
+        "delta_H": "CALCULATED",
+        "R0": "ASSUMED",
+        "mn": "MANUFACTURER-SPEC",
+        "bulk_density": "MANUFACTURER-SPEC",
+        "repeat_unit_smiles": "LITERATURE (curated record)"
+      },
+      "source": "Tg: Sarabu et al. (2020). Pharmaceutics, 12(3), 253 (PMC7082948, LG Tg = 119\u00b0C); Shin-Etsu AQOAT Technical Brochure (true density 1.28 g/cm\u00b3, bulk 0.35-0.45 g/cm\u00b3); HSP: Literature group contribution / Hansen Handbook; grade: NF / JP hypromellose acetate succinate",
+      "method": [
+        "HSP-HVK-01",
+        "LIT-ACQ-02"
+      ],
+      "algorithm": "Hoftyzer-van Krevelen on repeat unit; literature acquisition hierarchy for Tg",
+      "confidence": "medium",
+      "uncertainty": {
+        "tg_K": "+/- 3.0 K measurement; dry state declared",
+        "hsp": "displacement 0.54 MPa^0.5",
+        "mn": "supplier specification width"
+      },
+      "calculation_date": "2026-09-07",
+      "software_version": "input-generator/1.0",
+      "qc": {
+        "entity_id": "POL-0009",
+        "identity_roundtrip": "pass (curated record v1.0, monograph match)",
+        "ranges": "pass",
+        "hsp_primary_secondary_displacement": 0.54,
+        "borderline_flag": false,
+        "status": "APPROVED",
+        "warnings": [],
+        "errors": [],
+        "notes": [
+          "Grade identification present: {'carrier': 'hypromellose acetate succinate', 'grade': 'L', 'pharmacopoeia': 'NF / JP hypromellose acetate succinate', 'k_value': None, 'composition': 'acetyl 5-9%, succinoyl 14-18%, methoxy 20-24%, hydroxypropoxy 5-9%', 'dissolution_pH': 5.5}",
+          "Repeat-unit representation present",
+          "Polymer Tg 392.15 K recorded from literature"
+        ],
+        "diagnostics": []
+      }
+    },
+    {
+      "entity_id": "POL-0010",
+      "entity_type": "polymer",
+      "name": "hypromellose acetate succinate (HPMCAS)",
+      "abbreviation": "HPMCAS-M",
+      "canonical_smiles": null,
+      "repeat_unit_smiles": {
+        "value": "*OC1C(OC(=O)C)C(OC(=O)CCC(=O)O)C(COCC(C)O)C(O1)O*",
+        "record_version": "1.0",
+        "composition": "acetyl 7-11%, succinoyl 10-14%, methoxy 21-25%, hydroxypropoxy 5-9%",
+        "formula": "substituted cellulosics",
+        "repeat_unit_mw": 250.0
+      },
+      "grade": {
+        "carrier": "hypromellose acetate succinate",
+        "grade": "M",
+        "pharmacopoeia": "NF / JP hypromellose acetate succinate",
+        "k_value": null,
+        "composition": "acetyl 7-11%, succinoyl 10-14%, methoxy 21-25%, hydroxypropoxy 5-9%",
+        "dissolution_pH": 6.0
+      },
+      "mn": null,
+      "mw": null,
+      "mn_note": "MANUFACTURER-SPEC: supplier literature reports Mw approx. 40000-60000 g/mol (PDI 2-3 typical); complete from the deployed grade GPC/datasheet",
+      "tm_K": null,
+      "tg_K": {
+        "value": 393.15,
+        "method": "mDSC onset, dry state, grade M",
+        "measurement_uncertainty_K": 3.0,
+        "tg_source": "Sarabu et al. (2020). Pharmaceutics, 12(3), 253 (PMC7082948, MG Tg = 120\u00b0C); Shin-Etsu AQOAT Technical Brochure"
+      },
+      "density_g_cm3": {
+        "value": 0.38,
+        "true_density_g_cm3": 1.28,
+        "note": "bulk density from grade datasheet (0.38 g/cm3); true density reference 1.28 g/cm3 (pycnometry)"
+      },
+      "hsp_mpa_half": {
+        "delta_D": 18.5,
+        "delta_P": 10.4,
+        "delta_H": 9.8,
+        "tabulated_total": 23.41,
+        "recomputed_total": 23.38,
+        "method_id": "HSP-HVK-01",
+        "secondary_fedors_total": 22.9,
+        "displacement": 0.51,
+        "qc_note": null
+      },
+      "R0": {
+        "value": 7.5,
+        "band": [
+          7.0,
+          8.0
+        ]
+      },
+      "logP": null,
+      "TPSA": null,
+      "HBD": null,
+      "HBA": null,
+      "BCS_class": null,
+      "provenance": {
+        "tg_K": "LITERATURE",
+        "delta_D": "CALCULATED",
+        "delta_P": "CALCULATED",
+        "delta_H": "CALCULATED",
+        "R0": "ASSUMED",
+        "mn": "MANUFACTURER-SPEC",
+        "bulk_density": "MANUFACTURER-SPEC",
+        "repeat_unit_smiles": "LITERATURE (curated record)"
+      },
+      "source": "Tg: Sarabu et al. (2020). Pharmaceutics, 12(3), 253 (PMC7082948, MG Tg = 120\u00b0C); Shin-Etsu AQOAT Technical Brochure; HSP: Literature group contribution / Hansen Handbook; grade: NF / JP hypromellose acetate succinate",
+      "method": [
+        "HSP-HVK-01",
+        "LIT-ACQ-02"
+      ],
+      "algorithm": "Hoftyzer-van Krevelen on repeat unit; literature acquisition hierarchy for Tg",
+      "confidence": "medium",
+      "uncertainty": {
+        "tg_K": "+/- 3.0 K measurement; dry state declared",
+        "hsp": "displacement 0.51 MPa^0.5",
+        "mn": "supplier specification width"
+      },
+      "calculation_date": "2026-09-07",
+      "software_version": "input-generator/1.0",
+      "qc": {
+        "entity_id": "POL-0010",
+        "identity_roundtrip": "pass (curated record v1.0, monograph match)",
+        "ranges": "pass",
+        "hsp_primary_secondary_displacement": 0.51,
+        "borderline_flag": false,
+        "status": "APPROVED",
+        "warnings": [],
+        "errors": [],
+        "notes": [
+          "Grade identification present: {'carrier': 'hypromellose acetate succinate', 'grade': 'M', 'pharmacopoeia': 'NF / JP hypromellose acetate succinate', 'k_value': None, 'composition': 'acetyl 7-11%, succinoyl 10-14%, methoxy 21-25%, hydroxypropoxy 5-9%', 'dissolution_pH': 6.0}",
+          "Repeat-unit representation present",
+          "Polymer Tg 393.15 K recorded from literature"
+        ],
+        "diagnostics": []
+      }
+    },
+    {
+      "entity_id": "POL-0011",
+      "entity_type": "polymer",
+      "name": "hypromellose acetate succinate (HPMCAS)",
+      "abbreviation": "HPMCAS-H",
+      "canonical_smiles": null,
+      "repeat_unit_smiles": {
+        "value": "*OC1C(OC(=O)C)C(OC(=O)CCC(=O)O)C(COCC(C)O)C(O1)O*",
+        "record_version": "1.0",
+        "composition": "acetyl 10-14%, succinoyl 4-8%, methoxy 22-26%, hydroxypropoxy 6-10%",
+        "formula": "substituted cellulosics",
+        "repeat_unit_mw": 250.0
+      },
+      "grade": {
+        "carrier": "hypromellose acetate succinate",
+        "grade": "H",
+        "pharmacopoeia": "NF / JP hypromellose acetate succinate",
+        "k_value": null,
+        "composition": "acetyl 10-14%, succinoyl 4-8%, methoxy 22-26%, hydroxypropoxy 6-10%",
+        "dissolution_pH": 6.5
+      },
+      "mn": null,
+      "mw": null,
+      "mn_note": "MANUFACTURER-SPEC: supplier literature reports Mw approx. 40000-60000 g/mol (PDI 2-3 typical); complete from the deployed grade GPC/datasheet",
+      "tm_K": null,
+      "tg_K": {
+        "value": 395.15,
+        "method": "mDSC onset, dry state, grade H",
+        "measurement_uncertainty_K": 3.0,
+        "tg_source": "Sarabu et al. (2020). Pharmaceutics, 12(3), 253 (PMC7082948, HG Tg = 122\u00b0C); Shin-Etsu AQOAT Technical Brochure"
+      },
+      "density_g_cm3": {
+        "value": 0.38,
+        "true_density_g_cm3": 1.28,
+        "note": "bulk density from grade datasheet (0.38 g/cm3); true density reference 1.28 g/cm3 (pycnometry)"
+      },
+      "hsp_mpa_half": {
+        "delta_D": 18.7,
+        "delta_P": 9.6,
+        "delta_H": 9.1,
+        "tabulated_total": 22.88,
+        "recomputed_total": 22.91,
+        "method_id": "HSP-HVK-01",
+        "secondary_fedors_total": 22.3,
+        "displacement": 0.58,
+        "qc_note": null
+      },
+      "R0": {
+        "value": 7.5,
+        "band": [
+          7.0,
+          8.0
+        ]
+      },
+      "logP": null,
+      "TPSA": null,
+      "HBD": null,
+      "HBA": null,
+      "BCS_class": null,
+      "provenance": {
+        "tg_K": "LITERATURE",
+        "delta_D": "CALCULATED",
+        "delta_P": "CALCULATED",
+        "delta_H": "CALCULATED",
+        "R0": "ASSUMED",
+        "mn": "MANUFACTURER-SPEC",
+        "bulk_density": "MANUFACTURER-SPEC",
+        "repeat_unit_smiles": "LITERATURE (curated record)"
+      },
+      "source": "Tg: Sarabu et al. (2020). Pharmaceutics, 12(3), 253 (PMC7082948, HG Tg = 122\u00b0C); Shin-Etsu AQOAT Technical Brochure; HSP: Literature group contribution / Hansen Handbook; grade: NF / JP hypromellose acetate succinate",
+      "method": [
+        "HSP-HVK-01",
+        "LIT-ACQ-02"
+      ],
+      "algorithm": "Hoftyzer-van Krevelen on repeat unit; literature acquisition hierarchy for Tg",
+      "confidence": "medium",
+      "uncertainty": {
+        "tg_K": "+/- 3.0 K measurement; dry state declared",
+        "hsp": "displacement 0.58 MPa^0.5",
+        "mn": "supplier specification width"
+      },
+      "calculation_date": "2026-09-07",
+      "software_version": "input-generator/1.0",
+      "qc": {
+        "entity_id": "POL-0011",
+        "identity_roundtrip": "pass (curated record v1.0, monograph match)",
+        "ranges": "pass",
+        "hsp_primary_secondary_displacement": 0.58,
+        "borderline_flag": false,
+        "status": "APPROVED",
+        "warnings": [],
+        "errors": [],
+        "notes": [
+          "Grade identification present: {'carrier': 'hypromellose acetate succinate', 'grade': 'H', 'pharmacopoeia': 'NF / JP hypromellose acetate succinate', 'k_value': None, 'composition': 'acetyl 10-14%, succinoyl 4-8%, methoxy 22-26%, hydroxypropoxy 6-10%', 'dissolution_pH': 6.5}",
+          "Repeat-unit representation present",
+          "Polymer Tg 395.15 K recorded from literature"
+        ],
+        "diagnostics": []
+      }
+    },
+    {
+      "entity_id": "POL-0012",
+      "entity_type": "polymer",
+      "name": "poly(butyl methacrylate-co-(2-dimethylaminoethyl) methacrylate-co-methyl methacrylate)",
+      "abbreviation": "Eudragit E PO",
+      "canonical_smiles": null,
+      "repeat_unit_smiles": {
+        "value": "*CC(*)(C)C(=O)OCCN(C)C.*CC(*)(C)C(=O)OCCCC.*CC(*)(C)C(=O)OC",
+        "record_version": "1.0",
+        "composition": "DMAEMA:BMA:MMA 2:1:1 molar ratio",
+        "formula": "C9H17NO2:C8H14O2:C5H8O2",
+        "repeat_unit_mw": 427.58
+      },
+      "grade": {
+        "carrier": "methacrylate",
+        "grade": "E PO",
+        "pharmacopoeia": "Ph. Eur. / USP basic butylated methacrylate copolymer",
+        "k_value": null,
+        "composition": "DMAEMA:BMA:MMA 2:1:1 molar ratio",
+        "dissolution_pH": null
+      },
+      "mn": null,
+      "mw": null,
+      "mn_note": "MANUFACTURER-SPEC: supplier literature reports Mw approx. 47000 g/mol (PDI 2-3 typical); complete from the deployed grade GPC/datasheet",
+      "tm_K": null,
+      "tg_K": {
+        "value": 321.15,
+        "method": "mDSC onset, dry state, grade E PO",
+        "measurement_uncertainty_K": 3.0,
+        "tg_source": "Evonik Eudragit E PO Technical Information (true density 1.125 g/cm\u00b3, bulk 0.40-0.50 g/cm\u00b3); PMC9962897 Table 2 (Tg = 48\u00b0C)"
+      },
+      "density_g_cm3": {
+        "value": 0.45,
+        "true_density_g_cm3": 1.125,
+        "note": "bulk density from grade datasheet (0.45 g/cm3); true density reference 1.125 g/cm3 (pycnometry)"
+      },
+      "hsp_mpa_half": {
+        "delta_D": 17.5,
+        "delta_P": 5.2,
+        "delta_H": 5.6,
+        "tabulated_total": 19.1,
+        "recomputed_total": 19.1,
+        "method_id": "HSP-HVK-01",
+        "secondary_fedors_total": 18.6,
+        "displacement": 0.5,
+        "qc_note": null
+      },
+      "R0": {
+        "value": 7.5,
+        "band": [
+          7.0,
+          8.0
+        ]
+      },
+      "logP": null,
+      "TPSA": null,
+      "HBD": null,
+      "HBA": null,
+      "BCS_class": null,
+      "provenance": {
+        "tg_K": "LITERATURE",
+        "delta_D": "CALCULATED",
+        "delta_P": "CALCULATED",
+        "delta_H": "CALCULATED",
+        "R0": "ASSUMED",
+        "mn": "MANUFACTURER-SPEC",
+        "bulk_density": "MANUFACTURER-SPEC",
+        "repeat_unit_smiles": "LITERATURE (curated record)"
+      },
+      "source": "Tg: Evonik Eudragit E PO Technical Information (true density 1.125 g/cm\u00b3, bulk 0.40-0.50 g/cm\u00b3); PMC9962897 Table 2 (Tg = 48\u00b0C); HSP: Literature group contribution / Hansen Handbook; grade: Ph. Eur. / USP basic butylated methacrylate copolymer",
+      "method": [
+        "HSP-HVK-01",
+        "LIT-ACQ-02"
+      ],
+      "algorithm": "Hoftyzer-van Krevelen on repeat unit; literature acquisition hierarchy for Tg",
+      "confidence": "medium",
+      "uncertainty": {
+        "tg_K": "+/- 3.0 K measurement; dry state declared",
+        "hsp": "displacement 0.5 MPa^0.5",
+        "mn": "supplier specification width"
+      },
+      "calculation_date": "2026-09-07",
+      "software_version": "input-generator/1.0",
+      "qc": {
+        "entity_id": "POL-0012",
+        "identity_roundtrip": "pass (curated record v1.0, monograph match)",
+        "ranges": "pass",
+        "hsp_primary_secondary_displacement": 0.5,
+        "borderline_flag": false,
+        "status": "APPROVED",
+        "warnings": [],
+        "errors": [],
+        "notes": [
+          "Grade identification present: {'carrier': 'methacrylate', 'grade': 'E PO', 'pharmacopoeia': 'Ph. Eur. / USP basic butylated methacrylate copolymer', 'k_value': None, 'composition': 'DMAEMA:BMA:MMA 2:1:1 molar ratio', 'dissolution_pH': None}",
+          "Repeat-unit representation present",
+          "Polymer Tg 321.15 K recorded from literature"
+        ],
+        "diagnostics": []
+      }
+    },
+    {
+      "entity_id": "POL-0013",
+      "entity_type": "polymer",
+      "name": "poly(methacrylic acid-co-ethyl acrylate)",
+      "abbreviation": "Eudragit L100-55",
+      "canonical_smiles": null,
+      "repeat_unit_smiles": {
+        "value": "*CC(*)(C)C(=O)O.*CC(*)C(=O)OCC",
+        "record_version": "1.0",
+        "composition": "MAA:EA 1:1 molar ratio",
+        "formula": "C4H6O2:C5H8O2 (1:1)",
+        "repeat_unit_mw": 186.21
+      },
+      "grade": {
+        "carrier": "methacrylate",
+        "grade": "L100-55",
+        "pharmacopoeia": "Ph. Eur. / USP methacrylic acid - ethyl acrylate copolymer (1:1) Type A",
+        "k_value": null,
+        "composition": "MAA:EA 1:1 molar ratio",
+        "dissolution_pH": 5.5
+      },
+      "mn": null,
+      "mw": null,
+      "mn_note": "MANUFACTURER-SPEC: supplier literature reports Mw approx. 320000 g/mol (PDI 2-3 typical); complete from the deployed grade GPC/datasheet",
+      "tm_K": null,
+      "tg_K": {
+        "value": 383.15,
+        "method": "mDSC onset, dry state, grade L100-55",
+        "measurement_uncertainty_K": 3.0,
+        "tg_source": "Evonik Technical Information; NETZSCH Analyzing & Testing (2022, onset 111\u00b0C); PMC9962897 (Tg = 110\u00b0C, true density 1.19 g/cm\u00b3)"
+      },
+      "density_g_cm3": {
+        "value": 0.45,
+        "true_density_g_cm3": 1.19,
+        "note": "bulk density from grade datasheet (0.45 g/cm3); true density reference 1.19 g/cm3 (pycnometry)"
+      },
+      "hsp_mpa_half": {
+        "delta_D": 18.1,
+        "delta_P": 8.6,
+        "delta_H": 11.2,
+        "tabulated_total": 22.95,
+        "recomputed_total": 22.96,
+        "method_id": "HSP-HVK-01",
+        "secondary_fedors_total": 22.2,
+        "displacement": 0.75,
+        "qc_note": null
+      },
+      "R0": {
+        "value": 7.5,
+        "band": [
+          7.0,
+          8.0
+        ]
+      },
+      "logP": null,
+      "TPSA": null,
+      "HBD": null,
+      "HBA": null,
+      "BCS_class": null,
+      "provenance": {
+        "tg_K": "LITERATURE",
+        "delta_D": "CALCULATED",
+        "delta_P": "CALCULATED",
+        "delta_H": "CALCULATED",
+        "R0": "ASSUMED",
+        "mn": "MANUFACTURER-SPEC",
+        "bulk_density": "MANUFACTURER-SPEC",
+        "repeat_unit_smiles": "LITERATURE (curated record)"
+      },
+      "source": "Tg: Evonik Technical Information; NETZSCH Analyzing & Testing (2022, onset 111\u00b0C); PMC9962897 (Tg = 110\u00b0C, true density 1.19 g/cm\u00b3); HSP: Literature group contribution / Hansen Handbook; grade: Ph. Eur. / USP methacrylic acid - ethyl acrylate copolymer (1:1) Type A",
+      "method": [
+        "HSP-HVK-01",
+        "LIT-ACQ-02"
+      ],
+      "algorithm": "Hoftyzer-van Krevelen on repeat unit; literature acquisition hierarchy for Tg",
+      "confidence": "medium",
+      "uncertainty": {
+        "tg_K": "+/- 3.0 K measurement; dry state declared",
+        "hsp": "displacement 0.75 MPa^0.5",
+        "mn": "supplier specification width"
+      },
+      "calculation_date": "2026-09-07",
+      "software_version": "input-generator/1.0",
+      "qc": {
+        "entity_id": "POL-0013",
+        "identity_roundtrip": "pass (curated record v1.0, monograph match)",
+        "ranges": "pass",
+        "hsp_primary_secondary_displacement": 0.75,
+        "borderline_flag": false,
+        "status": "APPROVED",
+        "warnings": [],
+        "errors": [],
+        "notes": [
+          "Grade identification present: {'carrier': 'methacrylate', 'grade': 'L100-55', 'pharmacopoeia': 'Ph. Eur. / USP methacrylic acid - ethyl acrylate copolymer (1:1) Type A', 'k_value': None, 'composition': 'MAA:EA 1:1 molar ratio', 'dissolution_pH': 5.5}",
+          "Repeat-unit representation present",
+          "Polymer Tg 383.15 K recorded from literature"
+        ],
+        "diagnostics": []
+      }
+    },
+    {
+      "entity_id": "POL-0014",
+      "entity_type": "polymer",
+      "name": "ethyl cellulose",
+      "abbreviation": "Ethocel Standard",
+      "canonical_smiles": null,
+      "repeat_unit_smiles": {
+        "value": "*OC1C(OCC)C(OCC)C(COCC)C(O1)O*",
+        "record_version": "1.0",
+        "composition": "48.0-49.5% ethoxyl content",
+        "formula": "substituted anhydroglucose",
+        "repeat_unit_mw": 246.3
+      },
+      "grade": {
+        "carrier": "ethyl cellulose",
+        "grade": "Standard",
+        "pharmacopoeia": "USP / Ph. Eur. ethylcellulose",
+        "k_value": null,
+        "composition": "48.0-49.5% ethoxyl content",
+        "dissolution_pH": null
+      },
+      "mn": null,
+      "mw": null,
+      "mn_note": "MANUFACTURER-SPEC: supplier literature reports Mw approx. 40000-80000 g/mol (PDI 2-3 typical); complete from the deployed grade GPC/datasheet",
+      "tm_K": null,
+      "tg_K": {
+        "value": 403.15,
+        "method": "mDSC onset, dry state, grade Standard",
+        "measurement_uncertainty_K": 3.0,
+        "tg_source": "Wasilewska et al. (2019). PMC6829386 (Tg 129-133\u00b0C, specific gravity 1.12-1.15 g/cm\u00b3); Dow Ethocel Technical Manual"
+      },
+      "density_g_cm3": {
+        "value": 0.4,
+        "true_density_g_cm3": 1.14,
+        "note": "bulk density from grade datasheet (0.4 g/cm3); true density reference 1.14 g/cm3 (pycnometry)"
+      },
+      "hsp_mpa_half": {
+        "delta_D": 17.2,
+        "delta_P": 6.4,
+        "delta_H": 7.8,
+        "tabulated_total": 20.01,
+        "recomputed_total": 19.94,
+        "method_id": "HSP-HVK-01",
+        "secondary_fedors_total": 19.4,
+        "displacement": 0.61,
+        "qc_note": null
+      },
+      "R0": {
+        "value": 7.5,
+        "band": [
+          7.0,
+          8.0
+        ]
+      },
+      "logP": null,
+      "TPSA": null,
+      "HBD": null,
+      "HBA": null,
+      "BCS_class": null,
+      "provenance": {
+        "tg_K": "LITERATURE",
+        "delta_D": "CALCULATED",
+        "delta_P": "CALCULATED",
+        "delta_H": "CALCULATED",
+        "R0": "ASSUMED",
+        "mn": "MANUFACTURER-SPEC",
+        "bulk_density": "MANUFACTURER-SPEC",
+        "repeat_unit_smiles": "LITERATURE (curated record)"
+      },
+      "source": "Tg: Wasilewska et al. (2019). PMC6829386 (Tg 129-133\u00b0C, specific gravity 1.12-1.15 g/cm\u00b3); Dow Ethocel Technical Manual; HSP: Literature group contribution / Hansen Handbook; grade: USP / Ph. Eur. ethylcellulose",
+      "method": [
+        "HSP-HVK-01",
+        "LIT-ACQ-02"
+      ],
+      "algorithm": "Hoftyzer-van Krevelen on repeat unit; literature acquisition hierarchy for Tg",
+      "confidence": "medium",
+      "uncertainty": {
+        "tg_K": "+/- 3.0 K measurement; dry state declared",
+        "hsp": "displacement 0.61 MPa^0.5",
+        "mn": "supplier specification width"
+      },
+      "calculation_date": "2026-09-07",
+      "software_version": "input-generator/1.0",
+      "qc": {
+        "entity_id": "POL-0014",
+        "identity_roundtrip": "pass (curated record v1.0, monograph match)",
+        "ranges": "pass",
+        "hsp_primary_secondary_displacement": 0.61,
+        "borderline_flag": false,
+        "status": "APPROVED",
+        "warnings": [],
+        "errors": [],
+        "notes": [
+          "Grade identification present: {'carrier': 'ethyl cellulose', 'grade': 'Standard', 'pharmacopoeia': 'USP / Ph. Eur. ethylcellulose', 'k_value': None, 'composition': '48.0-49.5% ethoxyl content', 'dissolution_pH': None}",
+          "Repeat-unit representation present",
+          "Polymer Tg 403.15 K recorded from literature"
+        ],
+        "diagnostics": []
+      }
+    },
+    {
+      "entity_id": "POL-0015",
+      "entity_type": "polymer",
+      "name": "polyvinyl alcohol",
+      "abbreviation": "PVA 4-88 / Parteck MXP",
+      "canonical_smiles": null,
+      "repeat_unit_smiles": {
+        "value": "*CC(*)O",
+        "record_version": "1.0",
+        "composition": "86.7-88.7% degree of hydrolysis",
+        "formula": "C2H4O",
+        "repeat_unit_mw": 44.05
+      },
+      "grade": {
+        "carrier": "polyvinyl alcohol",
+        "grade": "4-88",
+        "pharmacopoeia": "Ph. Eur. / USP polyvinyl alcohol (partially hydrolyzed)",
+        "k_value": null,
+        "composition": "86.7-88.7% degree of hydrolysis",
+        "dissolution_pH": null
+      },
+      "mn": null,
+      "mw": null,
+      "mn_note": "MANUFACTURER-SPEC: supplier literature reports Mw approx. 26000-32000 g/mol (PDI 2-3 typical); complete from the deployed grade GPC/datasheet",
+      "tm_K": null,
+      "tg_K": {
+        "value": 358.15,
+        "method": "mDSC onset, dry state, grade 4-88",
+        "measurement_uncertainty_K": 3.0,
+        "tg_source": "Thomas et al. (2018). Polymer, 147, 179-188 (Tg = 85\u00b0C); Tsioptsias et al. (2023). PMC10145932; Merck Millipore Parteck MXP Technical Brochure"
+      },
+      "density_g_cm3": {
+        "value": 0.55,
+        "true_density_g_cm3": 1.26,
+        "note": "bulk density from grade datasheet (0.55 g/cm3); true density reference 1.26 g/cm3 (pycnometry)"
+      },
+      "hsp_mpa_half": {
+        "delta_D": 17.0,
+        "delta_P": 9.0,
+        "delta_H": 18.0,
+        "tabulated_total": 26.34,
+        "recomputed_total": 26.34,
+        "method_id": "HSP-HVK-01",
+        "secondary_fedors_total": 25.5,
+        "displacement": 0.84,
+        "qc_note": null
+      },
+      "R0": {
+        "value": 7.5,
+        "band": [
+          7.0,
+          8.0
+        ]
+      },
+      "logP": null,
+      "TPSA": null,
+      "HBD": null,
+      "HBA": null,
+      "BCS_class": null,
+      "provenance": {
+        "tg_K": "LITERATURE",
+        "delta_D": "CALCULATED",
+        "delta_P": "CALCULATED",
+        "delta_H": "CALCULATED",
+        "R0": "ASSUMED",
+        "mn": "MANUFACTURER-SPEC",
+        "bulk_density": "MANUFACTURER-SPEC",
+        "repeat_unit_smiles": "LITERATURE (curated record)"
+      },
+      "source": "Tg: Thomas et al. (2018). Polymer, 147, 179-188 (Tg = 85\u00b0C); Tsioptsias et al. (2023). PMC10145932; Merck Millipore Parteck MXP Technical Brochure; HSP: Literature group contribution / Hansen Handbook; grade: Ph. Eur. / USP polyvinyl alcohol (partially hydrolyzed)",
+      "method": [
+        "HSP-HVK-01",
+        "LIT-ACQ-02"
+      ],
+      "algorithm": "Hoftyzer-van Krevelen on repeat unit; literature acquisition hierarchy for Tg",
+      "confidence": "medium",
+      "uncertainty": {
+        "tg_K": "+/- 3.0 K measurement; dry state declared",
+        "hsp": "displacement 0.84 MPa^0.5",
+        "mn": "supplier specification width"
+      },
+      "calculation_date": "2026-09-07",
+      "software_version": "input-generator/1.0",
+      "qc": {
+        "entity_id": "POL-0015",
+        "identity_roundtrip": "pass (curated record v1.0, monograph match)",
+        "ranges": "pass",
+        "hsp_primary_secondary_displacement": 0.84,
+        "borderline_flag": false,
+        "status": "APPROVED",
+        "warnings": [],
+        "errors": [],
+        "notes": [
+          "Grade identification present: {'carrier': 'polyvinyl alcohol', 'grade': '4-88', 'pharmacopoeia': 'Ph. Eur. / USP polyvinyl alcohol (partially hydrolyzed)', 'k_value': None, 'composition': '86.7-88.7% degree of hydrolysis', 'dissolution_pH': None}",
+          "Repeat-unit representation present",
+          "Polymer Tg 358.15 K recorded from literature"
+        ],
+        "diagnostics": []
+      }
+    },
+    {
+      "entity_id": "POL-0016",
+      "entity_type": "polymer",
+      "name": "polyethylene glycol (PEG 3350)",
+      "abbreviation": "PEG 3350",
+      "canonical_smiles": null,
+      "repeat_unit_smiles": {
+        "value": "*CCO*",
+        "record_version": "1.0",
+        "composition": "homopolymer",
+        "formula": "C2H4O",
+        "repeat_unit_mw": 44.05
+      },
+      "grade": {
+        "carrier": "polyethylene glycol",
+        "grade": "3350",
+        "pharmacopoeia": "Ph. Eur. / USP macrogol 3350",
+        "k_value": null,
+        "composition": "homopolymer",
+        "dissolution_pH": null
+      },
+      "mn": null,
+      "mw": null,
+      "mn_note": "MANUFACTURER-SPEC: supplier literature reports Mw approx. 3350 g/mol (PDI 2-3 typical); complete from the deployed grade GPC/datasheet",
+      "tm_K": null,
+      "tg_K": {
+        "value": 258.15,
+        "method": "mDSC onset, dry state, grade 3350",
+        "measurement_uncertainty_K": 3.0,
+        "tg_source": "Cojocariu et al. (2026). PMC13030308 (density 1.125 g/cm\u00b3); Polymer Data Handbook (dry DSC Tg -15\u00b0C)"
+      },
+      "density_g_cm3": {
+        "value": 0.52,
+        "true_density_g_cm3": 1.125,
+        "note": "bulk density from grade datasheet (0.52 g/cm3); true density reference 1.125 g/cm3 (pycnometry)"
+      },
+      "hsp_mpa_half": {
+        "delta_D": 17.0,
+        "delta_P": 8.5,
+        "delta_H": 9.2,
+        "tabulated_total": 21.14,
+        "recomputed_total": 21.12,
+        "method_id": "HSP-HVK-01",
+        "secondary_fedors_total": 20.5,
+        "displacement": 0.64,
+        "qc_note": null
+      },
+      "R0": {
+        "value": 7.5,
+        "band": [
+          7.0,
+          8.0
+        ]
+      },
+      "logP": null,
+      "TPSA": null,
+      "HBD": null,
+      "HBA": null,
+      "BCS_class": null,
+      "provenance": {
+        "tg_K": "LITERATURE",
+        "delta_D": "CALCULATED",
+        "delta_P": "CALCULATED",
+        "delta_H": "CALCULATED",
+        "R0": "ASSUMED",
+        "mn": "MANUFACTURER-SPEC",
+        "bulk_density": "MANUFACTURER-SPEC",
+        "repeat_unit_smiles": "LITERATURE (curated record)"
+      },
+      "source": "Tg: Cojocariu et al. (2026). PMC13030308 (density 1.125 g/cm\u00b3); Polymer Data Handbook (dry DSC Tg -15\u00b0C); HSP: Literature group contribution / Hansen Handbook; grade: Ph. Eur. / USP macrogol 3350",
+      "method": [
+        "HSP-HVK-01",
+        "LIT-ACQ-02"
+      ],
+      "algorithm": "Hoftyzer-van Krevelen on repeat unit; literature acquisition hierarchy for Tg",
+      "confidence": "medium",
+      "uncertainty": {
+        "tg_K": "+/- 3.0 K measurement; dry state declared",
+        "hsp": "displacement 0.64 MPa^0.5",
+        "mn": "supplier specification width"
+      },
+      "calculation_date": "2026-09-07",
+      "software_version": "input-generator/1.0",
+      "qc": {
+        "entity_id": "POL-0016",
+        "identity_roundtrip": "pass (curated record v1.0, monograph match)",
+        "ranges": "pass",
+        "hsp_primary_secondary_displacement": 0.64,
+        "borderline_flag": false,
+        "status": "APPROVED",
+        "warnings": [],
+        "errors": [],
+        "notes": [
+          "Grade identification present: {'carrier': 'polyethylene glycol', 'grade': '3350', 'pharmacopoeia': 'Ph. Eur. / USP macrogol 3350', 'k_value': None, 'composition': 'homopolymer', 'dissolution_pH': None}",
+          "Repeat-unit representation present",
+          "Polymer Tg 258.15 K recorded from literature"
+        ],
+        "diagnostics": []
+      }
+    },
+    {
+      "entity_id": "POL-0017",
+      "entity_type": "polymer",
+      "name": "poly(lactic acid)",
+      "abbreviation": "PLA (Resomer L 206 S)",
+      "canonical_smiles": null,
+      "repeat_unit_smiles": {
+        "value": "*C(C)C(=O)O*",
+        "record_version": "1.0",
+        "composition": "homopolymer",
+        "formula": "C3H4O2",
+        "repeat_unit_mw": 72.06
+      },
+      "grade": {
+        "carrier": "polylactic acid",
+        "grade": "Resomer L 206 S",
+        "pharmacopoeia": "Technical grade biodegradable polyester",
+        "k_value": null,
+        "composition": "homopolymer",
+        "dissolution_pH": null
+      },
+      "mn": null,
+      "mw": null,
+      "mn_note": "MANUFACTURER-SPEC: supplier literature reports Mw approx. 80000-120000 g/mol (PDI 2-3 typical); complete from the deployed grade GPC/datasheet",
+      "tm_K": null,
+      "tg_K": {
+        "value": 328.15,
+        "method": "mDSC onset, dry state, grade Resomer L 206 S",
+        "measurement_uncertainty_K": 3.0,
+        "tg_source": "NETZSCH Analyzing & Testing (Tg 55-60\u00b0C); NatureWorks Ingeo Technical Data Sheet (true density 1.25 g/cm\u00b3)"
+      },
+      "density_g_cm3": {
+        "value": 0.7,
+        "true_density_g_cm3": 1.25,
+        "note": "bulk density from grade datasheet (0.7 g/cm3); true density reference 1.25 g/cm3 (pycnometry)"
+      },
+      "hsp_mpa_half": {
+        "delta_D": 18.6,
+        "delta_P": 9.9,
+        "delta_H": 6.0,
+        "tabulated_total": 21.92,
+        "recomputed_total": 21.91,
+        "method_id": "HSP-HVK-01",
+        "secondary_fedors_total": 21.2,
+        "displacement": 0.72,
+        "qc_note": null
+      },
+      "R0": {
+        "value": 7.5,
+        "band": [
+          7.0,
+          8.0
+        ]
+      },
+      "logP": null,
+      "TPSA": null,
+      "HBD": null,
+      "HBA": null,
+      "BCS_class": null,
+      "provenance": {
+        "tg_K": "LITERATURE",
+        "delta_D": "CALCULATED",
+        "delta_P": "CALCULATED",
+        "delta_H": "CALCULATED",
+        "R0": "ASSUMED",
+        "mn": "MANUFACTURER-SPEC",
+        "bulk_density": "MANUFACTURER-SPEC",
+        "repeat_unit_smiles": "LITERATURE (curated record)"
+      },
+      "source": "Tg: NETZSCH Analyzing & Testing (Tg 55-60\u00b0C); NatureWorks Ingeo Technical Data Sheet (true density 1.25 g/cm\u00b3); HSP: Literature group contribution / Hansen Handbook; grade: Technical grade biodegradable polyester",
+      "method": [
+        "HSP-HVK-01",
+        "LIT-ACQ-02"
+      ],
+      "algorithm": "Hoftyzer-van Krevelen on repeat unit; literature acquisition hierarchy for Tg",
+      "confidence": "medium",
+      "uncertainty": {
+        "tg_K": "+/- 3.0 K measurement; dry state declared",
+        "hsp": "displacement 0.72 MPa^0.5",
+        "mn": "supplier specification width"
+      },
+      "calculation_date": "2026-09-07",
+      "software_version": "input-generator/1.0",
+      "qc": {
+        "entity_id": "POL-0017",
+        "identity_roundtrip": "pass (curated record v1.0, monograph match)",
+        "ranges": "pass",
+        "hsp_primary_secondary_displacement": 0.72,
+        "borderline_flag": false,
+        "status": "APPROVED",
+        "warnings": [],
+        "errors": [],
+        "notes": [
+          "Grade identification present: {'carrier': 'polylactic acid', 'grade': 'Resomer L 206 S', 'pharmacopoeia': 'Technical grade biodegradable polyester', 'k_value': None, 'composition': 'homopolymer', 'dissolution_pH': None}",
+          "Repeat-unit representation present",
+          "Polymer Tg 328.15 K recorded from literature"
+        ],
+        "diagnostics": []
+      }
+    },
+    {
+      "entity_id": "POL-0018",
+      "entity_type": "polymer",
+      "name": "poly(lactic-co-glycolic acid)",
+      "abbreviation": "PLGA 50:50",
+      "canonical_smiles": null,
+      "repeat_unit_smiles": {
+        "value": "*CC(=O)O*.*C(C)C(=O)O*",
+        "record_version": "1.0",
+        "composition": "50:50 lactide:glycolide molar ratio",
+        "formula": "C2H2O2:C3H4O2 (1:1)",
+        "repeat_unit_mw": 130.09
+      },
+      "grade": {
+        "carrier": "poly(lactic-co-glycolic acid)",
+        "grade": "RG 503 H",
+        "pharmacopoeia": "USP poly(DL-lactide-co-glycolide)",
+        "k_value": null,
+        "composition": "50:50 lactide:glycolide molar ratio",
+        "dissolution_pH": null
+      },
+      "mn": null,
+      "mw": null,
+      "mn_note": "MANUFACTURER-SPEC: supplier literature reports Mw approx. 34000 g/mol (PDI 2-3 typical); complete from the deployed grade GPC/datasheet",
+      "tm_K": null,
+      "tg_K": {
+        "value": 313.15,
+        "method": "mDSC onset, dry state, grade RG 503 H",
+        "measurement_uncertainty_K": 3.0,
+        "tg_source": "Yang et al. (2019). APS March Meeting; PMC8912735 (Tg 38-42\u00b0C); Corbion Purac Technical Data (true density 1.34 g/cm\u00b3)"
+      },
+      "density_g_cm3": {
+        "value": 0.65,
+        "true_density_g_cm3": 1.34,
+        "note": "bulk density from grade datasheet (0.65 g/cm3); true density reference 1.34 g/cm3 (pycnometry)"
+      },
+      "hsp_mpa_half": {
+        "delta_D": 18.8,
+        "delta_P": 10.4,
+        "delta_H": 7.2,
+        "tabulated_total": 22.65,
+        "recomputed_total": 22.66,
+        "method_id": "HSP-HVK-01",
+        "secondary_fedors_total": 21.9,
+        "displacement": 0.75,
+        "qc_note": null
+      },
+      "R0": {
+        "value": 7.5,
+        "band": [
+          7.0,
+          8.0
+        ]
+      },
+      "logP": null,
+      "TPSA": null,
+      "HBD": null,
+      "HBA": null,
+      "BCS_class": null,
+      "provenance": {
+        "tg_K": "LITERATURE",
+        "delta_D": "CALCULATED",
+        "delta_P": "CALCULATED",
+        "delta_H": "CALCULATED",
+        "R0": "ASSUMED",
+        "mn": "MANUFACTURER-SPEC",
+        "bulk_density": "MANUFACTURER-SPEC",
+        "repeat_unit_smiles": "LITERATURE (curated record)"
+      },
+      "source": "Tg: Yang et al. (2019). APS March Meeting; PMC8912735 (Tg 38-42\u00b0C); Corbion Purac Technical Data (true density 1.34 g/cm\u00b3); HSP: Literature group contribution / Hansen Handbook; grade: USP poly(DL-lactide-co-glycolide)",
+      "method": [
+        "HSP-HVK-01",
+        "LIT-ACQ-02"
+      ],
+      "algorithm": "Hoftyzer-van Krevelen on repeat unit; literature acquisition hierarchy for Tg",
+      "confidence": "medium",
+      "uncertainty": {
+        "tg_K": "+/- 3.0 K measurement; dry state declared",
+        "hsp": "displacement 0.75 MPa^0.5",
+        "mn": "supplier specification width"
+      },
+      "calculation_date": "2026-09-07",
+      "software_version": "input-generator/1.0",
+      "qc": {
+        "entity_id": "POL-0018",
+        "identity_roundtrip": "pass (curated record v1.0, monograph match)",
+        "ranges": "pass",
+        "hsp_primary_secondary_displacement": 0.75,
+        "borderline_flag": false,
+        "status": "APPROVED",
+        "warnings": [],
+        "errors": [],
+        "notes": [
+          "Grade identification present: {'carrier': 'poly(lactic-co-glycolic acid)', 'grade': 'RG 503 H', 'pharmacopoeia': 'USP poly(DL-lactide-co-glycolide)', 'k_value': None, 'composition': '50:50 lactide:glycolide molar ratio', 'dissolution_pH': None}",
+          "Repeat-unit representation present",
+          "Polymer Tg 313.15 K recorded from literature"
+        ],
+        "diagnostics": []
+      }
+    },
+    {
+      "entity_id": "POL-0019",
+      "entity_type": "polymer",
+      "name": "poly(ethylene-co-vinyl acetate)",
+      "abbreviation": "EVA 28-05",
+      "canonical_smiles": null,
+      "repeat_unit_smiles": {
+        "value": "*CC*.*CC(*)OC(=O)C",
+        "record_version": "1.0",
+        "composition": "28 wt% vinyl acetate",
+        "formula": "C2H4:C4H6O2",
+        "repeat_unit_mw": 114.14
+      },
+      "grade": {
+        "carrier": "ethylene vinyl acetate",
+        "grade": "28-05",
+        "pharmacopoeia": "Technical grade medical polymer",
+        "k_value": null,
+        "composition": "28 wt% vinyl acetate",
+        "dissolution_pH": null
+      },
+      "mn": null,
+      "mw": null,
+      "mn_note": "MANUFACTURER-SPEC: supplier literature reports Mw approx. 65000-85000 g/mol (PDI 2-3 typical); complete from the deployed grade GPC/datasheet",
+      "tm_K": null,
+      "tg_K": {
+        "value": 243.15,
+        "method": "mDSC onset, dry state, grade 28-05",
+        "measurement_uncertainty_K": 3.0,
+        "tg_source": "Svarcova et al. (2025). Processes, 13(5), 1562; NETZSCH Analyzing & Testing (Tg -30\u00b0C, density 0.92-0.95 g/cm\u00b3)"
+      },
+      "density_g_cm3": {
+        "value": 0.55,
+        "true_density_g_cm3": 0.95,
+        "note": "bulk density from grade datasheet (0.55 g/cm3); true density reference 0.95 g/cm3 (pycnometry)"
+      },
+      "hsp_mpa_half": {
+        "delta_D": 16.8,
+        "delta_P": 3.2,
+        "delta_H": 4.1,
+        "tabulated_total": 17.59,
+        "recomputed_total": 17.59,
+        "method_id": "HSP-HVK-01",
+        "secondary_fedors_total": 17.1,
+        "displacement": 0.49,
+        "qc_note": null
+      },
+      "R0": {
+        "value": 7.5,
+        "band": [
+          7.0,
+          8.0
+        ]
+      },
+      "logP": null,
+      "TPSA": null,
+      "HBD": null,
+      "HBA": null,
+      "BCS_class": null,
+      "provenance": {
+        "tg_K": "LITERATURE",
+        "delta_D": "CALCULATED",
+        "delta_P": "CALCULATED",
+        "delta_H": "CALCULATED",
+        "R0": "ASSUMED",
+        "mn": "MANUFACTURER-SPEC",
+        "bulk_density": "MANUFACTURER-SPEC",
+        "repeat_unit_smiles": "LITERATURE (curated record)"
+      },
+      "source": "Tg: Svarcova et al. (2025). Processes, 13(5), 1562; NETZSCH Analyzing & Testing (Tg -30\u00b0C, density 0.92-0.95 g/cm\u00b3); HSP: Literature group contribution / Hansen Handbook; grade: Technical grade medical polymer",
+      "method": [
+        "HSP-HVK-01",
+        "LIT-ACQ-02"
+      ],
+      "algorithm": "Hoftyzer-van Krevelen on repeat unit; literature acquisition hierarchy for Tg",
+      "confidence": "medium",
+      "uncertainty": {
+        "tg_K": "+/- 3.0 K measurement; dry state declared",
+        "hsp": "displacement 0.49 MPa^0.5",
+        "mn": "supplier specification width"
+      },
+      "calculation_date": "2026-09-07",
+      "software_version": "input-generator/1.0",
+      "qc": {
+        "entity_id": "POL-0019",
+        "identity_roundtrip": "pass (curated record v1.0, monograph match)",
+        "ranges": "pass",
+        "hsp_primary_secondary_displacement": 0.49,
+        "borderline_flag": false,
+        "status": "APPROVED",
+        "warnings": [],
+        "errors": [],
+        "notes": [
+          "Grade identification present: {'carrier': 'ethylene vinyl acetate', 'grade': '28-05', 'pharmacopoeia': 'Technical grade medical polymer', 'k_value': None, 'composition': '28 wt% vinyl acetate', 'dissolution_pH': None}",
+          "Repeat-unit representation present",
+          "Polymer Tg 243.15 K recorded from literature"
         ],
         "diagnostics": []
       }

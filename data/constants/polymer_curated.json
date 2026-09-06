@@ -22,10 +22,16 @@
           "tg_uncertainty_K": 2.1,
           "tg_method": "mDSC onset, dry state",
           "tg_source": "Browne et al. 2020, Pharmaceutics 12(5):433",
-          "bulk_density_g_cm3": 0.40,
+          "bulk_density_g_cm3": 0.4,
           "bulk_density_note": "typical powder range 0.3-0.5 g/cm3 (MANUFACTURER-SPEC)",
-          "true_density_g_cm3": 1.20,
-          "hsp": { "delta_D": 20.44, "delta_P": 13.67, "delta_H": 6.86, "tabulated_total": 26.28, "secondary_fedors_total": 23.75 }
+          "true_density_g_cm3": 1.2,
+          "hsp": {
+            "delta_D": 20.44,
+            "delta_P": 13.67,
+            "delta_H": 6.86,
+            "tabulated_total": 26.28,
+            "secondary_fedors_total": 23.75
+          }
         },
         {
           "grade": "K17",
@@ -41,9 +47,15 @@
           "tg_uncertainty_K": 3.0,
           "tg_method": "DSC dry state (approx 138 C)",
           "tg_source": "Browne et al. 2020",
-          "bulk_density_g_cm3": 0.40,
-          "true_density_g_cm3": 1.20,
-          "hsp": { "delta_D": 20.44, "delta_P": 13.67, "delta_H": 6.86, "tabulated_total": 26.28, "secondary_fedors_total": 23.75 }
+          "bulk_density_g_cm3": 0.4,
+          "true_density_g_cm3": 1.2,
+          "hsp": {
+            "delta_D": 20.44,
+            "delta_P": 13.67,
+            "delta_H": 6.86,
+            "tabulated_total": 26.28,
+            "secondary_fedors_total": 23.75
+          }
         },
         {
           "grade": "K90",
@@ -59,9 +71,65 @@
           "tg_uncertainty_K": 3.0,
           "tg_method": "DSC dry state (approx 156 C)",
           "tg_source": "LaFountaine et al. 2016",
-          "bulk_density_g_cm3": 0.40,
+          "bulk_density_g_cm3": 0.4,
           "true_density_g_cm3": 1.24,
-          "hsp": { "delta_D": 20.44, "delta_P": 13.67, "delta_H": 6.86, "tabulated_total": 26.28, "secondary_fedors_total": 23.75 }
+          "hsp": {
+            "delta_D": 20.44,
+            "delta_P": 13.67,
+            "delta_H": 6.86,
+            "tabulated_total": 26.28,
+            "secondary_fedors_total": 23.75
+          }
+        },
+        {
+          "grade": "K12",
+          "abbreviation": "PVP K12",
+          "pharmacopoeia": "Ph. Eur. / USP povidone",
+          "k_value": "11-14",
+          "repeat_unit_smiles": "*CC(*)N1CCCC1=O",
+          "formula": "C6H9NO",
+          "repeat_unit_mw": 111.14,
+          "mn_range": "2000-3000",
+          "mw_range": "4000-6000",
+          "tg_K": 378.0,
+          "tg_uncertainty_K": 2.5,
+          "tg_method": "mDSC onset, dry state (approx 105 C)",
+          "tg_source": "Alshehri et al. (2020) Pharmaceutics 12(10), 964; BASF Kollidon 12 PF TDS",
+          "bulk_density_g_cm3": 0.5,
+          "bulk_density_note": "bulk density from grade datasheet; true density reference 1.20 g/cm3",
+          "true_density_g_cm3": 1.2,
+          "hsp": {
+            "delta_D": 20.44,
+            "delta_P": 13.67,
+            "delta_H": 6.86,
+            "tabulated_total": 26.28,
+            "secondary_fedors_total": 23.75
+          }
+        },
+        {
+          "grade": "K25",
+          "abbreviation": "PVP K25",
+          "pharmacopoeia": "Ph. Eur. / USP povidone",
+          "k_value": "24-26",
+          "repeat_unit_smiles": "*CC(*)N1CCCC1=O",
+          "formula": "C6H9NO",
+          "repeat_unit_mw": 111.14,
+          "mn_range": "9000-14000",
+          "mw_range": "28000-34000",
+          "tg_K": 426.2,
+          "tg_uncertainty_K": 2.5,
+          "tg_method": "mDSC onset, dry state (approx 153 C)",
+          "tg_source": "Alshehri et al. (2020) Pharmaceutics 12(10), 964; BASF Kollidon 25 TDS",
+          "bulk_density_g_cm3": 0.42,
+          "bulk_density_note": "bulk density from grade datasheet; true density reference 1.20 g/cm3",
+          "true_density_g_cm3": 1.2,
+          "hsp": {
+            "delta_D": 20.44,
+            "delta_P": 13.67,
+            "delta_H": 6.86,
+            "tabulated_total": 26.28,
+            "secondary_fedors_total": 23.75
+          }
         }
       ]
     },
@@ -87,7 +155,13 @@
           "tg_source": "Browne et al. 2020 / Oktay & Polli 2024",
           "bulk_density_g_cm3": 0.35,
           "true_density_g_cm3": 1.22,
-          "hsp": { "delta_D": 19.50, "delta_P": 11.20, "delta_H": 7.40, "tabulated_total": 23.68, "secondary_fedors_total": 22.80 }
+          "hsp": {
+            "delta_D": 19.5,
+            "delta_P": 11.2,
+            "delta_H": 7.4,
+            "tabulated_total": 23.68,
+            "secondary_fedors_total": 22.8
+          }
         }
       ]
     },
@@ -112,8 +186,14 @@
           "tg_method": "MTDSC midpoint (approx 162 C)",
           "tg_source": "McPhillips et al. 1999",
           "bulk_density_g_cm3": 0.38,
-          "true_density_g_cm3": 1.30,
-          "hsp": { "delta_D": 18.20, "delta_P": 12.80, "delta_H": 11.50, "tabulated_total": 25.04, "secondary_fedors_total": 24.10 }
+          "true_density_g_cm3": 1.3,
+          "hsp": {
+            "delta_D": 18.2,
+            "delta_P": 12.8,
+            "delta_H": 11.5,
+            "tabulated_total": 25.04,
+            "secondary_fedors_total": 24.1
+          }
         }
       ]
     },
@@ -140,7 +220,13 @@
           "tg_source": "Sarabu et al. 2020 / Klar & Urbanetz 2016",
           "bulk_density_g_cm3": 0.35,
           "true_density_g_cm3": 1.25,
-          "hsp": { "delta_D": 18.50, "delta_P": 10.40, "delta_H": 9.80, "tabulated_total": 23.41, "secondary_fedors_total": 22.90 }
+          "hsp": {
+            "delta_D": 18.5,
+            "delta_P": 10.4,
+            "delta_H": 9.8,
+            "tabulated_total": 23.41,
+            "secondary_fedors_total": 22.9
+          }
         },
         {
           "grade": "L",
@@ -159,7 +245,13 @@
           "tg_source": "Sarabu et al. 2020",
           "bulk_density_g_cm3": 0.35,
           "true_density_g_cm3": 1.25,
-          "hsp": { "delta_D": 18.30, "delta_P": 11.20, "delta_H": 10.50, "tabulated_total": 23.94, "secondary_fedors_total": 23.40 }
+          "hsp": {
+            "delta_D": 18.3,
+            "delta_P": 11.2,
+            "delta_H": 10.5,
+            "tabulated_total": 23.94,
+            "secondary_fedors_total": 23.4
+          }
         },
         {
           "grade": "H",
@@ -178,7 +270,13 @@
           "tg_source": "Sarabu et al. 2020",
           "bulk_density_g_cm3": 0.35,
           "true_density_g_cm3": 1.25,
-          "hsp": { "delta_D": 18.70, "delta_P": 9.60, "delta_H": 9.10, "tabulated_total": 22.88, "secondary_fedors_total": 22.30 }
+          "hsp": {
+            "delta_D": 18.7,
+            "delta_P": 9.6,
+            "delta_H": 9.1,
+            "tabulated_total": 22.88,
+            "secondary_fedors_total": 22.3
+          }
         }
       ]
     },
@@ -204,7 +302,13 @@
           "tg_source": "Guembe-Michel et al. 2025 / Oktay & Polli 2024",
           "bulk_density_g_cm3": 0.45,
           "true_density_g_cm3": 1.08,
-          "hsp": { "delta_D": 17.60, "delta_P": 11.80, "delta_H": 7.20, "tabulated_total": 22.39, "secondary_fedors_total": 21.60 }
+          "hsp": {
+            "delta_D": 17.6,
+            "delta_P": 11.8,
+            "delta_H": 7.2,
+            "tabulated_total": 22.39,
+            "secondary_fedors_total": 21.6
+          }
         }
       ]
     },
@@ -231,7 +335,262 @@
           "tg_source": "Oktay & Polli 2024",
           "bulk_density_g_cm3": 0.38,
           "true_density_g_cm3": 1.28,
-          "hsp": { "delta_D": 17.80, "delta_P": 9.40, "delta_H": 9.90, "tabulated_total": 22.45, "secondary_fedors_total": 21.90 }
+          "hsp": {
+            "delta_D": 17.8,
+            "delta_P": 9.4,
+            "delta_H": 9.9,
+            "tabulated_total": 22.45,
+            "secondary_fedors_total": 21.9
+          }
+        },
+        {
+          "grade": "E PO",
+          "abbreviation": "Eudragit E PO",
+          "pharmacopoeia": "Ph. Eur. / USP basic butylated methacrylate copolymer",
+          "composition": "DMAEMA:BMA:MMA 2:1:1 molar ratio",
+          "repeat_unit_smiles": "*CC(*)(C)C(=O)OCCN(C)C.*CC(*)(C)C(=O)OCCCC.*CC(*)(C)C(=O)OC",
+          "formula": "C9H17NO2:C8H14O2:C5H8O2",
+          "repeat_unit_mw": 427.58,
+          "mn_range": "35000-50000",
+          "mw_range": "47000",
+          "tg_K": 321.15,
+          "tg_uncertainty_K": 3.0,
+          "tg_method": "DSC dry state (48 C)",
+          "tg_source": "Evonik Eudragit E PO Technical Information; PMC9962897 Table 2",
+          "bulk_density_g_cm3": 0.45,
+          "bulk_density_note": "bulk density from grade datasheet; true density reference 1.125 g/cm3",
+          "true_density_g_cm3": 1.125,
+          "hsp": {
+            "delta_D": 17.5,
+            "delta_P": 5.2,
+            "delta_H": 5.6,
+            "tabulated_total": 19.1,
+            "secondary_fedors_total": 18.6
+          }
+        },
+        {
+          "grade": "L100-55",
+          "abbreviation": "Eudragit L100-55",
+          "pharmacopoeia": "Ph. Eur. / USP methacrylic acid - ethyl acrylate copolymer (1:1) Type A",
+          "composition": "MAA:EA 1:1 molar ratio",
+          "dissolution_pH": 5.5,
+          "repeat_unit_smiles": "*CC(*)(C)C(=O)O.*CC(*)C(=O)OCC",
+          "formula": "C4H6O2:C5H8O2 (1:1)",
+          "repeat_unit_mw": 186.21,
+          "mn_range": "50000-80000",
+          "mw_range": "320000",
+          "tg_K": 383.15,
+          "tg_uncertainty_K": 3.0,
+          "tg_method": "DSC dry state (110 C)",
+          "tg_source": "Evonik Technical Information; NETZSCH Analyzing & Testing (2022); PMC9962897",
+          "bulk_density_g_cm3": 0.45,
+          "bulk_density_note": "bulk density from grade datasheet; true density reference 1.19 g/cm3",
+          "true_density_g_cm3": 1.19,
+          "hsp": {
+            "delta_D": 18.1,
+            "delta_P": 8.6,
+            "delta_H": 11.2,
+            "tabulated_total": 22.95,
+            "secondary_fedors_total": 22.2
+          }
+        }
+      ]
+    },
+    {
+      "carrier": "ethyl cellulose",
+      "name": "ethyl cellulose",
+      "chemical_family": "cellulosic ether",
+      "functional_class": "Water-insoluble sustained release matrix former / coating",
+      "grades": [
+        {
+          "grade": "Standard",
+          "abbreviation": "Ethocel Standard",
+          "pharmacopoeia": "USP / Ph. Eur. ethylcellulose",
+          "composition": "48.0-49.5% ethoxyl content",
+          "repeat_unit_smiles": "*OC1C(OCC)C(OCC)C(COCC)C(O1)O*",
+          "formula": "substituted anhydroglucose",
+          "repeat_unit_mw": 246.3,
+          "mn_range": "15000-30000",
+          "mw_range": "40000-80000",
+          "tg_K": 403.15,
+          "tg_uncertainty_K": 3.0,
+          "tg_method": "DSC dry state (130 C)",
+          "tg_source": "Wasilewska et al. (2019) PMC6829386; Dow Ethocel Manual",
+          "bulk_density_g_cm3": 0.4,
+          "bulk_density_note": "bulk density from grade datasheet; true density reference 1.14 g/cm3",
+          "true_density_g_cm3": 1.14,
+          "hsp": {
+            "delta_D": 17.2,
+            "delta_P": 6.4,
+            "delta_H": 7.8,
+            "tabulated_total": 20.01,
+            "secondary_fedors_total": 19.4
+          }
+        }
+      ]
+    },
+    {
+      "carrier": "polyvinyl alcohol",
+      "name": "polyvinyl alcohol",
+      "chemical_family": "polyvinyl alcohol",
+      "functional_class": "Hot melt extrusion matrix / film coating agent",
+      "grades": [
+        {
+          "grade": "4-88",
+          "abbreviation": "PVA 4-88 / Parteck MXP",
+          "pharmacopoeia": "Ph. Eur. / USP polyvinyl alcohol (partially hydrolyzed)",
+          "composition": "86.7-88.7% degree of hydrolysis",
+          "repeat_unit_smiles": "*CC(*)O",
+          "formula": "C2H4O",
+          "repeat_unit_mw": 44.05,
+          "mn_range": "10000-20000",
+          "mw_range": "26000-32000",
+          "tg_K": 358.15,
+          "tg_uncertainty_K": 3.0,
+          "tg_method": "DSC dry state (85 C)",
+          "tg_source": "Thomas et al. (2018) Polymer 147:179; Merck Millipore Parteck MXP Brochure",
+          "bulk_density_g_cm3": 0.55,
+          "bulk_density_note": "bulk density from grade datasheet; true density reference 1.26 g/cm3",
+          "true_density_g_cm3": 1.26,
+          "hsp": {
+            "delta_D": 17.0,
+            "delta_P": 9.0,
+            "delta_H": 18.0,
+            "tabulated_total": 26.34,
+            "secondary_fedors_total": 25.5
+          }
+        }
+      ]
+    },
+    {
+      "carrier": "polyethylene glycol",
+      "name": "polyethylene glycol (PEG 3350)",
+      "chemical_family": "polyether",
+      "functional_class": "Hydrophilic matrix former / plasticizer",
+      "grades": [
+        {
+          "grade": "3350",
+          "abbreviation": "PEG 3350",
+          "pharmacopoeia": "Ph. Eur. / USP macrogol 3350",
+          "composition": "homopolymer",
+          "repeat_unit_smiles": "*CCO*",
+          "formula": "C2H4O",
+          "repeat_unit_mw": 44.05,
+          "mn_range": "3000-3700",
+          "mw_range": "3350",
+          "tg_K": 258.15,
+          "tg_uncertainty_K": 3.0,
+          "tg_method": "dry DSC Tg (-15 C)",
+          "tg_source": "Cojocariu et al. (2026) PMC13030308; Polymer Data Handbook",
+          "bulk_density_g_cm3": 0.52,
+          "bulk_density_note": "bulk density from grade datasheet; true density reference 1.125 g/cm3",
+          "true_density_g_cm3": 1.125,
+          "hsp": {
+            "delta_D": 17.0,
+            "delta_P": 8.5,
+            "delta_H": 9.2,
+            "tabulated_total": 21.14,
+            "secondary_fedors_total": 20.5
+          }
+        }
+      ]
+    },
+    {
+      "carrier": "polylactic acid",
+      "name": "poly(lactic acid)",
+      "chemical_family": "biodegradable polyester",
+      "functional_class": "Biodegradable matrix carrier / implant former",
+      "grades": [
+        {
+          "grade": "Resomer L 206 S",
+          "abbreviation": "PLA (Resomer L 206 S)",
+          "pharmacopoeia": "Technical grade biodegradable polyester",
+          "composition": "homopolymer",
+          "repeat_unit_smiles": "*C(C)C(=O)O*",
+          "formula": "C3H4O2",
+          "repeat_unit_mw": 72.06,
+          "mn_range": "40000-70000",
+          "mw_range": "80000-120000",
+          "tg_K": 328.15,
+          "tg_uncertainty_K": 3.0,
+          "tg_method": "DSC dry state (55 C)",
+          "tg_source": "NETZSCH Analyzing & Testing; NatureWorks Ingeo TDS",
+          "bulk_density_g_cm3": 0.7,
+          "bulk_density_note": "bulk density from grade datasheet; true density reference 1.25 g/cm3",
+          "true_density_g_cm3": 1.25,
+          "hsp": {
+            "delta_D": 18.6,
+            "delta_P": 9.9,
+            "delta_H": 6.0,
+            "tabulated_total": 21.92,
+            "secondary_fedors_total": 21.2
+          }
+        }
+      ]
+    },
+    {
+      "carrier": "poly(lactic-co-glycolic acid)",
+      "name": "poly(lactic-co-glycolic acid)",
+      "chemical_family": "biodegradable polyester copolymer",
+      "functional_class": "Biodegradable controlled release matrix",
+      "grades": [
+        {
+          "grade": "RG 503 H",
+          "abbreviation": "PLGA 50:50",
+          "pharmacopoeia": "USP poly(DL-lactide-co-glycolide)",
+          "composition": "50:50 lactide:glycolide molar ratio",
+          "repeat_unit_smiles": "*CC(=O)O*.*C(C)C(=O)O*",
+          "formula": "C2H2O2:C3H4O2 (1:1)",
+          "repeat_unit_mw": 130.09,
+          "mn_range": "20000-35000",
+          "mw_range": "34000",
+          "tg_K": 313.15,
+          "tg_uncertainty_K": 3.0,
+          "tg_method": "DSC dry state (40 C)",
+          "tg_source": "Yang et al. (2019) APS; PMC8912735; Corbion Purac TDS",
+          "bulk_density_g_cm3": 0.65,
+          "bulk_density_note": "bulk density from grade datasheet; true density reference 1.34 g/cm3",
+          "true_density_g_cm3": 1.34,
+          "hsp": {
+            "delta_D": 18.8,
+            "delta_P": 10.4,
+            "delta_H": 7.2,
+            "tabulated_total": 22.65,
+            "secondary_fedors_total": 21.9
+          }
+        }
+      ]
+    },
+    {
+      "carrier": "ethylene vinyl acetate",
+      "name": "poly(ethylene-co-vinyl acetate)",
+      "chemical_family": "polyolefin copolymer",
+      "functional_class": "Controlled-release implant / transdermal membrane matrix",
+      "grades": [
+        {
+          "grade": "28-05",
+          "abbreviation": "EVA 28-05",
+          "pharmacopoeia": "Technical grade medical polymer",
+          "composition": "28 wt% vinyl acetate",
+          "repeat_unit_smiles": "*CC*.*CC(*)OC(=O)C",
+          "formula": "C2H4:C4H6O2",
+          "repeat_unit_mw": 114.14,
+          "mn_range": "30000-50000",
+          "mw_range": "65000-85000",
+          "tg_K": 243.15,
+          "tg_uncertainty_K": 3.0,
+          "tg_method": "DSC dry state (-30 C)",
+          "tg_source": "Svarcova et al. (2025) Processes 13(5):1562; NETZSCH TDS",
+          "bulk_density_g_cm3": 0.55,
+          "bulk_density_note": "bulk density from grade datasheet; true density reference 0.95 g/cm3",
+          "true_density_g_cm3": 0.95,
+          "hsp": {
+            "delta_D": 16.8,
+            "delta_P": 3.2,
+            "delta_H": 4.1,
+            "tabulated_total": 17.59,
+            "secondary_fedors_total": 17.1
+          }
         }
       ]
     }

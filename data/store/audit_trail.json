@@ -5,5 +5,19 @@
     "entity_name": "BCS Class II Verified Scientific Database",
     "action": "DATASET_INITIALIZATION",
     "reason": "Imported 18 peer-reviewed BCS Class II drugs from verified scientific database; purged legacy records."
+  },
+  {
+    "timestamp": "2026-09-07T00:00:00Z",
+    "entity_id": "BATCH-0002",
+    "entity_name": "ASD Polymer Verified Scientific Database",
+    "action": "DATASET_UPDATE",
+    "reason": "Imported and integrated 19 peer-reviewed commercial polymer excipients from ASD_Polymer_Verified_Scientific_Database.xlsx (POL-0001 through POL-0019)."
+  },
+  {
+    "timestamp": "2026-09-07T00:00:00Z",
+    "entity_id": "BATCH-0002",
+    "entity_name": "ASD Polymer Verified Scientific Database",
+    "action": "DATASET_UPDATE",
+    "reason": "Imported and integrated 19 peer-reviewed commercial polymer excipients from ASD_Polymer_Verified_Scientific_Database.xlsx (POL-0001 through POL-0019)."
   }
 ]
